@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v9.0/.Modules/settings.schema.json",
+  "country": "w1",
+  "appFolders": ["Bifrost Reference", "Legacy App", "Legacy App - Bifrost"],
+  "testFolders": [],
+  "bcptTestFolders": [],
+  "appDependencyProbingPaths": [
+    {
+      "repo": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core",
+      "release_status": "latestBuild",
+      "version": "latest",
+      "projects": "*",
+      "authTokenSecret": "GH_TOKEN_DEPS"
+    }
+  ]
+}
