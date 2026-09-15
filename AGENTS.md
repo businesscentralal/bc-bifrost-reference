@@ -191,7 +191,7 @@ result. `data` is an escaped JSON **string**, not a nested object. Full contract
 ```al
 Dispatcher: Codeunit "Dispatcher ori";
 Dispatcher.Execute(Enum::"Message Type ori"::"Your.Type.Name",
-    Enum::"CE Message Version ori"::"1.0", '', '', 'application/json',
+    Enum::"Message Version ori"::"1.0", '', '', 'application/json',
     RequestContent, ResponseContent, ResponseContentType);
 ```
 

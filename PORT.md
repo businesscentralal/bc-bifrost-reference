@@ -27,6 +27,7 @@ Not against memory, and not against the documentation alone. Three sources, in t
 | `ExecuteCloudEventTask` | `ExecuteBifrostTask` | 13 |
 | `Cloud Events Dispatcher ori` | `Dispatcher ori` | 5 |
 | `Cloud Event Message` (table) | `Message ori` | 2 |
+| `CE Message Version ori` | `Message Version ori` | 3 |
 | `Origo.APP.CloudEvents` | `Origo.Bifrost` | 8 |
 | `Origo.CloudEvents.Reference` | `Origo.Bifrost.Reference` | 15 |
 
@@ -55,8 +56,38 @@ documentation.
 | Item | Why |
 | --- | --- |
 | **It has never been compiled.** | No AL compiler and no Business Central container in this environment. Every identifier is verified by name against shipped source; none is verified by the compiler. |
-| `Dispatcher.Codeunit.al`, `License.Codeunit.al` | File paths *inside Foundation*, cited by `CALLING-FROM-AL.md`. Renamed by the documented rule ("the words Cloud Event / Cloud Events are removed"), but the Foundation repository is private and could not be read from here. |
-| Foundation version `28.0.0.0` | Taken from `foundationMinVersion` in `data/apps.json` and from the DocEx map. If Foundation has moved past 28.0.0.0, raise it. |
+
+## Checked against Foundation on 15 September, after this port was written
+
+A session with access to the private `bc-origo-bifrost-core` read the real source. Three
+results, recorded here because two of them correct this file.
+
+| Claim | Verdict |
+| --- | --- |
+| `Dispatcher.Codeunit.al` / `"Dispatcher ori"`, `License.Codeunit.al` / `"License ori"` | **Right.** Codeunits 10078252 and 10077908. Foundation drops the product word rather than substituting it, which is what the rename rule predicted. |
+| Foundation version `28.0.0.0` | **Right, and do not change it.** Foundation is exactly `28.0.0.0`. An earlier note here suggested raising it if symbols failed to download — that was a guess, it was wrong, and acting on it would have broken a correct pin. |
+| `"CE Message Version ori"` | **Missed by this port.** Three occurrences survived in `CALLING-FROM-AL.md`, `QUICKSTART.md` and `AGENTS.md`. Now `"Message Version ori"` (enum 10077895). |
+
+Other Foundation ids confirmed in passing: `Message Task ori` 10078251, `Secret Store ori`
+10078305, `App Registry ori` 10078317.
+
+### `CALLING-FROM-AL.md` was factually wrong, and it was wrong before the port
+
+Inherited from the Cloud Events original, not introduced here. The file said `Execute()`
+"calls the interface implementation directly. Nothing is persisted - no queue row, no
+orchestration." Foundation's source says the opposite: every `Execute` overload delegates to
+`EnqueueAndProcess`, which does `Insert(true)` and then `ProcessIncomingMessage(...)`, and the
+codeunit declares `Permissions = tabledata "Message ori" = rim` for it.
+
+Corrected here: a queue row **is** written, the orchestrator **does** run, only the webhook is
+skipped (empty `TaskId`), and `Execute` passes `OmitCommit` = `true` while `EnqueueAndProcess`
+defaults it to `false`. Two smaller corrections in the same file: `ResolvePool()` is `internal`
+and no partner extension can call it, and the in-process MCP tool server moved out of the
+kernel to Language Models.
+
+**The same false claim is in Foundation's own `.claude/CLAUDE.md`** — *"Execute dispatches
+straight through the interface (OmitCommit = true, no queue row)"*. That one has to be fixed in
+the private repository; it is not in this port's reach.
 | `.AL-Go/settings.json` dependency repo | Points at `OrigoSoftwareSolutions/bc-origo-bifrost-core`, from `tools/app-sources.json`. Private, unverified. |
 | Object ID ranges 90000–90149 | Unchanged. They are sample ranges a partner would replace with their own, not Origo ranges — but confirm against the house standard before publishing. |
 | The repository rename | `origo-bc-cloudevents-reference` → `bifrost-reference` is a GitHub setting. `QUICKSTART.md` and `app.json` already assume the new name. |

@@ -69,7 +69,7 @@ contract):
 
 ```al
 Dispatcher.Execute(Enum::"Message Type ori"::"Reference.Echo.Set",
-    Enum::"CE Message Version ori"::"1.0", '', '', 'application/json',
+    Enum::"Message Version ori"::"1.0", '', '', 'application/json',
     RequestContent, ResponseContent, ResponseContentType);
 ```
 
