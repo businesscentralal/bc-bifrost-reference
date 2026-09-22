@@ -7,8 +7,8 @@ using Origo.Bifrost;
 /// pattern: the actual write happens in a separate codeunit (TableNo = "Message Argument
 /// ori") invoked via Codeunit.Run(), so a failure is caught here and reported through
 /// RespondWithLastError() without rolling back the outer transaction. Help text lives in a
-/// separate codeunit (RefNoteAddHelp) - the pattern Core uses for every one of its 143
-/// message types once help text grows past a few lines; see WRITING-HELP.md.
+/// separate codeunit (RefNoteAddHelp) - the pattern to default to once help text grows past
+/// a few lines; see WRITING-HELP.md.
 /// </summary>
 codeunit 90003 "Ref Note Add Impl" implements "Msg Interface ori"
 {
@@ -33,7 +33,7 @@ codeunit 90003 "Ref Note Add Impl" implements "Msg Interface ori"
 
     internal procedure GetDescription(): Text[250]
     begin
-        exit('Creates a note record. Fails with a structured error if the id already exists.');
+        exit('Creates one Reference Note record with the number and text given. Fails with a structured error if a note with that number already exists.');
     end;
 
     internal procedure GetMessageDirection(): Enum "Msg Direction ori"

@@ -47,7 +47,7 @@ curl -X POST "https://<env>/api/origo/cloudEvent/v1.0/tasks" \
   -H "Content-Type: application/json" \
   -d '{
     "specversion": "1.0",
-    "type": "Reference.Echo.Set",
+    "type": "Reference.Echo.Get",
     "source": "quickstart",
     "subject": "quickstart-1",
     "datacontenttype": "application/json",
@@ -68,7 +68,7 @@ directly" section.
 contract):
 
 ```al
-Dispatcher.Execute(Enum::"Message Type ori"::"Reference.Echo.Set",
+Dispatcher.Execute(Enum::"Message Type ori"::"Reference.Echo.Get",
     Enum::"Message Version ori"::"1.0", '', '', 'application/json',
     RequestContent, ResponseContent, ResponseContentType);
 ```

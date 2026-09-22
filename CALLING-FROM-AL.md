@@ -52,7 +52,7 @@ operation) are incompatible with `OmitCommit = true`.** `TryFunction` needs a re
 boundary to roll back to; skipping the commit removes that boundary. This is stated directly
 in Core's own XML doc comments on the dispatcher - not a guess.
 
-## Example: calling `Reference.Echo.Set` from another extension
+## Example: calling `Reference.Echo.Get` from another extension
 
 ```al
 var
@@ -63,7 +63,7 @@ var
 begin
     RequestContent.AddText('{"message":"hello"}');
     Dispatcher.Execute(
-        Enum::"Message Type ori"::"Reference.Echo.Set",
+        Enum::"Message Type ori"::"Reference.Echo.Get",
         Enum::"Message Version ori"::"1.0",
         '', '', 'application/json',
         RequestContent, ResponseContent, ResponseContentType);

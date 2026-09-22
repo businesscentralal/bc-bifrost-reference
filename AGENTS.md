@@ -52,10 +52,12 @@ not listed and cannot be chosen at all - a real access-control mechanism (e.g. g
 **Help text is the contract, not a nicety - read `WRITING-HELP.md` before writing it.** Most
 message types exposed as agent tools get a generic, parameter-less schema; the help markdown
 is the only place your actual request/response shape and failure modes are described
-anywhere. Use the skeleton in `WRITING-HELP.md` (Overview, Request Parameters, Response
-Shape, Errors, Idempotency/Safety, Related Message Types, Examples) - keep it inline in the
-impl codeunit only while it's a few lines; move it to its own codeunit once it grows past
-that, matching `RefNoteAddHelp.Codeunit.al`.
+anywhere. Use the skeleton in `WRITING-HELP.md` (`# Type.Name`, Overview, Direction, Request
+table, Request example, Response incl. empty case, Errors table with exact error text,
+Safety / repeat, Related types) and pass its five-question test. Never name implementation
+(procedure or codeunit names, AL mechanics, Origo infrastructure) in help text - it is a
+contract for the caller. Inline in the impl codeunit or in its own codeunit
+(`RefNoteAddHelp.Codeunit.al`) - either is fine.
 
 ### 1.2 Every `ExecuteBifrostTask` starts with both guards, in this order
 
