@@ -8,32 +8,32 @@ using Origo.Bifrost;
 /// message types, so a caller — usually an agent — can learn what this app adds without
 /// walking the whole catalogue. No request body is required.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller and published on the documentation site. Contract only — see WRITING-HELP.md.</remarks>
+/// <remarks>Public document: this text is returned to every caller. Contract only - see CONTRACT.md.</remarks>
 codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
 {
     Access = Internal;
 
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
 
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
 
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     begin
-        exit('Returns a Markdown overview of the Bifrost Reference app and lists its message types. No request body is required.');
+        exit('Returns a Markdown overview of the Bifrost Reference app and lists its message types. Read-only. No request body is required.');
     end;
 
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit(Enum::"Msg Direction ori"::Outbound);
     end;
 
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     var
         HelpText: TextBuilder;
     begin
@@ -75,7 +75,7 @@ codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
         Argument.SetResponseMarkdown(HelpText.ToText());
     end;
 
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         ResponseJson: JsonObject;
     begin
@@ -91,17 +91,23 @@ codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
     begin
         Overview.AppendLine('# Bifrost Reference');
         Overview.AppendLine('');
-        Overview.AppendLine('A sample app built on Bifrost Foundation. It exists to show, in the smallest honest form,');
-        Overview.AppendLine('what a dependent app does: register message types, implement them, document them, register');
-        Overview.AppendLine('with the app registry. It stores nothing a business would use.');
+        Overview.AppendLine('A sample app built on Bifrost Foundation. Each message type shows one pattern a partner app');
+        Overview.AppendLine('needs: reading a record, validated writes with safe retries, a preview/apply pair for a bulk');
+        Overview.AppendLine('change, an external HTTP call with a secret. The data it writes is sample data only.');
         Overview.AppendLine('');
         Overview.AppendLine('## Message types');
-        Overview.AppendLine('| Type | Direction | What it does |');
+        Overview.AppendLine('| Type | Effect | What it does |');
         Overview.AppendLine('| --- | --- | --- |');
-        Overview.AppendLine('| `Reference.Echo.Get` | Outbound | Returns what you sent plus the server time. A connectivity check. |');
-        Overview.AppendLine('| `Reference.Table.Get` | Outbound | Returns a table''s object ID from its name. A read that can fail. |');
-        Overview.AppendLine('| `Reference.Note.Add` | Inbound | Stores one note under a number you choose. A write that rejects duplicates. |');
-        Overview.AppendLine('| `Help.Reference.Get` | Outbound | This overview. |');
+        Overview.AppendLine('| `Reference.Customer.Overview.Get` | Read-only | A customer''s balance, overdue amount and available credit. |');
+        Overview.AppendLine('| `Reference.ServiceVisit.Create` | Commits | Logs a service visit at a customer; safe to retry with externalId. |');
+        Overview.AppendLine('| `Reference.ItemPrice.PreviewAdjustment` | Read-only | Shows a % unit price change for an item category. |');
+        Overview.AppendLine('| `Reference.ItemPrice.ApplyAdjustment` | Commits | Applies that change; needs the preview''s itemCount. |');
+        Overview.AppendLine('| `Reference.ExchangeRate.Get` | Read-only (internet) | Latest ECB rate between two currencies. |');
+        Overview.AppendLine('| `Reference.ApiKey.Set` | Commits | Stores the rates API key as a secret. |');
+        Overview.AppendLine('| `Reference.Echo.Get` | Read-only | Returns what you sent plus the server time. A connectivity check. |');
+        Overview.AppendLine('| `Reference.Table.Get` | Read-only | Returns a table''s object ID from its name. |');
+        Overview.AppendLine('| `Reference.Note.Add` | Commits | Stores one note under a number you choose. |');
+        Overview.AppendLine('| `Help.Reference.Get` | Read-only | This overview. |');
         Overview.AppendLine('');
         Overview.AppendLine('For the contract of any one type, call `Help.Implementation.Get` with its name.');
         exit(Overview.ToText());

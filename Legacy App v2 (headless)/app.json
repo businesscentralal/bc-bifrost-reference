@@ -1,0 +1,36 @@
+{
+  "id": "8a3f2c1e-9d4b-4e7a-b6c3-1f5e8a2d4c9b",
+  "name": "Legacy App",
+  "publisher": "Origo",
+  "version": "2.1.0.0",
+  "brief": "A small, ordinary extension - written before Bifröst existed",
+  "description": "Deliberately ordinary stock-reservation logic, written as if Bifröst didn't exist. Paired with 'Legacy App - Bifrost' to show what retrofitting an existing solution actually involves - including the one case that can't be wrapped without touching this app's code.",
+  "url": "https://www.origo.is/",
+  "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
+  "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
+  "target": "Cloud",
+  "screenshots": [],
+  "dependencies": [],
+  "idRanges": [
+    {
+      "from": 90050,
+      "to": 90099
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "supportedLocales": [
+    "en-US",
+    "is-IS"
+  ],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "runtime": "17.0",
+  "features": [
+    "TranslationFile"
+  ],
+  "propagateDependencies": false
+}

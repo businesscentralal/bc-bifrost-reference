@@ -4,12 +4,9 @@
 covers a different, real question: **can AL code already running inside Business Central
 call a message type directly, without an external caller at all?**
 
-Yes. Verified against Core's own source (`app/src/Task/Dispatcher.Codeunit.al`,
-codeunit `"Dispatcher ori"`) - a public, documented entry point that any
-extension can call. It is not an internal implementation detail — Bifröst Language Models
-uses this same codeunit to run its MCP tool calls without going through HTTP at all. (The MCP
-tool server lived in the kernel under Cloud Events; in Bifröst it moved out. Foundation's
-`RequestLogType.Enum.al` still carries the ordinal, with a comment saying why.)
+Yes. Codeunit `"Dispatcher ori"` is a public, documented entry point that any extension can
+call. It is the same path Foundation itself uses when it runs message types in-process,
+without going through HTTP.
 
 ## The two ways to call it
 
@@ -24,6 +21,10 @@ Dispatcher: Codeunit "Dispatcher ori";
 
 Both take the same shape: message type, version, subject, source, content type, request
 payload as `BigText`, and give you back the response payload plus its content type.
+`Execute` has an 8-parameter overload (always `OmitCommit = true`) and a 9-parameter one with
+`OmitCommit`. `EnqueueAndProcess` adds `TaskId`, `WindowsLanguageId`, `MessageId` and
+`ResponseTime` (12 parameters, `OmitCommit = false`; 13 with the flag), with matching overloads
+that return the response in a `Temp Blob` instead of `BigText`.
 
 :::caution `Execute` is not a "direct call"
 
@@ -72,7 +73,8 @@ end;
 ```
 
 No API page, no OAuth, no network call - this runs entirely in-process, in the caller's own
-transaction (unless `OmitCommit` is used to isolate it).
+transaction: with `Execute`'s default `OmitCommit = true` nothing is committed on your behalf;
+pass `OmitCommit = false` and the orchestrator commits.
 
 ## Which license pool this consumes
 

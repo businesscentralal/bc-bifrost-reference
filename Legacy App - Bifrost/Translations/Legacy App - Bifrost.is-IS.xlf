@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="is-IS" original="Legacy App - Bifrost">
+    <body>
+      <group id="body">
+        <trans-unit id="Codeunit 1501032832 - NamedType 4125166614" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2'. Send true or false, without quotes.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2'. Sendu true eða false, án gæsalappa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2'. Sendu true eða false, án gæsalappa.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType BooleanFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1501032832 - NamedType 3777985252" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is empty. Send a value, for example %2.</source>
+          <target state="translated">Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = example, is-IS=Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType EmptyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1501032832 - NamedType 1698007908" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a whole number. Send a whole number, for example 3.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki heil tala. Sendu heila tölu, til dæmis 3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki heil tala. Sendu heila tölu, til dæmis 3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType IntegerFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1501032832 - NamedType 1830439019" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is required. Send it as %2.</source>
+          <target state="translated">Færibreytan '%1' er nauðsynleg. Sendu hana sem %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = expected type and example, is-IS=Færibreytan '%1' er nauðsynleg. Sendu hana sem %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType MissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1501032832 - NamedType 1973040246" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' must be a single value (text or number), not an object or an array.</source>
+          <target state="translated">Færibreytan '%1' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Færibreytan '%1' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType NotAValueErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1501032832 - NamedType 1264649167" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The request body must be a JSON object, for example { "itemNo": "1896-S", "quantity": 2 }.</source>
+          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S", "quantity": 2 }.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S", "quantity": 2 }.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType NotObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1501032832 - NamedType 2723671431" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a number. Send a number with a dot as decimal separator, for example 2.5.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType NumberFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1501032832 - NamedType 3255873965" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is %2 characters long; the maximum is %3.</source>
+          <target state="translated">Færibreytan '%1' er %2 stafir; hámarkið er %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = actual length, %3 = maximum length, is-IS=Færibreytan '%1' er %2 stafir; hámarkið er %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType TooLongErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3564666794 - NamedType 251673366" size-unit="char" translate="yes" xml:space="preserve">
+          <source>itemFilter '%1' matches %2 reservations, not the %3 you sent in expectedCount. Nothing was released. Check with Legacy.Stock.List and send its count.</source>
+          <target state="translated">itemFilter '%1' passar við %2 frátekningar, ekki %3 eins og þú sendir í expectedCount. Ekkert var losað. Athugaðu með Legacy.Stock.List og sendu fjöldann þaðan.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = filter, %2 = actual count, %3 = expected count, is-IS=itemFilter '%1' passar við %2 frátekningar, ekki %3 eins og þú sendir í expectedCount. Ekkert var losað. Athugaðu með Legacy.Stock.List og sendu fjöldann þaðan.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Release All Process - NamedType CountMismatchErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1056309465 - NamedType 199971095" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter 'itemFilter' is '%1', which is not a valid filter: %2 Send an item number or a filter such as 1896-S|1900-S or 19*.</source>
+          <target state="translated">Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1896-S|1900-S eða 19*.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = filter received, %2 = platform error text, is-IS=Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1896-S|1900-S eða 19*.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock List Impl - NamedType FilterErr</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 771155518 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Legacy Stock via Bifrost</source>
+          <target state="translated">Birgðafrátekningar um Bifröst</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Birgðafrátekningar um Bifröst</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet LEGACY ADAPTER - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

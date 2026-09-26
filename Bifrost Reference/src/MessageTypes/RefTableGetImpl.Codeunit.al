@@ -9,32 +9,32 @@ using System.Reflection;
 /// needs before calling Data.Records.Get/Set dynamically. Unlike Reference.Echo.Get, this
 /// type demonstrates the structured error-response contract for expected failures.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller and published on the documentation site. Contract only — see WRITING-HELP.md.</remarks>
+/// <remarks>Public document: this text is returned to every caller. Contract only - see CONTRACT.md.</remarks>
 codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori"
 {
     Access = Internal;
 
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
 
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
 
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     begin
         exit('Returns the object ID of a Business Central table given its object name. Read-only; fails with a structured error if no table has that name.');
     end;
 
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit(Enum::"Msg Direction ori"::Outbound);
     end;
 
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     var
         HelpText: TextBuilder;
     begin
@@ -74,8 +74,9 @@ codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori"
         HelpText.AppendLine('');
         HelpText.AppendLine('| `error` | Meaning | `hint` |');
         HelpText.AppendLine('| --- | --- | --- |');
-        HelpText.AppendLine('| `Missing required field ''tableName''.` | The request has no `tableName` field. | Send `{ "tableName": "<name>" }`. |');
-        HelpText.AppendLine('| `Table ''Foo'' was not found.` | No table has the object name given (`Foo` is the name you sent). | Check spelling and spaces; use the full object name, e.g. `Sales Header`, not `SalesHeader`. |');
+        HelpText.AppendLine('| `Parameter ''tableName'' is required. Send it as text, for example "Customer".` | The request has no `tableName` field. | Send `{ "tableName": "<name>" }`. |');
+        HelpText.AppendLine('| `Parameter ''tableName'' is empty. Send a value, for example "Customer".` | Empty string. | Send the name. |');
+        HelpText.AppendLine('| `Table ''Foo'' was not found. Use the full object name with spaces, for example Sales Header, or list tables with Help.Tables.Get.` | No table has that object name. | Check spelling and spaces. |');
         HelpText.AppendLine('');
         HelpText.AppendLine('Example:');
         HelpText.AppendLine('```json');
@@ -91,24 +92,22 @@ codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori"
         Argument.SetResponseMarkdown(HelpText.ToText());
     end;
 
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         AllObj: Record AllObj;
+        RefInput: Codeunit "Ref Input";
         RequestJson: JsonObject;
         ResponseJson: JsonObject;
-        NameToken: JsonToken;
         TableName: Text;
-        TableNotFoundErr: Label 'Table ''%1'' was not found.', Comment = '%1 = table name';
+        TableNotFoundErr: Label 'Table ''%1'' was not found. Use the full object name with spaces, for example Sales Header, or list tables with Help.Tables.Get.', Comment = '%1 = table name, is-IS=Taflan ''%1'' fannst ekki. Notaðu fullt heiti með bilum, t.d. Sales Header, eða skoðaðu töflur með Help.Tables.Get.';
     begin
         Argument.AssertVersion1();
         Argument.AssertIsLicensed();
 
-        RequestJson := Argument.GetRequestJson();
-        if not RequestJson.Get('tableName', NameToken) then begin
-            Argument.RespondWithError('Missing required field ''tableName''.');
+        if not RefInput.ReadRequest(Argument, RequestJson) then
             exit;
-        end;
-        TableName := NameToken.AsValue().AsText();
+        if not RefInput.GetRequiredText(Argument, RequestJson, 'tableName', 30, '"Customer"', TableName) then
+            exit;
 
         AllObj.SetRange("Object Type", AllObj."Object Type"::Table);
         AllObj.SetRange("Object Name", TableName);

@@ -5,8 +5,9 @@ case: you already have a working extension, and you want some of its existing pr
 callable through Bifröst **without rewriting them**.
 
 The worked example is `Legacy App` + `Legacy App - Bifrost` in this repo. `Legacy App`
-is written as if Bifröst didn't exist - two procedures, two different shapes on
-purpose. `Legacy App - Bifrost` depends on it and wraps both. Read them in that order;
+was written as if Bifröst didn't exist - two procedures, two different shapes on
+purpose - and has since been given a headless facade (below). `Legacy App - Bifrost` depends
+on it and wraps it. Read them in that order;
 this document explains the *why* behind what you'll see.
 
 ## The two apps, and why there are two
@@ -36,13 +37,36 @@ The underlying rules - six methods, two guards, error handling, write isolation,
 Confirm()/Commit() check below - are identical either way. This choice is about *where the
 adapter code lives*, not about what it has to do.
 
+## Where the example ended up: a headless facade
+
+The current `Legacy App` puts its business logic in a public, UI-free facade codeunit,
+`"Legacy Stock API"` (`Legacy App v2 (headless)/src/LegacyStockAPI.Codeunit.al`). It knows nothing about
+Bifröst: no `Confirm()`/`Message()`, no `Commit()`, every precondition checked up front with an
+actionable error, outcomes returned rather than hidden - `Reserve` returns the new total,
+`CancelReservation` returns a `Boolean` (whether anything was cancelled) - plus
+`GetReservedQuantity`, `HasReservation`, `IsReservable` and OnBefore/OnAfter integration events.
+`"Legacy Stock Mgt"` keeps the old entry points for existing callers: `ReserveStock` and
+`CancelReservationSilent` are obsolete shells over the facade, and `CancelReservation` is the UI
+entry point that asks `Confirm()` and then calls the facade.
+
+`Legacy App - Bifrost` calls the facade, never `Legacy Stock Mgt`, through isolated Process
+codeunits (`Legacy Reserve Process`, `Legacy Cancel Process`, run with `Codeunit.Run`, a failure
+answered with `RespondWithError(GetLastErrorText())`). It also adds a read sibling,
+`Legacy.Stock.Get` (`{itemNo, hasReservation, reservedQuantity}`), so a caller can check state
+before and after a write. Responses: `Legacy.Stock.Reserve` returns
+`{itemNo, quantityAdded, totalReserved}`, `Legacy.Stock.CancelReservation` returns
+`{itemNo, cancelled}`.
+
+The two cases below are how it got there, and why.
+
 ## Case 1: `Legacy.Stock.Reserve` - a thin wrapper, nothing else needed
 
-`Legacy Stock Mgt.ReserveStock` has no dialogs and no intermediate `Commit()` - the whole
-operation is one transaction, and it can't leave anything half-done. `Legacy Stock Reserve
-Impl.ExecuteBifrostTask` calls it directly: parse the JSON, call the procedure, write the
-JSON response. No change to `Legacy App` was needed. **This is the case people assume is the
-only case** - it's why a "just wrap it" mental model survives until it hits case 2.
+The original `Legacy Stock Mgt.ReserveStock` had no dialogs and no intermediate `Commit()` - the
+whole operation is one transaction, and it can't leave anything half-done. The first adapter
+called it directly: parse the JSON, call the procedure, write the JSON response. No change to
+`Legacy App` was needed for that. **This is the case people assume is the only case** - it's why
+a "just wrap it" mental model survives until it hits case 2. (It now calls the facade's
+`Reserve` instead, which says *why* a reservation was refused rather than returning `false`.)
 
 ## Case 2: `Legacy.Stock.CancelReservation` - the one that needed a real change
 
@@ -68,9 +92,13 @@ targeted extraction:
 - `CancelReservation(ItemNo)` — kept, unchanged in behaviour for existing callers, now just
   the confirm dialog in front of the silent core.
 
-`Legacy Cancel Reserve Impl` calls `CancelReservationSilent`, never the original. Existing
-callers of `CancelReservation` (pages, whatever already used it) don't need to change at
-all - the extraction is additive, not a rename.
+A later step moved that silent core into the facade as `"Legacy Stock API".CancelReservation`,
+which also returns whether anything was cancelled. `CancelReservationSilent` stays as an obsolete
+shell over it for callers written against the first retrofit, and `CancelReservation` still
+asks `Confirm()` and then calls the facade. `Legacy Cancel Reserve Impl` calls the facade (via
+`Legacy Cancel Process`), never the dialog version. Existing callers of `CancelReservation`
+(pages, whatever already used it) don't need to change at all - the extraction is additive,
+not a rename.
 
 ## How to tell which case you're in
 
@@ -83,8 +111,9 @@ Before wrapping an existing procedure, check it for:
 | Plain data read/write, no UI, one transaction | Safe to wrap directly, as in case 1 |
 
 If neither signal is present, you're almost always in case 1. If either is present, you're
-in case 2, and the fix is the same shape every time: extract a silent core, keep the
-original as a thin wrapper around it, point the adapter at the silent core.
+in case 2, and the fix is the same shape every time: extract a silent core (ideally into a
+public headless facade like `"Legacy Stock API"`), keep the original as a thin wrapper around
+it, point the adapter at the silent core.
 
 ## What doesn't change between building fresh and retrofitting
 

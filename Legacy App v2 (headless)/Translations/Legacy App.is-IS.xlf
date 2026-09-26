@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="is-IS" original="Legacy App">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 814962226 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Legacy Cancellation Log</source>
+          <target state="needs-translation">Skrá yfir niðurfelldar frátekningar (eldra forrit)</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Legacy Cancellation Log - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 814962226 - Field 2362114274 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancelled At</source>
+          <target state="needs-translation">Fellt niður þann</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Legacy Cancellation Log - Field Cancelled At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 814962226 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <target state="needs-translation">Færslunr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Legacy Cancellation Log - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 814962226 - Field 568743302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item No.</source>
+          <target state="needs-translation">Vörunr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Legacy Cancellation Log - Field Item No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2411554703 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Legacy Stock Reservation</source>
+          <target state="needs-translation">Frátekning birgða (eldra forrit)</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Legacy Stock Reservation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2411554703 - Field 568743302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item No.</source>
+          <target state="needs-translation">Vörunr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Legacy Stock Reservation - Field Item No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2411554703 - Field 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity</source>
+          <target state="needs-translation">Magn</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Legacy Stock Reservation - Field Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3417392183 - NamedType 26629596" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item '%1' is blocked, so stock cannot be reserved for it. Unblock the item or choose another.</source>
+          <target state="translated">Varan '%1' er lokuð og því er ekki hægt að taka frá birgðir fyrir hana. Opnaðu vöruna eða veldu aðra.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item no., is-IS=Varan '%1' er lokuð og því er ekki hægt að taka frá birgðir fyrir hana. Opnaðu vöruna eða veldu aðra.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock API - NamedType ItemBlockedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3417392183 - NamedType 2871054791" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An item number is required. Send the number of an existing item, for example 1896-S.</source>
+          <target state="translated">Vörunúmer vantar. Sendu númer vöru sem er til, til dæmis 1896-S.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vörunúmer vantar. Sendu númer vöru sem er til, til dæmis 1896-S.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock API - NamedType ItemNoMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3417392183 - NamedType 2184892397" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item '%1' does not exist. Check the number, or find the item with Data.Records.Get on table Item.</source>
+          <target state="translated">Varan '%1' er ekki til. Athugaðu númerið eða finndu vöruna með Data.Records.Get á töflunni Item.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item no., is-IS=Varan '%1' er ekki til. Athugaðu númerið eða finndu vöruna með Data.Records.Get á töflunni Item.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock API - NamedType ItemNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3417392183 - NamedType 1060406365" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item '%1' has %2 in inventory and %3 already reserved, so reserving %4 more would reserve more than is in stock. Reserve at most %5, or explicitly allow over-reservation.</source>
+          <target state="translated">Varan '%1' á %2 á lager og %3 eru þegar frátekin, svo ef %4 væru tekin frá til viðbótar væri tekið frá meira en er til. Taktu frá að hámarki %5 eða leyfðu umframfrátekningu sérstaklega.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item no., %2 = inventory, %3 = already reserved, %4 = quantity asked, %5 = available, is-IS=Varan '%1' á %2 á lager og %3 eru þegar frátekin, svo ef %4 væru tekin frá til viðbótar væri tekið frá meira en er til. Taktu frá að hámarki %5 eða leyfðu umframfrátekningu sérstaklega.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock API - NamedType OverStockErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3417392183 - NamedType 1473162410" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The quantity to reserve is %1. Send a quantity greater than zero; to remove a reservation, cancel it instead.</source>
+          <target state="translated">Magnið sem á að taka frá er %1. Sendu magn sem er stærra en núll; til að fjarlægja frátekningu skaltu hætta við hana.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = quantity, is-IS=Magnið sem á að taka frá er %1. Sendu magn sem er stærra en núll; til að fjarlægja frátekningu skaltu hætta við hana.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock API - NamedType QuantityErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 600072821 - Method 895184314 - NamedType 750120336" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancel the reservation for %1?</source>
+          <target state="translated">Hætta við frátekningu fyrir %1?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item no., is-IS=Hætta við frátekningu fyrir %1?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Mgt - Method CancelReservation - NamedType ConfirmQst</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 600072821 - Method 895184314 - NamedType 137901555" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item %1 has no reservation.</source>
+          <target state="translated">Varan %1 er ekki með frátekningu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item no., is-IS=Varan %1 er ekki með frátekningu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Mgt - Method CancelReservation - NamedType NothingToCancelMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 600072821 - Method 1690375468 - NamedType 2059597720" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There are no reservations to release.</source>
+          <target state="translated">Engar frátekningar eru til að losa.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engar frátekningar eru til að losa.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Mgt - Method ReleaseAll - NamedType NothingMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 600072821 - Method 1690375468 - NamedType 750120336" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Release all %1 reservations?</source>
+          <target state="translated">Losa allar %1 frátekningar?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = number of reservations, is-IS=Losa allar %1 frátekningar?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Mgt - Method ReleaseAll - NamedType ConfirmQst</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 600072821 - Method 1690375468 - NamedType 4288424883" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 reservations released.</source>
+          <target state="translated">%1 frátekningar losaðar.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = number released, is-IS=%1 frátekningar losaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Mgt - Method ReleaseAll - NamedType DoneMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 1998436031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reserve Stock</source>
+          <target state="translated">Taka frá birgðir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Taka frá birgðir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Reserve Dialog - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1998436031 - Control 332802016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The item to reserve stock for.</source>
+          <target state="translated">Varan sem á að taka frá birgðir fyrir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Varan sem á að taka frá birgðir fyrir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Reserve Dialog - Control ItemNo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1998436031 - Control 332802016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item No.</source>
+          <target state="translated">Vörunr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vörunr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Reserve Dialog - Control ItemNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1998436031 - Control 2704404533 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The quantity to add to the reservation.</source>
+          <target state="translated">Magnið sem bætist við frátekninguna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Magnið sem bætist við frátekninguna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Reserve Dialog - Control Quantity - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1998436031 - Control 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quantity</source>
+          <target state="translated">Magn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Magn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Reserve Dialog - Control Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Legacy Stock Reservations</source>
+          <target state="translated">Frátekningar birgða (eldra forrit)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Frátekningar birgða (eldra forrit)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Control 568743302 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The item the stock is reserved for.</source>
+          <target state="translated">Varan sem birgðir eru teknar frá fyrir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Varan sem birgðir eru teknar frá fyrir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Control Item No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Control 2704404533 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The reserved quantity.</source>
+          <target state="translated">Frátekið magn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Frátekið magn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Control Quantity - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 895184314 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancel the reservation for the selected item. You are asked to confirm.</source>
+          <target state="translated">Hætta við frátekningu valinnar vöru. Þú ert beðin(n) um staðfestingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hætta við frátekningu valinnar vöru. Þú ert beðin(n) um staðfestingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action CancelReservation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 895184314 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancel reservation</source>
+          <target state="translated">Hætta við frátekningu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hætta við frátekningu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action CancelReservation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 1690375468 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Release every reservation and log each one, in one step. You are asked to confirm.</source>
+          <target state="translated">Losa allar frátekningar og skrá hverja og eina, í einu skrefi. Þú ert beðin(n) um staðfestingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Losa allar frátekningar og skrá hverja og eina, í einu skrefi. Þú ert beðin(n) um staðfestingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action ReleaseAll - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 1690375468 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Release all reservations</source>
+          <target state="translated">Losa allar frátekningar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Losa allar frátekningar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action ReleaseAll - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 2574417948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reserve a quantity of an item. You enter the item and the quantity in a dialog.</source>
+          <target state="translated">Taka frá magn af vöru. Þú slærð inn vöru og magn í glugga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Taka frá magn af vöru. Þú slærð inn vöru og magn í glugga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action ReserveStock - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 2574417948 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reserve stock...</source>
+          <target state="translated">Taka frá birgðir...</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Taka frá birgðir...</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action ReserveStock - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 2574417948 - Method 1377591017 - NamedType 3617171775" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reserved %1 of item %2. Total reserved: %3.</source>
+          <target state="translated">Tekið frá %1 af vöru %2. Samtals frátekið: %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = quantity, %2 = item no., %3 = new total, is-IS=Tekið frá %1 af vöru %2. Samtals frátekið: %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action ReserveStock - Method OnAction - NamedType ReservedMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 3120024090 - Action 2574417948 - Method 1377591017 - NamedType 151449132" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Only %1 of item %2 is available to reserve. Reserve %3 anyway?</source>
+          <target state="translated">Aðeins %1 af vöru %2 er hægt að taka frá. Taka samt frá %3?</target>
+          <note from="Developer" annotates="general" priority="2">%1 = available, %2 = item no., %3 = quantity, is-IS=Aðeins %1 af vöru %2 er hægt að taka frá. Taka samt frá %3?</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Legacy Stock Reservations - Action ReserveStock - Method OnAction - NamedType OverStockQst</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 1520099311 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Legacy Stock</source>
+          <target state="translated">Birgðafrátekningar (eldra forrit)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Birgðafrátekningar (eldra forrit)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet LEGACY STOCK - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

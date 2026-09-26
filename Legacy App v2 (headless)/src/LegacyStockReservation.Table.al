@@ -6,18 +6,18 @@ namespace Origo.Bifrost.Reference.Legacy;
 /// </summary>
 table 90050 "Legacy Stock Reservation"
 {
-    Caption = 'Legacy Stock Reservation';
+    Caption = 'Legacy Stock Reservation', Comment = 'is-IS=Frátekning birgða (eldra forrit)';
     DataClassification = CustomerContent;
 
     fields
     {
         field(1; "Item No."; Code[20])
         {
-            Caption = 'Item No.';
+            Caption = 'Item No.', Comment = 'is-IS=Vörunr.';
         }
         field(2; "Quantity"; Decimal)
         {
-            Caption = 'Quantity';
+            Caption = 'Quantity', Comment = 'is-IS=Magn';
         }
     }
 

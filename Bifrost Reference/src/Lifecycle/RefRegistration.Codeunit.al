@@ -11,8 +11,7 @@ using Origo.Bifrost;
 /// the app's name on Bifrost App Secrets. A dependent app never shows a notification of its own
 /// for HTTP or credentials; it registers here and Foundation aggregates.
 ///
-/// Every Bifröst app has exactly one of these. Pass 0 as the setup page id while the app has no
-/// setup page of its own (this sample has none yet); pass the page's object id once it does.
+/// Every Bifröst app has exactly one of these. The last argument is the app's own setup page.
 /// </summary>
 codeunit 90006 "Ref Registration"
 {
@@ -25,6 +24,6 @@ codeunit 90006 "Ref Registration"
         AppInfo: ModuleInfo;
     begin
         NavApp.GetCurrentModuleInfo(AppInfo);
-        AppRegistry.AddApp(Apps, AppInfo.Id(), CopyStr(AppInfo.Name(), 1, 250), 0);
+        AppRegistry.AddApp(Apps, AppInfo.Id(), CopyStr(AppInfo.Name(), 1, 250), Page::"Ref Setup");
     end;
 }

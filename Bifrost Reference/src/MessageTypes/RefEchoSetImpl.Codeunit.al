@@ -8,32 +8,32 @@ using Origo.Bifrost;
 /// without depending on any external system. The type was named Reference.Echo.Set until the
 /// rename; the codeunit keeps its object name so the object ID and file stay stable.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller and published on the documentation site. Contract only — see WRITING-HELP.md.</remarks>
+/// <remarks>Public document: this text is returned to every caller. Contract only - see CONTRACT.md.</remarks>
 codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
 {
     Access = Internal;
 
-    internal procedure IsEnabled(): Boolean
+    procedure IsEnabled(): Boolean
     begin
         exit(true);
     end;
 
-    internal procedure GetFilterTableNo(): Integer
+    procedure GetFilterTableNo(): Integer
     begin
         exit(0);
     end;
 
-    internal procedure GetDescription(): Text[250]
+    procedure GetDescription(): Text[250]
     begin
-        exit('Returns the request object unchanged with a serverTime field added. Connectivity check; reads no data and writes nothing.');
+        exit('Returns the request object unchanged with a serverTime field added. Read-only connectivity check; reads no data.');
     end;
 
-    internal procedure GetMessageDirection(): Enum "Msg Direction ori"
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit(Enum::"Msg Direction ori"::Outbound);
     end;
 
-    internal procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
     var
         HelpText: TextBuilder;
     begin
@@ -70,12 +70,9 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
         HelpText.AppendLine('An empty request `{}` returns `{ "serverTime": "2026-09-18T10:15:30.123Z" }` - not an error.');
         HelpText.AppendLine('');
         HelpText.AppendLine('## Errors');
-        HelpText.AppendLine('The operation has no error conditions of its own. If the request `data` is not a JSON');
-        HelpText.AppendLine('object the call fails before the operation runs.');
-        HelpText.AppendLine('');
-        HelpText.AppendLine('| `error` | Meaning | `hint` |');
+        HelpText.AppendLine('| `error` | Meaning | Fix |');
         HelpText.AppendLine('| --- | --- | --- |');
-        HelpText.AppendLine('| *(none)* | - | - |');
+        HelpText.AppendLine('| `The request body must be a JSON object, for example { "customerNo": "10000" }.` | `data` is an array or plain text. | Send a JSON object, or no body. |');
         HelpText.AppendLine('');
         HelpText.AppendLine('## Safety / repeat');
         HelpText.AppendLine('Safe to call any number of times. Each call returns a new `serverTime`; nothing else');
@@ -87,13 +84,15 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
         Argument.SetResponseMarkdown(HelpText.ToText());
     end;
 
-    internal procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
+    procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
+        RefInput: Codeunit "Ref Input";
         RequestJson: JsonObject;
     begin
         Argument.AssertVersion1();
         Argument.AssertIsLicensed();
-        RequestJson := Argument.GetRequestJson();
+        if not RefInput.ReadRequest(Argument, RequestJson) then
+            exit;
         if not RequestJson.Replace('serverTime', CurrentDateTime()) then
             RequestJson.Add('serverTime', CurrentDateTime());
         Argument.SetResponseJson(RequestJson);

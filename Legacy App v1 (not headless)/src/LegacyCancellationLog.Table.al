@@ -1,10 +1,7 @@
 namespace Origo.Bifrost.Reference.Legacy;
 
 /// <summary>
-/// Records that a reservation was cancelled. Kept deliberately separate from the
-/// reservation table so CancelReservation has a second, independent write to make -
-/// that second write is what makes the premature Commit() in CancelReservation a real
-/// problem rather than a stylistic one. See ADAPTING.md.
+/// Records that a reservation was cancelled. Identical in v1 and v2.
 /// </summary>
 table 90051 "Legacy Cancellation Log"
 {

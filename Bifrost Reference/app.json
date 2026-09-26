@@ -2,7 +2,7 @@
   "id": "3f8a1c2e-6b4d-4a9f-9e2c-7d5b8a3f1e6c",
   "name": "Bifrost Reference",
   "publisher": "Origo",
-  "version": "1.0.0.0",
+  "version": "1.1.0.0",
   "brief": "Reference implementation for extending Bifröst",
   "description": "A minimal, from-scratch reference implementation showing how to extend Bifröst Foundation with new message types. Intended for third-party developers building on the Bifröst platform.",
   "url": "https://www.origo.is/",
@@ -31,7 +31,8 @@
     "includeSourceInSymbolFile": true
   },
   "supportedLocales": [
-    "en-US"
+    "en-US",
+    "is-IS"
   ],
   "platform": "28.0.0.0",
   "application": "28.0.0.0",

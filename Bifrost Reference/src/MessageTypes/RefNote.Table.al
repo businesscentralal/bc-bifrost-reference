@@ -6,18 +6,18 @@ namespace Origo.Bifrost.Reference;
 /// </summary>
 table 90002 "Ref Note"
 {
-    Caption = 'Reference Note';
+    Caption = 'Reference Note', Comment = 'is-IS=Athugasemd (sýnidæmi)';
     DataClassification = CustomerContent;
 
     fields
     {
         field(1; "No."; Code[20])
         {
-            Caption = 'No.';
+            Caption = 'No.', Comment = 'is-IS=Nr.';
         }
         field(2; "Text"; Text[250])
         {
-            Caption = 'Text';
+            Caption = 'Text', Comment = 'is-IS=Texti';
         }
     }
 

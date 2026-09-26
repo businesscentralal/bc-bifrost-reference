@@ -9,10 +9,10 @@ wire contract (what a caller actually sends/receives) — this guide covers the 
 ```json
 "dependencies": [
   {
-    "id": "a629b897-7541-4562-bebb-c6122f15801c",
+    "id": "7505e808-6e52-4b96-a328-82573391297a",
     "name": "Bifrost Foundation",
     "publisher": "Origo",
-    "version": "28.1.0.0"
+    "version": "28.0.0.0"
   }
 ]
 ```
@@ -47,9 +47,9 @@ they return.
 
 **Direction must match the verb.** `GetMessageDirection` returns `Outbound` for a type that
 only reads Business Central data and returns it, and `Inbound` for a type that writes into
-Business Central. Of the five types in this repo: `Reference.Echo.Get` and
-`Reference.Table.Get` are **Outbound** — one reads the server clock, the other reads object
-metadata; neither touches a table. `Reference.Note.Add`, `Legacy.Stock.Reserve` and
+Business Central. Of the types discussed here: `Reference.Echo.Get`,
+`Reference.Table.Get` and `Legacy.Stock.Get` are **Outbound** — they read the server clock,
+object metadata and a reservation respectively; none writes. `Reference.Note.Add`, `Legacy.Stock.Reserve` and
 `Legacy.Stock.CancelReservation` are **Inbound** — they insert a note, insert or increase a
 reservation, and delete a reservation plus insert a log entry respectively. The help document's
 `## Direction` section repeats this in words so a caller can see it without reading AL.
@@ -81,7 +81,7 @@ A message type that can never fail (like `Reference.Echo.Get`) is incomplete. Re
 types need both paths:
 
 - **Expected failures** (bad input, not found, business rule) → `Argument.RespondWithError(msg)`. See `RefTableGetImpl.Codeunit.al`: missing field, table not found — both return a structured `{ status: "Error", error, hint }` response instead of a generic BC error.
-- **Unexpected failures** (anything that could still throw) → isolate the risky code and let `Codeunit.Run()` catch it, then call `Argument.RespondWithLastError()`. This also adds the AL call stack to the response. See below.
+- **Unexpected failures** (anything that could still throw) → isolate the risky code and let `Codeunit.Run()` catch it, then answer with `Argument.RespondWithError(GetLastErrorText())`. Foundation also offers `Argument.RespondWithLastError()`, which adds a `callstack` field with the AL call stack; this repo does not use it for isolated writes, so no call stack reaches the caller. See below.
 
 Both response shapes include a `hint` pointing the caller back to `Help.Implementation.Get`
 for that message type — this is deliberate: callers (including AI agents) can self-correct
@@ -98,8 +98,12 @@ codeunit with `TableNo = "Message Argument ori"`, invoked via `Codeunit.Run()`:
 
 ```al
 // In your main impl codeunit's ExecuteBifrostTask:
-if not Codeunit.Run(Codeunit::"Ref Note Add Process", Argument) then
-    Argument.RespondWithLastError();
+// (what Ref Input.RunIsolated does - RefInput.Codeunit.al)
+if Argument."Omit Commit" then
+    Codeunit.Run(Codeunit::"Ref Note Add Process", Argument) // caller owns the transaction
+else
+    if not Codeunit.Run(Codeunit::"Ref Note Add Process", Argument) then
+        Argument.RespondWithError(GetLastErrorText());
 ```
 
 ```al
@@ -120,13 +124,14 @@ the realistic failure case (duplicate key).
 an existing procedure that already validates its own input and returns a result you can test
 (a `Boolean`, a count, an empty record) instead of raising, and that procedure has no dialogs
 and no intermediate `Commit()`, you may call it directly and turn its result into
-`RespondWithError` yourself. That is what the two Legacy adapters do: `Legacy.Stock.Reserve`
-calls `ReserveStock`, which returns `false` for a non-positive quantity and otherwise performs
-a single insert-or-modify; `Legacy.Stock.CancelReservation` calls `CancelReservationSilent`,
-which exits quietly when nothing exists and otherwise performs a delete and an insert in one
-transaction. Neither has an expected failure that only surfaces as an AL error, so there is
-nothing for `Codeunit.Run()` to catch. The moment such a procedure gains an `Error()` you want
-reported to the caller, move the call behind the isolation pattern above.
+`RespondWithError` yourself. `Legacy.Stock.Get` does this: it reads `HasReservation` and
+`GetReservedQuantity` from the `"Legacy Stock API"` facade directly. The two Legacy write
+adapters do **not**: the facade's `Reserve` raises actionable `Error()`s (unknown item, blocked
+item, quantity not above zero), so `Legacy.Stock.Reserve` and `Legacy.Stock.CancelReservation`
+call the facade through isolated Process codeunits (`Legacy Reserve Process`,
+`Legacy Cancel Process`) and answer a failure with `RespondWithError(GetLastErrorText())`.
+The moment a procedure you call directly gains an `Error()` you want reported to the caller,
+move the call behind the isolation pattern above.
 
 ## 6. Make your app known to Foundation — one subscriber, one directory type
 
@@ -157,7 +162,7 @@ publisher.
 should not have to walk the whole catalogue. `Help.Reference.Get`
 (`RefHelpGetImpl.Codeunit.al`) returns a Markdown overview of the app and a table of its types
 with one line each. Keep the table in step with the enum — a test that compares the two is the
-cheapest way (see the test app).
+cheapest way. This repo does not include tests yet; see `TESTING.md`.
 
 ## 7. What NOT to copy from Origo's own extensions
 

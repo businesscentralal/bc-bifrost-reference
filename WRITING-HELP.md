@@ -89,7 +89,7 @@ nothing.
   "nothing"). `Reference.Note.Add`, `Legacy.Stock.Reserve` and `Legacy.Stock.CancelReservation`
   are Inbound.
 - **Outbound** — the call reads from Business Central and returns data; nothing is written.
-  `Reference.Echo.Get` and `Reference.Table.Get` are Outbound.
+  `Reference.Echo.Get`, `Reference.Table.Get` and `Legacy.Stock.Get` are Outbound.
 
 The verb in the type name must agree with the direction: `Get` is Outbound; `Add`, `Reserve`,
 `Cancel...`, `Set`, `Post` are Inbound. A `Get` that writes, or a `Set` that does not, is a
@@ -191,7 +191,8 @@ there.
 If your message type writes data, say explicitly what calling it twice does. The three writes
 in this repo give the three common answers:
 
-- `Legacy.Stock.CancelReservation` — **safe**: the second call finds nothing and succeeds.
+- `Legacy.Stock.CancelReservation` — **safe**: the second call finds nothing, writes nothing
+  and answers `cancelled: false`.
 - `Reference.Note.Add` — **fails on repeat**: the second call with the same `no` gets the
   duplicate error; tell the caller how to interpret that after a timeout.
 - `Legacy.Stock.Reserve` — **repeat has an effect**: the quantity is added again. This is the
@@ -209,9 +210,10 @@ line each, when to choose them instead.
 
 ## Where the text lives
 
-- **Inline** in the impl codeunit (`RefEchoSetImpl.Codeunit.al`, `RefTableGetImpl.Codeunit.al`,
-  the two Legacy adapters) — fine while the type is simple and one file is easier to review.
-- **Separate codeunit** (`RefNoteAddHelp.Codeunit.al` next to `RefNoteAddImpl.Codeunit.al`) —
+- **Inline** in the impl codeunit (`RefEchoSetImpl.Codeunit.al`, `RefTableGetImpl.Codeunit.al`)
+  — fine while the type is simple and one file is easier to review.
+- **Separate codeunit** (`RefNoteAddHelp.Codeunit.al` next to `RefNoteAddImpl.Codeunit.al`;
+  `LegacyAdapterHelp.Codeunit.al` for all three Legacy adapters) —
   the pattern to default to once the help grows or the impl codeunit is busy. The document is
   the same either way; only the file changes.
 

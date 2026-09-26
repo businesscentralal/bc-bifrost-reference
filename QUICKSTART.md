@@ -18,8 +18,8 @@ repo's illustrative `90000-90049`.
 
 Before changing anything, prove the baseline compiles - this repo's own CI does exactly
 this on every push (`.github/workflows/CICD.yaml`). If you have AL-Go / `bc-container-helper`
-set up locally, or just VS Code with the AL extension and symbols downloaded for Cloud
-Events Core, compile now. Fixing a problem you introduced is much easier than debugging one
+set up locally, or just VS Code with the AL extension and symbols downloaded for Bifrost
+Foundation, compile now. Fixing a problem you introduced is much easier than debugging one
 you inherited.
 
 ## 3. Write your `ExecuteBifrostTask`, using the closest existing example
@@ -42,7 +42,7 @@ gets used.
 **From outside Business Central** (see `INTEGRATING.md` for the full contract):
 
 ```bash
-curl -X POST "https://<env>/api/origo/cloudEvent/v1.0/tasks" \
+curl -X POST "https://<env>/api/origo/bifrost/v1.0/tasks" \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -56,11 +56,11 @@ curl -X POST "https://<env>/api/origo/cloudEvent/v1.0/tasks" \
 ```
 
 `subject` is required here - `tasks` declares it `NotBlank`, unlike `queues` where it's
-optional (see `INTEGRATING.md`'s "Required fields differ per endpoint" table). Leaving it out
+optional (see the envelope notes in `INTEGRATING.md`). Leaving it out
 is the first thing that goes wrong if you copy this without reading that table.
 
-The response's `data` field is a **link**, not the payload - GET it from `CE Response Data
-API` (`/api/origo/cloudEvent/v1.0/responses`) to read the actual result. This two-call shape
+The response's `data` field is a **link**, not the payload - GET it from `Response Data
+API ori` (`/api/origo/bifrost/v1.0/responses`) to read the actual result. This two-call shape
 is real, not a simplification - see `INTEGRATING.md`'s "Neither POST returns your payload
 directly" section.
 
@@ -81,7 +81,7 @@ lives, not on the message type itself.
 - It compiles.
 - `Help.MessageTypes.Get` (or your own quick call) returns a description someone unfamiliar
   with your code could act on.
-- You've triggered both the success path and at least one failure path (`RespondWithError`
-  or `RespondWithLastError`) and checked the response shape matches what your help text says.
+- You've triggered both the success path and at least one failure path (`RespondWithError`,
+  including `RespondWithError(GetLastErrorText())` after an isolated write) and checked the response shape matches what your help text says.
 - If you're retrofitting: you've checked the existing procedure for `Confirm()`/`Message()`
   and `Commit()` per `ADAPTING.md`'s table, not just wrapped it and hoped.

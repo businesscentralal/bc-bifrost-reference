@@ -3,8 +3,10 @@
 This repository was `businesscentralal/origo-bc-cloudevents-reference`. Everything here is the
 same three apps with the platform retargeted from Origo Cloud Events Core to Bifröst Foundation.
 
-Nothing in the business logic changed. The Legacy App's stock-reservation code is untouched
-except for the one extraction that `ADAPTING.md` already documented.
+Nothing in the business logic changed in the port itself. The Legacy App's stock-reservation
+code was untouched by the port except for the one extraction that `ADAPTING.md` already
+documented; it has since been moved into the headless facade `"Legacy Stock API"` (see
+`ADAPTING.md`).
 
 ## What the names were checked against
 
@@ -81,9 +83,10 @@ codeunit declares `Permissions = tabledata "Message ori" = rim` for it.
 
 Corrected here: a queue row **is** written, the orchestrator **does** run, only the webhook is
 skipped (empty `TaskId`), and `Execute` passes `OmitCommit` = `true` while `EnqueueAndProcess`
-defaults it to `false`. Two smaller corrections in the same file: `ResolvePool()` is `internal`
-and no partner extension can call it, and the in-process MCP tool server moved out of the
-kernel to Language Models.
+defaults it to `false`. A smaller correction in the same file: `ResolvePool()` is `internal`
+and no partner extension can call it. (An earlier version of this note also said the in-process
+MCP tool server moved out of the kernel to Language Models; that is wrong - `"MCP Tool Server
+ori"` is still in Foundation on main, `app/src/Chat/Server/MCPToolServer.Codeunit.al`.)
 
 **The same false claim is in Foundation's own `.claude/CLAUDE.md`** — *"Execute dispatches
 straight through the interface (OmitCommit = true, no queue row)"*. That one has to be fixed in

@@ -1,16 +1,8 @@
+# Build output: compiled apps and symbols are never committed
 *.app
 *.flf
 *.bclicense
 *.g.xlf
-.DS_Store
-Thumbs.db
-TestResults*.xml
-bcptTestResults*.json
-BuildOutput.txt
-rad.json
-.output/
-.dependencies/
-.buildartifacts/
 .alpackages/
 .packages/
 .alcache/
@@ -18,6 +10,36 @@ rad.json
 .altestrunner/
 .snapshots/
 .symbols/
+.output/
+.dependencies/
+.buildartifacts/
+BuildOutput.txt
+TestResults*.xml
+bcptTestResults*.json
+
+# Per-developer environment: each partner points these at their own sandbox
 .vscode/
-cache_*
+launch.json
+rad.json
+*.code-workspace.local
+
+# Secrets and credentials
+.env
+.env.*
+*.pfx
+*.pem
+*.key
+*secret*.json
+
+# Internal working material - never part of the partner repo
+.claude/
+INTERNAL*
+*.internal.md
+test/reports/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
 ~$*
+cache_*
+*.log
