@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Reference">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 2596569480 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Asset Maintenance</source>
+          <target state="translated">Viðhald eignar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðhald eignar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target state="translated">Lýsing</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <target state="translated">Færslunr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Færslunr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 3850961964 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Id</source>
+          <target state="translated">Ytra auðkenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ytra auðkenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field External Id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 1991001892 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>FA No.</source>
+          <target state="translated">Eignanr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eignanr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field FA No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 1333289741 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Hours</source>
+          <target state="translated">Klukkustundir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Klukkustundir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Hours - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 1361924619 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Date</source>
+          <target state="translated">Dagsetning viðhalds</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Dagsetning viðhalds</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Maintenance Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3413509963 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reference Note</source>
+          <target state="translated">Athugasemd (sýnidæmi)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athugasemd (sýnidæmi)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Note - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3413509963 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <target state="translated">Nr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Nr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Note - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3413509963 - Field 1821279055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Text</source>
+          <target state="translated">Texti</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Texti</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Note - Field Text - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3452267938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bifrost Reference Setup</source>
+          <target state="translated">Uppsetning Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifrost Reference</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3452267938 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <target state="translated">Aðallykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðallykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Setup - Field Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3452267938 - Field 3072284833 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rates Base URL</source>
+          <target state="translated">Grunnslóð gengisþjónustu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Grunnslóð gengisþjónustu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Setup - Field Rates Base URL - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 707477861 - NamedType 2606753555" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is '%2'. Send a 3-letter ISO currency code, for example EUR or ISK.</source>
+          <target state="translated">Færibreytan '%1' er '%2'. Sendu þriggja stafa ISO-gjaldmiðlakóða, til dæmis EUR eða ISK.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' er '%2'. Sendu þriggja stafa ISO-gjaldmiðlakóða, til dæmis EUR eða ISK.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Exch Rate Get Impl - NamedType CurrencyFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 707477861 - NamedType 3823501588" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameters 'from' and 'to' are both %1. Send two different currencies.</source>
+          <target state="translated">Færibreyturnar 'from' og 'to' eru báðar %1. Sendu tvo ólíka gjaldmiðla.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = currency code, is-IS=Færibreyturnar 'from' og 'to' eru báðar %1. Sendu tvo ólíka gjaldmiðla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Exch Rate Get Impl - NamedType SameCurrencyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2230199924 - NamedType 3672293264" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter 'fromDate' is %1, which is after 'asOfDate' %2. Send a fromDate on or before the asOfDate, or leave fromDate out to get the balance only.</source>
+          <target state="translated">Færibreytan 'fromDate' er %1, sem er eftir 'asOfDate' %2. Sendu fromDate sem er sami dagur eða fyrr en asOfDate, eða slepptu fromDate til að fá eingöngu stöðuna.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = fromDate received, %2 = asOfDate used, is-IS=Færibreytan 'fromDate' er %1, sem er eftir 'asOfDate' %2. Sendu fromDate sem er sami dagur eða fyrr en asOfDate, eða slepptu fromDate til að fá eingöngu stöðuna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref GLAcc Overview Impl - NamedType FromAfterAsOfErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 4068153118" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki dagsetning á sniðinu ÁÁÁÁ-MM-DD. Sendu til dæmis 2026-09-26.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki dagsetning á sniðinu ÁÁÁÁ-MM-DD. Sendu til dæmis 2026-09-26.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType DateFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 3777985252" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is empty. Send a value, for example %2.</source>
+          <target state="translated">Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = example, is-IS=Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType EmptyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 2876098697" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No fixed asset was given. Send the asset number in subject or as "assetNo", or its SystemId in subject.</source>
+          <target state="translated">Engin eign var tilgreind. Sendu númer eignarinnar í subject eða sem "assetNo", eða SystemId hennar í subject.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engin eign var tilgreind. Sendu númer eignarinnar í subject eða sem "assetNo", eða SystemId hennar í subject.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType FixedAssetMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 4063402908" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fixed asset '%1' was not found. Check the number, or search for the asset with Data.Records.Get on table Fixed Asset.</source>
+          <target state="translated">Eignin '%1' fannst ekki. Athugaðu númerið eða leitaðu að henni með Data.Records.Get á töflunni Fixed Asset.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = asset no. or SystemId received, is-IS=Eignin '%1' fannst ekki. Athugaðu númerið eða leitaðu að henni með Data.Records.Get á töflunni Fixed Asset.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType FixedAssetNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 815549933" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No G/L account was given. Send the account number in subject or as "accountNo", or its SystemId in subject.</source>
+          <target state="translated">Enginn fjárhagslykill var tilgreindur. Sendu númer lykilsins í subject eða sem "accountNo", eða SystemId hans í subject.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Enginn fjárhagslykill var tilgreindur. Sendu númer lykilsins í subject eða sem "accountNo", eða SystemId hans í subject.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType GLAccountMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 1640432856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>G/L account '%1' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.</source>
+          <target state="translated">Fjárhagslykillinn '%1' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni G/L Account.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = account no. or SystemId received, is-IS=Fjárhagslykillinn '%1' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni G/L Account.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType GLAccountNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 1698007908" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a whole number. Send for example 12.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki heiltala. Sendu til dæmis 12.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki heiltala. Sendu til dæmis 12.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType IntegerFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 1830439019" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is required. Send it as %2.</source>
+          <target state="translated">Færibreytan '%1' er nauðsynleg. Sendu hana sem %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = expected type and example, is-IS=Færibreytan '%1' er nauðsynleg. Sendu hana sem %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType MissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 1973040246" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' must be a single value (text or number), not an object or an array.</source>
+          <target state="translated">Færibreytan '%1' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Færibreytan '%1' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType NotAValueErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 1264649167" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The request body must be a JSON object, for example { "accountNo": "2910" }.</source>
+          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType NotObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 2723671431" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a number. Send a number with a dot as decimal separator, for example 2.5.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType NumberFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 2239992694" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is %2, but it must be between %3 and %4.</source>
+          <target state="translated">Færibreytan '%1' er %2 en verður að vera á bilinu %3 til %4.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, %3 = minimum, %4 = maximum, is-IS=Færibreytan '%1' er %2 en verður að vera á bilinu %3 til %4.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType RangeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 3255873965" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is %2 characters long; the maximum is %3.</source>
+          <target state="translated">Færibreytan '%1' er %2 stafir; hámarkið er %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = actual length, %3 = maximum length, is-IS=Færibreytan '%1' er %2 stafir; hámarkið er %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType TooLongErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - NamedType 3621259247" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fixed asset '%1' is blocked, so no maintenance can be logged. Clear Blocked on the fixed asset card in Business Central, or choose another asset.</source>
+          <target state="translated">Eignin '%1' er lokuð og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Lokað á eignaspjaldinu í Business Central eða veldu aðra eign.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = fixed asset no., is-IS=Eignin '%1' er lokuð og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Lokað á eignaspjaldinu í Business Central eða veldu aðra eign.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - NamedType BlockedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - NamedType 1067498080" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter 'maintenanceDate' is %1, which is after the work date %2. Maintenance is logged after it is done; send a date on or before %2.</source>
+          <target state="translated">Færibreytan 'maintenanceDate' er %1, sem er eftir vinnudagsetningu %2. Viðhald er skráð eftir að það hefur verið unnið; sendu dagsetningu sem er %2 eða fyrr.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance date, %2 = work date, is-IS=Færibreytan 'maintenanceDate' er %1, sem er eftir vinnudagsetningu %2. Viðhald er skráð eftir að það hefur verið unnið; sendu dagsetningu sem er %2 eða fyrr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - NamedType FutureDateErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - NamedType 2083297866" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fixed asset '%1' is inactive, so no maintenance can be logged. Clear Inactive on the fixed asset card in Business Central, or choose another asset.</source>
+          <target state="translated">Eignin '%1' er óvirk og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Óvirk á eignaspjaldinu í Business Central eða veldu aðra eign.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = fixed asset no., is-IS=Eignin '%1' er óvirk og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Óvirk á eignaspjaldinu í Business Central eða veldu aðra eign.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - NamedType InactiveErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3321213669 - Method 1665861916 - NamedType 954852589" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A note with no. '%1' already exists. Choose a different no.; if this is a retry, the first attempt most likely succeeded.</source>
+          <target state="translated">Athugasemd með nr. '%1' er þegar til. Veldu annað nr.; ef þetta er endurtekning tókst fyrsta tilraunin líklega.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = note no., is-IS=Athugasemd með nr. '%1' er þegar til. Veldu annað nr.; ef þetta er endurtekning tókst fyrsta tilraunin líklega.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Note Add Process - Method OnRun - NamedType DuplicateNoErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3913287163 - NamedType 2316592330" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item category '%1' was not found. Check the code, or list categories with Data.Records.Get on table Item Category.</source>
+          <target state="translated">Vöruflokkurinn '%1' fannst ekki. Athugaðu kóðann eða skoðaðu flokka með Data.Records.Get á töflunni Item Category.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item category code, is-IS=Vöruflokkurinn '%1' fannst ekki. Athugaðu kóðann eða skoðaðu flokka með Data.Records.Get á töflunni Item Category.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Adjust - NamedType CategoryNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3913287163 - NamedType 4161920640" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter 'percent' is 0, which would change nothing. Send the change in percent, for example 5 for +5 % or -10 for -10 %.</source>
+          <target state="translated">Færibreytan 'percent' er 0, sem breytir engu. Sendu breytinguna í prósentum, t.d. 5 fyrir +5 % eða -10 fyrir -10 %.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Færibreytan 'percent' er 0, sem breytir engu. Sendu breytinguna í prósentum, t.d. 5 fyrir +5 % eða -10 fyrir -10 %.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Adjust - NamedType ZeroPercentErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 211567532 - NamedType 2687044689" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The selection changed since the preview: expected %1 items in category '%2', found %3. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount.</source>
+          <target state="translated">Valið hefur breyst frá forskoðun: búist var við %1 vörum í flokknum '%2' en þær eru %3. Keyrðu Reference.ItemPrice.PreviewAdjustment aftur og sendu itemCount sem expectedItemCount.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = expected count, %2 = item category, %3 = actual count, is-IS=Valið hefur breyst frá forskoðun: búist var við %1 vörum í flokknum '%2' en þær eru %3. Keyrðu Reference.ItemPrice.PreviewAdjustment aftur og sendu itemCount sem expectedItemCount.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - NamedType SelectionChangedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2553378571 - NamedType 1762320083" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The exchange rate service at %1 could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup &gt; Start setup wizard).</source>
+          <target state="translated">Ekki náðist samband við gengisþjónustuna á %1. Ef lokað er á útsendar HTTP-beiðnir skaltu leyfa þær fyrir Bifrost Reference í uppsetningarleiðsögn Bifrastar (Uppsetning Bifröst &gt; Hefja uppsetningarleiðsögn).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = base URL, is-IS=Ekki náðist samband við gengisþjónustuna á %1. Ef lokað er á útsendar HTTP-beiðnir skaltu leyfa þær fyrir Bifrost Reference í uppsetningarleiðsögn Bifrastar (Uppsetning Bifröst &gt; Hefja uppsetningarleiðsögn).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Rates Client - NamedType CannotReachErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2553378571 - NamedType 217222318" size-unit="char" translate="yes" xml:space="preserve">
+          <source> Details: %1</source>
+          <target state="translated"> Nánar: %1</target>
+          <note from="Developer" annotates="general" priority="2">%1 = platform error, is-IS= Nánar: %1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Rates Client - NamedType DetailsTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2553378571 - NamedType 2197075555" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The exchange rate service answered HTTP %1 for %2 to %3. Check that both are ISO currency codes the service supports (for example EUR, USD, ISK).</source>
+          <target state="translated">Gengisþjónustan svaraði HTTP %1 fyrir %2 í %3. Athugaðu að báðir séu ISO-gjaldmiðlakóðar sem þjónustan styður (t.d. EUR, USD, ISK).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = HTTP status, %2 = from currency, %3 = to currency, is-IS=Gengisþjónustan svaraði HTTP %1 fyrir %2 í %3. Athugaðu að báðir séu ISO-gjaldmiðlakóðar sem þjónustan styður (t.d. EUR, USD, ISK).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Rates Client - NamedType HttpStatusErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2553378571 - NamedType 2281088304" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The exchange rate service returned an answer without a rate for %1. Try again later, or check Rates Base URL on the Bifrost Reference Setup page.</source>
+          <target state="translated">Gengisþjónustan skilaði svari án gengis fyrir %1. Reyndu aftur síðar eða athugaðu grunnslóðina á uppsetningarsíðu Bifrost Reference.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = to currency, is-IS=Gengisþjónustan skilaði svari án gengis fyrir %1. Reyndu aftur síðar eða athugaðu grunnslóðina á uppsetningarsíðu Bifrost Reference.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Rates Client - NamedType UnexpectedAnswerErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4119695688 - NamedType 364485539" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exchange rates API key (optional)</source>
+          <target state="translated">API-lykill gengisþjónustu (valkvæður)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=API-lykill gengisþjónustu (valkvæður)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Secrets - NamedType ApiKeyDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3781505619 - Method 3571782927 - NamedType 448691940" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table '%1' was not found. Use the full object name with spaces, for example Sales Header, or list tables with Help.Tables.Get.</source>
+          <target state="translated">Taflan '%1' fannst ekki. Notaðu fullt heiti með bilum, t.d. Sales Header, eða skoðaðu töflur með Help.Tables.Get.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table name, is-IS=Taflan '%1' fannst ekki. Notaðu fullt heiti með bilum, t.d. Sales Header, eða skoðaðu töflur með Help.Tables.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Table Get Impl - Method ExecuteBifrostTask - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Page 2596569480 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reference Asset Maintenance</source>
+          <target state="translated">Viðhald eigna (sýnidæmi)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðhald eigna (sýnidæmi)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2596569480 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A short note on the work done.</source>
+          <target state="translated">Stutt lýsing á verkinu sem var unnið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stutt lýsing á verkinu sem var unnið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2596569480 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The number of the maintenance entry.</source>
+          <target state="translated">Númer viðhaldsfærslunnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer viðhaldsfærslunnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2596569480 - Control 3850961964 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The caller's own id for the entry, used to make retries safe.</source>
+          <target state="translated">Eigið auðkenni sendanda fyrir færsluna, notað til að gera endurtekningar öruggar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eigið auðkenni sendanda fyrir færsluna, notað til að gera endurtekningar öruggar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control External Id - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2596569480 - Control 1991001892 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The fixed asset the maintenance was done on.</source>
+          <target state="translated">Eignin sem viðhaldið var unnið á.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eignin sem viðhaldið var unnið á.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control FA No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2596569480 - Control 1333289741 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The hours spent on the maintenance.</source>
+          <target state="translated">Klukkustundir sem fóru í viðhaldið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Klukkustundir sem fóru í viðhaldið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Hours - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2596569480 - Control 1361924619 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The date the maintenance was done.</source>
+          <target state="translated">Dagsetningin sem viðhaldið var unnið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Dagsetningin sem viðhaldið var unnið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Maintenance Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bifrost Reference Setup</source>
+          <target state="translated">Uppsetning Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifrost Reference</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - NamedType 2027679388" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Not set (the default service works without a key)</source>
+          <target state="translated">Ekki skráður (sjálfgefna þjónustan virkar án lykils)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekki skráður (sjálfgefna þjónustan virkar án lykils)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - NamedType KeyNotSetTxt</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - NamedType 2939090615" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set</source>
+          <target state="translated">Skráður</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skráður</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - NamedType KeySetTxt</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Control 1122038339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exchange rates service</source>
+          <target state="translated">Gengisþjónusta</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Gengisþjónusta</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Control Rates - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Control 2371054293 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Whether an API key is stored in the Bifrost secret store. The value itself is never shown.</source>
+          <target state="translated">Hvort API-lykill er vistaður í leyndarmálageymslu Bifrastar. Gildið sjálft er aldrei sýnt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hvort API-lykill er vistaður í leyndarmálageymslu Bifrastar. Gildið sjálft er aldrei sýnt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Control ApiKeyStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Control 2371054293 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>API key</source>
+          <target state="translated">API-lykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=API-lykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Control ApiKeyStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Control 3072284833 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Base address of the exchange rate service used by Reference.ExchangeRate.Get.</source>
+          <target state="translated">Grunnslóð gengisþjónustunnar sem Reference.ExchangeRate.Get notar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Grunnslóð gengisþjónustunnar sem Reference.ExchangeRate.Get notar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Control Rates Base URL - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Action 3370348682 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove the stored API key.</source>
+          <target state="translated">Fjarlægja vistaðan API-lykil.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Fjarlægja vistaðan API-lykil.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Action ClearApiKey - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Action 3370348682 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear API key</source>
+          <target state="translated">Hreinsa API-lykil</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hreinsa API-lykil</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Action ClearApiKey - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Action 926141975 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enter the API key in a masked dialog. It is stored in the Bifrost secret store.</source>
+          <target state="translated">Sláðu inn API-lykilinn í huldum glugga. Hann er vistaður í leyndarmálageymslu Bifrastar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sláðu inn API-lykilinn í huldum glugga. Hann er vistaður í leyndarmálageymslu Bifrastar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Action SetApiKey - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3452267938 - Action 926141975 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set API key</source>
+          <target state="translated">Setja API-lykil</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Setja API-lykil</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Action SetApiKey - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1367192820 - Action 3228077733 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Open the setup of the Bifrost Reference app.</source>
+          <target state="translated">Opna uppsetningu forritsins Bifrost Reference.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna uppsetningu forritsins Bifrost Reference.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Ref Setup Action - Action BifrostReferenceSetup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1367192820 - Action 3228077733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
+          <source>Bifrost Reference</source>
+          <target state="translated">Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifrost Reference</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Ref Setup Action - Action BifrostReferenceSetup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 1086823728 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bifrost Reference</source>
+          <target state="translated">Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifrost Reference</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST REFERENCE - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,76 @@
+{
+  "_note": "Readable definition of playbook REF-RELEASE. requestTemplate is shown here as plain JSON; the RequestTemplate field of Playbook Step ori is a BLOB and is written as the base64 of that JSON (UTF-8, no whitespace) - see requestTemplateBase64. Enum fields (StepType, ConditionType, Operator) are written by AL name. Verified live on 26.09.2026.",
+  "playbook": {
+    "table": "Playbook ori",
+    "Code": "REF-RELEASE",
+    "Description": "Reference: release stock reservations matching a filter, guarded by the listed count"
+  },
+  "steps": [
+    {
+      "table": "Playbook Step ori",
+      "PlaybookCode": "REF-RELEASE",
+      "StepNo_": 10,
+      "Description": "List reservations matching the filter",
+      "MessageType": "Legacy.Stock.List",
+      "StepType": "Check",
+      "requestTemplate": { "itemFilter": "@_initial.itemFilter" },
+      "requestTemplateBase64": "eyJpdGVtRmlsdGVyIjoiQF9pbml0aWFsLml0ZW1GaWx0ZXIifQ==",
+      "ResultLogPaths": "count,itemFilter,status,error",
+      "SummaryPaths": "count,totalQuantity",
+      "NextStepNo_Success": 20,
+      "NextStepNo_Failure": 0
+    },
+    {
+      "table": "Playbook Step ori",
+      "PlaybookCode": "REF-RELEASE",
+      "StepNo_": 20,
+      "Description": "Release them, guarded by the listed count",
+      "MessageType": "Legacy.Stock.ReleaseAll",
+      "StepType": "Action",
+      "requestTemplate": { "itemFilter": "@10.itemFilter", "expectedCount": "@10.count" },
+      "requestTemplateBase64": "eyJpdGVtRmlsdGVyIjoiQDEwLml0ZW1GaWx0ZXIiLCJleHBlY3RlZENvdW50IjoiQDEwLmNvdW50In0=",
+      "ResultLogPaths": "",
+      "SummaryPaths": "released",
+      "NextStepNo_Success": 0,
+      "NextStepNo_Failure": 0
+    }
+  ],
+  "conditions": [
+    {
+      "table": "Playbook Condition ori",
+      "PlaybookCode": "REF-RELEASE",
+      "StepNo_": 10,
+      "ConditionType": "Success",
+      "GroupNo_": 1,
+      "LineNo_": 10000,
+      "Path": "count",
+      "Operator": "GreaterThan",
+      "Value": "0",
+      "Description": "Anything to release? No = tidy end, not a failure"
+    },
+    {
+      "table": "Playbook Condition ori",
+      "PlaybookCode": "REF-RELEASE",
+      "StepNo_": 10,
+      "ConditionType": "Error",
+      "GroupNo_": 1,
+      "LineNo_": 10000,
+      "Path": "10.status",
+      "Operator": "Equals",
+      "Value": "Error",
+      "Description": "List answered with an error body - fail the run"
+    },
+    {
+      "table": "Playbook Condition ori",
+      "PlaybookCode": "REF-RELEASE",
+      "StepNo_": 20,
+      "ConditionType": "Success",
+      "GroupNo_": 1,
+      "LineNo_": 10000,
+      "Path": "released",
+      "Operator": "Exists",
+      "Value": "",
+      "Description": "An error body has no released - fails the run"
+    }
+  ]
+}

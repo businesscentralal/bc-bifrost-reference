@@ -1,0 +1,66 @@
+{
+  "id": "6c1e9b4a-2f7d-4e3b-a8c5-9d0f1b2e3a47",
+  "name": "Bifrost Reference Tests",
+  "publisher": "Origo",
+  "version": "1.0.0.0",
+  "brief": "Unit tests for the Bifrost reference apps",
+  "description": "Shows how to test Bifrost message types from AL: calls go through Foundation's public Dispatcher, never through internals. Covers the break set, isolated writes, safe retries, help that matches the real error texts, and a lint of every selection card.",
+  "url": "https://www.origo.is/",
+  "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
+  "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
+  "target": "Cloud",
+  "screenshots": [],
+  "dependencies": [
+    {
+      "id": "7505e808-6e52-4b96-a328-82573391297a",
+      "name": "Bifrost Foundation",
+      "publisher": "Origo",
+      "version": "28.0.0.0"
+    },
+    {
+      "id": "3f8a1c2e-6b4d-4a9f-9e2c-7d5b8a3f1e6c",
+      "name": "Bifrost Reference",
+      "publisher": "Origo",
+      "version": "1.1.0.0"
+    },
+    {
+      "id": "8a3f2c1e-9d4b-4e7a-b6c3-1f5e8a2d4c9b",
+      "name": "Legacy App",
+      "publisher": "Origo",
+      "version": "2.0.0.0"
+    },
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "name": "Library Assert",
+      "publisher": "Microsoft",
+      "version": "28.0.0.0"
+    },
+    {
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "name": "Test Runner",
+      "publisher": "Microsoft",
+      "version": "28.0.0.0"
+    }
+  ],
+  "idRanges": [
+    {
+      "from": 90150,
+      "to": 90199
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "suppressWarnings": [
+    "AA0217"
+  ],
+  "supportedLocales": [
+    "en-US"
+  ],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "runtime": "17.0",
+  "propagateDependencies": false
+}
