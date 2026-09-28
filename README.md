@@ -131,6 +131,7 @@ Never reuse the ranges of Bifrost Foundation or of any other published app.
 
 - **Locally:** VS Code with the AL extension. See [TESTING.md](TESTING.md) for `launch.json`, publish order and permissions.
 - **Symbols:** Bifrost Foundation comes from AppSource. Install it in your sandbox, then run `AL: Download symbols`.
+- **CI:** the GitHub workflows in `.github/` build the apps in Origo's own GitHub, where they have access to Foundation's symbols. In a fork or copy they won't find those symbols and will fail. Build and test in your own sandbox as described above, or point AL-Go at your own copy of Foundation's `.app`.
 
 ## Extension model, in one paragraph
 
