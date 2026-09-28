@@ -1,6 +1,8 @@
 # Legacy App: what "headless" means
 
-Legacy App is an ordinary Business Central extension with no Bifröst dependency. It keeps one **stock reservation** per item and a **cancellation log**. It stands in for any app a partner already has.
+Legacy App is an ordinary Business Central extension. It keeps one **stock reservation** per item and a **cancellation log**. It stands in for any app a partner already has.
+
+Legacy App v2 is **headless inside, message types outside**: the business logic lives in the internal headless core `Legacy Stock API`, and the app's public API is its Bifröst message types (`Legacy.Stock.*`, in `src/MessageTypes/`). The app depends on Bifröst Foundation for that; the core itself knows nothing about Bifröst.
 
 ## What a person sees
 
@@ -30,15 +32,17 @@ A person needs both. An **API, a job queue, another app or an AI agent needs onl
 - every input as a parameter
 - every outcome as a return value or a clear error
 
-Pages call those procedures after talking to the person. Everything else calls them directly.
+Pages call those procedures after talking to the person. Everything outside the app calls them through the app's message types.
 
 ```
              Person                      API · job queue · other app · AI agent
                │                                          │
-   Page action (dialog, Confirm, Message)                  │
+   Page action (dialog, Confirm, Message)      Legacy.Stock.* message types
+               │                               (public API: validated input,
+               │                                audited, permission-checked)
                │                                          │
                └──────────────►  Legacy Stock API  ◄──────┘
-                                 (headless facade: rules + writes,
+                                 (internal headless core: rules + writes,
                                   no UI, no Commit, clear errors,
                                   explicit results, events)
 ```
@@ -56,7 +60,7 @@ Notice the reads. A page that must ask a question calls one (`WouldExceedInvento
 
 ## What it looked like before
 
-The first version mixed the two in seven ways, all marked `AUDIT 7.2` in `Legacy App v1 (not headless)/src/`:
+The first version mixed the two in seven ways, all marked `AUDIT -` in `Legacy App v1 (not headless)/src/`:
 
 - `Confirm` in the business procedures
 - a stock check that ran only when there was a UI
@@ -66,12 +70,16 @@ The first version mixed the two in seven ways, all marked `AUDIT 7.2` in `Legacy
 - rules inside the page trigger
 - a batch job with no filter
 
-Each fix here is marked `FIXED 7.2`. The table in [`START-HERE.md`](../START-HERE.md) §7.2 lists every pattern to look for.
+Each fix here is marked `FIXED -`. The table in [`START-HERE.md`](../START-HERE.md) §7.1 lists every pattern to look for.
 
 One fix changes behaviour on purpose. In v1, code that called `ReserveStock` could reserve more than was in stock without a word, because only the UI path checked. Now every caller gets the check. Callers that really mean to over-reserve say so with `AllowOverStock`.
 
 The old procedures in `Legacy Stock Mgt` still exist as thin shells, so existing callers keep working. [`START-HERE.md`](../START-HERE.md) §7 tells the story step by step.
 
-## What the facade does not do
+## Message types are the public API
 
-It knows nothing about Bifröst. Making it callable as Bifröst message types is the job of the separate **Legacy App - Bifrost** adapter app. Without that adapter, an AI agent can read the app's table through Bifröst's generic data access, but it can't reserve or cancel anything. Generic writes to the table are blocked, and there are no business actions to call.
+The core knows nothing about Bifröst, and it is `Access = Internal`: no other app can call it. The app's public API is its message types in `src/MessageTypes/`: `Legacy.Stock.Reserve`, `.CancelReservation`, `.Get`, `.List`, `.ReleaseAll` and the directory `Help.Legacy.Get`. They own only the Bifröst contract (read and check the input, call the core in isolation, answer); every business rule stays in the core.
+
+Why message types rather than a public codeunit: every caller outside the app (other apps, integrations, the job queue, Orchestrator playbooks, agents) goes through the same validated, audited, permission-checked contract. The questions a person answers in dialogs have become explicit parameters (`allowOverStock`, `expectedCount`). The app's own pages call the core directly.
+
+The old procedures in `Legacy Stock Mgt` stay public and obsolete, so existing callers keep working; new callers use the message types. Permission set **LEGACY STOCK** is the one assignable set; assign it together with Foundation's BIFROST permission sets.

@@ -28,16 +28,16 @@ Both `queues` and `tasks` put a *relative link* in the response `data` field, no
 ```json
 {
   "specversion": "1.0",
-  "type": "Reference.Customer.Overview.Get",
+  "type": "Reference.GLAccount.Overview.Get",
   "source": "my-integration",
-  "subject": "10000",
+  "subject": "2910",
   "datacontenttype": "application/json",
-  "data": "{}"
+  "data": "{\"asOfDate\":\"2026-08-31\"}"
 }
 ```
 
-- `type` is the exact dotted name of the message type, e.g. `Reference.Customer.Overview.Get` or `Legacy.Stock.Get`.
-- **On the API, `data` is a JSON *string*,** with the request object escaped inside it: `"data": "{\"customerNo\":\"10000\"}"`. The help documents show the request as an object for readability; over OData you send it as a string.
+- `type` is the exact dotted name of the message type, e.g. `Reference.GLAccount.Overview.Get` or `Legacy.Stock.Get`.
+- **On the API, `data` is a JSON *string*,** with the request object escaped inside it: `"data": "{\"asOfDate\":\"2026-08-31\",\"fromDate\":\"2026-08-01\"}"`. The help documents show the request as an object for readability; over OData you send it as a string.
 - `specversion`, `type` and `source` are required on both endpoints. `subject` is also required on `tasks` and optional on `queues`.
 
 ### A runnable call
@@ -48,15 +48,15 @@ curl -X POST "https://api.businesscentral.dynamics.com/v2.0/<tenant>/<environmen
   -H "Content-Type: application/json" \
   -d '{
     "specversion": "1.0",
-    "type": "Reference.Customer.Overview.Get",
+    "type": "Reference.GLAccount.Overview.Get",
     "source": "my-integration",
-    "subject": "10000",
+    "subject": "2910",
     "datacontenttype": "application/json",
-    "data": "{}"
+    "data": "{\"asOfDate\":\"2026-08-31\"}"
   }'
 ```
 
-The response's `data` is a link. GET it (from `responses`) with the same token to read the customer overview.
+The response's `data` is a link. GET it (from `responses`) with the same token to read the account overview (`balanceAsOf` on 2026-08-31; `netChange` is `null` because no `fromDate` was sent).
 
 ## Every call is scoped to who made it
 
@@ -67,7 +67,7 @@ All four pages filter to `SystemCreatedBy = UserSecurityId()`. The identity that
 Failures are JSON with a `hint` field:
 
 ```json
-{ "status": "Error", "error": "Customer '99999' was not found. Check the number, or search for the customer with Data.Records.Get on table Customer.", "hint": "..." }
+{ "status": "Error", "error": "G/L account '99999' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.", "hint": "..." }
 ```
 
 - **Expected failures** (bad input, not found, business rule) carry the exact `error` text listed in that message type's help. Match on it.
@@ -81,8 +81,8 @@ The `hint` tells the caller to call `Help.Implementation.Get` with the message t
 | Type | `subject` / `data` | What it teaches |
 |---|---|---|
 | `Reference.Echo.Get` | `data`: `{"message":"hi"}` | The envelope round trip, nothing else |
-| `Reference.Customer.Overview.Get` | `subject`: `10000` | A read; send `99999` for the "not found" error |
-| `Legacy.Stock.Get` | `subject`: `1896-S` | A read over an existing app's headless facade |
+| `Reference.GLAccount.Overview.Get` | `subject`: `2910`, `data`: `{"asOfDate":"2026-08-31"}` | A read; send `99999` for the "not found" error, and no `fromDate` to see `netChange: null` |
+| `Legacy.Stock.Get` | `subject`: `1896-S` | A read from an existing app made headless, with its message types in the same app (Legacy App v2) |
 | `Reference.Note.Add` | `data`: `{"no":"NOTE-1","text":"hello"}` | A write; send the same `no` twice for the "already exists" error |
 
 `Reference.Echo.Get` and `Reference.Note.Add` don't read `subject`. On `tasks` it is still required, so send any non-empty value, for example `"try-1"`.
@@ -126,6 +126,6 @@ begin
 end;
 ```
 
-**Licensing.** In-process calls are charged like any other call. From an interactive session (a user clicking a page action), they count against the **User** pool, not the App Registration pool that service-principal callers use.
+**Usage.** In-process calls count as usage like any other call. From an interactive session (a user clicking a page action), they count against the **User** pool, not the App Registration pool that service-principal callers use. Whether your own pages call your message types this way is your choice; see `START-HERE.md` §7.3.
 
 A type that raises an `Error()` (rather than answering with `RespondWithError`) raises it out of the dispatcher too. Catch it in your own code if the caller must survive.

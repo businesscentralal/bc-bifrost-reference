@@ -1,10 +1,12 @@
 {
   "folders": [
     { "name": "1 · Legacy App v1 (not headless)", "path": "Legacy App v1 (not headless)" },
-    { "name": "2 · Legacy App (headless, v2)", "path": "Legacy App v2 (headless)" },
-    { "name": "3 · Legacy App - Bifrost (adapter)", "path": "Legacy App - Bifrost" },
-    { "name": "4 · Bifrost Reference (new app)", "path": "Bifrost Reference" },
-    { "name": "5 · Bifrost Reference Tests", "path": "Bifrost Reference Tests" }
+    { "name": "2 · Legacy App v2 (headless inside, message types outside)", "path": "Legacy App v2 (headless)" },
+    { "name": "3 · Bifrost Reference (new app)", "path": "Bifrost Reference" },
+    { "name": "4 · Bifrost Reference Tests", "path": "Bifrost Reference Tests" },
+    { "name": "5 · Bifrost Reference Playbooks (needs Bifrost Orchestrator)", "path": "Bifrost Reference Playbooks" },
+    { "name": "6 · Bifrost Boilerplate (copy this to begin)", "path": "Bifrost Boilerplate" },
+    { "name": "7 · Bifrost Boilerplate Tests", "path": "Bifrost Boilerplate Tests" }
   ],
   "settings": {
     "al.enableCodeAnalysis": true,

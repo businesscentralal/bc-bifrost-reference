@@ -4,7 +4,7 @@
   "publisher": "Origo",
   "version": "1.1.0.0",
   "brief": "Legacy App before the retrofit - deliberately NOT headless",
-  "description": "The 'before' state of the headless demo: business logic inside page actions, dialogs in business procedures, a GuiAllowed branch, Commits between writes, swallowed errors and silent failures - each marked AUDIT 7.2 in the code. Publish this first, then upgrade to 'Legacy App' 2.0 (same app id) to see the retrofit.",
+  "description": "The 'before' state of the headless demo: business logic inside page actions, dialogs in business procedures, a GuiAllowed branch, Commits between writes, swallowed errors and silent failures - each marked AUDIT in the code. Publish this first, then upgrade to 'Legacy App' 2.0 (same app id) to see the retrofit.",
   "url": "https://www.origo.is/",
   "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
   "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",

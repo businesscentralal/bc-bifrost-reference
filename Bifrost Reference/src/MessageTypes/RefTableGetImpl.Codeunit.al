@@ -9,7 +9,7 @@ using System.Reflection;
 /// needs before calling Data.Records.Get/Set dynamically. Unlike Reference.Echo.Get, this
 /// type demonstrates the structured error-response contract for expected failures.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller. Contract only - see CONTRACT.md.</remarks>
+/// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
 codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori"
 {
     Access = Internal;
@@ -43,27 +43,33 @@ codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori"
         HelpText.AppendLine('## Overview');
         HelpText.AppendLine('Returns the object ID of one Business Central table, looked up by its object name.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('Use it when you know a table by name (for example `Customer`) and need its numeric ID');
+        HelpText.AppendLine('Use it when you know a table by name (for example `Item`) and need its numeric ID');
         HelpText.AppendLine('before calling an operation that takes a table ID. Not for reading records, listing');
         HelpText.AppendLine('fields, or searching by partial name - the name must match the whole object name.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Direction');
-        HelpText.AppendLine('Outbound - a read. Nothing is written.');
+        HelpText.AppendLine('**Effect:** Read-only (direction Outbound - a read). Nothing is written.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Request');
+        HelpText.AppendLine('## Workflow');
+        HelpText.AppendLine('This type -> an operation that takes a table ID (for example `Data.Records.Get` or');
+        HelpText.AppendLine('`Data.Records.Set` called dynamically).');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Identifying the target');
+        HelpText.AppendLine('None: subject is not used. The table is named by `tableName` in the body.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Parameters');
         HelpText.AppendLine('| Field | Type | Required | Default | Notes |');
         HelpText.AppendLine('| --- | --- | --- | --- | --- |');
-        HelpText.AppendLine('| `tableName` | string | yes | - | The table''s object name as it appears in Business Central, e.g. `Customer`, `Sales Header`. The whole name, not a prefix. |');
+        HelpText.AppendLine('| `tableName` | string | yes | - | The table''s object name as it appears in Business Central, e.g. `Item`, `G/L Account`. The whole name, not a prefix. |');
         HelpText.AppendLine('');
         HelpText.AppendLine('## Request example');
         HelpText.AppendLine('```json');
-        HelpText.AppendLine('{ "tableName": "Customer" }');
+        HelpText.AppendLine('{ "tableName": "Item" }');
         HelpText.AppendLine('```');
         HelpText.AppendLine('');
         HelpText.AppendLine('## Response');
         HelpText.AppendLine('One object: the name you sent and the table''s object ID (integer).');
         HelpText.AppendLine('```json');
-        HelpText.AppendLine('{ "tableName": "Customer", "tableId": 18 }');
+        HelpText.AppendLine('{ "tableName": "Item", "tableId": 27 }');
         HelpText.AppendLine('```');
         HelpText.AppendLine('There is no empty result: a name that matches no table is an error (below), not an');
         HelpText.AppendLine('empty response.');
@@ -74,19 +80,30 @@ codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori"
         HelpText.AppendLine('');
         HelpText.AppendLine('| `error` | Meaning | `hint` |');
         HelpText.AppendLine('| --- | --- | --- |');
-        HelpText.AppendLine('| `Parameter ''tableName'' is required. Send it as text, for example "Customer".` | The request has no `tableName` field. | Send `{ "tableName": "<name>" }`. |');
-        HelpText.AppendLine('| `Parameter ''tableName'' is empty. Send a value, for example "Customer".` | Empty string. | Send the name. |');
+        HelpText.AppendLine('| `Parameter ''tableName'' is required. Send it as text, for example "Item".` | The request has no `tableName` field. | Send `{ "tableName": "<name>" }`. |');
+        HelpText.AppendLine('| `Parameter ''tableName'' is empty. Send a value, for example "Item".` | Empty string. | Send the name. |');
         HelpText.AppendLine('| `Table ''Foo'' was not found. Use the full object name with spaces, for example Sales Header, or list tables with Help.Tables.Get.` | No table has that object name. | Check spelling and spaces. |');
+        HelpText.AppendLine('| `Parameter ''tableName'' is 40 characters long; the maximum is 30.` | Longer than any table name. | Send the object name, at most 30 characters. |');
+        HelpText.AppendLine('| `Parameter ''tableName'' must be a single value (text or number), not an object or an array.` | `tableName` sent as object or array. | Send it as text. |');
+        HelpText.AppendLine('| `The request body must be a JSON object, for example { "accountNo": "2910" }.` | `data` is an array or plain text. | Send `{ "tableName": "<name>" }`. |');
         HelpText.AppendLine('');
         HelpText.AppendLine('Example:');
         HelpText.AppendLine('```json');
         HelpText.AppendLine('{ "status": "Error", "error": "Table ''Foo'' was not found.", "hint": "..." }');
         HelpText.AppendLine('```');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Safety / repeat');
-        HelpText.AppendLine('Read-only. Safe to call repeatedly; the same name always gives the same ID.');
+        HelpText.AppendLine('## Safe retries / repeat');
+        HelpText.AppendLine('Read-only; safe to repeat. Safe to call repeatedly; the same name always gives the same ID.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Related types');
+        HelpText.AppendLine('## Permissions and side effects');
+        HelpText.AppendLine('Every user sees this type; it reads only the list of objects in the database. No side effects.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Formats and language');
+        HelpText.AppendLine('`tableName` is the object name in English as Business Central stores it, whatever the');
+        HelpText.AppendLine('caller''s language (the caption `Vara` is not found; send `Item`). `tableId` is a JSON');
+        HelpText.AppendLine('integer. Error texts are translatable and follow lcid when a translation is installed.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Related message types');
         HelpText.AppendLine('- `Reference.Echo.Get` - connectivity check with no lookup and no failure path.');
         HelpText.AppendLine('- `Reference.Note.Add` - a write with a duplicate-key failure path.');
         Argument.SetResponseMarkdown(HelpText.ToText());
@@ -106,7 +123,7 @@ codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori"
 
         if not RefInput.ReadRequest(Argument, RequestJson) then
             exit;
-        if not RefInput.GetRequiredText(Argument, RequestJson, 'tableName', 30, '"Customer"', TableName) then
+        if not RefInput.GetRequiredText(Argument, RequestJson, 'tableName', 30, '"Item"', TableName) then
             exit;
 
         AllObj.SetRange("Object Type", AllObj."Object Type"::Table);

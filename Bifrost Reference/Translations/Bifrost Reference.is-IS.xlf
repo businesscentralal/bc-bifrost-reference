@@ -3,70 +3,70 @@
   <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Reference">
     <body>
       <group id="body">
+        <trans-unit id="Table 2596569480 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Asset Maintenance</source>
+          <target state="translated">Viðhald eignar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðhald eignar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target state="translated">Lýsing</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <target state="translated">Færslunr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Færslunr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 3850961964 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Id</source>
+          <target state="translated">Ytra auðkenni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ytra auðkenni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field External Id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 1991001892 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>FA No.</source>
+          <target state="translated">Eignanr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eignanr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field FA No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 1333289741 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Hours</source>
+          <target state="translated">Klukkustundir</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Klukkustundir</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Hours - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2596569480 - Field 1361924619 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Date</source>
+          <target state="translated">Dagsetning viðhalds</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Dagsetning viðhalds</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Asset Maintenance - Field Maintenance Date - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3413509963 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reference Note</source>
-          <target state="needs-translation">Athugasemd (sýnidæmi)</target>
-          <note from="Developer" annotates="general" priority="2"></note>
+          <target state="translated">Athugasemd (sýnidæmi)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athugasemd (sýnidæmi)</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Ref Note - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3413509963 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>No.</source>
-          <target state="needs-translation">Nr.</target>
-          <note from="Developer" annotates="general" priority="2"></note>
+          <target state="translated">Nr.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Nr.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Ref Note - Field No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3413509963 - Field 1821279055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Text</source>
-          <target state="needs-translation">Texti</target>
-          <note from="Developer" annotates="general" priority="2"></note>
+          <target state="translated">Texti</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Texti</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Ref Note - Field Text - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3770943455 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Service Visit</source>
-          <target state="translated">Þjónustuheimsókn</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Þjónustuheimsókn</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Service Visit - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3770943455 - Field 4190130733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Customer No.</source>
-          <target state="translated">Nr. viðskiptamanns</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Nr. viðskiptamanns</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Service Visit - Field Customer No. - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3770943455 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Description</source>
-          <target state="translated">Lýsing</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lýsing</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Service Visit - Field Description - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3770943455 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Entry No.</source>
-          <target state="translated">Færslunr.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Færslunr.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Service Visit - Field Entry No. - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3770943455 - Field 3850961964 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>External Id</source>
-          <target state="translated">Ytra auðkenni</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Ytra auðkenni</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Service Visit - Field External Id - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3770943455 - Field 1333289741 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Hours</source>
-          <target state="translated">Klukkustundir</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Klukkustundir</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Service Visit - Field Hours - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3770943455 - Field 3005499407 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Visit Date</source>
-          <target state="translated">Dagsetning heimsóknar</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Dagsetning heimsóknar</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Ref Service Visit - Field Visit Date - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3452267938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Reference Setup</source>
-          <target state="translated">Uppsetning Bifrost sýnidæmis</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifrost sýnidæmis</note>
+          <target state="translated">Uppsetning Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifrost Reference</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Ref Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3452267938 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -93,17 +93,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = currency code, is-IS=Færibreyturnar 'from' og 'to' eru báðar %1. Sendu tvo ólíka gjaldmiðla.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Exch Rate Get Impl - NamedType SameCurrencyErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 881506225 - NamedType 481314759" size-unit="char" translate="yes" xml:space="preserve">
-          <source>No customer was given. Send the customer number in subject or as "customerNo", or its SystemId in subject.</source>
-          <target state="translated">Enginn viðskiptamaður var tilgreindur. Sendu númer viðskiptamanns í subject eða sem "customerNo", eða SystemId hans í subject.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Enginn viðskiptamaður var tilgreindur. Sendu númer viðskiptamanns í subject eða sem "customerNo", eða SystemId hans í subject.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType CustomerMissingErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 881506225 - NamedType 99657326" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Customer '%1' was not found. Check the number, or search for the customer with Data.Records.Get on table Customer.</source>
-          <target state="translated">Viðskiptamaðurinn '%1' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni Customer.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = customer no. or SystemId received, is-IS=Viðskiptamaðurinn '%1' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni Customer.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType CustomerNotFoundErr</note>
+        <trans-unit id="Codeunit 2230199924 - NamedType 3672293264" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter 'fromDate' is %1, which is after 'asOfDate' %2. Send a fromDate on or before the asOfDate, or leave fromDate out to get the balance only.</source>
+          <target state="translated">Færibreytan 'fromDate' er %1, sem er eftir 'asOfDate' %2. Sendu fromDate sem er sami dagur eða fyrr en asOfDate, eða slepptu fromDate til að fá eingöngu stöðuna.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = fromDate received, %2 = asOfDate used, is-IS=Færibreytan 'fromDate' er %1, sem er eftir 'asOfDate' %2. Sendu fromDate sem er sami dagur eða fyrr en asOfDate, eða slepptu fromDate til að fá eingöngu stöðuna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref GLAcc Overview Impl - NamedType FromAfterAsOfErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 881506225 - NamedType 4068153118" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter '%1' has the value '%2', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.</source>
@@ -116,6 +110,30 @@
           <target state="translated">Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</target>
           <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = example, is-IS=Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType EmptyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 2876098697" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No fixed asset was given. Send the asset number in subject or as "assetNo", or its SystemId in subject.</source>
+          <target state="translated">Engin eign var tilgreind. Sendu númer eignarinnar í subject eða sem "assetNo", eða SystemId hennar í subject.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engin eign var tilgreind. Sendu númer eignarinnar í subject eða sem "assetNo", eða SystemId hennar í subject.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType FixedAssetMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 4063402908" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fixed asset '%1' was not found. Check the number, or search for the asset with Data.Records.Get on table Fixed Asset.</source>
+          <target state="translated">Eignin '%1' fannst ekki. Athugaðu númerið eða leitaðu að henni með Data.Records.Get á töflunni Fixed Asset.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = asset no. or SystemId received, is-IS=Eignin '%1' fannst ekki. Athugaðu númerið eða leitaðu að henni með Data.Records.Get á töflunni Fixed Asset.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType FixedAssetNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 815549933" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No G/L account was given. Send the account number in subject or as "accountNo", or its SystemId in subject.</source>
+          <target state="translated">Enginn fjárhagslykill var tilgreindur. Sendu númer lykilsins í subject eða sem "accountNo", eða SystemId hans í subject.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Enginn fjárhagslykill var tilgreindur. Sendu númer lykilsins í subject eða sem "accountNo", eða SystemId hans í subject.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType GLAccountMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 881506225 - NamedType 1640432856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>G/L account '%1' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.</source>
+          <target state="translated">Fjárhagslykillinn '%1' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni G/L Account.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = account no. or SystemId received, is-IS=Fjárhagslykillinn '%1' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni G/L Account.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType GLAccountNotFoundErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 881506225 - NamedType 1698007908" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter '%1' has the value '%2', which is not a whole number. Send for example 12.</source>
@@ -136,9 +154,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType NotAValueErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 881506225 - NamedType 1264649167" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The request body must be a JSON object, for example { "customerNo": "10000" }.</source>
-          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "customerNo": "10000" }.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "customerNo": "10000" }.</note>
+          <source>The request body must be a JSON object, for example { "accountNo": "2910" }.</source>
+          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType NotObjectErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 881506225 - NamedType 2723671431" size-unit="char" translate="yes" xml:space="preserve">
@@ -158,6 +176,24 @@
           <target state="translated">Færibreytan '%1' er %2 stafir; hámarkið er %3.</target>
           <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = actual length, %3 = maximum length, is-IS=Færibreytan '%1' er %2 stafir; hámarkið er %3.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType TooLongErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - NamedType 3621259247" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fixed asset '%1' is blocked, so no maintenance can be logged. Clear Blocked on the fixed asset card in Business Central, or choose another asset.</source>
+          <target state="translated">Eignin '%1' er lokuð og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Lokað á eignaspjaldinu í Business Central eða veldu aðra eign.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = fixed asset no., is-IS=Eignin '%1' er lokuð og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Lokað á eignaspjaldinu í Business Central eða veldu aðra eign.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - NamedType BlockedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - NamedType 1067498080" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter 'maintenanceDate' is %1, which is after the work date %2. Maintenance is logged after it is done; send a date on or before %2.</source>
+          <target state="translated">Færibreytan 'maintenanceDate' er %1, sem er eftir vinnudagsetningu %2. Viðhald er skráð eftir að það hefur verið unnið; sendu dagsetningu sem er %2 eða fyrr.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance date, %2 = work date, is-IS=Færibreytan 'maintenanceDate' er %1, sem er eftir vinnudagsetningu %2. Viðhald er skráð eftir að það hefur verið unnið; sendu dagsetningu sem er %2 eða fyrr.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - NamedType FutureDateErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - NamedType 2083297866" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fixed asset '%1' is inactive, so no maintenance can be logged. Clear Inactive on the fixed asset card in Business Central, or choose another asset.</source>
+          <target state="translated">Eignin '%1' er óvirk og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Óvirk á eignaspjaldinu í Business Central eða veldu aðra eign.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = fixed asset no., is-IS=Eignin '%1' er óvirk og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Óvirk á eignaspjaldinu í Business Central eða veldu aðra eign.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - NamedType InactiveErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3321213669 - Method 1665861916 - NamedType 954852589" size-unit="char" translate="yes" xml:space="preserve">
           <source>A note with no. '%1' already exists. Choose a different no.; if this is a retry, the first attempt most likely succeeded.</source>
@@ -185,8 +221,8 @@
         </trans-unit>
         <trans-unit id="Codeunit 2553378571 - NamedType 1762320083" size-unit="char" translate="yes" xml:space="preserve">
           <source>The exchange rate service at %1 could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup &gt; Start setup wizard).</source>
-          <target state="translated">Ekki náðist samband við gengisþjónustuna á %1. Ef lokað er á útsendar HTTP-beiðnir skaltu leyfa þær fyrir Bifrost Reference í uppsetningarálfi Bifrastar (Bifrost Setup &gt; Start setup wizard).</target>
-          <note from="Developer" annotates="general" priority="2">%1 = base URL, is-IS=Ekki náðist samband við gengisþjónustuna á %1. Ef lokað er á útsendar HTTP-beiðnir skaltu leyfa þær fyrir Bifrost Reference í uppsetningarálfi Bifrastar (Bifrost Setup &gt; Start setup wizard).</note>
+          <target state="translated">Ekki náðist samband við gengisþjónustuna á %1. Ef lokað er á útsendar HTTP-beiðnir skaltu leyfa þær fyrir Bifrost Reference í uppsetningarleiðsögn Bifrastar (Uppsetning Bifröst &gt; Hefja uppsetningarleiðsögn).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = base URL, is-IS=Ekki náðist samband við gengisþjónustuna á %1. Ef lokað er á útsendar HTTP-beiðnir skaltu leyfa þær fyrir Bifrost Reference í uppsetningarleiðsögn Bifrastar (Uppsetning Bifröst &gt; Hefja uppsetningarleiðsögn).</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Rates Client - NamedType CannotReachErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2553378571 - NamedType 217222318" size-unit="char" translate="yes" xml:space="preserve">
@@ -219,64 +255,52 @@
           <note from="Developer" annotates="general" priority="2">%1 = table name, is-IS=Taflan '%1' fannst ekki. Notaðu fullt heiti með bilum, t.d. Sales Header, eða skoðaðu töflur með Help.Tables.Get.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Table Get Impl - Method ExecuteBifrostTask - NamedType TableNotFoundErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1687210192 - NamedType 3621259247" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Customer '%1' is blocked for all transactions, so no visit can be logged. Unblock the customer in Business Central or choose another customer.</source>
-          <target state="translated">Viðskiptamaðurinn '%1' er lokaður fyrir öllum færslum og því er ekki hægt að skrá heimsókn. Opnaðu viðskiptamanninn í Business Central eða veldu annan.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = customer no., is-IS=Viðskiptamaðurinn '%1' er lokaður fyrir öllum færslum og því er ekki hægt að skrá heimsókn. Opnaðu viðskiptamanninn í Business Central eða veldu annan.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Visit Create Impl - NamedType BlockedErr</note>
+        <trans-unit id="Page 2596569480 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reference Asset Maintenance</source>
+          <target state="translated">Viðhald eigna (sýnidæmi)</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðhald eigna (sýnidæmi)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1687210192 - NamedType 1067498080" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Parameter 'visitDate' is %1, which is after the work date %2. Visits are logged after they happen; send a date on or before %2.</source>
-          <target state="translated">Færibreytan 'visitDate' er %1, sem er eftir vinnudagsetningu %2. Heimsóknir eru skráðar eftir á; sendu dagsetningu sem er %2 eða fyrr.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = visit date, %2 = work date, is-IS=Færibreytan 'visitDate' er %1, sem er eftir vinnudagsetningu %2. Heimsóknir eru skráðar eftir á; sendu dagsetningu sem er %2 eða fyrr.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Visit Create Impl - NamedType FutureDateErr</note>
+        <trans-unit id="Page 2596569480 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A short note on the work done.</source>
+          <target state="translated">Stutt lýsing á verkinu sem var unnið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stutt lýsing á verkinu sem var unnið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Description - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2099849546 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Reference Service Visits</source>
-          <target state="translated">Þjónustuheimsóknir (sýnidæmi)</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Þjónustuheimsóknir (sýnidæmi)</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Service Visits - Property Caption</note>
+        <trans-unit id="Page 2596569480 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The number of the maintenance entry.</source>
+          <target state="translated">Númer viðhaldsfærslunnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Númer viðhaldsfærslunnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Entry No. - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2099849546 - Control 4190130733 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The customer that was visited.</source>
-          <target state="translated">Viðskiptamaðurinn sem var heimsóttur.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Viðskiptamaðurinn sem var heimsóttur.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Service Visits - Control Customer No. - Property ToolTip</note>
+        <trans-unit id="Page 2596569480 - Control 3850961964 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The caller's own id for the entry, used to make retries safe.</source>
+          <target state="translated">Eigið auðkenni sendanda fyrir færsluna, notað til að gera endurtekningar öruggar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eigið auðkenni sendanda fyrir færsluna, notað til að gera endurtekningar öruggar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control External Id - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2099849546 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>A short description of the visit.</source>
-          <target state="translated">Stutt lýsing á heimsókninni.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Stutt lýsing á heimsókninni.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Service Visits - Control Description - Property ToolTip</note>
+        <trans-unit id="Page 2596569480 - Control 1991001892 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The fixed asset the maintenance was done on.</source>
+          <target state="translated">Eignin sem viðhaldið var unnið á.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Eignin sem viðhaldið var unnið á.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control FA No. - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2099849546 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The number of the visit entry.</source>
-          <target state="translated">Númer heimsóknarfærslunnar.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Númer heimsóknarfærslunnar.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Service Visits - Control Entry No. - Property ToolTip</note>
+        <trans-unit id="Page 2596569480 - Control 1333289741 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The hours spent on the maintenance.</source>
+          <target state="translated">Klukkustundir sem fóru í viðhaldið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Klukkustundir sem fóru í viðhaldið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Hours - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2099849546 - Control 3850961964 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The caller's own id for the visit, used to make retries safe.</source>
-          <target state="translated">Eigið auðkenni sendanda fyrir heimsóknina, notað til að gera endurtekningar öruggar.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Eigið auðkenni sendanda fyrir heimsóknina, notað til að gera endurtekningar öruggar.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Service Visits - Control External Id - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 2099849546 - Control 1333289741 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The hours spent.</source>
-          <target state="translated">Klukkustundir sem fóru í heimsóknina.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Klukkustundir sem fóru í heimsóknina.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Service Visits - Control Hours - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 2099849546 - Control 3005499407 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The date of the visit.</source>
-          <target state="translated">Dagsetning heimsóknarinnar.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Dagsetning heimsóknarinnar.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Service Visits - Control Visit Date - Property ToolTip</note>
+        <trans-unit id="Page 2596569480 - Control 1361924619 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The date the maintenance was done.</source>
+          <target state="translated">Dagsetningin sem viðhaldið var unnið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Dagsetningin sem viðhaldið var unnið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Ref Asset Maintenance - Control Maintenance Date - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3452267938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Reference Setup</source>
-          <target state="translated">Uppsetning Bifrost sýnidæmis</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifrost sýnidæmis</note>
+          <target state="translated">Uppsetning Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Uppsetning Bifrost Reference</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Ref Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3452267938 - NamedType 2027679388" size-unit="char" translate="yes" xml:space="preserve">
@@ -341,20 +365,20 @@
         </trans-unit>
         <trans-unit id="PageExtension 1367192820 - Action 3228077733 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Open the setup of the Bifrost Reference app.</source>
-          <target state="translated">Opna uppsetningu Bifrost sýnidæmisins.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Opna uppsetningu Bifrost sýnidæmisins.</note>
+          <target state="translated">Opna uppsetningu forritsins Bifrost Reference.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opna uppsetningu forritsins Bifrost Reference.</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Ref Setup Action - Action BifrostReferenceSetup - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="PageExtension 1367192820 - Action 3228077733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1243421685">
           <source>Bifrost Reference</source>
-          <target state="translated">Bifrost sýnidæmi</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Bifrost sýnidæmi</note>
+          <target state="translated">Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifrost Reference</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Ref Setup Action - Action BifrostReferenceSetup - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 1086823728 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Reference</source>
-          <target state="translated">Bifrost sýnidæmi</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Bifrost sýnidæmi</note>
+          <target state="translated">Bifrost Reference</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifrost Reference</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST REFERENCE - Property Caption</note>
         </trans-unit>
       </group>

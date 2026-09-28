@@ -32,6 +32,7 @@ rad.json
 *secret*.json
 
 # Internal working material - never part of the partner repo
+_trial/
 .claude/
 INTERNAL*
 *.internal.md

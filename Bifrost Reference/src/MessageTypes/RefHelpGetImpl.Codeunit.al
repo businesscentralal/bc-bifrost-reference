@@ -8,7 +8,7 @@ using Origo.Bifrost;
 /// message types, so a caller — usually an agent — can learn what this app adds without
 /// walking the whole catalogue. No request body is required.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller. Contract only - see CONTRACT.md.</remarks>
+/// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
 codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
 {
     Access = Internal;
@@ -45,11 +45,17 @@ codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
         HelpText.AppendLine('what this app offers before calling anything in it. Not for the contract of one operation -');
         HelpText.AppendLine('ask `Help.Implementation.Get` for that.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Direction');
-        HelpText.AppendLine('Outbound - a read. Nothing is written.');
+        HelpText.AppendLine('**Effect:** Read-only (direction Outbound - a read). Nothing is written.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Request');
-        HelpText.AppendLine('No fields. Send an empty object.');
+        HelpText.AppendLine('## Workflow');
+        HelpText.AppendLine('This type first -> `Help.Implementation.Get` with the name of the type you want to call ->');
+        HelpText.AppendLine('that type.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Identifying the target');
+        HelpText.AppendLine('None: subject is not used.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Parameters');
+        HelpText.AppendLine('No fields. Send an empty object. Anything you send is ignored.');
         HelpText.AppendLine('');
         HelpText.AppendLine('## Request example');
         HelpText.AppendLine('```json');
@@ -66,10 +72,19 @@ codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
         HelpText.AppendLine('## Errors');
         HelpText.AppendLine('The operation has no error conditions of its own.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Safety / repeat');
-        HelpText.AppendLine('Safe to call any number of times; the answer changes only when the app is upgraded.');
+        HelpText.AppendLine('## Safe retries / repeat');
+        HelpText.AppendLine('Read-only; safe to repeat. Safe to call any number of times; the answer changes only when');
+        HelpText.AppendLine('the app is upgraded.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Related types');
+        HelpText.AppendLine('## Permissions and side effects');
+        HelpText.AppendLine('Every user sees this type; it reads no table. The overview lists every type of the app,');
+        HelpText.AppendLine('including ones your permissions hide from you. No side effects.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Formats and language');
+        HelpText.AppendLine('`markdown` is Markdown text with `\n` line breaks. The overview is in English in every');
+        HelpText.AppendLine('language; it is not translated.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Related message types');
         HelpText.AppendLine('- `Help.MessageTypes.Get` - the whole catalogue across all installed apps.');
         HelpText.AppendLine('- `Help.Implementation.Get` - the full contract of one message type.');
         Argument.SetResponseMarkdown(HelpText.ToText());
@@ -98,8 +113,8 @@ codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
         Overview.AppendLine('## Message types');
         Overview.AppendLine('| Type | Effect | What it does |');
         Overview.AppendLine('| --- | --- | --- |');
-        Overview.AppendLine('| `Reference.Customer.Overview.Get` | Read-only | A customer''s balance, overdue amount and available credit. |');
-        Overview.AppendLine('| `Reference.ServiceVisit.Create` | Commits | Logs a service visit at a customer; safe to retry with externalId. |');
+        Overview.AppendLine('| `Reference.GLAccount.Overview.Get` | Read-only | A G/L account''s balance as of a date and its net change for a period. |');
+        Overview.AppendLine('| `Reference.AssetMaintenance.Create` | Commits | Logs maintenance work on a fixed asset; safe to retry with externalId. |');
         Overview.AppendLine('| `Reference.ItemPrice.PreviewAdjustment` | Read-only | Shows a % unit price change for an item category. |');
         Overview.AppendLine('| `Reference.ItemPrice.ApplyAdjustment` | Commits | Applies that change; needs the preview''s itemCount. |');
         Overview.AppendLine('| `Reference.ExchangeRate.Get` | Read-only (internet) | Latest ECB rate between two currencies. |');

@@ -6,7 +6,7 @@ using Origo.Bifrost.Reference.Legacy;
 using System.TestLibraries.Utilities;
 
 /// <summary>
-/// Legacy.Stock.* - proves the fixes of the §7.2 audit stay fixed:
+/// Legacy.Stock.* - proves the fixes of the §7.1 audit stay fixed:
 ///  - the stock check applies without a UI (the v1 GuiAllowed branch), and the person's decision
 ///    is the explicit allowOverStock parameter;
 ///  - errors raised by the facade inside the isolated write reach the caller (no swallowed errors);
@@ -89,7 +89,6 @@ codeunit 90153 "Legacy Adapter Tests"
     procedure ReleaseAllWithTheListedCountReleasesAndLogs()
     var
         Log: Record "Legacy Cancellation Log";
-        LegacyStockAPI: Codeunit "Legacy Stock API";
         Listed: JsonObject;
         Released: JsonObject;
     begin
@@ -107,8 +106,8 @@ codeunit 90153 "Legacy Adapter Tests"
         // [THEN] both are released, and each is logged
         Caller.AssertOk(Released);
         Assert.AreEqual(2, Caller.GetDecimal(Released, 'released'), 'released');
-        Assert.IsFalse(LegacyStockAPI.HasReservation('BIFT-S1'), 'BIFT-S1 should be released.');
-        Assert.IsFalse(LegacyStockAPI.HasReservation('BIFT-S2'), 'BIFT-S2 should be released.');
+        Assert.IsFalse(HasReservation('BIFT-S1'), 'BIFT-S1 should be released.');
+        Assert.IsFalse(HasReservation('BIFT-S2'), 'BIFT-S2 should be released.');
         Log.SetFilter("Item No.", 'BIFT-S*');
         Assert.RecordCount(Log, 2);
     end;
@@ -116,7 +115,7 @@ codeunit 90153 "Legacy Adapter Tests"
     [Test]
     procedure HelpQuotesTheFacadesOverStockError()
     begin
-        // The facade's Label and the adapter's help live in two apps; this keeps them in step.
+        // The core's Label and the message type's help live in two codeunits; this keeps them in step.
         Assert.IsTrue(Caller.GetHelp('Legacy.Stock.Reserve').Contains(OverStockPartTxt), 'The Reserve help should quote the over-stock error.');
     end;
 
@@ -134,11 +133,17 @@ codeunit 90153 "Legacy Adapter Tests"
     end;
 
     local procedure ReserveOverStock(ItemNo: Code[20]; Quantity: Decimal)
-    var
-        LegacyStockAPI: Codeunit "Legacy Stock API";
     begin
+        // Through the public API, like every caller outside Legacy App: the core is internal.
         CreateItem(ItemNo);
-        LegacyStockAPI.Reserve(ItemNo, Quantity, true);
+        Caller.AssertOk(
+            Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.Reserve", ItemNo,
+                StrSubstNo('{"quantity":%1,"allowOverStock":true}', Format(Quantity, 0, 9))));
+    end;
+
+    local procedure HasReservation(ItemNo: Code[20]): Boolean
+    begin
+        exit(Caller.GetBoolean(Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.Get", ItemNo, ''), 'hasReservation'));
     end;
 
     local procedure CreateItem(ItemNo: Code[20])

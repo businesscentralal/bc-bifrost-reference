@@ -5,7 +5,7 @@ using System.TestLibraries.Utilities;
 
 /// <summary>
 /// Lints every selection card (name + description) of the message types these apps add. An agent
-/// chooses a type from its card alone, so the card rules in CONTRACT.md are checked like code:
+/// chooses a type from its card alone, so the card rules in START-HERE.md section 4 are checked like code:
 ///  - the description is not empty (it can never exceed 250 characters - the interface is Text[250]);
 ///  - it states its effect: an Outbound type says "Read-only", an Inbound type says "Commits",
 ///    so the words and the direction can never disagree;
@@ -56,7 +56,7 @@ codeunit 90151 "Selection Card Lint"
 
     local procedure IsOurs(Ordinal: Integer): Boolean
     begin
-        // Bifrost Reference 90000-90049, Legacy App - Bifrost 90100-90149.
+        // Bifrost Reference 90000-90049, Legacy App (v2 message types) 90100-90149.
         exit(((Ordinal >= 90000) and (Ordinal <= 90049)) or ((Ordinal >= 90100) and (Ordinal <= 90149)));
     end;
 }

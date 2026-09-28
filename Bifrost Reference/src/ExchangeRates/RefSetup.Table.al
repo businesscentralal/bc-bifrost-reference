@@ -7,7 +7,7 @@ namespace Origo.Bifrost.Reference;
 /// </summary>
 table 90011 "Ref Setup"
 {
-    Caption = 'Bifrost Reference Setup', Comment = 'is-IS=Uppsetning Bifrost sýnidæmis';
+    Caption = 'Bifrost Reference Setup', Comment = 'is-IS=Uppsetning Bifrost Reference';
     DataClassification = SystemMetadata;
 
     fields

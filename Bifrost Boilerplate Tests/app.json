@@ -1,0 +1,60 @@
+{
+  "id": "e2a9d6f1-7c34-4b8e-a15d-9f6c3b2e8a70",
+  "name": "My Bifrost App Tests",
+  "publisher": "My Company",
+  "version": "1.0.0.0",
+  "brief": "Unit tests for My Bifrost App",
+  "description": "Tests the message types of My Bifrost App through Foundation's public Dispatcher, never through internals, and lints every selection card.",
+  "url": "https://www.example.com/",
+  "EULA": "https://www.example.com/eula",
+  "privacyStatement": "https://www.example.com/privacy",
+  "target": "Cloud",
+  "screenshots": [],
+  "dependencies": [
+    {
+      "id": "7505e808-6e52-4b96-a328-82573391297a",
+      "name": "Bifrost Foundation",
+      "publisher": "Origo",
+      "version": "28.0.0.0"
+    },
+    {
+      "id": "b7e4c2a9-3f18-4d6e-9a5c-1e8f2d7b6c43",
+      "name": "My Bifrost App",
+      "publisher": "My Company",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "name": "Library Assert",
+      "publisher": "Microsoft",
+      "version": "28.0.0.0"
+    },
+    {
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "name": "Test Runner",
+      "publisher": "Microsoft",
+      "version": "28.0.0.0"
+    }
+  ],
+  "idRanges": [
+    {
+      "from": 50050,
+      "to": 50099
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": false,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  },
+  "suppressWarnings": [
+    "AA0217"
+  ],
+  "supportedLocales": [
+    "en-US"
+  ],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "runtime": "17.0",
+  "propagateDependencies": false
+}

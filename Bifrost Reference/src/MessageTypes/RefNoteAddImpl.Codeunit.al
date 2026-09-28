@@ -8,7 +8,7 @@ using Origo.Bifrost;
 /// ori") invoked via Codeunit.Run(), so a failure is caught here and answered as
 /// status = Error without rolling back the outer transaction. Help text lives in a
 /// separate codeunit (RefNoteAddHelp) - the pattern to default to once help text grows past
-/// a few lines; see the use card in CONTRACT.md.
+/// a few lines; see the use card in START-HERE.md section 4.
 /// </summary>
 codeunit 90003 "Ref Note Add Impl" implements "Msg Interface ori"
 {

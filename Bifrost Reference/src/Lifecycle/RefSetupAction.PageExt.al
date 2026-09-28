@@ -15,8 +15,8 @@ pageextension 90012 "Ref Setup Action" extends "Setup ori"
             action(BifrostReferenceSetup)
             {
                 ApplicationArea = All;
-                Caption = 'Bifrost Reference', Comment = 'is-IS=Bifrost sýnidæmi';
-                ToolTip = 'Open the setup of the Bifrost Reference app.', Comment = 'is-IS=Opna uppsetningu Bifrost sýnidæmisins.';
+                Caption = 'Bifrost Reference', Comment = 'is-IS=Bifrost Reference';
+                ToolTip = 'Open the setup of the Bifrost Reference app.', Comment = 'is-IS=Opna uppsetningu forritsins Bifrost Reference.';
                 Image = Setup;
                 RunObject = page "Ref Setup";
             }

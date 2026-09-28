@@ -6,7 +6,7 @@ Everything here works for a person clicking through the UI. That is the point: n
 
 ## What's wrong with it for anything without a person
 
-Every problem is marked in the code as `AUDIT 7.2 - <pattern>`, after the audit table in [`START-HERE.md`](../START-HERE.md) §7.2. Search the folder for `AUDIT 7.2` to find them all.
+Every problem is marked in the code as `AUDIT - <pattern>`, after the audit table in [`START-HERE.md`](../START-HERE.md) §7.1. Search the folder for `AUDIT -` to find them all.
 
 | Where | Pattern | Why an API, job queue, other app or AI agent can't use it |
 |---|---|---|
@@ -24,9 +24,22 @@ Every problem is marked in the code as `AUDIT 7.2 - <pattern>`, after the audit 
 ## The demo, step by step
 
 1. **Publish this app (v1).** Use the app in BC: reserve more than is in stock (you are warned), cancel (you are asked), release all (a progress window, then "n released, m skipped"). For an agent there is nothing to call. It can read the table through Bifröst's generic data access, but generic writes are blocked.
-2. **Publish `Legacy App` (v2) over it.** For a person, the app asks the same questions in the same places. Underneath, the work has moved into the headless facade `Legacy Stock API`, and the page only talks to the person. The app still knows nothing about Bifröst, so for an agent there is still nothing to call.
-3. **Publish `Legacy App - Bifrost`,** a separate app that depends on Legacy App v2 and Bifröst Foundation. Now `Legacy.Stock.Reserve`, `.CancelReservation`, `.Get`, `.List` and `.ReleaseAll` exist, and an agent can do everything a person can, with the same rules. The questions a person answered in dialogs have become explicit parameters (`allowOverStock`, `expectedCount`).
+2. **Legacy App v2: headless inside, message types outside.** Publish `Legacy App` v2 (folder `Legacy App v2 (headless)`, depends on Bifröst Foundation) over it. For a person, the app asks the same questions in the same places. Underneath, the work has moved into the internal headless core `Legacy Stock API`, and the page only talks to the person. Outside, the app's public API is its message types: `Legacy.Stock.Reserve`, `.CancelReservation`, `.Get`, `.List` and `.ReleaseAll`, so an agent can do everything a person can, with the same rules. The questions a person answered in dialogs have become explicit parameters (`allowOverStock`, `expectedCount`).
 
-Search both `src/` folders for `7.2 -` to see each problem next to its fix.
+Search `Legacy App v1 (not headless)/src/` for `AUDIT -` and `Legacy App v2 (headless)/src/` for `FIXED -` to see each problem next to its fix.
 
-**Starting again:** BC won't install 1.1 over 2.x. Uninstall and unpublish `Legacy App - Bifrost` and then `Legacy App` before you publish v1 again.
+## Comparing v1 and v2
+
+Both apps use the same folders, so a folder-by-folder comparison shows exactly what the retrofit changed:
+
+| Folder | v1 (before) | v2 (after) |
+|---|---|---|
+| `src/Data/` | Reservation and cancellation log tables | The same tables, unchanged |
+| `src/Logic/` | `LegacyStockMgt` with dialogs, `Commit` and `GuiAllowed`; `LegacyReleaseRow` | `LegacyStockAPI`, the internal headless core; `LegacyStockMgt`, old entry points kept for compatibility |
+| `src/UI/` | The list page with the business logic inside it; the reserve dialog | The list page, which only talks to the person; the same dialog |
+| `src/Permissions/` | `LEGACY STOCK` | The same |
+| `src/MessageTypes/` | – | **New:** the app's public API, with the five `Legacy.Stock.*` types, their help, the input layer and registration |
+
+In VS Code, select both `src` folders in the Explorer and choose **Compare Selected**, or compare the matching files one by one.
+
+**Starting again:** BC won't install 1.1 over 2.0. Uninstall and unpublish `Legacy App` (2.0) before you publish v1 again.

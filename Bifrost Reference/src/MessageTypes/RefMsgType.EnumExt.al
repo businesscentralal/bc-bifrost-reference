@@ -33,17 +33,19 @@ enumextension 90000 "Ref Msg Type" extends "Message Type ori"
         Caption = 'Help.Reference.Get', Locked = true;
         Implementation = "Msg Interface ori" = "Ref Help Get Impl";
     }
-    // Read: a record resolved from subject, FlowFields, nulls. See src/Customers.
-    value(90004; "Reference.Customer.Overview.Get")
+    // Read: a record resolved from subject, optional dates, FlowFields, nulls. See src/GLAccounts.
+    // Ordinals 90004 and 90005 were renamed when the samples moved off personal data (GDPR):
+    // a reference app shows patterns on business data only. The ordinals are unchanged.
+    value(90004; "Reference.GLAccount.Overview.Get")
     {
-        Caption = 'Reference.Customer.Overview.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Cust Overview Impl";
+        Caption = 'Reference.GLAccount.Overview.Get', Locked = true;
+        Implementation = "Msg Interface ori" = "Ref GLAcc Overview Impl";
     }
-    // Write: validated input, isolated write, safe retry. See src/ServiceVisits.
-    value(90005; "Reference.ServiceVisit.Create")
+    // Write: validated input, isolated write, safe retry. See src/AssetMaintenance.
+    value(90005; "Reference.AssetMaintenance.Create")
     {
-        Caption = 'Reference.ServiceVisit.Create', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Visit Create Impl";
+        Caption = 'Reference.AssetMaintenance.Create', Locked = true;
+        Implementation = "Msg Interface ori" = "Ref Maint Create Impl";
     }
     // Preview / apply pair for an irreversible bulk change. See src/Prices.
     value(90006; "Reference.ItemPrice.PreviewAdjustment")

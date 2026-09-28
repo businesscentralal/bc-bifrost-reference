@@ -7,7 +7,7 @@ namespace Origo.Bifrost.Reference;
 /// </summary>
 page 90011 "Ref Setup"
 {
-    Caption = 'Bifrost Reference Setup', Comment = 'is-IS=Uppsetning Bifrost sýnidæmis';
+    Caption = 'Bifrost Reference Setup', Comment = 'is-IS=Uppsetning Bifrost Reference';
     PageType = Card;
     SourceTable = "Ref Setup";
     UsageCategory = Administration;

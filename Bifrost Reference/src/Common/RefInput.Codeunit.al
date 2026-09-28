@@ -1,6 +1,7 @@
 namespace Origo.Bifrost.Reference;
 
-using Microsoft.Sales.Customer;
+using Microsoft.Finance.GeneralLedger.Account;
+using Microsoft.FixedAssets.FixedAsset;
 using Origo.Bifrost;
 
 /// <summary>
@@ -26,7 +27,7 @@ codeunit 90010 "Ref Input"
     Access = Internal;
 
     var
-        NotObjectErr: Label 'The request body must be a JSON object, for example { "customerNo": "10000" }.', Comment = 'is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "customerNo": "10000" }.';
+        NotObjectErr: Label 'The request body must be a JSON object, for example { "accountNo": "2910" }.', Comment = 'is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.';
         MissingErr: Label 'Parameter ''%1'' is required. Send it as %2.', Comment = '%1 = parameter name, %2 = expected type and example, is-IS=Færibreytan ''%1'' er nauðsynleg. Sendu hana sem %2.';
         EmptyErr: Label 'Parameter ''%1'' is empty. Send a value, for example %2.', Comment = '%1 = parameter name, %2 = example, is-IS=Færibreytan ''%1'' er tóm. Sendu gildi, til dæmis %2.';
         NotAValueErr: Label 'Parameter ''%1'' must be a single value (text or number), not an object or an array.', Comment = '%1 = parameter name, is-IS=Færibreytan ''%1'' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.';
@@ -34,8 +35,10 @@ codeunit 90010 "Ref Input"
         DateFormatErr: Label 'Parameter ''%1'' has the value ''%2'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.', Comment = '%1 = parameter name, %2 = value received, is-IS=Færibreytan ''%1'' hefur gildið ''%2'', sem er ekki dagsetning á sniðinu ÁÁÁÁ-MM-DD. Sendu til dæmis 2026-09-26.';
         NumberFormatErr: Label 'Parameter ''%1'' has the value ''%2'', which is not a number. Send a number with a dot as decimal separator, for example 2.5.', Comment = '%1 = parameter name, %2 = value received, is-IS=Færibreytan ''%1'' hefur gildið ''%2'', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.';
         RangeErr: Label 'Parameter ''%1'' is %2, but it must be between %3 and %4.', Comment = '%1 = parameter name, %2 = value received, %3 = minimum, %4 = maximum, is-IS=Færibreytan ''%1'' er %2 en verður að vera á bilinu %3 til %4.';
-        CustomerMissingErr: Label 'No customer was given. Send the customer number in subject or as "customerNo", or its SystemId in subject.', Comment = 'is-IS=Enginn viðskiptamaður var tilgreindur. Sendu númer viðskiptamanns í subject eða sem "customerNo", eða SystemId hans í subject.';
-        CustomerNotFoundErr: Label 'Customer ''%1'' was not found. Check the number, or search for the customer with Data.Records.Get on table Customer.', Comment = '%1 = customer no. or SystemId received, is-IS=Viðskiptamaðurinn ''%1'' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni Customer.';
+        GLAccountMissingErr: Label 'No G/L account was given. Send the account number in subject or as "accountNo", or its SystemId in subject.', Comment = 'is-IS=Enginn fjárhagslykill var tilgreindur. Sendu númer lykilsins í subject eða sem "accountNo", eða SystemId hans í subject.';
+        GLAccountNotFoundErr: Label 'G/L account ''%1'' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.', Comment = '%1 = account no. or SystemId received, is-IS=Fjárhagslykillinn ''%1'' fannst ekki. Athugaðu númerið eða leitaðu að honum með Data.Records.Get á töflunni G/L Account.';
+        FixedAssetMissingErr: Label 'No fixed asset was given. Send the asset number in subject or as "assetNo", or its SystemId in subject.', Comment = 'is-IS=Engin eign var tilgreind. Sendu númer eignarinnar í subject eða sem "assetNo", eða SystemId hennar í subject.';
+        FixedAssetNotFoundErr: Label 'Fixed asset ''%1'' was not found. Check the number, or search for the asset with Data.Records.Get on table Fixed Asset.', Comment = '%1 = asset no. or SystemId received, is-IS=Eignin ''%1'' fannst ekki. Athugaðu númerið eða leitaðu að henni með Data.Records.Get á töflunni Fixed Asset.';
         TextExampleTok: Label 'text, for example %1', Comment = '%1 = example value', Locked = true;
         DateExampleTok: Label 'a date in the format YYYY-MM-DD, for example "2026-09-26"', Locked = true;
         NumberExampleTok: Label 'a number, for example 2.5', Locked = true;
@@ -121,6 +124,27 @@ codeunit 90010 "Ref Input"
     end;
 
     /// <summary>
+    /// Reads an optional date in ISO format (YYYY-MM-DD). Absent, JSON null or empty gives
+    /// Found = false and Value = 0D, so the caller applies its own default. A value in any
+    /// other format is refused exactly as in GetRequiredDate; it is never ignored.
+    /// </summary>
+    procedure GetOptionalDate(var Argument: Record "Message Argument ori"; RequestJson: JsonObject; KeyName: Text; var Value: Date; var Found: Boolean): Boolean
+    var
+        DateText: Text;
+    begin
+        Value := 0D;
+        if not GetOptionalText(Argument, RequestJson, KeyName, 30, DateText, Found) then
+            exit(false);
+        if not Found then
+            exit(true);
+        if not TryParseIsoDate(DateText, Value) then begin
+            Argument.RespondWithError(StrSubstNo(DateFormatErr, KeyName, DateText));
+            exit(false);
+        end;
+        exit(true);
+    end;
+
+    /// <summary>
     /// Reads a required decimal and checks it against an inclusive range. Accepts a JSON
     /// number (2.5) or a numeric string ("2.5"); always with a dot as decimal separator.
     /// </summary>
@@ -172,41 +196,80 @@ codeunit 90010 "Ref Input"
     end;
 
     /// <summary>
-    /// Resolves the customer the caller means. Order: subject as SystemId (GUID), subject as
-    /// customer number, then "customerNo" in the body. Three outcomes, three different answers:
-    /// nothing given -> "no customer was given"; given but unknown -> "customer 'X' was not
-    /// found" (echoing X); found -> true. Mixing up the first two is the most frequent cause
+    /// Resolves the G/L account the caller means. Order: subject as SystemId (GUID), subject as
+    /// account number, then "accountNo" in the body. Three outcomes, three different answers:
+    /// nothing given -> "no G/L account was given"; given but unknown -> "G/L account 'X' was
+    /// not found" (echoing X); found -> true. Mixing up the first two is the most frequent cause
     /// of failed first calls: the caller fixes the wrong thing.
+    /// Set SetLoadFields on the record before calling, so the Get loads only what the type returns.
     /// </summary>
-    procedure ResolveCustomer(var Argument: Record "Message Argument ori"; RequestJson: JsonObject; var Customer: Record Customer): Boolean
+    procedure ResolveGLAccount(var Argument: Record "Message Argument ori"; RequestJson: JsonObject; var GLAccount: Record "G/L Account"): Boolean
     var
-        CustomerNoText: Text;
+        AccountNoText: Text;
         Found: Boolean;
     begin
         if Argument.SubjectIsGuid() then begin
-            if Customer.GetBySystemId(Argument.Subject) then
+            if GLAccount.GetBySystemId(Argument.Subject) then
                 exit(true);
-            Argument.RespondWithError(StrSubstNo(CustomerNotFoundErr, Argument.Subject));
+            Argument.RespondWithError(StrSubstNo(GLAccountNotFoundErr, Argument.Subject));
             exit(false);
         end;
 
-        CustomerNoText := DelChr(Argument.Subject, '<>', ' ');
-        if CustomerNoText = '' then begin
-            if not GetOptionalText(Argument, RequestJson, 'customerNo', MaxStrLen(Customer."No."), CustomerNoText, Found) then
+        AccountNoText := DelChr(Argument.Subject, '<>', ' ');
+        if AccountNoText = '' then begin
+            if not GetOptionalText(Argument, RequestJson, 'accountNo', MaxStrLen(GLAccount."No."), AccountNoText, Found) then
                 exit(false);
             if not Found then begin
-                Argument.RespondWithError(CustomerMissingErr);
+                Argument.RespondWithError(GLAccountMissingErr);
                 exit(false);
             end;
         end;
 
-        if StrLen(CustomerNoText) > MaxStrLen(Customer."No.") then begin
-            Argument.RespondWithError(StrSubstNo(CustomerNotFoundErr, CustomerNoText));
+        if StrLen(AccountNoText) > MaxStrLen(GLAccount."No.") then begin
+            Argument.RespondWithError(StrSubstNo(GLAccountNotFoundErr, AccountNoText));
             exit(false);
         end;
-        if Customer.Get(UpperCase(CustomerNoText)) then
+        if GLAccount.Get(UpperCase(AccountNoText)) then
             exit(true);
-        Argument.RespondWithError(StrSubstNo(CustomerNotFoundErr, CustomerNoText));
+        Argument.RespondWithError(StrSubstNo(GLAccountNotFoundErr, AccountNoText));
+        exit(false);
+    end;
+
+    /// <summary>
+    /// Resolves the fixed asset the caller means, with the same order and the same three
+    /// outcomes as ResolveGLAccount: subject as SystemId (GUID), subject as asset number, then
+    /// "assetNo" in the body; "not given" and "not found" are answered differently.
+    /// Set SetLoadFields on the record before calling.
+    /// </summary>
+    procedure ResolveFixedAsset(var Argument: Record "Message Argument ori"; RequestJson: JsonObject; var FixedAsset: Record "Fixed Asset"): Boolean
+    var
+        AssetNoText: Text;
+        Found: Boolean;
+    begin
+        if Argument.SubjectIsGuid() then begin
+            if FixedAsset.GetBySystemId(Argument.Subject) then
+                exit(true);
+            Argument.RespondWithError(StrSubstNo(FixedAssetNotFoundErr, Argument.Subject));
+            exit(false);
+        end;
+
+        AssetNoText := DelChr(Argument.Subject, '<>', ' ');
+        if AssetNoText = '' then begin
+            if not GetOptionalText(Argument, RequestJson, 'assetNo', MaxStrLen(FixedAsset."No."), AssetNoText, Found) then
+                exit(false);
+            if not Found then begin
+                Argument.RespondWithError(FixedAssetMissingErr);
+                exit(false);
+            end;
+        end;
+
+        if StrLen(AssetNoText) > MaxStrLen(FixedAsset."No.") then begin
+            Argument.RespondWithError(StrSubstNo(FixedAssetNotFoundErr, AssetNoText));
+            exit(false);
+        end;
+        if FixedAsset.Get(UpperCase(AssetNoText)) then
+            exit(true);
+        Argument.RespondWithError(StrSubstNo(FixedAssetNotFoundErr, AssetNoText));
         exit(false);
     end;
 

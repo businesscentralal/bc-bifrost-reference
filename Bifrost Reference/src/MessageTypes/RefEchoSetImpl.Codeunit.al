@@ -8,7 +8,7 @@ using Origo.Bifrost;
 /// without depending on any external system. The type was named Reference.Echo.Set until the
 /// rename; the codeunit keeps its object name so the object ID and file stay stable.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller. Contract only - see CONTRACT.md.</remarks>
+/// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
 codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
 {
     Access = Internal;
@@ -47,10 +47,16 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
         HelpText.AppendLine('response travel intact - a connectivity and envelope check, or a way to read the');
         HelpText.AppendLine('server clock. Not for reading or writing business data: it touches no table.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Direction');
-        HelpText.AppendLine('Outbound - a read. Nothing is written.');
+        HelpText.AppendLine('**Effect:** Read-only (direction Outbound - a read). Nothing is written.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Request');
+        HelpText.AppendLine('## Workflow');
+        HelpText.AppendLine('Standalone. Call it first when a connection is new or suspect; no other type is needed before');
+        HelpText.AppendLine('or after it.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Identifying the target');
+        HelpText.AppendLine('None: subject is not used.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Parameters');
         HelpText.AppendLine('Any JSON object. There are no named fields; everything you send is returned as sent.');
         HelpText.AppendLine('');
         HelpText.AppendLine('| Field | Type | Required | Default | Notes |');
@@ -72,13 +78,22 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
         HelpText.AppendLine('## Errors');
         HelpText.AppendLine('| `error` | Meaning | Fix |');
         HelpText.AppendLine('| --- | --- | --- |');
-        HelpText.AppendLine('| `The request body must be a JSON object, for example { "customerNo": "10000" }.` | `data` is an array or plain text. | Send a JSON object, or no body. |');
+        HelpText.AppendLine('| `The request body must be a JSON object, for example { "accountNo": "2910" }.` | `data` is an array or plain text. | Send a JSON object, or no body. |');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Safety / repeat');
-        HelpText.AppendLine('Safe to call any number of times. Each call returns a new `serverTime`; nothing else');
-        HelpText.AppendLine('differs between calls.');
+        HelpText.AppendLine('## Safe retries / repeat');
+        HelpText.AppendLine('Read-only; safe to repeat. Safe to call any number of times. Each call returns a new');
+        HelpText.AppendLine('`serverTime`; nothing else differs between calls.');
         HelpText.AppendLine('');
-        HelpText.AppendLine('## Related types');
+        HelpText.AppendLine('## Permissions and side effects');
+        HelpText.AppendLine('No permission beyond calling Bifrost is needed; every user sees this type. It reads and');
+        HelpText.AppendLine('writes no table. No side effects.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Formats and language');
+        HelpText.AppendLine('`serverTime` is an ISO 8601 date-time in UTC. Your values are returned exactly as sent, in');
+        HelpText.AppendLine('their own JSON types. Error texts are translatable and follow lcid when a translation is');
+        HelpText.AppendLine('installed.');
+        HelpText.AppendLine('');
+        HelpText.AppendLine('## Related message types');
         HelpText.AppendLine('- `Reference.Table.Get` - a read that can fail, returning a structured error.');
         HelpText.AppendLine('- `Reference.Note.Add` - a write with a duplicate-key failure path.');
         Argument.SetResponseMarkdown(HelpText.ToText());

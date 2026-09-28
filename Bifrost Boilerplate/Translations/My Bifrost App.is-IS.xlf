@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="is-IS" original="My Bifrost App">
+    <body>
+      <group id="body">
+        <trans-unit id="Codeunit 2581445924 - NamedType 3899500243" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Hello, %1! My Bifrost App is working in %2.</source>
+          <target state="translated">Halló, %1! My Bifrost App virkar í %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = the name sent, or the user, %2 = company name, is-IS=Halló, %1! My Bifrost App virkar í %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Hello Get Impl - NamedType GreetingTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 4125166614" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2'. Send true or false, without quotes.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2'. Sendu true eða false, án gæsalappa.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2'. Sendu true eða false, án gæsalappa.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType BooleanFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 4068153118" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki dagsetning á sniðinu ÁÁÁÁ-MM-DD. Sendu til dæmis 2026-09-26.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki dagsetning á sniðinu ÁÁÁÁ-MM-DD. Sendu til dæmis 2026-09-26.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType DateFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 3777985252" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is empty. Send a value, for example %2.</source>
+          <target state="translated">Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = example, is-IS=Færibreytan '%1' er tóm. Sendu gildi, til dæmis %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType EmptyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 1698007908" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a whole number. Send for example 12.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki heiltala. Sendu til dæmis 12.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki heiltala. Sendu til dæmis 12.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType IntegerFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 108396880" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No item was given. Send the item number in subject or as "itemNo", or its SystemId in subject.</source>
+          <target state="translated">Engin vara var tilgreind. Sendu númer vörunnar í subject eða sem "itemNo", eða SystemId hennar í subject.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engin vara var tilgreind. Sendu númer vörunnar í subject eða sem "itemNo", eða SystemId hennar í subject.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType ItemMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 2184892397" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item '%1' was not found. Check the number, or search for the item with Data.Records.Get on table Item.</source>
+          <target state="translated">Varan '%1' fannst ekki. Athugaðu númerið eða leitaðu að henni með Data.Records.Get á töflunni Item.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item no. or SystemId received, is-IS=Varan '%1' fannst ekki. Athugaðu númerið eða leitaðu að henni með Data.Records.Get á töflunni Item.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType ItemNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 1830439019" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is required. Send it as %2.</source>
+          <target state="translated">Færibreytan '%1' er nauðsynleg. Sendu hana sem %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = expected type and example, is-IS=Færibreytan '%1' er nauðsynleg. Sendu hana sem %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType MissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 1973040246" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' must be a single value (text or number), not an object or an array.</source>
+          <target state="translated">Færibreytan '%1' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, is-IS=Færibreytan '%1' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType NotAValueErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 1264649167" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The request body must be a JSON object, for example { "itemNo": "1896-S" }.</source>
+          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S" }.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S" }.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType NotObjectErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 2723671431" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' has the value '%2', which is not a number. Send a number with a dot as decimal separator, for example 2.5.</source>
+          <target state="translated">Færibreytan '%1' hefur gildið '%2', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, is-IS=Færibreytan '%1' hefur gildið '%2', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType NumberFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 2239992694" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is %2, but it must be between %3 and %4.</source>
+          <target state="translated">Færibreytan '%1' er %2 en verður að vera á bilinu %3 til %4.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = value received, %3 = minimum, %4 = maximum, is-IS=Færibreytan '%1' er %2 en verður að vera á bilinu %3 til %4.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType RangeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2281736422 - NamedType 3255873965" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter '%1' is %2 characters long; the maximum is %3.</source>
+          <target state="translated">Færibreytan '%1' er %2 stafir; hámarkið er %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = actual length, %3 = maximum length, is-IS=Færibreytan '%1' er %2 stafir; hámarkið er %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType TooLongErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1472980933 - NamedType 199971095" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Parameter 'itemFilter' is '%1', which is not a valid filter: %2 Send an item number or a filter such as 1000..1999 or 19*.</source>
+          <target state="translated">Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1000..1999 eða 19*.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = filter received, %2 = platform error text, is-IS=Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1000..1999 eða 19*.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item List Impl - NamedType FilterErr</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 1498262926 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>My Bifrost App</source>
+          <target state="translated">Bifröst-appið mitt</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst-appið mitt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet MY BIFROST APP - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

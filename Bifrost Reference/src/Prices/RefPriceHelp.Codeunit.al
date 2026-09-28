@@ -26,6 +26,7 @@ codeunit 90020 "Ref Price Help"
         Help.AppendLine('2. When the user agrees: `Reference.ItemPrice.ApplyAdjustment` with the same');
         Help.AppendLine('   `itemCategoryCode` and `percent`, and this response''s `itemCount` as `expectedItemCount`.');
         Help.AppendLine('');
+        AppendIdentification(Help);
         AppendParameters(Help, false);
         Help.AppendLine('## Request example');
         Help.AppendLine('```json');
@@ -34,6 +35,10 @@ codeunit 90020 "Ref Price Help"
         Help.AppendLine('');
         AppendResponse(Help, false);
         AppendErrors(Help, false);
+        Help.AppendLine('## Safe retries / repeat');
+        Help.AppendLine('Read-only; safe to repeat. The same call gives the same result until prices or the items in');
+        Help.AppendLine('the category change.');
+        Help.AppendLine('');
         Help.AppendLine('## Permissions and side effects');
         Help.AppendLine('Needs read permission on Item. No side effects.');
         Help.AppendLine('');
@@ -61,6 +66,7 @@ codeunit 90020 "Ref Price Help"
         Help.AppendLine('2. This type, with the same `itemCategoryCode` and `percent`, and the preview''s');
         Help.AppendLine('   `itemCount` as `expectedItemCount`. If the selection changed, the call is refused.');
         Help.AppendLine('');
+        AppendIdentification(Help);
         AppendParameters(Help, true);
         Help.AppendLine('## Request example');
         Help.AppendLine('```json');
@@ -70,6 +76,12 @@ codeunit 90020 "Ref Price Help"
         Help.AppendLine('');
         AppendResponse(Help, true);
         AppendErrors(Help, true);
+        Help.AppendLine('## Safe retries / repeat');
+        Help.AppendLine('**Repeat has an effect:** a second identical call changes the prices again (+5 % twice is');
+        Help.AppendLine('about +10.25 %), because the item count is still the same. When unsure whether an earlier');
+        Help.AppendLine('call went through, run `Reference.ItemPrice.PreviewAdjustment` and compare `currentUnitPrice`');
+        Help.AppendLine('with the prices you saw before.');
+        Help.AppendLine('');
         Help.AppendLine('## Permissions and side effects');
         Help.AppendLine('Needs write permission on Item. The Item''s own OnValidate/OnModify logic runs for');
         Help.AppendLine('`Unit Price`, exactly as when a user edits it.');
@@ -78,6 +90,17 @@ codeunit 90020 "Ref Price Help"
         Help.AppendLine('## Related message types');
         Help.AppendLine('- `Reference.ItemPrice.PreviewAdjustment` - always call it first.');
         exit(Help.ToText());
+    end;
+
+    local procedure AppendIdentification(var Help: TextBuilder)
+    begin
+        Help.AppendLine('## Identifying the item category');
+        Help.AppendLine('`subject` is not used. The category is `itemCategoryCode` in the body (case-insensitive);');
+        Help.AppendLine('the items are every item in it that is not blocked.');
+        Help.AppendLine('');
+        Help.AppendLine('If it is not sent you get "Parameter ''itemCategoryCode'' is required"; if no category has');
+        Help.AppendLine('it you get "Item category ''X'' was not found" with your value.');
+        Help.AppendLine('');
     end;
 
     local procedure AppendParameters(var Help: TextBuilder; IsApply: Boolean)
@@ -125,7 +148,9 @@ codeunit 90020 "Ref Price Help"
         if IsApply then begin
             Help.AppendLine('| `Parameter ''expectedItemCount'' is required. Send it as a whole number, for example 12.` | Preview skipped. | Run the preview first and send its `itemCount`. |');
             Help.AppendLine('| `The selection changed since the preview: expected 4 items in category ''STÓLL'', found 5. ...` | Items were added, removed or blocked after the preview. | Run the preview again. |');
+            Help.AppendLine('| `Parameter ''expectedItemCount'' has the value ''four'', which is not a whole number. Send for example 12.` | Not a whole number. | Send the preview''s `itemCount` as a number. |');
         end;
+        Help.AppendLine('| `The request body must be a JSON object, for example { "accountNo": "2910" }.` | Body is an array or plain text. | Send a JSON object. |');
         Help.AppendLine('');
     end;
 
