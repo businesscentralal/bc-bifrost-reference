@@ -930,7 +930,7 @@ Verified against Bifrost Foundation 28.0 and against the apps in this repo. Only
 
 | Procedure | What Foundation does with it |
 |---|---|
-| `OnMessageCompleted(var Argument: Record "Message Argument ori")` | Called once after every successful call of the type, except `Help.*` and `Webhook.*` types. The argument carries the type, subject, request and response. It runs in its own transaction scope after the response is written, so it may write (a meter entry, a counter). An error in it is logged and rolls back only its own writes; the caller still gets the response. Never change the response here. |
+| `OnMessageCompleted(var Argument: Record "Message Argument ori")` | Called once after every successful call of the type. (Foundation skips metering for its own discovery types; your app's types, including your own `Help.*` type, are metered.) The argument carries the type, subject, request and response. It runs in its own transaction scope after the response is written, so it may write (a meter entry, a counter). An error in it is logged and rolls back only its own writes; the caller still gets the response. Never change the response here. |
 
 Foundation's `Default Metering ori` does nothing and is the default for every value. To meter your own types, write a codeunit that implements the interface and name it on your enum value: `Implementation = "Msg Interface ori" = "<your Impl>", "Msg Metering ori" = "<your Metering>";`. The hook does not change how Bifröst counts usage.
 
@@ -973,7 +973,7 @@ Procedures:
 | | `SetResponseText(ResponseText: Text)` and `SetResponseText(var ResponseTextBuilder: TextBuilder)` | Does not set a content type. Prefer the two above. |
 | | `SetResponsePdf(var TempBlob: Codeunit "Temp Blob")` | Content type `application/pdf`. |
 | Errors | `RespondWithError(ErrorMessage: Text)` | Answers `{"status":"Error","error":"<ErrorMessage>","hint":"…"}`. |
-| | `RespondWithLastError()` | Answers `{"status":"Error","error":"<GetLastErrorText()>","callstack":"…","hint":"…"}`. The call stack reaches the caller. This repo uses `RespondWithError(GetLastErrorText())` instead. |
+| | `RespondWithLastError()` | Answers `{"status":"Error","code":"BusinessCentralError","error":"<GetLastErrorText()>","hint":"…"}`. The call stack never reaches the caller; Foundation sends it to its own telemetry. This repo uses `RespondWithError(GetLastErrorText())`, which gives the same answer shape. |
 | Guards | `AssertVersion1()` | Raises an error unless the version is `1.0`. Call it first. |
 | | `AssertIsLicensed()` | Raises an error unless the call is marked licensed. Foundation checks the licence and quota before it calls `ExecuteBifrostTask` and marks every call it runs, so this only fails when the Impl is called outside Foundation. Foundation's own `Help.*` types don't call it, and neither do this repo's `Help.<App>.Get` types. Every other type calls it. |
 | | `IsLicensed(): Boolean` | The same flag, without the error. |
@@ -1016,7 +1016,7 @@ Verified against Foundation 28.0. The test caller in §5.8 does exactly this.
 | `Error()` raised in the type (a core rule inside the Process, `AssertVersion1`) | Nothing: with `OmitCommit` = true it is raised out of `Execute`. Test it with `asserterror` + `Assert.ExpectedError()`. | – |
 | Refused by Foundation before your type runs | `{"status":"Error","error":"…",…}` (below). | `text/json` |
 
-**Licence and quota.** `Help.*` types are never refused. Every other type needs the **Bifröst trial activated once in the environment**. Until it is, every call answers `{"status":"Error","error":"Bifrost trial has not been started. Send a Help.License.Sync message …","activationMethod":"Help.License.Sync",…}`, and every success assertion in a test fails with that text. Activate it by calling `Help.License.Sync` once, or on the Bifrost Setup page. In a SaaS **sandbox**, quotas are not enforced and the outbound-HTTP check is skipped, so after activation nothing else refuses a call. In production, a call can also be refused because outbound HTTP is off for Bifrost Foundation or because a monthly or prepaid quota is used up, each with its own `status = Error` answer. A successful call counts as one message in sandboxes too.
+**Licence and quota.** Foundation's own `Help.*` types are never refused. Every other type, including your app's own `Help.*` type, needs the **Bifröst trial activated once in the environment**. Until it is, every call answers `{"status":"Error","error":"Bifrost trial has not been started. Send a Help.License.Sync message …","activationMethod":"Help.License.Sync",…}`, and every success assertion in a test fails with that text. Activate it by calling `Help.License.Sync` once, or on the Bifrost Setup page. In a SaaS **sandbox**, quotas are not enforced and the outbound-HTTP check is skipped, so after activation nothing else refuses a call. In production, a call can also be refused because outbound HTTP is off for Bifrost Foundation or because a monthly or prepaid quota is used up, each with its own `status = Error` answer. A successful call counts as one message in sandboxes too.
 
 **The message row and the transaction.** Every call, `Execute` included, writes a row to the Bifröst message log before your type runs.
 
@@ -1313,7 +1313,7 @@ codeunit 50001 "My Hello Get Impl" implements "Msg Interface ori"
 
 `My Input` needs only `ReadRequest`, `GetOptionalText`, `ReadTextToken`, `TryGetRequestJson` and their Labels from §5.1 for this. Keep the Hello type in production: it is the first call after every publish.
 
-**The directory** (`Help.MyApp.Get`). Every app has exactly one. It answers `{ "format": "markdown", "markdown": "…" }`, calls no `AssertIsLicensed` (a `Help.*` type is never charged), and its own help has the eleven sections like any other.
+**The directory** (`Help.MyApp.Get`). Every app has exactly one. It answers `{ "format": "markdown", "markdown": "…" }`, calls no `AssertIsLicensed`, and its own help has the eleven sections like any other.
 
 ```al
 codeunit 50002 "My Help Get Impl" implements "Msg Interface ori"
@@ -1582,7 +1582,7 @@ codeunit 50052 "My Selection Card Lint"
 
 1. Download symbols from your sandbox (Bifrost Foundation, the base app, and for the test app also Library Assert and Test Runner). Compile with CodeCop, UICop and PerTenantExtensionCop or AppSourceCop.
 2. Publish the app, then the test app. Library Assert and Test Runner must be installed in the sandbox.
-3. Activate the Bifröst trial once in the environment (§5.7, "Licence and quota"). Until then, every call of a non-`Help.*` type answers "Bifrost trial has not been started", and `HelloGreetsByNameAndNamesTheApp` fails with that text.
+3. Activate the Bifröst trial once in the environment (§5.7, "Licence and quota"). Until then, every call of your app's types (including `Help.MyApp.Get`) answers "Bifrost trial has not been started", and `HelloGreetsByNameAndNamesTheApp` fails with that text.
 4. Run the tests (VS Code AL test runner, or the AL Test Tool page). The tests assert English texts: run them where the default language is English, or see §5.9.
 5. Call `MyApp.Hello.Get` over the API or MCP server. If `appVersion` is old, the new publish isn't live yet. Then `Help.MyApp.Get`.
 
