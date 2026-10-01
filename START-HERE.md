@@ -103,11 +103,11 @@ Message types are your app's public API. A procedure call reaches only AL code t
 
 ### Platform
 
-17. **Name types `Area.Entity.Verb`,** in words a user would say. The name is the strongest search signal, and callers in every language send it as it is.
-    - **Area** is your app's product area, one word (`Calibration`, `Fleet`, `Warranty`). Every type of the app uses the same Area, and it must be **yours alone**: never an area another app already uses (`Sales`, `Purchase`, `Data`, `Help`, `Document`, `Reference`, `Legacy` …). Two extensions can't add the same value name to `Message Type ori`, so check `Help.MessageTypes.Get` in your sandbox before you choose.
+17. **Name types `Capability.Entity.Verb`,** in words a user would say. The name is the strongest search signal, and callers in every language send it as it is.
+    - **Capability** is your app's product area, one word (`Calibration`, `Fleet`, `Warranty`). Most apps have one capability, and each must be **yours alone**: never a capability another app already uses. An app may own more than one (one per service it connects to, for example). Don't add types to someone else's capability (`Sales`, `Purchase`, `Data`, `Help`, `Document`, `Reference`, `Legacy` …). Two extensions can't add the same value name to `Message Type ori`, so check `Help.MessageTypes.Get` in your sandbox before you choose. An agent looks at the capabilities first and then at the types inside one, so a shared capability would mix two apps' types. The MCP server's tools call a capability a *domain* (`list_domains`, `describe_domains`).
     - **Entity** is the business object, singular (`Item.List`, not `Items.List`). A qualifier may follow it (`Item.Summary.Get`, `GLAccount.Overview.Get`). A filter such as "overdue" is a parameter, not part of the name.
     - **Verb** is the last segment. It may name what it acts on (`CancelReservation`, `ReleaseAll`, `PreviewAdjustment`).
-    - **The directory type** is `Help.<Area>.Get` (rule 21).
+    - **The directory type** is `Help.<Capability>.Get` (rule 21).
 
     | Verb | Effect | Meaning |
     |---|---|---|
@@ -122,12 +122,12 @@ Message types are your app's public API. A procedure call reaches only AL code t
     | `Apply…` | Commits | Carries out what a `Preview…` showed (§5.6). |
     | `Post` | Irreversible | Posts to ledgers. |
 
-    **The examples in this file use three example areas:** `Reference` (the types of this repository's `Bifrost Reference` app), `Legacy` (the `Legacy App` of §7) and `Contoso` (the §5.1–§5.4 code: the same `AssetMaintenance.Create` type as it would look in a partner's app). `MyApp` in §5.8 is the placeholder you replace with your own Area.
+    **The examples in this file use three example capabilities:** `Reference` (the types of this repository's `Bifrost Reference` app), `Legacy` (the `Legacy App` of §7) and `Contoso` (the §5.1–§5.4 code: the same `AssetMaintenance.Create` type as it would look in a partner's app). `MyApp` in §5.8 is the placeholder you replace with your own capability.
 
 18. **Register the app with `App Registry ori`,** even when it has no setup page and no secrets (pass 0 as the page). Foundation's setup wizard can only switch on outbound HTTP for apps it knows.
 19. **At most one action on Foundation's `Setup ori` page.** Your settings live on your own page.
 20. **Never show your own HTTP, credentials or setup notification.** Foundation aggregates them on Bifrost Setup for every registered app.
-21. **One `Help.<Area>.Get` directory type per app** (§5.8). Throughout this file, `Help.<App>.Get` means the same thing.
+21. **One `Help.<Capability>.Get` directory type per capability you own** (§5.8), so usually one per app. Throughout this file, `Help.<App>.Get` means the same thing.
 
 ### A note on personal data
 
@@ -154,7 +154,7 @@ Don't put everything in the description. Longer descriptions made agents hesitat
 ### Contract template
 
 ```
-Name:            Area.Entity.Verb           (the user's words; the strongest search signal)
+Name:            Capability.Entity.Verb           (the user's words; the strongest search signal)
 Effect:          Read-only | Commits | Rolled back | Irreversible
 User words:      how users say it, incl. synonyms (undo, fix, receive, totals …)
 Siblings:        similar types and how to tell them apart
@@ -584,7 +584,7 @@ enumextension 50100 "Contoso Msg Type" extends "Message Type ori"
 }
 ```
 
-The caption is `Locked = true` because callers in every locale send the same string. Never translate it. Value ids come from your own id range, like object ids; never renumber a published value. (`Contoso` is the example area of §5.1–§5.4, rule 17; use your own.)
+The caption is `Locked = true` because callers in every locale send the same string. Never translate it. Value ids come from your own id range, like object ids; never renumber a published value. (`Contoso` is the example capability of §5.1–§5.4, rule 17; use your own.)
 
 ### 5.3 The implementation: a write with validation and an isolated process
 
@@ -901,7 +901,7 @@ A type that receives a secret reads it into `SecretText`, runs its isolated stor
 **Also** (all three are printed in §5.8):
 
 - a **permission set** covering your tables: `tabledata <table> = RIMD` and `table <table> = X` for each one. Don't put `BIFROST API ori` in it; assign that next to yours (§5.7).
-- a **`Help.<Area>.Get`** type returning a Markdown table of your types with their effect. Keep that table in step with the enum; a test that looks for every type name in its answer is the cheapest guard.
+- a **`Help.<Capability>.Get`** type returning a Markdown table of your types with their effect. Keep that table in step with the enum; a test that looks for every type name in its answer is the cheapest guard.
 - the registration above.
 
 ### 5.6 Preview / apply pair (irreversible or bulk changes)
@@ -938,7 +938,7 @@ Foundation's `Default Metering ori` does nothing and is the default for every va
 
 | Enum | Values |
 |---|---|
-| `"Message Type ori"` (extensible) | Extend it: `value(<id>; "Area.Entity.Verb") { Caption = 'Area.Entity.Verb', Locked = true; Implementation = "Msg Interface ori" = "<your Impl codeunit>"; }` (§5.2). Metering needs no declaration: every value falls back to Foundation's default. |
+| `"Message Type ori"` (extensible) | Extend it: `value(<id>; "Capability.Entity.Verb") { Caption = 'Capability.Entity.Verb', Locked = true; Implementation = "Msg Interface ori" = "<your Impl codeunit>"; }` (§5.2). Metering needs no declaration: every value falls back to Foundation's default. |
 | `"Msg Direction ori"` | `Outbound` (0), `Inbound` (1), `Both` (2) |
 | `"Message Version ori"` | `"1.0"` (0), the only value |
 | `"Secret Scope ori"` (not extensible) | `Company` (0), `"Company And User"` (1) |
@@ -1079,7 +1079,7 @@ The posting-gate sets (`BIFROST GL Post ori`, `BIFROST ItemPost ori` …) matter
 
 This section is enough on its own to start path A. It is `Bifrost Boilerplate/` and `Bifrost Boilerplate Tests/` from this repository cut down to the Hello World and the directory type; those folders are the same thing ready to copy, with two more sample types (`MyApp.Item.Summary.Get`, a read; `MyApp.Item.List`, a capped list).
 
-**Replace before the first publish:** both `id` GUIDs (generate new ones), `name`, `publisher`, the id ranges (`50000–50049` and `50050–50099` are placeholders), the namespace `MyCompany.MyBifrostApp`, the object-name prefix `My`, and `MyApp` in every type name (your Area, rule 17).
+**Replace before the first publish:** both `id` GUIDs (generate new ones), `name`, `publisher`, the id ranges (`50000–50049` and `50050–50099` are placeholders), the namespace `MyCompany.MyBifrostApp`, the object-name prefix `My`, and `MyApp` in every type name (your capability, rule 17).
 
 ```text
 MyApp/
@@ -1883,7 +1883,7 @@ Each idea has the pattern it should follow and the trap to avoid. Fill in the co
 
 | Idea | Typical use | Pattern | Trap to avoid |
 |---|---|---|---|
-| **Document with lines** | Create a sales quote or service order with lines in one call | Validate the header and every line first. One isolated Process for header plus lines. Return the numbers. | A partial document when line 3 fails. Generic `Data.Records.Set` is blocked on line tables, so write lines in your own Process codeunit. |
+| **Document with lines** | Create a sales quote or service order with lines in one call | Validate the header and every line first. One isolated Process for header plus lines. Return the numbers. | A partial document when line 3 fails. Don't rely on generic `Data.Records.Set` for lines: the ChangeLog Write Guard blocks it in most tenants, and where the guard is open it bypasses the document's own checks. Write lines in your own Process codeunit. |
 | **Post a document** | Post an invoice your app created | A Check or PreviewPost type paired with Post. Irreversible. Name the permission set. | Base-app dialogs, unless you use `SetHideValidationDialog`. Posting flags left unset. |
 | **Long-running job** | Recalculate or import thousands of records | Queue it (`queues` endpoint), return a job id, add a `…Status.Get` type. | Timeouts on the synchronous `tasks` path. |
 | **Inbound webhook** | A payment provider or WMS calls BC | Inbound webhooks arrive through Foundation's `Webhook.Inbound.Receive` type, which raises `OnWebhookReceived` on `Webhook Inbound Events ori`. Subscribe, filter on source and event type, and set `Handled`. | Processing the same event twice. Make the handler idempotent. |
