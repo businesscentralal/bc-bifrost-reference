@@ -30,7 +30,7 @@ description: Build, extend or retrofit a Business Central AL app so its operatio
 4. **The use card:** help with all 11 sections. Errors are copied word for word from the Labels.
 5. **Platform:**
    - registration with the App Registry
-   - one `Help.<Area>.Get` directory type, and a Hello World type
+   - one `Help.<Capability>.Get` directory type, and a Hello World type
    - a permission set, with `IsEnabled` checking it
    - Icelandic comments on every Label, Caption and ToolTip (§5.9)
 6. **Tests** through `Dispatcher ori` (§5.8, §8):
