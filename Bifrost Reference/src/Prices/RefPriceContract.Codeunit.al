@@ -81,7 +81,7 @@ codeunit 90020 "Ref Price Contract"
             Errors.Add(ContractMgt.TextErrorEntry('Parameter ''expectedItemCount'' is required. Send it as a whole number, for example 12.', 'The preview was skipped.', 'Run Reference.ItemPrice.PreviewAdjustment first and send its itemCount.'));
             Errors.Add(ContractMgt.TextErrorEntry('The selection changed since the preview: expected {expected} items in category ''{code}'', found {actual}. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount.', 'Items were added, removed or blocked after the preview.', 'Run the preview again and show the user the new result.'));
         end;
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
     end;
 
     procedure Workflow() Result: JsonObject

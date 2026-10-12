@@ -139,7 +139,7 @@ codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori", "Msg Discove
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''tableName'' is {length} characters long; the maximum is 30.', 'tableName is longer than any table name.', 'Send the object name, at most 30 characters.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''tableName'' must be a single value (text or number), not an object or an array.', 'tableName is an object or an array.', 'Send it as text.'));
         Errors.Add(ContractMgt.TextErrorEntry('Table ''{tableName}'' was not found. Use the full object name with spaces, for example Sales Header, or list tables with Help.Tables.Get.', 'No table has that object name.', 'Check spelling and spaces, and use the English object name.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object with tableName.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object with tableName.'));
         exit(true);
     end;
 

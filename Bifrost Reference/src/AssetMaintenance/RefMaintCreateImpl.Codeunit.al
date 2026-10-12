@@ -196,7 +196,7 @@ codeunit 90013 "Ref Maint Create Impl" implements "Msg Interface ori", "Msg Disc
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''hours'' is {value}, but it must be between 0.25 and 24.', 'hours is out of range.', 'Send 0.25 to 24.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'A text is too long: description (100), externalId (50), assetNo (20).', 'Shorten it.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'A parameter is an object or an array.', 'Send a single value.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
         exit(true);
     end;
 

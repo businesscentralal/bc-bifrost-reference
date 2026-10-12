@@ -5,38 +5,39 @@ using Origo.Bifrost;
 /// <summary>
 /// Registers Legacy App's message types. The enum extension is the same whether the app is new
 /// or retrofitted; what differs in a retrofit is the implementation side (calling the app's own
-/// internal headless core), not this.
+/// internal headless core), not this. Each value maps one codeunit to all three interfaces:
+/// running the call, being found, and the use card (contract chapters).
 /// </summary>
 enumextension 90100 "Legacy Adapter Msg Type" extends "Message Type ori"
 {
     value(90100; "Legacy.Stock.Reserve")
     {
         Caption = 'Legacy.Stock.Reserve', Locked = true;
-        Implementation = "Msg Interface ori" = "Legacy Stock Reserve Impl";
+        Implementation = "Msg Interface ori" = "Legacy Stock Reserve Impl", "Msg Discovery ori" = "Legacy Stock Reserve Impl", "Msg Contract ori" = "Legacy Stock Reserve Impl";
     }
     value(90101; "Legacy.Stock.CancelReservation")
     {
         Caption = 'Legacy.Stock.CancelReservation', Locked = true;
-        Implementation = "Msg Interface ori" = "Legacy Cancel Reserve Impl";
+        Implementation = "Msg Interface ori" = "Legacy Cancel Reserve Impl", "Msg Discovery ori" = "Legacy Cancel Reserve Impl", "Msg Contract ori" = "Legacy Cancel Reserve Impl";
     }
     value(90102; "Legacy.Stock.Get")
     {
         Caption = 'Legacy.Stock.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Legacy Stock Get Impl";
+        Implementation = "Msg Interface ori" = "Legacy Stock Get Impl", "Msg Discovery ori" = "Legacy Stock Get Impl", "Msg Contract ori" = "Legacy Stock Get Impl";
     }
     value(90103; "Legacy.Stock.List")
     {
         Caption = 'Legacy.Stock.List', Locked = true;
-        Implementation = "Msg Interface ori" = "Legacy Stock List Impl";
+        Implementation = "Msg Interface ori" = "Legacy Stock List Impl", "Msg Discovery ori" = "Legacy Stock List Impl", "Msg Contract ori" = "Legacy Stock List Impl";
     }
     value(90104; "Legacy.Stock.ReleaseAll")
     {
         Caption = 'Legacy.Stock.ReleaseAll', Locked = true;
-        Implementation = "Msg Interface ori" = "Legacy Release All Impl";
+        Implementation = "Msg Interface ori" = "Legacy Release All Impl", "Msg Discovery ori" = "Legacy Release All Impl", "Msg Contract ori" = "Legacy Release All Impl";
     }
     value(90105; "Help.Legacy.Get")
     {
         Caption = 'Help.Legacy.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Legacy Help Get Impl";
+        Implementation = "Msg Interface ori" = "Legacy Help Get Impl", "Msg Discovery ori" = "Legacy Help Get Impl", "Msg Contract ori" = "Legacy Help Get Impl";
     }
 }

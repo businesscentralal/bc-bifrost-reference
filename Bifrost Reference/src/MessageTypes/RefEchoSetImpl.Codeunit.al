@@ -110,7 +110,7 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object, or no body.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body.'));
         exit(true);
     end;
 
@@ -158,7 +158,7 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
             '{"serverTime":"2026-09-18T10:15:30.123Z"}'));
         Examples.Add(ContractMgt.Example('The body is not an object',
             '{"type":"Reference.Echo.Get","data":["hello"]}',
-            '{"status":"Error","error":"The request body must be a JSON object, for example { \"accountNo\": \"2910\" }."}'));
+            '{"status":"Error","error":"The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }."}'));
         exit(true);
     end;
 

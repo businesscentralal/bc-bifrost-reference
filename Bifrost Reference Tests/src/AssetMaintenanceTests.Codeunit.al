@@ -94,8 +94,10 @@ codeunit 90152 "Asset Maintenance Tests"
     [Test]
     procedure HelpListsTheErrorTheTypeReallyReturns()
     begin
-        // The help is the agent's only guide: it must quote the real error text, not an old one.
-        Assert.IsTrue(Caller.GetHelp('Reference.AssetMaintenance.Create').Contains('YYYY-MM-DD'), 'The help should document the date format error.');
+        // The contract is the agent's only guide: its errors chapter must quote the real error text, not an old one.
+        Assert.IsTrue(
+            Caller.GetContractChapter(Enum::"Message Type ori"::"Reference.AssetMaintenance.Create", 'errors').Contains('which is not a date in the format YYYY-MM-DD'),
+            'The errors chapter should document the date format error.');
     end;
 
     local procedure CreateFixedAsset()

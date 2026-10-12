@@ -211,7 +211,7 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''fromDate'' is {fromDate}, which is after ''asOfDate'' {asOfDate}. Send a fromDate on or before the asOfDate, or leave fromDate out to get the balance only.', 'The period ends before it starts.', 'Swap the dates, or leave fromDate out.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'accountNo, asOfDate or fromDate is an object or an array.', 'Send it as text.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'accountNo is longer than 20 characters, or a date longer than 30.', 'Send the account number, or the date as YYYY-MM-DD.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
         exit(true);
     end;
 

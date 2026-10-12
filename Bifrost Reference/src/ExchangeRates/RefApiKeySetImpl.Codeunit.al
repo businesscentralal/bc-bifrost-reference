@@ -81,7 +81,7 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'Store the API key the exchange rate service uses, in the Bifrost secret store. The key is never returned. To get a rate, use Reference.ExchangeRate.Get.', Comment = 'is-IS=Vista API-lykilinn sem gengisþjónustan notar í leyndarmálageymslu Bifrastar. Lyklinum er aldrei skilað. Til að fá gengi, notaðu Reference.ExchangeRate.Get.';
+        SelectionLbl: Label 'Store the API key the exchange rate service uses, in the Bifrost secret store. The key is never returned. For integrations, not chats: a person enters the key in Bifrost Setup > Apps. To get a rate, use Reference.ExchangeRate.Get.', Comment = 'is-IS=Vista API-lykilinn sem gengisþjónustan notar í leyndarmálageymslu Bifrastar. Lyklinum er aldrei skilað. Fyrir samþættingar, ekki spjall: fólk slær lykilinn inn í Bifrost Setup > Apps. Til að fá gengi, notaðu Reference.ExchangeRate.Get.';
     begin
         exit(SelectionLbl);
     end;
@@ -141,7 +141,7 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''apiKey'' is empty. Send a value, for example "your-key".', 'apiKey is an empty string.', 'Send the key.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''apiKey'' is {length} characters long; the maximum is 500.', 'apiKey is too long.', 'Check that you send the key only.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''apiKey'' must be a single value (text or number), not an object or an array.', 'apiKey is an object or an array.', 'Send it as text.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
         exit(true);
     end;
 
@@ -198,7 +198,8 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The key is stored in the Bifrost secret store (Foundation''s Secret Store ori), never in a table of this app, and is never returned by any message type: not in this response, not in errors, not in the setup page. ' +
+        Notes := 'For an integration or a setup script, not for a chat. An AI assistant must not ask a person to type or paste a key into the conversation: the conversation goes to the assistant''s provider. Send the person to Bifrost Setup > Apps instead, where they enter the key themselves. ' +
+            'The key is stored in the Bifrost secret store (Foundation''s Secret Store ori), never in a table of this app, and is never returned by any message type: not in this response, not in errors, not in the setup page. ' +
             'The request body is redacted in the Bifrost message log on every path, errors included, so the key is not kept there in plain text. ' +
             'Safe to repeat: the same key is stored again and the answer is "stored": true; a different key replaces the first. The key is stored for the current company only.';
         exit(true);

@@ -161,7 +161,7 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Dis
         Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service at {baseUrl} could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup > Start setup wizard).', 'No network, or outbound HTTP is blocked for this app. The platform''s reason may follow as " Details: {details}".', 'Run the Bifrost Setup Wizard and enable HTTP for Bifrost Reference.'));
         Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service answered HTTP {status} for {from} to {to}. Check that both are ISO currency codes the service supports (for example EUR, USD, ISK).', 'The service does not know one of the currencies, or failed.', 'Use a currency the service supports.'));
         Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service returned an answer without a rate for {to}. Try again later, or check Rates Base URL on the Bifrost Reference Setup page.', 'The service gave an unexpected answer.', 'Try again later, or check Rates Base URL.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
         exit(true);
     end;
 

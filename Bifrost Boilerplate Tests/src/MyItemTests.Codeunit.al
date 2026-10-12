@@ -61,6 +61,16 @@ codeunit 50052 "My Item Tests"
     end;
 
     [Test]
+    procedure ContractQuotesTheErrorTheTypeReallyReturns()
+    begin
+        // The contract is the agent's only guide: its errors chapter must quote the real error text
+        // from My Input, not an old one. Change the Label and the chapter together.
+        Assert.IsTrue(
+            Caller.GetContractChapter(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", 'errors').Contains('which is not a date in the format YYYY-MM-DD'),
+            'The errors chapter should document the date format error.');
+    end;
+
+    [Test]
     procedure ListIsCappedAndSaysThereIsMore()
     var
         Response: JsonObject;
