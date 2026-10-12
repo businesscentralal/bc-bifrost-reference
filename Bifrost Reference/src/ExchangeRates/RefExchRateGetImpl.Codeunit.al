@@ -7,7 +7,7 @@ using Origo.Bifrost;
 /// Shows: input validation before any network call, the HTTP client isolated in its own
 /// codeunit, an optional secret, and failures that tell the caller what to fix.
 /// </summary>
-codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori"
+codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -38,13 +38,6 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori"
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit(Enum::"Msg Direction ori"::Outbound);
-    end;
-
-    procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
-    var
-        Help: Codeunit "Ref Exch Rate Help";
-    begin
-        Argument.SetResponseMarkdown(Help.GetExchangeRateHelp());
     end;
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
@@ -85,6 +78,144 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori"
             ResponseJson.Add('rateDate', Format(RateDate, 0, 9));
         ResponseJson.Add('source', SourceTxt);
         Argument.SetResponseJson(ResponseJson);
+    end;
+
+    // ---------- Msg Discovery ori ----------
+
+    procedure GetKeywords(): Text
+    var
+        KeywordsLbl: Label 'exchange rate, euro to krona, currency rate today, convert currency, how many krona for a euro, ECB rate', Comment = 'is-IS=gengi, evra í krónur, gengi gjaldmiðils í dag, umreikna gjaldmiðil, hvað kostar evran, gengi Seðlabanka Evrópu';
+    begin
+        exit(KeywordsLbl);
+    end;
+
+    procedure GetSelectionDescription(): Text
+    var
+        SelectionLbl: Label 'Today''s reference rate between two currencies from an external service (European Central Bank data). Calls the internet; writes nothing. For Business Central''s own Currency Exchange Rate table, use Data.Records.Get.', Comment = 'is-IS=Viðmiðunargengi dagsins milli tveggja gjaldmiðla frá ytri þjónustu (gögn Seðlabanka Evrópu). Kallar á netið; skrifar ekkert. Fyrir töfluna Currency Exchange Rate í Business Central, notaðu Data.Records.Get.';
+    begin
+        exit(SelectionLbl);
+    end;
+
+    // ---------- Msg Contract ori ----------
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := 'Returns the latest reference exchange rate between two currencies from an external service (European Central Bank data, published once per working day). Makes one outbound HTTPS call; writes nothing in Business Central. ' +
+            'Not for Business Central''s own Currency Exchange Rate table (read that with Data.Records.Get), and not for historical rates.';
+        exit(true);
+    end;
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    var
+        Subject: JsonObject;
+    begin
+        Subject.Add('use', 'notUsed');
+        Subject.Add('description', 'The currencies are from and to in data.');
+        Envelope.Add('subject', Subject);
+        Envelope.Add('dataRequired', true);
+        Envelope.Add('version', '1.0');
+        Envelope.Add('contentType', 'text/json');
+        exit(true);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Parameters.Add(ContractMgt.Parameter('from', 'string', true, 'A 3-letter ISO currency code, for example EUR. Case-insensitive.'));
+        Parameters.Add(ContractMgt.Parameter('to', 'string', true, 'A 3-letter ISO currency code, different from from, for example ISK. Case-insensitive.'));
+        exit(true);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Fields: JsonArray;
+    begin
+        Fields.Add(ContractMgt.ResponseField('from', 'string', 'The from currency, in upper case.'));
+        Fields.Add(ContractMgt.ResponseField('to', 'string', 'The to currency, in upper case.'));
+        Fields.Add(ContractMgt.ResponseField('rate', 'number', '1 from = rate to.'));
+        Fields.Add(ContractMgt.ResponseField('rateDate', 'string', 'The day the rate was published, YYYY-MM-DD. Can be a few days before today around weekends and holidays. Left out when the service sends no date.'));
+        Fields.Add(ContractMgt.ResponseField('source', 'string', 'Where the rate comes from.'));
+        Response.Add('contentType', 'text/json');
+        Response.Add('fields', Fields);
+        exit(true);
+    end;
+
+    /// <summary>Error texts are verbatim from the Labels in this codeunit, Ref Rates Client and Ref Input.</summary>
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is required. Send it as text, for example "EUR".', 'from or to is missing.', 'Send both from and to.'));
+        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is empty. Send a value, for example "EUR".', 'from or to is an empty string.', 'Send a currency code.'));
+        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is 10.', 'from or to is far too long to be a currency code.', 'Send a 3-letter code.'));
+        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'from or to is an object or an array.', 'Send a 3-letter code as text.'));
+        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is ''{value}''. Send a 3-letter ISO currency code, for example EUR or ISK.', 'from or to is not three letters, for example EURO.', 'Use ISO currency codes.'));
+        Errors.Add(ContractMgt.TextErrorEntry('Parameters ''from'' and ''to'' are both {currency}. Send two different currencies.', 'The same currency on both sides.', 'Send two different codes.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service at {baseUrl} could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup > Start setup wizard).', 'No network, or outbound HTTP is blocked for this app. The platform''s reason may follow as " Details: {details}".', 'Run the Bifrost Setup Wizard and enable HTTP for Bifrost Reference.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service answered HTTP {status} for {from} to {to}. Check that both are ISO currency codes the service supports (for example EUR, USD, ISK).', 'The service does not know one of the currencies, or failed.', 'Use a currency the service supports.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service returned an answer without a rate for {to}. Try again later, or check Rates Base URL on the Bifrost Reference Setup page.', 'The service gave an unexpected answer.', 'Try again later, or check Rates Base URL.'));
+        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "accountNo": "2910" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        exit(true);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    var
+        Preconditions: JsonArray;
+    begin
+        Effect.Add('effect', 'read');
+        Effect.Add('changes', 'Nothing in Business Central. Makes one outbound HTTPS GET to the configured rates service, which gives up after 15 seconds.');
+        Effect.Add('idempotent', true);
+        Preconditions.Add('The caller can read Ref Setup (it holds the service URL); without it the type is not offered.');
+        Preconditions.Add('Outbound HTTP is allowed for Bifrost Reference.');
+        Effect.Add('preconditions', Preconditions);
+        exit(true);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Related.Add(ContractMgt.RelatedEntry('Reference.ApiKey.Set', 'The configured service needs an API key; the default service does not.'));
+        Related.Add(ContractMgt.RelatedEntry('Data.Records.Get', 'You want the rates stored in Business Central (table Currency Exchange Rate).'));
+        exit(true);
+    end;
+
+    /// <summary>Standalone; Reference.ApiKey.Set first only when the service needs a key.</summary>
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+    begin
+        Examples.Add(ContractMgt.Example('Euro to krona',
+            '{"type":"Reference.ExchangeRate.Get","data":{"from":"EUR","to":"ISK"}}',
+            '{"from":"EUR","to":"ISK","rate":136.6,"rateDate":"2026-09-25","source":"European Central Bank reference rates via the configured rates service"}'));
+        Examples.Add(ContractMgt.Example('Not a currency code',
+            '{"type":"Reference.ExchangeRate.Get","data":{"from":"EUR","to":"EURO"}}',
+            '{"status":"Error","error":"Parameter ''to'' is ''EURO''. Send a 3-letter ISO currency code, for example EUR or ISK."}'));
+        exit(true);
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Notes := 'Safe to repeat; the rate changes only when the service publishes a new one. If an API key is stored (see Reference.ApiKey.Set), it is sent in the X-Api-Key header and never appears in the response or in error texts. ' +
+            'Currency codes are returned in upper case; rate is a JSON number with a dot as decimal separator. Error texts follow lcid when a translation is installed.';
+        exit(true);
     end;
 
     local procedure ReadCurrency(var Argument: Record "Message Argument ori"; var RefInput: Codeunit "Ref Input"; RequestJson: JsonObject; KeyName: Text; var CurrencyCode: Code[3]): Boolean
