@@ -17,24 +17,24 @@ enumextension 50000 "My Msg Type" extends "Message Type ori"
     value(50003; "MyApp.Hello.Get")
     {
         Caption = 'MyApp.Hello.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "My Hello Get Impl";
+        Implementation = "Msg Interface ori" = "My Hello Get Impl", "Msg Contract ori" = "My Hello Get Impl";
     }
     // Read: a record resolved from subject, an optional date, FlowFields, nulls. See src/Items.
     value(50000; "MyApp.ItemSummary.Get")
     {
         Caption = 'MyApp.ItemSummary.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "My Item Summary Impl";
+        Implementation = "Msg Interface ori" = "My Item Summary Impl", "Msg Contract ori" = "My Item Summary Impl";
     }
     // Capped list: optional filter, count, returned, more. See src/Items.
     value(50001; "MyApp.Item.List")
     {
         Caption = 'MyApp.Item.List', Locked = true;
-        Implementation = "Msg Interface ori" = "My Item List Impl";
+        Implementation = "Msg Interface ori" = "My Item List Impl", "Msg Contract ori" = "My Item List Impl";
     }
     // The app's directory type. Every Bifröst app has exactly one.
     value(50002; "Help.MyApp.Get")
     {
         Caption = 'Help.MyApp.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "My Help Get Impl";
+        Implementation = "Msg Interface ori" = "My Help Get Impl", "Msg Contract ori" = "My Help Get Impl";
     }
 }

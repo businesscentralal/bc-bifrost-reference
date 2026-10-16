@@ -9,7 +9,7 @@ using Origo.Bifrost;
 /// rename; the codeunit keeps its object name so the object ID and file stay stable.
 /// </summary>
 /// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
-codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
+codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -33,7 +33,85 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
         exit(Enum::"Msg Direction ori"::Outbound);
     end;
 
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    begin
+        Clear(Envelope);
+        exit(false);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        Clear(Target);
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    begin
+        Clear(Parameters);
+        exit(false);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    begin
+        Clear(Response);
+        exit(false);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    begin
+        Clear(Errors);
+        exit(false);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    begin
+        Clear(Effect);
+        exit(false);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        Clear(Metering);
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    begin
+        Clear(Related);
+        exit(false);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        Clear(Workflow);
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    begin
+        Clear(Examples);
+        exit(false);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    begin
+        Overview := HelpMarkdown();
+        exit(Overview <> '');
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Clear(Notes);
+        exit(false);
+    end;
+
     procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
+    begin
+        Argument.SetResponseMarkdown(HelpMarkdown());
+    end;
+
+    local procedure HelpMarkdown() Markdown: Text
     var
         HelpText: TextBuilder;
     begin
@@ -96,8 +174,9 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori"
         HelpText.AppendLine('## Related message types');
         HelpText.AppendLine('- `Reference.Table.Get` - a read that can fail, returning a structured error.');
         HelpText.AppendLine('- `Reference.Note.Add` - a write with a duplicate-key failure path.');
-        Argument.SetResponseMarkdown(HelpText.ToText());
+        Markdown := HelpText.ToText();
     end;
+
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var

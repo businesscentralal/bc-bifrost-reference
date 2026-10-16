@@ -14,24 +14,24 @@ enumextension 90000 "Ref Msg Type" extends "Message Type ori"
     value(90000; "Reference.Echo.Get")
     {
         Caption = 'Reference.Echo.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Echo Set Impl";
+        Implementation = "Msg Interface ori" = "Ref Echo Set Impl", "Msg Contract ori" = "Ref Echo Set Impl";
     }
     value(90001; "Reference.Table.Get")
     {
         Caption = 'Reference.Table.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Table Get Impl";
+        Implementation = "Msg Interface ori" = "Ref Table Get Impl", "Msg Contract ori" = "Ref Table Get Impl";
     }
     value(90002; "Reference.Note.Add")
     {
         Caption = 'Reference.Note.Add', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Note Add Impl";
+        Implementation = "Msg Interface ori" = "Ref Note Add Impl", "Msg Contract ori" = "Ref Note Add Impl";
     }
     // The app's directory type. Every Bifröst app has one Help.<App>.Get so a caller can learn
     // what the app adds without walking the whole catalogue.
     value(90003; "Help.Reference.Get")
     {
         Caption = 'Help.Reference.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Help Get Impl";
+        Implementation = "Msg Interface ori" = "Ref Help Get Impl", "Msg Contract ori" = "Ref Help Get Impl";
     }
     // Read: a record resolved from subject, optional dates, FlowFields, nulls. See src/GLAccounts.
     // Ordinals 90004 and 90005 were renamed when the samples moved off personal data (GDPR):
@@ -39,34 +39,34 @@ enumextension 90000 "Ref Msg Type" extends "Message Type ori"
     value(90004; "Reference.GLAccountOverview.Get")
     {
         Caption = 'Reference.GLAccountOverview.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref GLAcc Overview Impl";
+        Implementation = "Msg Interface ori" = "Ref GLAcc Overview Impl", "Msg Contract ori" = "Ref GLAcc Overview Impl";
     }
     // Write: validated input, isolated write, safe retry. See src/AssetMaintenance.
     value(90005; "Reference.AssetMaintenance.Create")
     {
         Caption = 'Reference.AssetMaintenance.Create', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Maint Create Impl";
+        Implementation = "Msg Interface ori" = "Ref Maint Create Impl", "Msg Contract ori" = "Ref Maint Create Impl";
     }
     // Preview / apply pair for an irreversible bulk change. See src/Prices.
     value(90006; "Reference.ItemPrice.PreviewAdjustment")
     {
         Caption = 'Reference.ItemPrice.PreviewAdjustment', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Price Preview Impl";
+        Implementation = "Msg Interface ori" = "Ref Price Preview Impl", "Msg Contract ori" = "Ref Price Preview Impl";
     }
     value(90007; "Reference.ItemPrice.ApplyAdjustment")
     {
         Caption = 'Reference.ItemPrice.ApplyAdjustment', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Price Apply Impl";
+        Implementation = "Msg Interface ori" = "Ref Price Apply Impl", "Msg Contract ori" = "Ref Price Apply Impl";
     }
     // External HTTP call with an optional secret, and a type that receives a secret. See src/ExchangeRates.
     value(90008; "Reference.ExchangeRate.Get")
     {
         Caption = 'Reference.ExchangeRate.Get', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Exch Rate Get Impl";
+        Implementation = "Msg Interface ori" = "Ref Exch Rate Get Impl", "Msg Contract ori" = "Ref Exch Rate Get Impl";
     }
     value(90009; "Reference.ApiKey.Set")
     {
         Caption = 'Reference.ApiKey.Set', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Api Key Set Impl";
+        Implementation = "Msg Interface ori" = "Ref Api Key Set Impl", "Msg Contract ori" = "Ref Api Key Set Impl";
     }
 }

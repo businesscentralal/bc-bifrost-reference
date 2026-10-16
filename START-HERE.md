@@ -923,7 +923,7 @@ Verified against Bifrost Foundation 28.0 and against the apps in this repo. Only
 | `GetFilterTableNo(): Integer` | Listed as `filterTableNo` in `Help.MessageTypes.Get`. Return 0 when no table applies. |
 | `GetDescription(): Text[250]` | The selection card. Shown and searched in listings. |
 | `GetMessageDirection(): Enum "Msg Direction ori"` | Listed as `messageDirection`. |
-| `GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")` | Called by `Help.Implementation.Get`. Set the help with `Argument.SetResponseMarkdown(...)`. |
+| `GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")` | Not a member of the interface on Foundation 28.0.4. `Help.Implementation.Get` reads `"Msg Contract ori"` instead. These examples keep the eleven-section markdown and return it from `GetOverview`. Opt in on the enum value with `"Msg Contract ori" = "<your Impl>"`. |
 | `ExecuteBifrostTask(var Argument: Record "Message Argument ori")` | Runs the call. No return value: the answer is whatever you set on `Argument`. |
 
 #### Interface `"Msg Metering ori"` (advanced, optional)
@@ -1059,7 +1059,7 @@ Verified against Foundation 28.0. The test caller in §5.8 does exactly this.
 
 | Type | Call with | Returns |
 |---|---|---|
-| `Help.Implementation.Get` | `subject` = the type name, e.g. `Contoso.AssetMaintenance.Create` | The type's help document (`text/markdown`), from its `GetMessageHelpAsMarkdownDocument`. An empty or unknown subject raises an error, not a `status = Error` answer. |
+| `Help.Implementation.Get` | `subject` = the type name, e.g. `Reference.AssetMaintenance.Create` | On Foundation 28.0.4 the answer is the type's `Msg Contract ori` chapters. These examples return the eleven-section markdown from `GetOverview`. An empty or unknown subject raises an error, not a `status = Error` answer. |
 | `Help.MessageTypes.Get` | optional `subject` = one type name. Optional body `{ "onlyEnabled": true }` | `{"status":"Success","usage":"…","result":[{"name","isEnabled","filterTableNo","description","messageDirection"}]}`. This is the metadata, not the help. |
 | `Data.Records.Get` | body `{ "tableName": "<table object name>" }` or `{ "tableNumber": 50104 }` | Records of any normal table, your own extension tables included (Foundation blocks only its own internal tables and security tables). The caller needs read permission on the table. |
 

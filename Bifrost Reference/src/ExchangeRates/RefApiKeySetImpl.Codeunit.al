@@ -10,7 +10,7 @@ using Origo.Bifrost;
 /// key would sit there in plain text indefinitely. The value is held as SecretText from the
 /// moment it is read and is stored only through Secret Store ori.
 /// </summary>
-codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori"
+codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Contract ori"
 {
     Access = Internal;
 
@@ -35,6 +35,81 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori"
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit(Enum::"Msg Direction ori"::Inbound);
+    end;
+
+
+    procedure GetEnvelope(var Envelope: JsonObject): Boolean
+    begin
+        Clear(Envelope);
+        exit(false);
+    end;
+
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        Clear(Target);
+        exit(false);
+    end;
+
+    procedure GetParameters(var Parameters: JsonArray): Boolean
+    begin
+        Clear(Parameters);
+        exit(false);
+    end;
+
+    procedure GetResponse(var Response: JsonObject): Boolean
+    begin
+        Clear(Response);
+        exit(false);
+    end;
+
+    procedure GetErrors(var Errors: JsonArray): Boolean
+    begin
+        Clear(Errors);
+        exit(false);
+    end;
+
+    procedure GetEffect(var Effect: JsonObject): Boolean
+    begin
+        Clear(Effect);
+        exit(false);
+    end;
+
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        Clear(Metering);
+        exit(false);
+    end;
+
+    procedure GetRelated(var Related: JsonArray): Boolean
+    begin
+        Clear(Related);
+        exit(false);
+    end;
+
+    procedure GetWorkflow(var Workflow: JsonObject): Boolean
+    begin
+        Clear(Workflow);
+        exit(false);
+    end;
+
+    procedure GetExamples(var Examples: JsonArray): Boolean
+    begin
+        Clear(Examples);
+        exit(false);
+    end;
+
+    procedure GetOverview(var Overview: Text): Boolean
+    var
+        Help: Codeunit "Ref Exch Rate Help";
+    begin
+        Overview := Help.GetApiKeyHelp();
+        exit(Overview <> '');
+    end;
+
+    procedure GetNotes(var Notes: Text): Boolean
+    begin
+        Clear(Notes);
+        exit(false);
     end;
 
     procedure GetMessageHelpAsMarkdownDocument(var Argument: Record "Message Argument ori")
