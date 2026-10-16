@@ -113,7 +113,7 @@ Copy both folders, then follow the 10-step rename checklist in `Bifrost Boilerpl
 
 ## Message type names
 
-Every message type name has exactly three dot-separated parts: `Domain.Entity.Action`. Two parts, or four or more, are not allowed. When a name needs more words, join them inside one part: `MyApp.ItemSummary.Get`, not `MyApp.Item.Summary.Get`; `Reference.GLAccountOverview.Get`, not `Reference.GLAccount.Overview.Get`. The same rule is in [`AGENTS.md`](AGENTS.md) and in [`START-HERE.md`](START-HERE.md) rule 17.
+Every message type name has exactly three dot-separated parts: `Domain.Entity.Action`. Two parts, or four or more, are not allowed. When a name needs more words, join them inside one part: `MyApp.ItemSummary.Get`, not `MyApp.Item.Summary.Get`; `Reference.GLAccountOverview.Get`, not `Reference.GLAccount.Overview.Get`. The same rule is in [`AGENTS.md`](AGENTS.md) and in [`START-HERE.md`](START-HERE.md) rule 17. `tools/Test-MessageTypeNames.ps1` checks the shipped apps. Test apps are exempt.
 
 ## Object ID ranges
 

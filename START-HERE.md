@@ -108,6 +108,7 @@ Message types are your app's public API. A procedure call reaches only AL code t
     - **Entity** is one part: the business object, singular (`Item`, not `Items`). When the object needs more than one word, join them in that same part (`ItemSummary`, `GLAccountOverview`). Do not add another dot. A filter such as "overdue" is a parameter, not part of the name. The samples are `MyApp.ItemSummary.Get` and `Reference.GLAccountOverview.Get`.
     - **Verb** is the last segment. It may name what it acts on (`CancelReservation`, `ReleaseAll`, `PreviewAdjustment`).
     - **The directory type** is `Help.<Capability>.Get` (rule 21).
+    - **The guard** is `tools/Test-MessageTypeNames.ps1`, copied from Foundation (core #1037). It reads `Bifrost Boilerplate`, `Bifrost Reference` and `Legacy App v2 (headless)` only. Test apps are exempt. Legacy App v1 declares no message types.
 
     | Verb | Effect | Meaning |
     |---|---|---|
