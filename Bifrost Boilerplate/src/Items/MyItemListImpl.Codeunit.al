@@ -36,7 +36,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori"
     procedure GetDescription(): Text[250]
     begin
         // TODO: rewrite the selection card for your own type (at most 250 characters; say "Read-only" for an Outbound type).
-        exit('List items, all or by number filter, with the total count (max 100 rows; more says when there are others). Read-only. Blocked items only on request. For one item''s price and inventory use MyApp.Item.Summary.Get.');
+        exit('List items, all or by number filter, with the total count (max 100 rows; more says when there are others). Read-only. Blocked items only on request. For one item''s price and inventory use MyApp.ItemSummary.Get.');
     end;
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"

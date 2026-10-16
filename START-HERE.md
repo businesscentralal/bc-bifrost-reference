@@ -103,9 +103,9 @@ Message types are your app's public API. A procedure call reaches only AL code t
 
 ### Platform
 
-17. **Name types `Capability.Entity.Verb`,** in words a user would say. The name is the strongest search signal, and callers in every language send it as it is.
-    - **Capability** is your app's product area, one word (`Calibration`, `Fleet`, `Warranty`). Most apps have one capability, and each must be **yours alone**: never a capability another app already uses. An app may own more than one (one per service it connects to, for example). Don't add types to someone else's capability (`Sales`, `Purchase`, `Data`, `Help`, `Document`, `Reference`, `Legacy` …). Two extensions can't add the same value name to `Message Type ori`, so check `Help.MessageTypes.Get` in your sandbox before you choose. An agent looks at the capabilities first and then at the types inside one, so a shared capability would mix two apps' types. The MCP server's tools call a capability a *domain* (`list_domains`, `describe_domains`).
-    - **Entity** is the business object, singular (`Item.List`, not `Items.List`). A qualifier may follow it (`Item.Summary.Get`, `GLAccount.Overview.Get`). A filter such as "overdue" is a parameter, not part of the name.
+17. **Name types with exactly three dot-separated parts, `Domain.Entity.Action`** (the same shape as `Capability.Entity.Verb`), in words a user would say. Two parts, or four or more, are not allowed. The name is the strongest search signal, and callers in every language send it as it is.
+    - **Domain** (the capability) is your app's product area, one word (`Calibration`, `Fleet`, `Warranty`). Most apps have one capability, and each must be **yours alone**: never a capability another app already uses. An app may own more than one (one per service it connects to, for example). Don't add types to someone else's capability (`Sales`, `Purchase`, `Data`, `Help`, `Document`, `Reference`, `Legacy` …). Two extensions can't add the same value name to `Message Type ori`, so check `Help.MessageTypes.Get` in your sandbox before you choose. An agent looks at the capabilities first and then at the types inside one, so a shared capability would mix two apps' types. The MCP server's tools call a capability a *domain* (`list_domains`, `describe_domains`).
+    - **Entity** is one part: the business object, singular (`Item`, not `Items`). When the object needs more than one word, join them in that same part (`ItemSummary`, `GLAccountOverview`). Do not add another dot. A filter such as "overdue" is a parameter, not part of the name. The samples are `MyApp.ItemSummary.Get` and `Reference.GLAccountOverview.Get`.
     - **Verb** is the last segment. It may name what it acts on (`CancelReservation`, `ReleaseAll`, `PreviewAdjustment`).
     - **The directory type** is `Help.<Capability>.Get` (rule 21).
 
@@ -154,7 +154,7 @@ Don't put everything in the description. Longer descriptions made agents hesitat
 ### Contract template
 
 ```
-Name:            Capability.Entity.Verb           (the user's words; the strongest search signal)
+Name:            Domain.Entity.Action             (exactly three parts; the user's words; the strongest search signal)
 Effect:          Read-only | Commits | Rolled back | Irreversible
 User words:      how users say it, incl. synonyms (undo, fix, receive, totals …)
 Siblings:        similar types and how to tell them apart
@@ -275,7 +275,7 @@ The resulting selection card:
 
 > Log maintenance work on a fixed asset (machine, vehicle): date, hours and a short note. Commits; safe to retry with the same externalId. Not for FA ledger entries, depreciation or posting maintenance costs.
 
-The resulting use card is the help codeunit in `Bifrost Reference/src/AssetMaintenance/` (the same shape as §5.4). The read sibling, `Reference.GLAccount.Overview.Get`, has this selection card:
+The resulting use card is the help codeunit in `Bifrost Reference/src/AssetMaintenance/` (the same shape as §5.4). The read sibling, `Reference.GLAccountOverview.Get`, has this selection card:
 
 > Get a G/L account's balance as of a date, and its net change for a period: e.g. "what is on account 2910 at the end of August". Read-only. Account by subject (No. or SystemId). For the entries themselves use Data.Records.Get on G/L Entry.
 
@@ -787,7 +787,7 @@ That is intended: one rule, one text, two transports. The help lists the text on
 
 A type may call a core procedure directly, without a Process, only when that procedure raises no error the caller must see (§7.2).
 
-**A read** follows the same shape with direction `Outbound`, `IsEnabled` returning `ReadPermission()`, no Process codeunit, and `SetLoadFields` before resolving. For FlowFields "as of" a date, set `"Date Filter"` and use the fields that honour it: on a G/L account, `"Balance at Date"` (filter `..asOfDate`) and `"Net Change"` (filter `fromDate..asOfDate`). `Balance` ignores the date filter. `Reference.GLAccount.Overview.Get` does exactly this and answers `netChange: null` when no `fromDate` was sent.
+**A read** follows the same shape with direction `Outbound`, `IsEnabled` returning `ReadPermission()`, no Process codeunit, and `SetLoadFields` before resolving. For FlowFields "as of" a date, set `"Date Filter"` and use the fields that honour it: on a G/L account, `"Balance at Date"` (filter `..asOfDate`) and `"Net Change"` (filter `fromDate..asOfDate`). `Balance` ignores the date filter. `Reference.GLAccountOverview.Get` does exactly this and answers `netChange: null` when no `fromDate` was sent.
 
 ### 5.4 The help codeunit (the use card)
 
@@ -1077,7 +1077,7 @@ The posting-gate sets (`BIFROST GL Post ori`, `BIFROST ItemPost ori` …) matter
 
 ### 5.8 A minimal new app, complete
 
-This section is enough on its own to start path A. It is `Bifrost Boilerplate/` and `Bifrost Boilerplate Tests/` from this repository cut down to the Hello World and the directory type; those folders are the same thing ready to copy, with two more sample types (`MyApp.Item.Summary.Get`, a read; `MyApp.Item.List`, a capped list).
+This section is enough on its own to start path A. It is `Bifrost Boilerplate/` and `Bifrost Boilerplate Tests/` from this repository cut down to the Hello World and the directory type; those folders are the same thing ready to copy, with two more sample types (`MyApp.ItemSummary.Get`, a read; `MyApp.Item.List`, a capped list).
 
 **Replace before the first publish:** both `id` GUIDs (generate new ones), `name`, `publisher`, the id ranges (`50000–50049` and `50050–50099` are placeholders), the namespace `MyCompany.MyBifrostApp`, the object-name prefix `My`, and `MyApp` in every type name (your capability, rule 17).
 
@@ -1636,7 +1636,7 @@ One unit of the `.is-IS.xlf`:
 
 | The operation … | Effect | Copy |
 |---|---|---|
-| reads one record | Read-only | `Reference.GLAccount.Overview.Get`, `Legacy.Stock.Get` |
+| reads one record | Read-only | `Reference.GLAccountOverview.Get`, `Legacy.Stock.Get` |
 | reads many records | Read-only, capped with a documented maximum | `Legacy.Stock.List` (at most 100 rows, says when there are more) |
 | writes one record, safe to retry | Commits | `Reference.AssetMaintenance.Create` (`externalId`) |
 | changes many records, or can't be undone | Commits, guarded | `Reference.ItemPrice.PreviewAdjustment` + `ApplyAdjustment` (preview + apply), or `Legacy.Stock.List` + `Legacy.Stock.ReleaseAll` (list + release with `expectedCount`) |
@@ -1649,7 +1649,7 @@ One unit of the `.is-IS.xlf`:
 
 | Pattern | Message type | Folder |
 |---|---|---|
-| Read with resolver, FlowFields "as of" a date, nulls | `Reference.GLAccount.Overview.Get` | `Bifrost Reference/src/GLAccounts/` |
+| Read with resolver, FlowFields "as of" a date, nulls | `Reference.GLAccountOverview.Get` | `Bifrost Reference/src/GLAccounts/` |
 | Write, validation, isolation, safe retry | `Reference.AssetMaintenance.Create` | `Bifrost Reference/src/AssetMaintenance/` |
 | Preview / apply pair | `Reference.ItemPrice.*` | `Bifrost Reference/src/Prices/` |
 | HTTP, secret, setup page, install | `Reference.ExchangeRate.Get`, `Reference.ApiKey.Set` | `Bifrost Reference/src/ExchangeRates/`, `src/Lifecycle/` |

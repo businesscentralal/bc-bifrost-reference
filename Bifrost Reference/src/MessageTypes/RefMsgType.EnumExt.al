@@ -5,7 +5,7 @@ using Origo.Bifrost;
 /// <summary>
 /// Adds this app's message types to Bifröst Foundation's enum. The enum value name is what a
 /// caller sends as the request's `type`, and - next to the description - the strongest signal an
-/// agent uses to find the type. Name every type Area.Entity.Verb in words a user would say.
+/// agent uses to find the type. Name every type with exactly three parts, Area.Entity.Verb.
 /// </summary>
 enumextension 90000 "Ref Msg Type" extends "Message Type ori"
 {
@@ -36,9 +36,9 @@ enumextension 90000 "Ref Msg Type" extends "Message Type ori"
     // Read: a record resolved from subject, optional dates, FlowFields, nulls. See src/GLAccounts.
     // Ordinals 90004 and 90005 were renamed when the samples moved off personal data (GDPR):
     // a reference app shows patterns on business data only. The ordinals are unchanged.
-    value(90004; "Reference.GLAccount.Overview.Get")
+    value(90004; "Reference.GLAccountOverview.Get")
     {
-        Caption = 'Reference.GLAccount.Overview.Get', Locked = true;
+        Caption = 'Reference.GLAccountOverview.Get', Locked = true;
         Implementation = "Msg Interface ori" = "Ref GLAcc Overview Impl";
     }
     // Write: validated input, isolated write, safe retry. See src/AssetMaintenance.

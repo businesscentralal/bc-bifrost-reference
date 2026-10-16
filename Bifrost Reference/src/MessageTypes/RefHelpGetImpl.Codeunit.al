@@ -113,7 +113,7 @@ codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori"
         Overview.AppendLine('## Message types');
         Overview.AppendLine('| Type | Effect | What it does |');
         Overview.AppendLine('| --- | --- | --- |');
-        Overview.AppendLine('| `Reference.GLAccount.Overview.Get` | Read-only | A G/L account''s balance as of a date and its net change for a period. |');
+        Overview.AppendLine('| `Reference.GLAccountOverview.Get` | Read-only | A G/L account''s balance as of a date and its net change for a period. |');
         Overview.AppendLine('| `Reference.AssetMaintenance.Create` | Commits | Logs maintenance work on a fixed asset; safe to retry with externalId. |');
         Overview.AppendLine('| `Reference.ItemPrice.PreviewAdjustment` | Read-only | Shows a % unit price change for an item category. |');
         Overview.AppendLine('| `Reference.ItemPrice.ApplyAdjustment` | Commits | Applies that change; needs the preview''s itemCount. |');

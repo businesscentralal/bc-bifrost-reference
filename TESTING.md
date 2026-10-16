@@ -87,7 +87,7 @@ Record the rank of the right type.
 
 | Type | Also check |
 |---|---|
-| `Reference.GLAccount.Overview.Get` | `netChange` is `null` (not 0) without `fromDate`; `balanceAsOf` follows `asOfDate`; the SystemId as subject works. |
+| `Reference.GLAccountOverview.Get` | `netChange` is `null` (not 0) without `fromDate`; `balanceAsOf` follows `asOfDate`; the SystemId as subject works. |
 | `Reference.AssetMaintenance.Create` | The same `externalId` twice gives `created: false` and writes nothing. |
 | `Reference.ItemPrice.ApplyAdjustment` | It refuses without, or with a wrong, `expectedItemCount`. Apply changes real prices, so test in a copy company. |
 | `Reference.ApiKey.Set` | The request body is redacted in the Bifrost message log, on success and on failure. |

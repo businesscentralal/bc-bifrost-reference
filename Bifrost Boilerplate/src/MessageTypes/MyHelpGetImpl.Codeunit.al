@@ -112,7 +112,7 @@ codeunit 50005 "My Help Get Impl" implements "Msg Interface ori"
         Overview.AppendLine('| Type | Effect | What it does |');
         Overview.AppendLine('| --- | --- | --- |');
         Overview.AppendLine('| `MyApp.Hello.Get` | Read-only | Hello World: greeting, user, company and app version. Call it first. |');
-        Overview.AppendLine('| `MyApp.Item.Summary.Get` | Read-only | One item''s description, base unit, unit price and inventory as of a date. |');
+        Overview.AppendLine('| `MyApp.ItemSummary.Get` | Read-only | One item''s description, base unit, unit price and inventory as of a date. |');
         Overview.AppendLine('| `MyApp.Item.List` | Read-only | Items by number filter, at most 100 rows, with the total count. |');
         Overview.AppendLine('| `Help.MyApp.Get` | Read-only | This overview. |');
         Overview.AppendLine('');

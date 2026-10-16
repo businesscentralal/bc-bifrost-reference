@@ -5,7 +5,7 @@ using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
 /// <summary>
-/// Reference.GLAccount.Overview.Get - the reference read, as unit tests: the amounts match the
+/// Reference.GLAccountOverview.Get - the reference read, as unit tests: the amounts match the
 /// base app's own FlowFields, "not found" is not "missing", the period rule is enforced, and a
 /// value that was not asked for is JSON null rather than 0.
 /// The account is taken from the company's chart of accounts, never hard-coded.
@@ -31,7 +31,7 @@ codeunit 90154 "GL Account Overview Tests"
         FromDate := CalcDate('<-CM>', WorkDate());
 
         // [WHEN] the overview is asked for that period
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", GLAccount."No.",
+        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", GLAccount."No.",
             StrSubstNo('{"asOfDate":"%1","fromDate":"%2"}', Format(WorkDate(), 0, 9), Format(FromDate, 0, 9)));
 
         // [THEN] the answer carries the account and the same amounts the base app calculates
@@ -48,7 +48,7 @@ codeunit 90154 "GL Account Overview Tests"
     procedure UnknownAccountIsNotFoundRatherThanMissing()
     begin
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", 'BIFT-NOPE', ''),
+            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", 'BIFT-NOPE', ''),
             'was not found');
     end;
 
@@ -59,7 +59,7 @@ codeunit 90154 "GL Account Overview Tests"
     begin
         FindPostingAccount(GLAccount);
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", GLAccount."No.", '{"asOfDate":"2026-08-31","fromDate":"2026-09-01"}'),
+            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", GLAccount."No.", '{"asOfDate":"2026-08-31","fromDate":"2026-09-01"}'),
             'after ''asOfDate''');
     end;
 
@@ -72,7 +72,7 @@ codeunit 90154 "GL Account Overview Tests"
     begin
         // [GIVEN] a posting account  [WHEN] no fromDate is sent
         FindPostingAccount(GLAccount);
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", GLAccount."No.", '');
+        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", GLAccount."No.", '');
 
         // [THEN] netChange is JSON null - never 0 pretending to be a value - and the balance is still given
         Caller.AssertOk(Response);

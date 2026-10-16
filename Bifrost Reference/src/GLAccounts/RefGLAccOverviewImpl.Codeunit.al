@@ -6,7 +6,7 @@ using Microsoft.Finance.GeneralLedger.Setup;
 using Origo.Bifrost;
 
 /// <summary>
-/// Reference.GLAccount.Overview.Get - the reference READ.
+/// Reference.GLAccountOverview.Get - the reference READ.
 ///
 /// Patterns shown:
 ///  - the target comes from subject (SystemId or No.) or the body, through the shared resolver,

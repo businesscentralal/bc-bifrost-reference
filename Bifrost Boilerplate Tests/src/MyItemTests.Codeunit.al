@@ -5,7 +5,7 @@ using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
 /// <summary>
-/// MyApp.Item.Summary.Get and MyApp.Item.List - the happy path and the break set, as unit
+/// MyApp.ItemSummary.Get and MyApp.Item.List - the happy path and the break set, as unit
 /// tests. Each test is one answer an agent relies on, so a change that breaks it fails the build
 /// instead of a user's first call. Items are created with the BIFT-BP prefix.
 /// </summary>
@@ -31,7 +31,7 @@ codeunit 50052 "My Item Tests"
         ExpectedNo := ItemNoTok;
 
         // [WHEN] the summary is asked for by item number in subject
-        Response := Caller.Call(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", ItemNoTok, '');
+        Response := Caller.Call(Enum::"Message Type ori"::"MyApp.ItemSummary.Get", ItemNoTok, '');
 
         // [THEN] the item is found, the inventory is 0 as of the work date and "no unit" is null, not ''
         Caller.AssertOk(Response);
@@ -45,7 +45,7 @@ codeunit 50052 "My Item Tests"
     procedure UnknownItemIsNotFoundRatherThanMissing()
     begin
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", 'BIFT-NOPE', ''),
+            Caller.Call(Enum::"Message Type ori"::"MyApp.ItemSummary.Get", 'BIFT-NOPE', ''),
             'was not found');
     end;
 
@@ -56,7 +56,7 @@ codeunit 50052 "My Item Tests"
         CreateItem(ItemNoTok);
         // [THEN] the answer names the parameter, echoes the value and gives the format to send
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", ItemNoTok, '{"asOfDate":"26.09.2026"}'),
+            Caller.Call(Enum::"Message Type ori"::"MyApp.ItemSummary.Get", ItemNoTok, '{"asOfDate":"26.09.2026"}'),
             'YYYY-MM-DD');
     end;
 

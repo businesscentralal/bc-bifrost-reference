@@ -4,7 +4,7 @@ using Microsoft.Inventory.Item;
 using Origo.Bifrost;
 
 /// <summary>
-/// MyApp.Item.Summary.Get - the sample READ. Replace it with your own first read, or delete it.
+/// MyApp.ItemSummary.Get - the sample READ. Replace it with your own first read, or delete it.
 ///
 /// Patterns shown:
 ///  - the target comes from subject (SystemId or No.) or the body, through the shared resolver,

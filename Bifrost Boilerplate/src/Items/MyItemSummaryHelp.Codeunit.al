@@ -1,7 +1,7 @@
 namespace MyCompany.MyBifrostApp;
 
 /// <summary>
-/// Help for MyApp.Item.Summary.Get. This is the "use card": everything a caller needs to
+/// Help for MyApp.ItemSummary.Get. This is the "use card": everything a caller needs to
 /// make the first call right, in the eleven sections of START-HERE.md section 4, in that order. Error texts
 /// are copied verbatim from the Labels in My Input - change them together.
 /// </summary>
@@ -11,7 +11,7 @@ codeunit 50002 "My Item Summary Help"
     Access = Internal;
 
     /// <summary>
-    /// Returns the help document of MyApp.Item.Summary.Get as Markdown.
+    /// Returns the help document of MyApp.ItemSummary.Get as Markdown.
     /// </summary>
     /// <returns>The Markdown document.</returns>
     procedure GetHelpText(): Text
@@ -19,7 +19,7 @@ codeunit 50002 "My Item Summary Help"
         Help: TextBuilder;
     begin
         // TODO: rename the type in every line below together with the enum value.
-        Help.AppendLine('# MyApp.Item.Summary.Get');
+        Help.AppendLine('# MyApp.ItemSummary.Get');
         Help.AppendLine('');
         Help.AppendLine('## Overview');
         Help.AppendLine('Returns one item''s description, base unit of measure, unit price and inventory (quantity on');
@@ -51,7 +51,7 @@ codeunit 50002 "My Item Summary Help"
         Help.AppendLine('');
         Help.AppendLine('## Request example');
         Help.AppendLine('```json');
-        Help.AppendLine('{ "type": "MyApp.Item.Summary.Get", "subject": "1896-S", "data": { "asOfDate": "2026-09-26" } }');
+        Help.AppendLine('{ "type": "MyApp.ItemSummary.Get", "subject": "1896-S", "data": { "asOfDate": "2026-09-26" } }');
         Help.AppendLine('```');
         Help.AppendLine('');
         Help.AppendLine('## Response');

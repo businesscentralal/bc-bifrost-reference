@@ -27,11 +27,11 @@ codeunit 50004 "My Item List Help"
         Help.AppendLine('');
         Help.AppendLine('**Effect:** Read-only. Nothing is written.');
         Help.AppendLine('');
-        Help.AppendLine('Not for one item''s price and inventory - use `MyApp.Item.Summary.Get`. Not for a search by');
+        Help.AppendLine('Not for one item''s price and inventory - use `MyApp.ItemSummary.Get`. Not for a search by');
         Help.AppendLine('description - use `Data.Records.Get` on table Item.');
         Help.AppendLine('');
         Help.AppendLine('## Workflow');
-        Help.AppendLine('This type -> pick an item -> `MyApp.Item.Summary.Get` with its `itemNo` as `subject`.');
+        Help.AppendLine('This type -> pick an item -> `MyApp.ItemSummary.Get` with its `itemNo` as `subject`.');
         Help.AppendLine('');
         Help.AppendLine('## Identifying the target');
         Help.AppendLine('No single record: `subject` is not used. The rows are chosen by `itemFilter` and');
@@ -86,7 +86,7 @@ codeunit 50004 "My Item List Help"
         Help.AppendLine('follow the caller''s lcid.');
         Help.AppendLine('');
         Help.AppendLine('## Related message types');
-        Help.AppendLine('- `MyApp.Item.Summary.Get` - one item''s price and inventory.');
+        Help.AppendLine('- `MyApp.ItemSummary.Get` - one item''s price and inventory.');
         Help.AppendLine('- `Data.Records.Get` on table Item - search by any field.');
         exit(Help.ToText());
     end;

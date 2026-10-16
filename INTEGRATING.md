@@ -28,7 +28,7 @@ Both `queues` and `tasks` put a *relative link* in the response `data` field, no
 ```json
 {
   "specversion": "1.0",
-  "type": "Reference.GLAccount.Overview.Get",
+  "type": "Reference.GLAccountOverview.Get",
   "source": "my-integration",
   "subject": "2910",
   "datacontenttype": "application/json",
@@ -36,7 +36,7 @@ Both `queues` and `tasks` put a *relative link* in the response `data` field, no
 }
 ```
 
-- `type` is the exact dotted name of the message type, e.g. `Reference.GLAccount.Overview.Get` or `Legacy.Stock.Get`.
+- `type` is the exact dotted name of the message type, e.g. `Reference.GLAccountOverview.Get` or `Legacy.Stock.Get`.
 - **On the API, `data` is a JSON *string*,** with the request object escaped inside it: `"data": "{\"asOfDate\":\"2026-08-31\",\"fromDate\":\"2026-08-01\"}"`. The help documents show the request as an object for readability; over OData you send it as a string.
 - `specversion`, `type` and `source` are required on both endpoints. `subject` is also required on `tasks` and optional on `queues`.
 
@@ -48,7 +48,7 @@ curl -X POST "https://api.businesscentral.dynamics.com/v2.0/<tenant>/<environmen
   -H "Content-Type: application/json" \
   -d '{
     "specversion": "1.0",
-    "type": "Reference.GLAccount.Overview.Get",
+    "type": "Reference.GLAccountOverview.Get",
     "source": "my-integration",
     "subject": "2910",
     "datacontenttype": "application/json",
@@ -81,7 +81,7 @@ The `hint` tells the caller to call `Help.Implementation.Get` with the message t
 | Type | `subject` / `data` | What it teaches |
 |---|---|---|
 | `Reference.Echo.Get` | `data`: `{"message":"hi"}` | The envelope round trip, nothing else |
-| `Reference.GLAccount.Overview.Get` | `subject`: `2910`, `data`: `{"asOfDate":"2026-08-31"}` | A read; send `99999` for the "not found" error, and no `fromDate` to see `netChange: null` |
+| `Reference.GLAccountOverview.Get` | `subject`: `2910`, `data`: `{"asOfDate":"2026-08-31"}` | A read; send `99999` for the "not found" error, and no `fromDate` to see `netChange: null` |
 | `Legacy.Stock.Get` | `subject`: `1896-S` | A read from an existing app made headless, with its message types in the same app (Legacy App v2) |
 | `Reference.Note.Add` | `data`: `{"no":"NOTE-1","text":"hello"}` | A write; send the same `no` twice for the "already exists" error |
 

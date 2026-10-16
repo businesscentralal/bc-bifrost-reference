@@ -55,7 +55,7 @@ A new app built on Bifröst. Each message type teaches one pattern:
 
 | Message type | Effect | Pattern |
 |---|---|---|
-| `Reference.GLAccount.Overview.Get` | Read-only | Resolve a record from `subject`, keeping "not given" and "not found" apart. `SetLoadFields`, FlowFields "as of" a date (balance at a date, net change for a period), `null` instead of 0, enums by name. |
+| `Reference.GLAccountOverview.Get` | Read-only | Resolve a record from `subject`, keeping "not given" and "not found" apart. `SetLoadFields`, FlowFields "as of" a date (balance at a date, net change for a period), `null` instead of 0, enums by name. |
 | `Reference.AssetMaintenance.Create` | Commits | Validate every input before any write. Business rules with actionable errors. Isolated write. Safe retry with `externalId`. |
 | `Reference.ItemPrice.PreviewAdjustment` / `ApplyAdjustment` | Read-only / Commits | A preview/apply pair for an irreversible bulk change. Apply is guarded by the preview's `itemCount`. |
 | `Reference.ExchangeRate.Get` | Read-only (internet) | Outbound HTTP in a TryFunction, an optional secret in the header, defensive parsing. |
@@ -110,6 +110,10 @@ Copy both folders, then follow the 10-step rename checklist in `Bifrost Boilerpl
 ### Skill: bifrost-playbooks
 
 `skills/bifrost-playbooks/SKILL.md` is an agent skill for building playbooks by conversation. The agent asks what should happen, finds the message types, proposes the steps, writes the records, and runs them in a sandbox against three cases: work to do, nothing to do, and a bad input. It schedules only when the user says so. Install it in Claude, or give it to your coding agent.
+
+## Message type names
+
+Every message type name has exactly three dot-separated parts: `Domain.Entity.Action`. Two parts, or four or more, are not allowed. When a name needs more words, join them inside one part: `MyApp.ItemSummary.Get`, not `MyApp.Item.Summary.Get`; `Reference.GLAccountOverview.Get`, not `Reference.GLAccount.Overview.Get`. The same rule is in [`AGENTS.md`](AGENTS.md) and in [`START-HERE.md`](START-HERE.md) rule 17.
 
 ## Object ID ranges
 

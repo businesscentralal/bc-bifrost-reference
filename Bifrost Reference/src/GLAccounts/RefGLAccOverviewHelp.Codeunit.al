@@ -1,7 +1,7 @@
 namespace Origo.Bifrost.Reference;
 
 /// <summary>
-/// Help for Reference.GLAccount.Overview.Get. This is the "use card": everything a caller
+/// Help for Reference.GLAccountOverview.Get. This is the "use card": everything a caller
 /// needs to make the first call right. Error texts are copied verbatim from the Labels in
 /// Ref Input and Ref GLAcc Overview Impl - change them together.
 /// </summary>
@@ -14,7 +14,7 @@ codeunit 90012 "Ref GLAcc Overview Help"
     var
         Help: TextBuilder;
     begin
-        Help.AppendLine('# Reference.GLAccount.Overview.Get');
+        Help.AppendLine('# Reference.GLAccountOverview.Get');
         Help.AppendLine('');
         Help.AppendLine('## Overview');
         Help.AppendLine('Returns one G/L account''s balance as of a date and, when you send a start date, its net');
@@ -53,7 +53,7 @@ codeunit 90012 "Ref GLAcc Overview Help"
         Help.AppendLine('');
         Help.AppendLine('## Request example');
         Help.AppendLine('```json');
-        Help.AppendLine('{ "type": "Reference.GLAccount.Overview.Get", "subject": "2910",');
+        Help.AppendLine('{ "type": "Reference.GLAccountOverview.Get", "subject": "2910",');
         Help.AppendLine('  "data": { "asOfDate": "2026-08-31", "fromDate": "2026-08-01" } }');
         Help.AppendLine('```');
         Help.AppendLine('');

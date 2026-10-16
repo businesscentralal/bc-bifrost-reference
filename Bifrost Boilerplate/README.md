@@ -35,7 +35,7 @@ Call it again after every publish. If `appVersion` is old, the new publish isn't
 | --- | --- |
 | `src/MessageTypes/MyHelloGetImpl.Codeunit.al` | `MyApp.Hello.Get`, the Hello World. It reads no business data. Keep it. |
 | `src/Common/MyInput.Codeunit.al` | The shared input layer: required and optional text, strict YYYY-MM-DD dates, decimal and whole number with a range, optional true/false, the item resolver (subject SystemId, subject No., body `itemNo`) and `RunIsolated` for your first write. Read every parameter through it. |
-| `src/Items/MyItemSummary*.al` | `MyApp.Item.Summary.Get` - a read of one record: description, unit price, inventory as of a date, null where there is no value. Impl plus help with all eleven sections of the contract (`START-HERE.md` §4). |
+| `src/Items/MyItemSummary*.al` | `MyApp.ItemSummary.Get` - a read of one record: description, unit price, inventory as of a date, null where there is no value. Impl plus help with all eleven sections of the contract (`START-HERE.md` §4). |
 | `src/Items/MyItemList*.al` | `MyApp.Item.List` - a capped list: optional filter, at most 100 rows, `count` / `returned` / `more`. |
 | `src/MessageTypes/MyHelpGetImpl.Codeunit.al` | `Help.MyApp.Get` - the app's directory. Every Bifröst app has exactly one. |
 | `src/MessageTypes/MyMsgType.EnumExt.al` | The enum values: the names callers send as `type`. |
@@ -70,10 +70,10 @@ The samples use items on purpose: a template gets copied everywhere, so it must 
 6. **Object names and affix.** Replace the `My` prefix in object names (`My Input`, `My Item Summary Impl`,
    ...) with your AppSource affix, or with the affix your organisation uses. Object names are at most 30
    characters.
-7. **Message type names.** Rename `MyApp` in `MyApp.Item.Summary.Get`, `MyApp.Item.List` and
+7. **Message type names.** Rename `MyApp` in `MyApp.ItemSummary.Get`, `MyApp.Item.List` and
    `Help.MyApp.Get` to your own area, in the enum extension (name **and** caption), in both help codeunits,
    in the directory table in `MyHelpGetImpl`, in the descriptions that name a sibling, and in the tests.
-   Names are `Area.Entity.Verb` in words a user would say.
+   Names have exactly three parts, `Area.Entity.Verb`, in words a user would say. Join extra words inside one part.
 8. **Captions and Icelandic.** Rewrite each `GetDescription` (the selection card, at most 250 characters,
    with `Read-only` or `Commits`) and each help document (the use card, the eleven sections of
    the contract in `START-HERE.md` §4). Every `Label`, `Caption` and `ToolTip` carries its Icelandic text in `Comment`

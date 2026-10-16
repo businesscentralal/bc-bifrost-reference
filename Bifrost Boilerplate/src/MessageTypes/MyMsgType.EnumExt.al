@@ -5,7 +5,7 @@ using Origo.Bifrost;
 /// <summary>
 /// Adds this app's message types to Bifröst Foundation's enum. The enum value name is what a
 /// caller sends as the request's type, and - next to the description - the strongest signal an
-/// agent uses to find the type. Name every type Area.Entity.Verb in words a user would say.
+/// agent uses to find the type. Name every type with exactly three parts, Area.Entity.Verb.
 /// Value ids come from the app's own id range; never renumber a value once it is published.
 /// </summary>
 enumextension 50000 "My Msg Type" extends "Message Type ori"
@@ -20,9 +20,9 @@ enumextension 50000 "My Msg Type" extends "Message Type ori"
         Implementation = "Msg Interface ori" = "My Hello Get Impl";
     }
     // Read: a record resolved from subject, an optional date, FlowFields, nulls. See src/Items.
-    value(50000; "MyApp.Item.Summary.Get")
+    value(50000; "MyApp.ItemSummary.Get")
     {
-        Caption = 'MyApp.Item.Summary.Get', Locked = true;
+        Caption = 'MyApp.ItemSummary.Get', Locked = true;
         Implementation = "Msg Interface ori" = "My Item Summary Impl";
     }
     // Capped list: optional filter, count, returned, more. See src/Items.
