@@ -56,7 +56,7 @@ In this app:
 | Release all | `Legacy Stock Mgt.ReleaseAll` (count, Confirm, Message) | `Legacy Stock API.ReleaseReservations(ItemFilter)` returns the number released, in one transaction |
 | Look up | the list page | `GetReservedQuantity`, `GetAvailableToReserve`, `WouldExceedInventory`, `CountReservations`, `HasReservation`, `IsReservable` |
 
-Notice the reads. A page that must ask a question calls one (`WouldExceedInventory`, `CountReservations`), asks the person, and passes the answer to the facade. The facade never asks, and it never checks `GuiAllowed`.
+Notice the reads. A page that must ask a question calls one (`WouldExceedInventory`, `CountReservations`), asks the person, and passes the answer to the core. The core never asks, and it never checks `GuiAllowed`.
 
 ## What it looked like before
 
@@ -70,11 +70,11 @@ The first version mixed the two in seven ways, all marked `AUDIT -` in `Legacy A
 - rules inside the page trigger
 - a batch job with no filter
 
-Each fix here is marked `FIXED -`. The table in [`START-HERE.md`](../START-HERE.md) §7.1 lists every pattern to look for.
+Each fix here is marked `FIXED -`. The audit table in [`ADAPTING.md`](../ADAPTING.md) lists every pattern to look for.
 
 One fix changes behaviour on purpose. In v1, code that called `ReserveStock` could reserve more than was in stock without a word, because only the UI path checked. Now every caller gets the check. Callers that really mean to over-reserve say so with `AllowOverStock`.
 
-The old procedures in `Legacy Stock Mgt` still exist as thin shells, so existing callers keep working. [`START-HERE.md`](../START-HERE.md) §7 tells the story step by step.
+The old procedures in `Legacy Stock Mgt` still exist as thin shells, so existing callers keep working. [`ADAPTING.md`](../ADAPTING.md) tells the story step by step.
 
 ## Message types are the public API
 

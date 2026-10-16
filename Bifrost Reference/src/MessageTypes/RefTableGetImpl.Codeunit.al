@@ -9,7 +9,7 @@ using System.Reflection;
 /// needs before calling Data.Records.Get/Set dynamically. Unlike Reference.Echo.Get, this
 /// type demonstrates the structured error-response contract for expected failures.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
+/// <remarks>Public: the contract chapters are returned to every caller. See BUILDING.md section 4.</remarks>
 codeunit 90001 "Ref Table Get Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;

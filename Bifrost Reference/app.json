@@ -8,7 +8,7 @@
   "url": "https://www.origo.is/",
   "EULA": "https://www.origo.is/skilmalar-og-oryggismal",
   "privacyStatement": "https://www.origo.is/um-origo/stefnur/personuverndarstefna",
-  "help": "https://github.com/businesscentralal/bifrost-reference#readme",
+  "help": "https://github.com/businesscentralal/bc-bifrost-reference#readme",
   "target": "Cloud",
   "screenshots": [],
   "dependencies": [

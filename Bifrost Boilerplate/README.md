@@ -33,9 +33,9 @@ Call it again after every publish. If `appVersion` is old, the new publish isn't
 
 | Folder / file | What it is |
 | --- | --- |
-| `src/MessageTypes/MyHelloGetImpl.Codeunit.al` | `MyApp.Hello.Get`, the Hello World. It reads no business data. Keep it. |
+| `src/MessageTypes/MyHelloGetImpl.Codeunit.al` | `MyApp.Hello.Get`, the Hello World. It reads no business data. Keep it, and copy it to start each new type: it shows the three interfaces and every contract chapter. |
 | `src/Common/MyInput.Codeunit.al` | The shared input layer: required and optional text, strict YYYY-MM-DD dates, decimal and whole number with a range, optional true/false, the item resolver (subject SystemId, subject No., body `itemNo`) and `RunIsolated` for your first write. Read every parameter through it. |
-| `src/Items/MyItemSummary*.al` | `MyApp.Item.Summary.Get` - a read of one record: description, unit price, inventory as of a date, null where there is no value. Impl plus help with all eleven sections of the contract (`START-HERE.md` §4). |
+| `src/Items/MyItemSummary*.al` | `MyApp.Item.Summary.Get` - a read of one record: description, unit price, inventory as of a date, null where there is no value. Its contract chapters show `target` and a dated parameter (`BUILDING.md` section 4). |
 | `src/Items/MyItemList*.al` | `MyApp.Item.List` - a capped list: optional filter, at most 100 rows, `count` / `returned` / `more`. |
 | `src/MessageTypes/MyHelpGetImpl.Codeunit.al` | `Help.MyApp.Get` - the app's directory. Every Bifröst app has exactly one. |
 | `src/MessageTypes/MyMsgType.EnumExt.al` | The enum values: the names callers send as `type`. |
@@ -60,7 +60,7 @@ The samples use items on purpose: a template gets copied everywhere, so it must 
    Use the range you own: your AppSource range from Microsoft Partner Center for an AppSource app, or a
    range in 50000-99999 agreed for the tenant for a per-tenant extension. Two apps installed in the same
    environment must never overlap, and two boilerplates copied without a change will. Then renumber every
-   object and every enum value, and change `IsOurs` in `MySelectionCardLint.Codeunit.al` to the same range.
+   object and every enum value, and change `IsOurs` in `MySelectionCardLint.Codeunit.al` and `MyContractLint.Codeunit.al` to the same range.
 4. **app.json - resource exposure.** The boilerplate ships with `allowDebugging`, `allowDownloadingSource` and
    `includeSourceInSymbolFile` set to `false`. The sample apps in this repository set them to `true` only
    because they are samples meant to be read; decide for your own app deliberately instead of copying them.
@@ -71,20 +71,20 @@ The samples use items on purpose: a template gets copied everywhere, so it must 
    ...) with your AppSource affix, or with the affix your organisation uses. Object names are at most 30
    characters.
 7. **Message type names.** Rename `MyApp` in `MyApp.Item.Summary.Get`, `MyApp.Item.List` and
-   `Help.MyApp.Get` to your own area, in the enum extension (name **and** caption), in both help codeunits,
-   in the directory table in `MyHelpGetImpl`, in the descriptions that name a sibling, and in the tests.
+   `Help.MyApp.Get` to your own area, in the enum extension (name **and** caption), in the contract chapters (`related`,
+   `workflow`, `examples`), in the directory table in `MyHelpGetImpl`, in the descriptions that name a sibling, and in the tests.
    Names are `Area.Entity.Verb` in words a user would say.
 8. **Captions and Icelandic.** Rewrite each `GetDescription` (the selection card, at most 250 characters,
-   with `Read-only` or `Commits`) and each help document (the use card, the eleven sections of
-   the contract in `START-HERE.md` §4). Every `Label`, `Caption` and `ToolTip` carries its Icelandic text in `Comment`
+   with `Read-only` or `Commits`), the keywords and selection description, and the contract
+   chapters (`BUILDING.md` section 4). Every `Label`, `Caption` and `ToolTip` carries its Icelandic text in `Comment`
    (`'%1 = ..., is-IS=...'`); technical tokens stay `Locked = true`. When you change a Label, change the
-   Errors table of the help in the same commit.
+   `errors` chapter in the same commit.
 9. **Permission set.** Rename `MY BIFROST APP` (at most 20 characters) and its caption including the is-IS
    text. Add `tabledata ... = RIMD` and `table ... = X` for every table you add; keep `IsEnabled` of each
    type checking the permission that type needs.
-10. **Build, publish, test.** Download symbols (Bifrost Foundation 28.0.0.0 and the base app), build the app
-    with CodeCop, UICop and AppSourceCop, publish it, then build and publish the test app and run it. All six
-    tests and the selection-card lint must pass before you replace the samples - they prove the copy works.
+10. **Build, publish, test.** Download symbols (Bifrost Foundation 28.0.2.0 and the base app), build the app
+    with CodeCop, UICop and AppSourceCop, publish it, then build and publish the test app and run it. All seven
+    tests and the two lints (selection card, contract chapters) must pass before you replace the samples - they prove the copy works.
     Then call your renamed `MyApp.Hello.Get` first, then `Help.MyApp.Get` and each type once through the Bifrost API or MCP server: one
     happy path and one error each.
 
@@ -92,15 +92,15 @@ The samples use items on purpose: a template gets copied everywhere, so it must 
 
 - **The item samples.** Once your own first read and list exist, delete `src/Items/*` and
   `MyItemTests.Codeunit.al`, remove the two enum values, the two rows in the directory table in
-  `MyHelpGetImpl` and the Item line in the permission set, and lower `ExpectedTypes` in the lint.
+  `MyHelpGetImpl` and the Item line in the permission set, and lower `ExpectedTypes` in both lints.
 - **`ResolveItem`** in `MyInput` when no type of yours takes an item (then also the
   `Microsoft.Inventory.Item` using line and the two item Labels).
 - **`RunIsolated`** when the app has no write types. Keep it for your first write: every write runs through
   it (`Reference.Note.Add` in `Bifrost Reference/src/MessageTypes` does; `Bifrost Reference/src/AssetMaintenance` shows the same
   isolation with a Process instance that carries validated values).
 - **Unused `Get` procedures** in `MyInput` (for example `GetRequiredDecimal`), with their Labels, so that the
-  Labels left all appear in a help document. Never delete `ReadRequest`.
-- **Never delete** `MyApp.Hello.Get`, `Help.MyApp.Get`, `MyRegistration`, the permission set, the test caller or the lint.
+  Labels left all appear in an `errors` chapter. Never delete `ReadRequest`.
+- **Never delete** `MyApp.Hello.Get`, `Help.MyApp.Get`, `MyRegistration`, the permission set, the test caller or the lints.
 
 ## When the app grows
 

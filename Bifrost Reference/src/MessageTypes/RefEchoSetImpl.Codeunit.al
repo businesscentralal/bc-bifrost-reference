@@ -8,7 +8,7 @@ using Origo.Bifrost;
 /// without depending on any external system. The type was named Reference.Echo.Set until the
 /// rename; the codeunit keeps its object name so the object ID and file stay stable.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
+/// <remarks>Public: the contract chapters are returned to every caller. See BUILDING.md section 4.</remarks>
 codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;

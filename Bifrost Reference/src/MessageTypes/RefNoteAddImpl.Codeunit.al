@@ -58,7 +58,7 @@ codeunit 90003 "Ref Note Add Impl" implements "Msg Interface ori", "Msg Discover
         Argument.AssertIsLicensed();
 
         // Write operations must run in an isolated sub-codeunit so a failure can be caught
-        // here without rolling back the outer transaction (START-HERE.md section 3).
+        // here without rolling back the outer transaction (BUILDING.md section 3).
         // Ref Input.RunIsolated honours "Omit Commit" and answers failures as status = Error
         // with the error text only (no call stack in the response).
         RefInput.RunIsolated(Codeunit::"Ref Note Add Process", Argument);

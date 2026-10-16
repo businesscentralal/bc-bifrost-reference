@@ -21,7 +21,7 @@ using Microsoft.Inventory.Item;
 ///  - read procedures let callers (and pages) check before they act;
 ///  - OnBefore/OnAfter events are the extension points inside the app (the codeunit is internal,
 ///    so other apps cannot subscribe to them).
-/// Each fix of a v1 problem is marked "FIXED - [pattern]" (START-HERE.md §7.1).
+/// Each fix of a v1 problem is marked "FIXED - [pattern]" (ADAPTING.md).
 /// </summary>
 codeunit 90052 "Legacy Stock API"
 {

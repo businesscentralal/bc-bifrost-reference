@@ -7,7 +7,7 @@ using System.TestLibraries.Utilities;
 
 /// <summary>
 /// Reference.AssetMaintenance.Create - the break set and the safe retry, as unit tests. Each test
-/// is one line of the live test plan (TESTING.md), so a change that breaks an answer an agent
+/// is one line of the live test plan (BUILDING.md section 8), so a change that breaks an answer an agent
 /// relies on fails the build instead of a user's first call.
 /// </summary>
 codeunit 90152 "Asset Maintenance Tests"

@@ -8,7 +8,7 @@ using Origo.Bifrost;
 /// caller - usually an agent - can learn what this app adds without walking the whole catalogue.
 /// No request body is required. Keep the table in BuildOverview in step with the enum extension.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
+/// <remarks>Public: the contract chapters are returned to every caller. See BUILDING.md section 4.</remarks>
 codeunit 50005 "My Help Get Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;

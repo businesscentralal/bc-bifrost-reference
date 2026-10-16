@@ -8,7 +8,7 @@ using Origo.Bifrost;
 /// message types, so a caller — usually an agent — can learn what this app adds without
 /// walking the whole catalogue. No request body is required.
 /// </summary>
-/// <remarks>Public document: this text is returned to every caller. Contract only - see START-HERE.md section 4.</remarks>
+/// <remarks>Public: the contract chapters are returned to every caller. See BUILDING.md section 4.</remarks>
 codeunit 90007 "Ref Help Get Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
