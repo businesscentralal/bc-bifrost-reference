@@ -2,151 +2,93 @@
 
 **Message types are your app's public API: headless inside, message types outside.**
 
-Business Central extensions that show how to build on
-Bifröst Foundation ([documentation](https://businesscentralal.github.io/bifrost/)). They cover:
+Business Central extensions that show how to build on Bifröst Foundation 28.0.2. Each operation is a *message type*: an enum value plus one codeunit that runs the call, helps an agent find it, and describes how to call it. Integrations, MCP hosts, AI agents and Orchestrator playbooks call it the same way. Product documentation: <https://docs.bifrost.origo.is>.
 
-- a new app whose operations are message types that agents and integrations can call
-- an existing app made headless inside, with message types outside, in the same app
+## Learn it in four steps
 
-The patterns come from live testing of message types with AI agents and follow Foundation's public API.
+| # | Read | What it teaches |
+|---|---|---|
+| 1 | `MyApp.Hello.Get` in `Bifrost Boilerplate/src/MessageTypes/MyHelloGetImpl.Codeunit.al` | **Copy this to start.** The whole shape of one message type: the three interfaces, the contract chapters, and the first call to make after every publish. |
+| 2 | `Reference.Note.Add` in `Bifrost Reference/src/MessageTypes/RefNoteAddImpl.Codeunit.al` + `RefNoteAddProcess.Codeunit.al` | **A write.** The write runs in an isolated sub-codeunit (`TableNo = "Message Argument ori"`) through `Ref Input.RunIsolated`, so a failure comes back as `status = Error` instead of breaking the call. |
+| 3 | `Reference.ItemPrice.PreviewAdjustment` / `Reference.ItemPrice.ApplyAdjustment` in `Bifrost Reference/src/Prices/` | **The safety pattern.** A read-only preview, then an apply that requires the preview's `itemCount` back as `expectedItemCount` and refuses if the selection changed. Apply declares `"effect": "irreversible"`. Both share `Ref Price Adjust`, so they can never disagree. |
+| 4 | `Legacy App v1 (not headless)` → `Legacy App v2 (headless)` | **Retrofitting an existing app.** v1 works in the UI but hides seven problems (`AUDIT -` in the code). v2, an upgrade with the same app id, moves the logic into an internal headless core and adds `Legacy.Stock.*` message types (`FIXED -`). See [ADAPTING.md](ADAPTING.md). |
 
-## What you need
+Then build your own with [BUILDING.md](BUILDING.md).
 
-- A Business Central **sandbox** with **Bifrost Foundation** installed from AppSource, and its licence or trial activated
-- **VS Code** with the AL extension
-- For the unit tests, Microsoft's **Library Assert** and **Test Runner** in the same sandbox
-- Your user needs the **`BIFROST API ori`** permission set, plus each app's own set
+### Extras
 
-## Quick start: your first Bifröst app in 15 minutes
-
-1. Clone the repository and open `bifrost-reference.code-workspace` in VS Code.
-2. In `Bifrost Boilerplate`, set `launch.json` to your sandbox, run **AL: Download symbols**, and publish.
-3. Call `MyApp.Hello.Get` over the Bifröst API or MCP server. An answer such as "Hello, … My Bifrost App is working in …" proves the whole path works.
-4. Copy `Bifrost Boilerplate` and `Bifrost Boilerplate Tests` into your own repository and follow the rename checklist in `Bifrost Boilerplate/README.md`.
-5. Add your own message types with [`START-HERE.md`](START-HERE.md), or hand it to your coding agent together with the skill `skills/bifrost-build`.
-
-## Start here
-
-| You are … | Read |
+| Type | Pattern it shows |
 |---|---|
-| **Building anything**, alone or with a coding agent | [`START-HERE.md`](START-HERE.md), the one file to read. Why message types, the paths (new app, existing app, the adapter exception), the rules, the contract, the code patterns and the definition of done. |
-| Building and testing the examples | [`TESTING.md`](TESTING.md) |
-| Calling Bifröst from outside BC, or from AL | [`INTEGRATING.md`](INTEGRATING.md) |
-| A coding agent working in this repository | [`AGENTS.md`](AGENTS.md) (points to `START-HERE.md`) |
-
-To see what "headless" means, with screens, read [`Legacy App v2 (headless)/README.md`](Legacy%20App%20v2%20(headless)/README.md).
-
-## The demo in three publishes, plus tests
-
-| # | Publish | A person sees | An AI agent can |
-|---|---|---|---|
-| 1 | `Legacy App v1 (not headless)`: **before** | A working app: reserve, cancel, release all | read its table, nothing more. It has no actions to call, and generic writes are blocked. Seven audit patterns hide in the code (`AUDIT -`). |
-| 2 | `Legacy App v2 (headless)` (same app id, an upgrade): **headless inside, message types outside** | The same app, with the same questions asked in the same places | reserve (refused over stock unless allowed), cancel, check, list and release through `Legacy.Stock.*`, with the same rules a person gets. Each pattern is fixed (`FIXED -`). |
-| 3 | `Bifrost Reference`: **a new app built on Bifröst** | Setup page, asset maintenance log | everything in the table below |
-| + | `Bifrost Reference Tests` | – | – (unit tests for 2 and 3, through message types only) |
-
-Open `bifrost-reference.code-workspace`; its folders are in publish order, with `Bifrost Reference Tests` fourth. Publish 1 → 2 is an upgrade (same app id). To run the demo again from the start, uninstall and unpublish `Bifrost Reference Tests` and `Legacy App` first, because BC refuses to install a lower version over a higher one. See `Legacy App v1 (not headless)/README.md` and `Legacy App v2 (headless)/README.md` for what changes at each step.
+| `Reference.Echo.Get` | The smallest possible type: returns the request with `serverTime` added. |
+| `Reference.Table.Get` | A read whose "not found" is a `RespondWithError` answer. |
+| `Reference.GLAccount.Overview.Get` | Resolving a record from `subject` ("not given" vs "not found"), FlowFields as of a date, `null` instead of 0, enums by name. |
+| `Reference.AssetMaintenance.Create` | Validate every input before any write; business-rule errors that say what to do; safe retry with `externalId`. |
+| `Reference.ExchangeRate.Get` + `Reference.ApiKey.Set` | Outbound HTTP in a TryFunction with an optional key; receiving a secret as `SecretText` into `Secret Store ori` with `RedactRequestData()`. |
+| `Help.MyApp.Get`, `Help.Reference.Get`, `Help.Legacy.Get` | The app's directory: one per capability, listing its types. |
+| `Legacy.Stock.List` + `Legacy.Stock.ReleaseAll` | Look, then act: a capped list whose `count` is the `expectedCount` guard of an all-or-nothing bulk release. |
 
 ## The apps
 
-### Bifrost Reference
-
-A new app built on Bifröst. Each message type teaches one pattern:
-
-| Message type | Effect | Pattern |
+| Folder | App (version) | Role |
 |---|---|---|
-| `Reference.GLAccount.Overview.Get` | Read-only | Resolve a record from `subject`, keeping "not given" and "not found" apart. `SetLoadFields`, FlowFields "as of" a date (balance at a date, net change for a period), `null` instead of 0, enums by name. |
-| `Reference.AssetMaintenance.Create` | Commits | Validate every input before any write. Business rules with actionable errors. Isolated write. Safe retry with `externalId`. |
-| `Reference.ItemPrice.PreviewAdjustment` / `ApplyAdjustment` | Read-only / Commits | A preview/apply pair for an irreversible bulk change. Apply is guarded by the preview's `itemCount`. |
-| `Reference.ExchangeRate.Get` | Read-only (internet) | Outbound HTTP in a TryFunction, an optional secret in the header, defensive parsing. |
-| `Reference.ApiKey.Set` | Commits | Receiving a secret: `SecretText`, `Secret Store ori`, `RedactRequestData()` on every path. |
-| `Help.Reference.Get` | Read-only | The app's directory. |
+| `Bifrost Boilerplate` + `Bifrost Boilerplate Tests` | My Bifrost App 1.0.0.0 | The template: Hello World, one read, one capped list, the directory type, registration, permission set, tests. Rename steps in `Bifrost Boilerplate/README.md`. |
+| `Bifrost Reference` | Bifrost Reference 1.2.0.0 | A new app built on Bifröst: the ten `Reference.*` / `Help.Reference.Get` types, setup page, install codeunit. |
+| `Legacy App v1 (not headless)` | Legacy App 2.1.0.0 | The "before". No Bifröst dependency. |
+| `Legacy App v2 (headless)` | Legacy App 2.2.0.0 (same app id) | The "after": internal core, six `Legacy.Stock.*` / `Help.Legacy.Get` types. |
+| `Bifrost Reference Tests` | Bifrost Reference Tests 1.0.0.0 | Tests for Bifrost Reference and Legacy App v2, through `Dispatcher ori` only, plus the selection-card and contract lints. |
+| `Bifrost Reference Playbooks` | (no app) | `REF-RELEASE`, a Bifrost Orchestrator playbook chaining `Legacy.Stock.List` into `Legacy.Stock.ReleaseAll`. Needs Bifrost Orchestrator. |
 
-It also has three minimal types to start from (`Reference.Echo.Get`, `.Table.Get`, `.Note.Add`); see `START-HERE.md` §10.
-
-The app also contains:
-
-- the **shared input layer** (`src/Common/RefInput.Codeunit.al`), which every partner app should copy
-- App Registry registration
-- its own setup page, reached from the single action on Bifrost Setup
-- an install codeunit
-- a permission set
-
-### Legacy App v1 (not headless) and Legacy App v2 (headless)
-
-Two versions of one app, named `Legacy App` in `app.json` (1.1.0.0 and 2.0.0.0, same app id). v1 is the "before": it works in the UI, but seven audit patterns hide in the code. v2 is **headless inside, message types outside**, and depends on Bifrost Foundation:
-
-- **Inside:** the logic lives in an **internal core** (`Legacy Stock API`, `Access = Internal`): no UI, no Commit, no `GuiAllowed`, explicit outcomes and read procedures. The pages ask the user, then call the core.
-- **Outside:** `Legacy.Stock.Reserve`, `.CancelReservation`, `.Get`, `.List`, `.ReleaseAll` and `Help.Legacy.Get` in `src/MessageTypes/`. Writes run through isolated Process codeunits. `List` + `ReleaseAll` form the look-then-act pair for a bulk change: `ReleaseAll` requires the `expectedCount` that `List` returned.
-- **Compatibility:** the old public `Legacy Stock Mgt` procedures stay as obsolete shells, so existing callers keep compiling.
-
-v1 → v2 is the worked example of `START-HERE.md` §7: the audit (§7.1) and the headless core with message types in the same app (§7.2).
-
-### Bifrost Reference Tests
-
-Unit tests for `Legacy App` v2 and `Bifrost Reference`, and the pattern to copy for your own. Every call goes through Foundation's public `Dispatcher ori`, exactly as a caller would make it. Two lints guard the contract: a **selection card lint** checks that every description states its effect and agrees with its direction, and a **help sections lint** checks that every help document has all eleven sections. See `Bifrost Reference Tests/README.md`.
-
-### Bifrost Reference Playbooks (builds on Bifrost Orchestrator)
-
-Not a standalone app. It needs **Bifrost Orchestrator** installed, plus the reference apps above. It shows how message types written to the contract become steps in an Orchestrator playbook, with no extra code. The first playbook, `REF-RELEASE`, chains `Legacy.Stock.List` into `Legacy.Stock.ReleaseAll`, and the count from the list guards the release. The folder also lists the rules a message type should follow to work well as a playbook step. See `Bifrost Reference Playbooks/README.md`. It has been built and tested in a sandbox.
-
-### Bifrost Boilerplate (copy this to begin)
-
-This is the smallest app that follows every rule in START-HERE:
-
-- a **Hello World** type, `MyApp.Hello.Get`, as the first call after every publish
-- the full shared input layer
-- one read type and one capped list type
-- the app's directory type
-- registration and a permission set
-- a test app with the caller, the card lint and six tests
-
-Copy both folders, then follow the 10-step rename checklist in `Bifrost Boilerplate/README.md`. Its ids (50000–50099) are placeholders.
-
-### Skill: bifrost-build
-
-`skills/bifrost-build/SKILL.md` is an agent skill for building with START-HERE. It picks the path, writes the contract first, builds from the §5 patterns and checks the definition of done. It always reads `START-HERE.md` first and never builds from memory.
-
-### Skill: bifrost-playbooks
-
-`skills/bifrost-playbooks/SKILL.md` is an agent skill for building playbooks by conversation. The agent asks what should happen, finds the message types, proposes the steps, writes the records, and runs them in a sandbox against three cases: work to do, nothing to do, and a bad input. It schedules only when the user says so. Install it in Claude, or give it to your coding agent.
+Agent skills: `skills/bifrost-build/SKILL.md` (build or retrofit an app) and `skills/bifrost-playbooks/SKILL.md` (build and test playbooks by conversation).
 
 ## Object ID ranges
 
-These are for illustration only; **never reuse them** for a real extension.
+From each `app.json`. Illustration only: **never reuse them** for a real extension.
 
 | App | Range |
 |---|---|
-| `Bifrost Reference` | `90000–90049` |
-| `Legacy App v1 (not headless)` | `90050–90099` |
-| `Legacy App v2 (headless)` | `90050–90099` (core) and `90100–90149` (message types) |
-| `Bifrost Reference Tests` | `90150–90199` |
-| `Bifrost Boilerplate` / `Bifrost Boilerplate Tests` | `50000–50049` / `50050–50099`, placeholders you replace |
+| `Bifrost Boilerplate` / `Bifrost Boilerplate Tests` | 50000–50049 / 50050–50099 (placeholders you replace) |
+| `Bifrost Reference` | 90000–90049 |
+| `Legacy App` v1 | 90050–90099 |
+| `Legacy App` v2 | 90050–90099 (core) and 90100–90149 (message types) |
+| `Bifrost Reference Tests` | 90150–90199 |
 
-For your own app, use `50000–99999` for a per-tenant extension, or get a range from Microsoft through Partner Center for AppSource.
+For your own app use 50000–99999 (per-tenant extension) or your AppSource range from Partner Center. Never reuse the ranges of Bifrost Foundation or any other published app.
 
-Never reuse the ranges of Bifrost Foundation or of any other published app.
+## Build and test
 
-## Building it
+**You need:** a Business Central **sandbox** with Bifrost Foundation from AppSource (trial activated), VS Code with the AL extension, Microsoft's **Library Assert** and **Test Runner** for the tests, and the **BIFROST API ori** permission set plus each app's own set (**MY BIFROST APP**, **BIFROST REFERENCE**, **LEGACY STOCK**).
 
-- **Locally:** VS Code with the AL extension. See [TESTING.md](TESTING.md) for `launch.json`, publish order and permissions.
-- **Symbols:** Bifrost Foundation comes from AppSource. Install it in your sandbox, then run `AL: Download symbols`.
-- **CI:** the GitHub workflows in `.github/` build the apps in Origo's own GitHub. Where Foundation's symbols come from is configured in the repository's settings on GitHub, not in the files, so a fork or copy won't find them and its build will fail. Build and test in your own sandbox as described above, or give AL-Go your own source for Foundation's `.app` (for example `appDependencyProbingPaths` or `installApps` in `.AL-Go/settings.json`).
+1. Open `bifrost-reference.code-workspace`. Its folders are in publish order.
+2. In each app folder, add a `.vscode/launch.json` for your sandbox (git-ignored) and run **AL: Download symbols**.
+3. Publish with `Ctrl+F5`:
+   - Template only: `Bifrost Boilerplate`, then `Bifrost Boilerplate Tests`.
+   - Demo: `Legacy App v1` (optional, only to see the "before"), `Legacy App v2` (an upgrade of v1), `Bifrost Reference`, `Bifrost Reference Tests`.
+   - To replay the demo, uninstall and unpublish `Bifrost Reference Tests` and `Legacy App` first: BC won't install a lower version over a higher one.
+4. For `Reference.ExchangeRate.Get` only: allow outbound HTTP for Bifrost Reference in the Bifrost Setup wizard.
+5. Run the tests from page **AL Test Tool** (130451): codeunits 50051–50054 (Boilerplate) or 90151–90155 (Reference). See `Bifrost Reference Tests/README.md`.
+6. Call `MyApp.Hello.Get` over the Bifröst API or MCP server. If `appVersion` is the one you just published, the app is live.
 
-## Extension model, in one paragraph
+**CI:** the workflows in `.github/` build `Bifrost Reference`, `Legacy App v2 (headless)` and `Bifrost Reference Tests` (see `.AL-Go/settings.json`). Foundation's symbols come from repository settings, so a fork won't find them; build in your sandbox, or give AL-Go your own source for Foundation's `.app`.
 
-Implement `interface "Msg Interface ori"` in a codeunit. The codeunit can be `Access = Internal`, but its six procedures are public. Add an enum value to `enum "Message Type ori"` pointing to that codeunit. Read the request from and write the response to `table "Message Argument ori"`. Origo's own Bifröst apps use the same model. `codeunit "Dispatcher ori"` calls any type from AL.
+## How an agent picks and uses your operation
+
+1. **Find.** The agent searches by words. It matches the type name, `GetDescription()` (the selection card, at most 250 characters, saying "Read-only" or "Commits") and `GetKeywords()` (the words people say, as a translatable Label). `GetSelectionDescription()` tells it what the type is *not* for and which sibling to use instead.
+2. **Read.** Before calling, it reads the contract. `Help.Implementation.Get` (MCP: `get_message_type_help`) returns the chapters as JSON: overview, envelope, target, parameters, response, errors, effect, metering, related, workflow, examples, notes. Errors quote the real Label texts.
+3. **Decide.** The `effect` chapter says `read`, `write` or `irreversible`, whether a repeat is safe, and the preconditions. Preconditions describe what `IsEnabled()` checks. `IsEnabled()` hides a type from users who can't use it; it doesn't block a direct call, so the type's own code and table permissions still decide what a call may do.
+4. **Chain.** `workflow` and `related` say what comes before and after, for example the preview before an apply.
+5. **Secrets never travel through an AI chat.** People enter API keys in **Bifrost Setup > Apps**. A type that receives a secret, such as `Reference.ApiKey.Set`, is for integrations and redacts the request from the log.
+
+## Guides
+
+| File | For |
+|---|---|
+| [BUILDING.md](BUILDING.md) | Adding a new operation: rules, contract chapters, code patterns, Foundation API, tests, definition of done. |
+| [ADAPTING.md](ADAPTING.md) | Making an existing app callable: the audit, the internal core, the adapter-app exception. |
+| [INTEGRATING.md](INTEGRATING.md) | Calling message types from outside BC or from AL. |
+| [AGENTS.md](AGENTS.md) | Instructions for coding agents in this repository. |
 
 ## Licence and trademarks
 
-The code and documentation in this repository are licensed under the [MIT License](LICENSE). Copy the samples into your own apps, commercial ones included.
+The code and documentation are licensed under the [MIT License](LICENSE). Copy the samples into your own apps, commercial ones included. The licence does not cover Bifrost Foundation or any other Origo app (never commit their symbols; `.gitignore` excludes `.alpackages/` and `*.app`), nor the names and logos "Bifröst" and "Origo", which are trademarks of Origo ehf. You may say your app works with Bifröst, but not suggest it is made or endorsed by Origo.
 
-The licence covers this repository only. It does not cover:
-- **Bifrost Foundation** or any other Origo app. They are licensed under their own terms, and their compiled symbols must never be committed to a repository (`.gitignore` excludes `.alpackages/` and `*.app`).
-- **The names and logos "Bifröst" and "Origo".** They are trademarks of Origo ehf. You may name them to say your app works with Bifröst, but not in a way that suggests your app is made or endorsed by Origo.
-
-Contributions to this repository are accepted under the same MIT License.
-
-## What not to copy
-
-Copy the patterns from Origo's own Bifröst apps, not their content. Those apps call real external systems (banks, registries, document exchange) under agreements that don't transfer to you. The only external call in this repo is `Reference.ExchangeRate.Get`, which uses a free public ECB rates service and needs no key.
+The only external call in this repository is `Reference.ExchangeRate.Get`, which uses a free public ECB rates service.

@@ -30,7 +30,7 @@ codeunit 50050 "My Test Caller"
     end;
 
     /// <summary>
-    /// Runs a message type and returns its answer as text (JSON or Markdown).
+    /// Runs a message type and returns its answer as text.
     /// </summary>
     /// <param name="MessageType">The message type to run.</param>
     /// <param name="Subject">The subject of the call, or ''.</param>
@@ -40,7 +40,7 @@ codeunit 50050 "My Test Caller"
     var
         RequestContent: BigText;
         ResponseContent: BigText;
-        ResponseContentType: Text[50];
+        ResponseContentType: Text[100];
     begin
         if RequestText <> '' then
             RequestContent.AddText(RequestText);
@@ -50,13 +50,21 @@ codeunit 50050 "My Test Caller"
     end;
 
     /// <summary>
-    /// The help document of a message type, exactly as callers receive it.
+    /// One chapter of a message type's contract, read through "Msg Contract Mgt ori".GetContract -
+    /// the same function Help.Implementation.Get uses, so a test sees exactly what callers see.
     /// </summary>
-    /// <param name="MessageTypeName">The message type name, for example MyApp.Item.List.</param>
-    /// <returns>The help document as Markdown.</returns>
-    procedure GetHelp(MessageTypeName: Text): Text
+    /// <param name="MessageType">The message type, for example MyApp.Item.List.</param>
+    /// <param name="Chapter">The chapter key, for example errors.</param>
+    /// <returns>The chapter as JSON text; '' when the type does not declare it.</returns>
+    procedure GetContractChapter(MessageType: Enum "Message Type ori"; Chapter: Text) Result: Text
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Contract: JsonObject;
+        Token: JsonToken;
     begin
-        exit(CallRaw(Enum::"Message Type ori"::"Help.Implementation.Get", MessageTypeName, ''));
+        ContractMgt.GetContract(MessageType, Contract);
+        if Contract.Get(Chapter, Token) then
+            Token.WriteTo(Result);
     end;
 
     /// <summary>

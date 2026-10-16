@@ -7,7 +7,7 @@ using System.TestLibraries.Utilities;
 
 /// <summary>
 /// Reference.AssetMaintenance.Create - the break set and the safe retry, as unit tests. Each test
-/// is one line of the live test plan (TESTING.md), so a change that breaks an answer an agent
+/// is one line of the live test plan (BUILDING.md section 8), so a change that breaks an answer an agent
 /// relies on fails the build instead of a user's first call.
 /// </summary>
 codeunit 90152 "Asset Maintenance Tests"
@@ -94,8 +94,10 @@ codeunit 90152 "Asset Maintenance Tests"
     [Test]
     procedure HelpListsTheErrorTheTypeReallyReturns()
     begin
-        // The help is the agent's only guide: it must quote the real error text, not an old one.
-        Assert.IsTrue(Caller.GetHelp('Reference.AssetMaintenance.Create').Contains('YYYY-MM-DD'), 'The help should document the date format error.');
+        // The contract is the agent's only guide: its errors chapter must quote the real error text, not an old one.
+        Assert.IsTrue(
+            Caller.GetContractChapter(Enum::"Message Type ori"::"Reference.AssetMaintenance.Create", 'errors').Contains('which is not a date in the format YYYY-MM-DD'),
+            'The errors chapter should document the date format error.');
     end;
 
     local procedure CreateFixedAsset()

@@ -109,7 +109,7 @@ The two patterns below come from `Help.Orchestrator.Get`. They have not been tes
 
 ## Explaining playbooks to people
 
-Use the plain terms: a **recipe** of **steps**, a shared **notebook** (the workspace) and **gates** (conditions). Say what will happen in business words ("every weekday at 07:00, release reservations for discontinued items and email Anna the count"), not in field names. Show the step table, not the records.
+Use the plain terms: a **recipe** of **steps**, a shared **notebook** (the workspace) and **gates** (conditions). Say what will happen in business words ("every weekday at 07:00, release reservations for discontinued items and email the warehouse manager the count"), not in field names. Show the step table, not the records.
 
 ## Never
 

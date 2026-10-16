@@ -76,9 +76,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType NotAValueErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1501032832 - NamedType 1264649167" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The request body must be a JSON object, for example { "itemNo": "1896-S", "quantity": 2 }.</source>
-          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S", "quantity": 2 }.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S", "quantity": 2 }.</note>
+          <source>The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.</source>
+          <target state="translated">Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType NotObjectErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1501032832 - NamedType 2723671431" size-unit="char" translate="yes" xml:space="preserve">
@@ -92,6 +92,42 @@
           <target state="translated">Færibreytan '%1' er %2 stafir; hámarkið er %3.</target>
           <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = actual length, %3 = maximum length, is-IS=Færibreytan '%1' er %2 stafir; hámarkið er %3.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType TooLongErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 92220189 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>cancel a reservation, remove the reservation, unreserve an item, release the stock for one item, free up reserved stock, undo a reservation</source>
+          <target state="translated">hætta við frátekningu, fjarlægja frátekningu, taka frátekningu af vöru, losa birgðir einnar vöru, losa frátekið magn, afturkalla frátekningu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=hætta við frátekningu, fjarlægja frátekningu, taka frátekningu af vöru, losa birgðir einnar vöru, losa frátekið magn, afturkalla frátekningu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Cancel Reserve Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 92220189 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancel the whole reservation of one item in Legacy App and log it; answers cancelled: false when there was nothing to cancel. It cannot reduce a reservation partly. For many items at once, use Legacy.Stock.ReleaseAll; to reserve, use Legacy.Stock.Reserve.</source>
+          <target state="translated">Hætta við alla frátekningu einnar vöru í Legacy App og skrá það; svarar cancelled: false ef ekkert var til að hætta við. Getur ekki minnkað frátekningu að hluta. Fyrir margar vörur í einu, notaðu Legacy.Stock.ReleaseAll; til að taka frá, notaðu Legacy.Stock.Reserve.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hætta við alla frátekningu einnar vöru í Legacy App og skrá það; svarar cancelled: false ef ekkert var til að hætta við. Getur ekki minnkað frátekningu að hluta. Fyrir margar vörur í einu, notaðu Legacy.Stock.ReleaseAll; til að taka frá, notaðu Legacy.Stock.Reserve.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Cancel Reserve Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2326664310 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>what can the legacy app do, list legacy message types, legacy app overview, help for stock reservations, which operations does the legacy app add</source>
+          <target state="translated">hvað getur eldra appið gert, lista skilaboðategundir eldra appsins, yfirlit eldra appsins, hjálp fyrir birgðafrátekningar, hvaða aðgerðir bætir eldra appið við</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=hvað getur eldra appið gert, lista skilaboðategundir eldra appsins, yfirlit eldra appsins, hjálp fyrir birgðafrátekningar, hvaða aðgerðir bætir eldra appið við</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Help Get Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2326664310 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An overview of Legacy App and the stock reservation message types it adds, one line each. For the contract of one type, use Help.Implementation.Get; for every installed app, use Help.MessageTypes.Get.</source>
+          <target state="translated">Yfirlit yfir Legacy App og skilaboðategundirnar fyrir birgðafrátekningar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirlit yfir Legacy App og skilaboðategundirnar fyrir birgðafrátekningar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Help Get Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3432071783 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>release all reservations, cancel every reservation, clear reservations, free all reserved stock, release reservations for these items, remove all reservations</source>
+          <target state="translated">losa allar frátekningar, hætta við allar frátekningar, hreinsa frátekningar, losa allar fráteknar birgðir, losa frátekningar fyrir þessar vörur, fjarlægja allar frátekningar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=losa allar frátekningar, hætta við allar frátekningar, hreinsa frátekningar, losa allar fráteknar birgðir, losa frátekningar fyrir þessar vörur, fjarlægja allar frátekningar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Release All Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3432071783 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Release every reservation matching an item filter in Legacy App at once, after the user has seen them; needs the count from Legacy.Stock.List. Not for one item: use Legacy.Stock.CancelReservation. To see what would be released, use Legacy.Stock.List.</source>
+          <target state="translated">Losa allar frátekningar sem passa við síu á vörunúmer í Legacy App í einu, eftir að notandinn hefur séð þær; þarf fjöldann úr Legacy.Stock.List. Ekki fyrir eina vöru: notaðu Legacy.Stock.CancelReservation. Til að sjá hvað yrði losað, notaðu Legacy.Stock.List.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Losa allar frátekningar sem passa við síu á vörunúmer í Legacy App í einu, eftir að notandinn hefur séð þær; þarf fjöldann úr Legacy.Stock.List. Ekki fyrir eina vöru: notaðu Legacy.Stock.CancelReservation. Til að sjá hvað yrði losað, notaðu Legacy.Stock.List.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Release All Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3564666794 - NamedType 251673366" size-unit="char" translate="yes" xml:space="preserve">
           <source>itemFilter '%1' matches %2 reservations, not the %3 you sent in expectedCount. Nothing was released. Check with Legacy.Stock.List and send its count.</source>
@@ -129,11 +165,35 @@
           <note from="Developer" annotates="general" priority="2">%1 = quantity, is-IS=Magnið sem á að taka frá er %1. Sendu magn sem er stærra en núll; til að fjarlægja frátekningu skaltu hætta við hana.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock API - NamedType QuantityErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3429894685 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>how much is reserved for an item, reserved quantity, available to reserve, check a reservation, is this item reserved, how much can still be reserved</source>
+          <target state="translated">hve mikið er frátekið af vöru, frátekið magn, laust til frátekningar, athuga frátekningu, er þessi vara frátekin, hve mikið má enn taka frá</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=hve mikið er frátekið af vöru, frátekið magn, laust til frátekningar, athuga frátekningu, er þessi vara frátekin, hve mikið má enn taka frá</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Get Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3429894685 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>How much of one item is reserved in Legacy App, and how much can still be reserved. Changes nothing. For all reservations or a filter, use Legacy.Stock.List; to change a reservation, use Legacy.Stock.Reserve or Legacy.Stock.CancelReservation.</source>
+          <target state="translated">Hve mikið af einni vöru er frátekið í Legacy App, og hve mikið má enn taka frá. Breytir engu. Fyrir allar frátekningar eða síu, notaðu Legacy.Stock.List; til að breyta frátekningu, notaðu Legacy.Stock.Reserve eða Legacy.Stock.CancelReservation.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Hve mikið af einni vöru er frátekið í Legacy App, og hve mikið má enn taka frá. Breytir engu. Fyrir allar frátekningar eða síu, notaðu Legacy.Stock.List; til að breyta frátekningu, notaðu Legacy.Stock.Reserve eða Legacy.Stock.CancelReservation.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Get Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1056309465 - NamedType 199971095" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter 'itemFilter' is '%1', which is not a valid filter: %2 Send an item number or a filter such as 1896-S|1900-S or 19*.</source>
           <target state="translated">Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1896-S|1900-S eða 19*.</target>
           <note from="Developer" annotates="general" priority="2">%1 = filter received, %2 = platform error text, is-IS=Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1896-S|1900-S eða 19*.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock List Impl - NamedType FilterErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1056309465 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>list reservations, show all reservations, which items are reserved, reservations for these items, how many reservations, total reserved quantity</source>
+          <target state="translated">lista frátekningar, sýna allar frátekningar, hvaða vörur eru fráteknar, frátekningar fyrir þessar vörur, hve margar frátekningar, samtals frátekið magn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=lista frátekningar, sýna allar frátekningar, hvaða vörur eru fráteknar, frátekningar fyrir þessar vörur, hve margar frátekningar, samtals frátekið magn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock List Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1056309465 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>See the stock reservations in Legacy App, all or by item number filter, with their count and total quantity; at most 100 rows. Gives the count Legacy.Stock.ReleaseAll needs. For one item, use Legacy.Stock.Get; to release them, use Legacy.Stock.ReleaseAll.</source>
+          <target state="translated">Sjá birgðafrátekningar í Legacy App, allar eða eftir síu á vörunúmer, með fjölda og heildarmagni; að hámarki 100 línur. Gefur fjöldann sem Legacy.Stock.ReleaseAll þarf. Fyrir eina vöru, notaðu Legacy.Stock.Get; til að losa þær, notaðu Legacy.Stock.ReleaseAll.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sjá birgðafrátekningar í Legacy App, allar eða eftir síu á vörunúmer, með fjölda og heildarmagni; að hámarki 100 línur. Gefur fjöldann sem Legacy.Stock.ReleaseAll þarf. Fyrir eina vöru, notaðu Legacy.Stock.Get; til að losa þær, notaðu Legacy.Stock.ReleaseAll.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock List Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 600072821 - Method 895184314 - NamedType 750120336" size-unit="char" translate="yes" xml:space="preserve">
           <source>Cancel the reservation for %1?</source>
@@ -164,6 +224,18 @@
           <target state="translated">%1 frátekningar losaðar.</target>
           <note from="Developer" annotates="general" priority="2">%1 = number released, is-IS=%1 frátekningar losaðar.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Mgt - Method ReleaseAll - NamedType DoneMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3286176031 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>reserve stock, set stock aside, hold items for an order, book stock for an item, put items on hold, reserve more of an item</source>
+          <target state="translated">taka frá birgðir, leggja birgðir til hliðar, halda vörum fyrir pöntun, bóka birgðir fyrir vöru, setja vörur í bið, taka meira frá af vöru</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=taka frá birgðir, leggja birgðir til hliðar, halda vörum fyrir pöntun, bóka birgðir fyrir vöru, setja vörur í bið, taka meira frá af vöru</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Reserve Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3286176031 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reserve a quantity of one item in Legacy App, added to what is already reserved; more than is in stock only when the user agrees. Not for removing a reservation: use Legacy.Stock.CancelReservation. To see what is reserved, use Legacy.Stock.Get.</source>
+          <target state="translated">Taka frá magn af einni vöru í Legacy App, bætt við það sem þegar er frátekið; meira en er til á lager aðeins ef notandinn samþykkir. Ekki til að fjarlægja frátekningu: notaðu Legacy.Stock.CancelReservation. Til að sjá hvað er frátekið, notaðu Legacy.Stock.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Taka frá magn af einni vöru í Legacy App, bætt við það sem þegar er frátekið; meira en er til á lager aðeins ef notandinn samþykkir. Ekki til að fjarlægja frátekningu: notaðu Legacy.Stock.CancelReservation. Til að sjá hvað er frátekið, notaðu Legacy.Stock.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Stock Reserve Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Page 1998436031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reserve Stock</source>

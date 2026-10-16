@@ -81,6 +81,30 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Grunnslóð gengisþjónustu</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Ref Setup - Field Rates Base URL - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Codeunit 241041904 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>set the API key, store the API key, change the API key, exchange rate service key, save the rates key</source>
+          <target state="translated">setja API-lykil, vista API-lykil, breyta API-lykli, lykill gengisþjónustu, vista lykil gengisþjónustu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=setja API-lykil, vista API-lykil, breyta API-lykli, lykill gengisþjónustu, vista lykil gengisþjónustu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Api Key Set Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 241041904 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Store the API key the exchange rate service uses, in the Bifrost secret store. The key is never returned. For integrations, not chats: a person enters the key in Bifrost Setup &gt; Apps. To get a rate, use Reference.ExchangeRate.Get.</source>
+          <target state="translated">Vista API-lykilinn sem gengisþjónustan notar í leyndarmálageymslu Bifrastar. Lyklinum er aldrei skilað. Fyrir samþættingar, ekki spjall: fólk slær lykilinn inn í Bifrost Setup &gt; Apps. Til að fá gengi, notaðu Reference.ExchangeRate.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vista API-lykilinn sem gengisþjónustan notar í leyndarmálageymslu Bifrastar. Lyklinum er aldrei skilað. Fyrir samþættingar, ekki spjall: fólk slær lykilinn inn í Bifrost Setup &gt; Apps. Til að fá gengi, notaðu Reference.ExchangeRate.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Api Key Set Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2642483118 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>test the connection, ping, echo, is Business Central reachable, check the connection, server time</source>
+          <target state="translated">prófa tenginguna, ping, bergmál, næst samband við Business Central, athuga tenginguna, tími á þjóni</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=prófa tenginguna, ping, bergmál, næst samband við Business Central, athuga tenginguna, tími á þjóni</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Echo Set Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2642483118 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check that a call reaches Business Central: returns what you sent plus the server time, and touches no data. To read records, use Data.Records.Get; to test a write, use Reference.Note.Add.</source>
+          <target state="translated">Athuga hvort kall nær til Business Central: skilar því sem þú sendir ásamt tíma þjónsins og snertir engin gögn. Til að lesa færslur, notaðu Data.Records.Get; til að prófa skrif, notaðu Reference.Note.Add.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athuga hvort kall nær til Business Central: skilar því sem þú sendir ásamt tíma þjónsins og snertir engin gögn. Til að lesa færslur, notaðu Data.Records.Get; til að prófa skrif, notaðu Reference.Note.Add.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Echo Set Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 707477861 - NamedType 2606753555" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter '%1' is '%2'. Send a 3-letter ISO currency code, for example EUR or ISK.</source>
           <target state="translated">Færibreytan '%1' er '%2'. Sendu þriggja stafa ISO-gjaldmiðlakóða, til dæmis EUR eða ISK.</target>
@@ -93,11 +117,47 @@
           <note from="Developer" annotates="general" priority="2">%1 = currency code, is-IS=Færibreyturnar 'from' og 'to' eru báðar %1. Sendu tvo ólíka gjaldmiðla.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Exch Rate Get Impl - NamedType SameCurrencyErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 707477861 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>exchange rate, euro to krona, currency rate today, convert currency, how many krona for a euro, ECB rate</source>
+          <target state="translated">gengi, evra í krónur, gengi gjaldmiðils í dag, umreikna gjaldmiðil, hvað kostar evran, gengi Seðlabanka Evrópu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=gengi, evra í krónur, gengi gjaldmiðils í dag, umreikna gjaldmiðil, hvað kostar evran, gengi Seðlabanka Evrópu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Exch Rate Get Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 707477861 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Today's reference rate between two currencies from an external service (European Central Bank data). Calls the internet; writes nothing. For Business Central's own Currency Exchange Rate table, use Data.Records.Get.</source>
+          <target state="translated">Viðmiðunargengi dagsins milli tveggja gjaldmiðla frá ytri þjónustu (gögn Seðlabanka Evrópu). Kallar á netið; skrifar ekkert. Fyrir töfluna Currency Exchange Rate í Business Central, notaðu Data.Records.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Viðmiðunargengi dagsins milli tveggja gjaldmiðla frá ytri þjónustu (gögn Seðlabanka Evrópu). Kallar á netið; skrifar ekkert. Fyrir töfluna Currency Exchange Rate í Business Central, notaðu Data.Records.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Exch Rate Get Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2230199924 - NamedType 3672293264" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter 'fromDate' is %1, which is after 'asOfDate' %2. Send a fromDate on or before the asOfDate, or leave fromDate out to get the balance only.</source>
           <target state="translated">Færibreytan 'fromDate' er %1, sem er eftir 'asOfDate' %2. Sendu fromDate sem er sami dagur eða fyrr en asOfDate, eða slepptu fromDate til að fá eingöngu stöðuna.</target>
           <note from="Developer" annotates="general" priority="2">%1 = fromDate received, %2 = asOfDate used, is-IS=Færibreytan 'fromDate' er %1, sem er eftir 'asOfDate' %2. Sendu fromDate sem er sami dagur eða fyrr en asOfDate, eða slepptu fromDate til að fá eingöngu stöðuna.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref GLAcc Overview Impl - NamedType FromAfterAsOfErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2230199924 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>account balance, balance of a G/L account, net change on an account, how much is on account, movement in a period, ledger account balance at month end</source>
+          <target state="translated">staða lykils, staða fjárhagslykils, hreyfing á lykli, hvað er á lyklinum, hreyfing á tímabili, staða fjárhagslykils í lok mánaðar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=staða lykils, staða fjárhagslykils, hreyfing á lykli, hvað er á lyklinum, hreyfing á tímabili, staða fjárhagslykils í lok mánaðar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref GLAcc Overview Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2230199924 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>One G/L account's balance as of a date and, optionally, its net change for a period, in local currency. For the entries behind the amount, use Data.Records.Get on G/L Entry; to find an account by name, use Data.Records.Get on G/L Account.</source>
+          <target state="translated">Staða eins fjárhagslykils á tilteknum degi og, ef óskað er, hreyfing hans á tímabili, í staðbundinni mynt. Fyrir færslurnar á bak við upphæðina, notaðu Data.Records.Get á G/L Entry; til að finna lykil eftir heiti, notaðu Data.Records.Get á G/L Account.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Staða eins fjárhagslykils á tilteknum degi og, ef óskað er, hreyfing hans á tímabili, í staðbundinni mynt. Fyrir færslurnar á bak við upphæðina, notaðu Data.Records.Get á G/L Entry; til að finna lykil eftir heiti, notaðu Data.Records.Get á G/L Account.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref GLAcc Overview Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 250871058 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>what can the reference app do, list reference message types, reference app overview, help for the reference app, which operations does this app add</source>
+          <target state="translated">hvað getur sýnisappið gert, lista skilaboðategundir sýnisappsins, yfirlit sýnisappsins, hjálp fyrir sýnisappið, hvaða aðgerðir bætir þetta app við</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=hvað getur sýnisappið gert, lista skilaboðategundir sýnisappsins, yfirlit sýnisappsins, hjálp fyrir sýnisappið, hvaða aðgerðir bætir þetta app við</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Help Get Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 250871058 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An overview of the Bifrost Reference app and the message types it adds, one line each. For the contract of one type, use Help.Implementation.Get; for every installed app, use Help.MessageTypes.Get.</source>
+          <target state="translated">Yfirlit yfir Bifrost Reference appið og skilaboðategundirnar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirlit yfir Bifrost Reference appið og skilaboðategundirnar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Help Get Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 881506225 - NamedType 4068153118" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter '%1' has the value '%2', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.</source>
@@ -154,9 +214,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType NotAValueErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 881506225 - NamedType 1264649167" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The request body must be a JSON object, for example { "accountNo": "2910" }.</source>
-          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.</note>
+          <source>The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.</source>
+          <target state="translated">Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Input - NamedType NotObjectErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 881506225 - NamedType 2723671431" size-unit="char" translate="yes" xml:space="preserve">
@@ -195,6 +255,30 @@
           <note from="Developer" annotates="general" priority="2">%1 = fixed asset no., is-IS=Eignin '%1' er óvirk og því er ekki hægt að skrá viðhald á hana. Taktu hakið úr Óvirk á eignaspjaldinu í Business Central eða veldu aðra eign.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - NamedType InactiveErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>log maintenance, record service on a machine, register repair work, maintenance log, hours spent on an asset, vehicle service</source>
+          <target state="translated">skrá viðhald, skrá þjónustu á vél, skrá viðgerð, viðhaldsskrá, tímar á eign, þjónusta á ökutæki</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=skrá viðhald, skrá þjónustu á vél, skrá viðgerð, viðhaldsskrá, tímar á eign, þjónusta á ökutæki</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3536240854 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Log maintenance work done on one fixed asset: date, hours and a short note. Posts nothing and changes no amount. For FA ledger entries or maintenance costs, use FA journals; to read the log back, use Data.Records.Get on Ref Asset Maintenance.</source>
+          <target state="translated">Skrá viðhaldsvinnu á einni eign: dagsetningu, tíma og stutta athugasemd. Bókar ekkert og breytir engri upphæð. Fyrir eignafærslur eða viðhaldskostnað, notaðu eignabækur; til að lesa skrána, notaðu Data.Records.Get á Ref Asset Maintenance.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrá viðhaldsvinnu á einni eign: dagsetningu, tíma og stutta athugasemd. Bókar ekkert og breytir engri upphæð. Fyrir eignafærslur eða viðhaldskostnað, notaðu eignabækur; til að lesa skrána, notaðu Data.Records.Get á Ref Asset Maintenance.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Maint Create Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4076088300 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>add a note, save a note, write a note, store a note, new note, jot this down</source>
+          <target state="translated">bæta við athugasemd, vista athugasemd, skrifa athugasemd, geyma athugasemd, ný athugasemd, skráðu þetta</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=bæta við athugasemd, vista athugasemd, skrifa athugasemd, geyma athugasemd, ný athugasemd, skráðu þetta</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Note Add Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4076088300 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Store one new short note under a number you choose; an existing number is refused, never overwritten. To check the connection, use Reference.Echo.Get; to read records, use Data.Records.Get on Ref Note.</source>
+          <target state="translated">Vista eina nýja stutta athugasemd undir númeri sem þú velur; númeri sem er þegar til er hafnað, aldrei skrifað yfir. Til að prófa tenginguna, notaðu Reference.Echo.Get; til að lesa færslur, notaðu Data.Records.Get á Ref Note.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vista eina nýja stutta athugasemd undir númeri sem þú velur; númeri sem er þegar til er hafnað, aldrei skrifað yfir. Til að prófa tenginguna, notaðu Reference.Echo.Get; til að lesa færslur, notaðu Data.Records.Get á Ref Note.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Note Add Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3321213669 - Method 1665861916 - NamedType 954852589" size-unit="char" translate="yes" xml:space="preserve">
           <source>A note with no. '%1' already exists. Choose a different no.; if this is a retry, the first attempt most likely succeeded.</source>
           <target state="translated">Athugasemd með nr. '%1' er þegar til. Veldu annað nr.; ef þetta er endurtekning tókst fyrsta tilraunin líklega.</target>
@@ -218,6 +302,30 @@
           <target state="translated">Valið hefur breyst frá forskoðun: búist var við %1 vörum í flokknum '%2' en þær eru %3. Keyrðu Reference.ItemPrice.PreviewAdjustment aftur og sendu itemCount sem expectedItemCount.</target>
           <note from="Developer" annotates="general" priority="2">%1 = expected count, %2 = item category, %3 = actual count, is-IS=Valið hefur breyst frá forskoðun: búist var við %1 vörum í flokknum '%2' en þær eru %3. Keyrðu Reference.ItemPrice.PreviewAdjustment aftur og sendu itemCount sem expectedItemCount.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - NamedType SelectionChangedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 211567532 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>change item prices, apply the price change, raise prices for a category, lower prices for a category, update unit prices, increase prices by percent</source>
+          <target state="translated">breyta vöruverði, beita verðbreytingu, hækka verð í flokki, lækka verð í flokki, uppfæra einingarverð, hækka verð um prósentu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=breyta vöruverði, beita verðbreytingu, hækka verð í flokki, lækka verð í flokki, uppfæra einingarverð, hækka verð um prósentu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 211567532 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Change the unit prices of every item in one item category by a percentage, after the user has seen the preview. Needs the preview's itemCount. To see the effect first, use Reference.ItemPrice.PreviewAdjustment.</source>
+          <target state="translated">Breyta einingarverði allra vara í einum vöruflokki um prósentu, eftir að notandinn hefur séð forskoðunina. Þarf itemCount úr forskoðuninni. Til að sjá áhrifin fyrst, notaðu Reference.ItemPrice.PreviewAdjustment.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Breyta einingarverði allra vara í einum vöruflokki um prósentu, eftir að notandinn hefur séð forskoðunina. Þarf itemCount úr forskoðuninni. Til að sjá áhrifin fyrst, notaðu Reference.ItemPrice.PreviewAdjustment.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1216512522 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>preview price change, what if prices go up, simulate price increase, price adjustment preview, show new prices for a category</source>
+          <target state="translated">forskoða verðbreytingu, hvað ef verð hækkar, herma eftir verðhækkun, forskoðun verðbreytingar, sýna nýtt verð í flokki</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=forskoða verðbreytingu, hvað ef verð hækkar, herma eftir verðhækkun, forskoðun verðbreytingar, sýna nýtt verð í flokki</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Preview Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1216512522 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>See what a percentage change would do to the unit prices of every item in one item category, without changing anything. To make the change, use Reference.ItemPrice.ApplyAdjustment with this answer's itemCount.</source>
+          <target state="translated">Sjá hvað prósentubreyting myndi gera við einingarverð allra vara í einum vöruflokki, án þess að breyta neinu. Til að gera breytinguna, notaðu Reference.ItemPrice.ApplyAdjustment með itemCount úr þessu svari.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sjá hvað prósentubreyting myndi gera við einingarverð allra vara í einum vöruflokki, án þess að breyta neinu. Til að gera breytinguna, notaðu Reference.ItemPrice.ApplyAdjustment með itemCount úr þessu svari.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Preview Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2553378571 - NamedType 1762320083" size-unit="char" translate="yes" xml:space="preserve">
           <source>The exchange rate service at %1 could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup &gt; Start setup wizard).</source>
@@ -254,6 +362,18 @@
           <target state="translated">Taflan '%1' fannst ekki. Notaðu fullt heiti með bilum, t.d. Sales Header, eða skoðaðu töflur með Help.Tables.Get.</target>
           <note from="Developer" annotates="general" priority="2">%1 = table name, is-IS=Taflan '%1' fannst ekki. Notaðu fullt heiti með bilum, t.d. Sales Header, eða skoðaðu töflur með Help.Tables.Get.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Table Get Impl - Method ExecuteBifrostTask - NamedType TableNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3781505619 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>table id, table number, object id of a table, find a table by name, which number is this table</source>
+          <target state="translated">auðkenni töflu, númer töflu, hlutanúmer töflu, finna töflu eftir heiti, hvaða númer er þessi tafla</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=auðkenni töflu, númer töflu, hlutanúmer töflu, finna töflu eftir heiti, hvaða númer er þessi tafla</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Table Get Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3781505619 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Turn a table's exact object name, such as Item or G/L Account, into its object ID. Not for reading records or fields: use Data.Records.Get for records.</source>
+          <target state="translated">Breyta nákvæmu hlutaheiti töflu, t.d. Item eða G/L Account, í hlutanúmer hennar. Ekki til að lesa færslur eða reiti: notaðu Data.Records.Get fyrir færslur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Breyta nákvæmu hlutaheiti töflu, t.d. Item eða G/L Account, í hlutanúmer hennar. Ekki til að lesa færslur eða reiti: notaðu Data.Records.Get fyrir færslur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Table Get Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Page 2596569480 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reference Asset Maintenance</source>

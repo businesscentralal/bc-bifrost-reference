@@ -1,12 +1,12 @@
 # Legacy App v1: the "before" state (not headless)
 
-This is Legacy App as many real apps look before anyone thinks about APIs or agents. It has the **same app id** as `Legacy App` (v2), with version 1.1.0.0, so publishing v2 over it is a real upgrade. It is not part of the CI build.
+This is Legacy App as many real apps look before anyone thinks about APIs or agents. It has the **same app id** as `Legacy App` (v2), with version 2.1.0.0, so publishing v2 (2.2.0.0) over it is a real upgrade. It is not part of the CI build.
 
 Everything here works for a person clicking through the UI. That is the point: none of these problems shows up until something without a person calls the code.
 
 ## What's wrong with it for anything without a person
 
-Every problem is marked in the code as `AUDIT - <pattern>`, after the audit table in [`START-HERE.md`](../START-HERE.md) §7.1. Search the folder for `AUDIT -` to find them all.
+Every problem is marked in the code as `AUDIT - <pattern>`, after the audit table in [`ADAPTING.md`](../ADAPTING.md). Search the folder for `AUDIT -` to find them all.
 
 | Where | Pattern | Why an API, job queue, other app or AI agent can't use it |
 |---|---|---|
@@ -38,8 +38,8 @@ Both apps use the same folders, so a folder-by-folder comparison shows exactly w
 | `src/Logic/` | `LegacyStockMgt` with dialogs, `Commit` and `GuiAllowed`; `LegacyReleaseRow` | `LegacyStockAPI`, the internal headless core; `LegacyStockMgt`, old entry points kept for compatibility |
 | `src/UI/` | The list page with the business logic inside it; the reserve dialog | The list page, which only talks to the person; the same dialog |
 | `src/Permissions/` | `LEGACY STOCK` | The same |
-| `src/MessageTypes/` | – | **New:** the app's public API, with the five `Legacy.Stock.*` types, their help, the input layer and registration |
+| `src/MessageTypes/` | – | **New:** the app's public API, with the five `Legacy.Stock.*` types, their contracts, the input layer and registration |
 
 In VS Code, select both `src` folders in the Explorer and choose **Compare Selected**, or compare the matching files one by one.
 
-**Starting again:** BC won't install 1.1 over 2.0. Uninstall and unpublish `Legacy App` (2.0) before you publish v1 again.
+**Starting again:** BC won't install 2.1 over 2.2. Uninstall and unpublish `Legacy App` (2.2) before you publish v1 again.

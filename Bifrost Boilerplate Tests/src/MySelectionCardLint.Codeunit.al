@@ -5,7 +5,7 @@ using System.TestLibraries.Utilities;
 
 /// <summary>
 /// Lints every selection card (name + description) of the message types this app adds. An agent
-/// chooses a type from its card alone, so the card rules in START-HERE.md section 4 are checked like code:
+/// chooses a type from its card alone, so the card rules in BUILDING.md section 4 are checked like code:
 ///  - the description is not empty (it can never exceed 250 characters - the interface is Text[250]);
 ///  - it states its effect: an Outbound type says "Read-only", an Inbound type says "Commits",
 ///    so the words and the direction can never disagree;

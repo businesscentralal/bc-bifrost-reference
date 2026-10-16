@@ -27,13 +27,13 @@ codeunit 90150 "Ref Test Caller"
     end;
 
     /// <summary>
-    /// Runs a message type and returns its answer as text (JSON or Markdown).
+    /// Runs a message type and returns its answer as text.
     /// </summary>
     procedure CallRaw(MessageType: Enum "Message Type ori"; Subject: Text; RequestText: Text) ResponseText: Text
     var
         RequestContent: BigText;
         ResponseContent: BigText;
-        ResponseContentType: Text[50];
+        ResponseContentType: Text[100];
     begin
         if RequestText <> '' then
             RequestContent.AddText(RequestText);
@@ -43,11 +43,19 @@ codeunit 90150 "Ref Test Caller"
     end;
 
     /// <summary>
-    /// The help document of a message type, exactly as callers receive it.
+    /// One chapter of a message type's contract (for example 'errors'), as JSON text; '' when the
+    /// type does not declare it. Read through "Msg Contract Mgt ori".GetContract, the same function
+    /// Help.Implementation.Get uses, so a test sees exactly what callers see.
     /// </summary>
-    procedure GetHelp(MessageTypeName: Text): Text
+    procedure GetContractChapter(MessageType: Enum "Message Type ori"; Chapter: Text) Result: Text
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Contract: JsonObject;
+        Token: JsonToken;
     begin
-        exit(CallRaw(Enum::"Message Type ori"::"Help.Implementation.Get", MessageTypeName, ''));
+        ContractMgt.GetContract(MessageType, Contract);
+        if Contract.Get(Chapter, Token) then
+            Token.WriteTo(Result);
     end;
 
     /// <summary>

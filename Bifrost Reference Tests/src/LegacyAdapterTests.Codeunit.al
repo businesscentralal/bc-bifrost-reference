@@ -115,8 +115,10 @@ codeunit 90153 "Legacy Adapter Tests"
     [Test]
     procedure HelpQuotesTheFacadesOverStockError()
     begin
-        // The core's Label and the message type's help live in two codeunits; this keeps them in step.
-        Assert.IsTrue(Caller.GetHelp('Legacy.Stock.Reserve').Contains(OverStockPartTxt), 'The Reserve help should quote the over-stock error.');
+        // The core's Label and the contract's errors chapter live in two codeunits; this keeps them in step.
+        Assert.IsTrue(
+            Caller.GetContractChapter(Enum::"Message Type ori"::"Legacy.Stock.Reserve", 'errors').Contains(OverStockPartTxt),
+            'The errors chapter of Legacy.Stock.Reserve should quote the over-stock error.');
     end;
 
     [Test]
