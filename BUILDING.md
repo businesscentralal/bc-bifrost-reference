@@ -91,7 +91,7 @@ Each comes from a failure in live agent testing.
 17. An agent can do everything the user it runs as can do. Design every type for the narrowest access that does the job: read only what the answer needs, write only what the task changes.
 18. Ship your own permission set for your tables and objects, as narrow as possible, and never include Foundation's sets in it. Customers combine it with `BIFROST API ori`.
 19. Be careful with `InherentPermissions` and indirect permissions on your objects: they let a call do more than the user could, and an agent will use that. Use them only where the task requires it, and say so in the `effect` chapter.
-20. Bifrost Field Access applies to Foundation's generic readers (Data, CSV, Deleted, ChangeLog). A response your code builds itself is not filtered: return only the fields the task needs, and leave personal data (names of people, contact details, identity and bank numbers) out unless the task is about them.
+20. Bifrost Field Access applies to Foundation's own field-by-field operations (reading, totals, exports, deleted records, the change log, record writes and document creation). A response your code builds itself is not filtered: return only the fields the task needs, and leave personal data (names of people, contact details, identity and bank numbers) out unless the task is about them.
 21. Your app's tables are not in Foundation's default protections. Tell customers which of your tables and fields hold personal or sensitive data, so they can classify them and set Field Access for agent users.
 
 ## 4. The contract
