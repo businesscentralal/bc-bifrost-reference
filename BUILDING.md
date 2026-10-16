@@ -44,7 +44,7 @@ The caption is `Locked`: callers in every language send the same string. Value i
 Name types `Capability.Entity.Verb` in words a user would say. The name is the strongest search signal.
 
 - **Capability:** your app's product area, one word, **yours alone**. Never add types to someone else's (`Sales`, `Data`, `Help`, `Document`, `Reference`, `Legacy` …). Two extensions can't add the same enum value name; check `Help.MessageTypes.Get` in your sandbox first.
-- **Entity:** the business object, singular, optionally qualified (`Item.Summary.Get`, `GLAccount.Overview.Get`). A filter is a parameter, not part of the name.
+- **Entity:** the business object, singular. Keep names to three parts, `Capability.Entity.Verb`; put any qualifier in the entity word or a parameter. A filter is a parameter, not part of the name. (Two sample types still have four parts; see issue #4.)
 - **Verb:** the promise. A `Get` that writes is a bug.
 
 | Verb | Direction | `effect` | Meaning |
@@ -85,6 +85,14 @@ Each comes from a failure in live agent testing.
 14. Register the app with `App Registry ori`, even without a setup page (pass 0), so the Bifrost Setup wizard can switch on outbound HTTP for it.
 15. At most one action on Foundation's `Setup ori` page; your settings live on your own page. No HTTP, credential or setup notifications of your own.
 16. Descriptions, contract text and errors are shown to every caller: keep personal data out. Request bodies are kept in the message log: send and store only what the type needs.
+
+**Permissions and data**
+
+17. An agent can do everything the user it runs as can do. Design every type for the narrowest access that does the job: read only what the answer needs, write only what the task changes.
+18. Ship your own permission set for your tables and objects, as narrow as possible, and never include Foundation's sets in it. Customers combine it with `BIFROST API ori`.
+19. Be careful with `InherentPermissions` and indirect permissions on your objects: they let a call do more than the user could, and an agent will use that. Use them only where the task requires it, and say so in the `effect` chapter.
+20. Bifrost Field Access applies to Foundation's generic readers (Data, CSV, Deleted, ChangeLog). A response your code builds itself is not filtered: return only the fields the task needs, and leave personal data (names of people, contact details, identity and bank numbers) out unless the task is about them.
+21. Your app's tables are not in Foundation's default protections. Tell customers which of your tables and fields hold personal or sensitive data, so they can classify them and set Field Access for agent users.
 
 ## 4. The contract
 
@@ -171,7 +179,7 @@ Test the card the way it is used: ask a fresh agent in plain words, with no type
 
 | Use | Procedure |
 |---|---|
-| Read | `GetRequestJson()` (wrap in a `[TryFunction]`: a non-object body raises), `GetRequestText()`, `GetRequestDataArray(var JsonArray)`, `SubjectIsGuid()` |
+| Read | `GetRequestJson()` (wrap in a `[TryFunction]`: a non-object body raises), `SubjectIsGuid()` |
 | Answer | `SetResponseJson(JsonObject)`, `SetResponseMarkdown(Text)`, `SetResponsePdf(var Temp Blob)` |
 | Errors | `RespondWithError(Text)` → `{"status":"Error","error":…,"hint":…}`. The hint points the caller to `Help.Implementation.Get`. |
 | Guards | `AssertVersion1()`, `AssertIsLicensed()` |
@@ -181,7 +189,7 @@ A success answer has no `status` field. Read `skip`/`take` with your input layer
 
 **`Dispatcher ori`:** `Execute(…)` (8 parameters, `OmitCommit` = true; 9 with the flag) and `EnqueueAndProcess(…)` (adds Task Id, language, message id, response time; `OmitCommit` = false). Every overload writes a `Message ori` row and runs the full pipeline. Pass only the `data` object as `RequestContent`. `Execute` runs in the default language (Bifrost Setup, then Company Information, then 1033); pass `WindowsLanguageId` to `EnqueueAndProcess` to choose. See [INTEGRATING.md](INTEGRATING.md).
 
-**Licence:** until the Bifröst trial is activated in the environment (in Bifrost Setup), calls to your types answer "Bifrost trial has not been started", and tests fail with that text.
+**Before the first call:** someone must approve the Terms of Use in the Bifrost Setup wizard. Until then every call answers `"code": "EULA_REQUIRED"` ("EULA approval is required before Bifrost calls can be processed."). Then the trial must be started in Bifrost Setup; until it is, calls to your types answer "Bifrost trial has not been started", and tests fail with that text.
 
 **`App Registry ori`:** subscribe to `OnRegisterApps` and call `AddApp(Apps, AppInfo.Id(), AppName, SetupPageId)`.
 
@@ -215,7 +223,8 @@ Tests assert English fragments, so run them in a company whose default language 
 - [ ] Headless: no UI, no `Commit`, isolated writes, nothing written before the isolated run.
 - [ ] All input through the input layer; the four error kinds are distinct; no silent success.
 - [ ] Direction correct, secrets redacted, app registered, `Help.<Capability>.Get` lists the type.
-- [ ] Compiles with 0 errors under CodeCop, UICop and PerTenantExtensionCop or AppSourceCop.
+- [ ] Narrow permission set shipped; no inherent or indirect permission the task doesn't need; responses carry no personal data the task doesn't need; your sensitive tables and fields are listed for customers.
+- [ ] Compiles with 0 errors and 0 warnings under CodeCop, UICop and PerTenantExtensionCop. For AppSource, first set your own ID range, logo and help URL in `app.json`; the samples use per-tenant ranges and fail AppSourceCop as shipped.
 - [ ] Unit tests and lints pass; the break set passes live.
 
 ## 9. Shipping your app

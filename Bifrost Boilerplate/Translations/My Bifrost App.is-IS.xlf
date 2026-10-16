@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="is-IS" original="My Bifrost App">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="My Bifrost App">
     <body>
       <group id="body">
         <trans-unit id="Codeunit 2581445924 - NamedType 3899500243" size-unit="char" translate="yes" xml:space="preserve">
@@ -8,6 +8,30 @@
           <target state="translated">Halló, %1! My Bifrost App virkar í %2.</target>
           <note from="Developer" annotates="general" priority="2">%1 = the name sent, or the user, %2 = company name, is-IS=Halló, %1! My Bifrost App virkar í %2.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Hello Get Impl - NamedType GreetingTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2581445924 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>hello, is my app working, test the connection to my app, check the app is installed, which version of my app is installed</source>
+          <target state="translated">halló, virkar appið mitt, prófa tenginguna við appið mitt, athuga hvort appið sé uppsett, hvaða útgáfa af appinu mínu er uppsett</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=halló, virkar appið mitt, prófa tenginguna við appið mitt, athuga hvort appið sé uppsett, hvaða útgáfa af appinu mínu er uppsett</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Hello Get Impl - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2581445924 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Check that My Bifrost App is installed and answering: a greeting, the user, the company and the app version. Not for business data: for what the app offers, use Help.MyApp.Get.</source>
+          <target state="translated">Athuga hvort My Bifrost App sé uppsett og svari: kveðja, notandinn, fyrirtækið og útgáfa appsins. Ekki fyrir viðskiptagögn: til að sjá hvað appið býður, notaðu Help.MyApp.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Athuga hvort My Bifrost App sé uppsett og svari: kveðja, notandinn, fyrirtækið og útgáfa appsins. Ekki fyrir viðskiptagögn: til að sjá hvað appið býður, notaðu Help.MyApp.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Hello Get Impl - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3983233541 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>what can my app do, list my app's message types, my app overview, help for my app, which operations does this app add</source>
+          <target state="translated">hvað getur appið mitt gert, lista skilaboðategundir appsins míns, yfirlit appsins míns, hjálp fyrir appið mitt, hvaða aðgerðir bætir þetta app við</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=hvað getur appið mitt gert, lista skilaboðategundir appsins míns, yfirlit appsins míns, hjálp fyrir appið mitt, hvaða aðgerðir bætir þetta app við</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Help Get Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3983233541 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An overview of My Bifrost App and the message types it adds, one line each. For the contract of one type, use Help.Implementation.Get; for every installed app, use Help.MessageTypes.Get.</source>
+          <target state="translated">Yfirlit yfir My Bifrost App og skilaboðategundirnar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirlit yfir My Bifrost App og skilaboðategundirnar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Help Get Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2281736422 - NamedType 4125166614" size-unit="char" translate="yes" xml:space="preserve">
           <source>Parameter '%1' has the value '%2'. Send true or false, without quotes.</source>
@@ -58,9 +82,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType NotAValueErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2281736422 - NamedType 1264649167" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The request body must be a JSON object, for example { "itemNo": "1896-S" }.</source>
-          <target state="translated">Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S" }.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S" }.</note>
+          <source>The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.</source>
+          <target state="translated">Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Input - NamedType NotObjectErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2281736422 - NamedType 2723671431" size-unit="char" translate="yes" xml:space="preserve">
@@ -86,6 +110,30 @@
           <target state="translated">Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1000..1999 eða 19*.</target>
           <note from="Developer" annotates="general" priority="2">%1 = filter received, %2 = platform error text, is-IS=Færibreytan 'itemFilter' er '%1', sem er ekki gild sía: %2 Sendu vörunúmer eða síu eins og 1000..1999 eða 19*.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item List Impl - NamedType FilterErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1472980933 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>list items, show items, which items do we have, items starting with, find items by number, how many items</source>
+          <target state="translated">lista vörur, sýna vörur, hvaða vörur eigum við, vörur sem byrja á, finna vörur eftir númeri, hve margar vörur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=lista vörur, sýna vörur, hvaða vörur eigum við, vörur sem byrja á, finna vörur eftir númeri, hve margar vörur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item List Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1472980933 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>List items by item number filter, with the total count; at most 100 rows. Not for one item's price and inventory: use MyApp.Item.Summary.Get. To search by description or another field, use Data.Records.Get on Item.</source>
+          <target state="translated">Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.Item.Summary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.Item.Summary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item List Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 231972383 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>item price and stock, how many do we have, what does this item cost, inventory of an item, quantity on hand, item summary</source>
+          <target state="translated">verð og birgðir vöru, hve mörg eigum við, hvað kostar þessi vara, birgðir vöru, magn á lager, yfirlit vöru</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=verð og birgðir vöru, hve mörg eigum við, hvað kostar þessi vara, birgðir vöru, magn á lager, yfirlit vöru</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item Summary Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 231972383 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>One item's description, base unit, unit price and quantity on hand as of a date. For many items, use MyApp.Item.List; for the entries behind the inventory, use Data.Records.Get on Item Ledger Entry.</source>
+          <target state="translated">Lýsing, grunneining, einingarverð og magn á lager einnar vöru á tilteknum degi. Fyrir margar vörur, notaðu MyApp.Item.List; fyrir færslurnar á bak við birgðirnar, notaðu Data.Records.Get á Item Ledger Entry.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lýsing, grunneining, einingarverð og magn á lager einnar vöru á tilteknum degi. Fyrir margar vörur, notaðu MyApp.Item.List; fyrir færslurnar á bak við birgðirnar, notaðu Data.Records.Get á Item Ledger Entry.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item Summary Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="PermissionSet 1498262926 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>My Bifrost App</source>
