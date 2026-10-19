@@ -83,7 +83,8 @@ The samples use items on purpose: a template gets copied everywhere, so it must 
    text. Add `tabledata ... = RIMD` and `table ... = X` for every table you add; keep `IsEnabled` of each
    type checking the permission that type needs.
 10. **Build, publish, test.** Download symbols (Bifrost Foundation 28.0.2.0 and the base app), build the app
-    with CodeCop, UICop and AppSourceCop, publish it, then build and publish the test app and run it. All seven
+    with CodeCop, UICop and PerTenantExtensionCop, publish it, then build and publish the test app and run it.
+    Before using AppSourceCop, configure your own AppSource object range, logo and help metadata. All seven
     tests and the two lints (selection card, contract chapters) must pass before you replace the samples - they prove the copy works.
     Then call your renamed `MyApp.Hello.Get` first, then `Help.MyApp.Get` and each type once through the Bifrost API or MCP server: one
     happy path and one error each.

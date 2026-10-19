@@ -21,9 +21,18 @@ codeunit 50007 "My Hello Get Impl" implements "Msg Interface ori", "Msg Discover
         GreetingTxt: Label 'Hello, %1! My Bifrost App is working in %2.', Comment = '%1 = the name sent, or the user, %2 = company name, is-IS=Halló, %1! My Bifrost App virkar í %2.';
 
     // ---------- Msg Interface ori ----------
-    procedure IsEnabled(): Boolean begin exit(true); end; // every user sees this type
-    procedure GetFilterTableNo(): Integer begin exit(0); end;
-    procedure GetMessageDirection(): Enum "Msg Direction ori" begin exit(Enum::"Msg Direction ori"::Outbound); end;
+    procedure IsEnabled(): Boolean
+    begin
+        exit(true);
+    end; // every user sees this type
+    procedure GetFilterTableNo(): Integer
+    begin
+        exit(0);
+    end;
+    procedure GetMessageDirection(): Enum "Msg Direction ori"
+    begin
+        exit(Enum::"Msg Direction ori"::Outbound);
+    end;
 
     procedure GetDescription(): Text[250]
     begin
@@ -61,8 +70,14 @@ codeunit 50007 "My Hello Get Impl" implements "Msg Interface ori", "Msg Discover
     end;
 
     // ---------- Msg Discovery ori: words people say, and what it is NOT for. Translatable Labels, never Locked. ----------
-    procedure GetKeywords(): Text begin exit(KeywordsLbl); end;
-    procedure GetSelectionDescription(): Text begin exit(SelectionLbl); end;
+    procedure GetKeywords(): Text
+    begin
+        exit(KeywordsLbl);
+    end;
+    procedure GetSelectionDescription(): Text
+    begin
+        exit(SelectionLbl);
+    end;
 
     // ---------- Msg Contract ori: the use card. Help.Implementation.Get returns these chapters. ----------
     procedure GetOverview(var Overview: Text): Boolean
@@ -147,6 +162,12 @@ codeunit 50007 "My Hello Get Impl" implements "Msg Interface ori", "Msg Discover
     end;
 
     // Chapters that do not apply. Returning false means "chapter not declared".
-    procedure GetTarget(var Target: JsonArray): Boolean begin exit(false); end; // reads no record
-    procedure GetMetering(var Metering: JsonObject): Boolean begin exit(false); end; // no meters of our own; Foundation still reports charging
+    procedure GetTarget(var Target: JsonArray): Boolean
+    begin
+        exit(false);
+    end; // reads no record
+    procedure GetMetering(var Metering: JsonObject): Boolean
+    begin
+        exit(false);
+    end; // no meters of our own; Foundation still reports charging
 }

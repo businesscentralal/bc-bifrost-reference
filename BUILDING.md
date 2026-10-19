@@ -16,7 +16,7 @@ Before the mechanics: an operation is a promise to someone you will never meet, 
 
 The rest of this guide is how to build each of these. The test of all seven is the same: ask a fresh agent in plain words, and watch whether it picks your operation, uses it correctly the first time, and asks before anything it can't undo.
 
-**Read the real Foundation symbols before you write code. Never guess a signature.** Everything here is checked against Bifrost Foundation 28.0.2 and the apps in this repository.
+**Read the real Foundation symbols before you write code. Never guess a signature.** Everything here is checked against Bifrost Foundation 28.0.2 and the apps in this repository. Download symbols for compilation, but deploy a full Foundation app package before publishing and testing these extensions. The AppSourceSymbols feed contains symbol-only packages with no executable objects. This repository’s AL-Go build obtains the full app from the latest Foundation main build through `appDependencyProbingPaths`.
 
 ## 1. One type = one enum value + one codeunit
 
@@ -171,7 +171,7 @@ Test the card the way it is used: ask a fresh agent in plain words, with no type
 
 | Use | Procedure |
 |---|---|
-| Read | `GetRequestJson()` (wrap in a `[TryFunction]`: a non-object body raises), `GetRequestText()`, `GetRequestDataArray(var JsonArray)`, `SubjectIsGuid()` |
+| Read | `GetRequestJson()` (wrap in a `[TryFunction]`: a non-object body raises), `SubjectIsGuid()` |
 | Answer | `SetResponseJson(JsonObject)`, `SetResponseMarkdown(Text)`, `SetResponsePdf(var Temp Blob)` |
 | Errors | `RespondWithError(Text)` → `{"status":"Error","error":…,"hint":…}`. The hint points the caller to `Help.Implementation.Get`. |
 | Guards | `AssertVersion1()`, `AssertIsLicensed()` |
@@ -181,7 +181,7 @@ A success answer has no `status` field. Read `skip`/`take` with your input layer
 
 **`Dispatcher ori`:** `Execute(…)` (8 parameters, `OmitCommit` = true; 9 with the flag) and `EnqueueAndProcess(…)` (adds Task Id, language, message id, response time; `OmitCommit` = false). Every overload writes a `Message ori` row and runs the full pipeline. Pass only the `data` object as `RequestContent`. `Execute` runs in the default language (Bifrost Setup, then Company Information, then 1033); pass `WindowsLanguageId` to `EnqueueAndProcess` to choose. See [INTEGRATING.md](INTEGRATING.md).
 
-**Licence:** until the Bifröst trial is activated in the environment (in Bifrost Setup), calls to your types answer "Bifrost trial has not been started", and tests fail with that text.
+**Licence:** first approve the EULA in the Bifrost Setup wizard. Until then, Foundation refuses calls with `status = Error` and `code = EULA_REQUIRED`, with a `setupUrl` pointing to setup. After EULA approval, activate the Bifröst trial in Bifrost Setup; otherwise calls answer "Bifrost trial has not been started". Tests need both steps completed by the environment owner; do not write EULA or licence state from test code.
 
 **`App Registry ori`:** subscribe to `OnRegisterApps` and call `AddApp(Apps, AppInfo.Id(), AppName, SetupPageId)`.
 
@@ -215,7 +215,7 @@ Tests assert English fragments, so run them in a company whose default language 
 - [ ] Headless: no UI, no `Commit`, isolated writes, nothing written before the isolated run.
 - [ ] All input through the input layer; the four error kinds are distinct; no silent success.
 - [ ] Direction correct, secrets redacted, app registered, `Help.<Capability>.Get` lists the type.
-- [ ] Compiles with 0 errors under CodeCop, UICop and PerTenantExtensionCop or AppSourceCop.
+- [ ] Compiles with 0 errors and 0 warnings under CodeCop, UICop and PerTenantExtensionCop (the templates use per-tenant object ranges). For AppSourceCop, first configure your own AppSource range, logo and help metadata.
 - [ ] Unit tests and lints pass; the break set passes live.
 
 ## 9. Shipping your app

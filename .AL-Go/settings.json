@@ -1,7 +1,27 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v9.0/.Modules/settings.schema.json",
   "country": "w1",
-  "appFolders": ["Bifrost Reference", "Legacy App v2 (headless)"],
-  "testFolders": ["Bifrost Reference Tests"],
-  "bcptTestFolders": []
+  "appFolders": [
+    "Bifrost Boilerplate",
+    "Bifrost Reference",
+    "Legacy App v2 (headless)"
+  ],
+  "testFolders": [
+    "Bifrost Boilerplate Tests",
+    "Bifrost Reference Tests"
+  ],
+  "bcptTestFolders": [],
+  "appDependencyProbingPaths": [
+    {
+      "repo": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core",
+      "release_status": "latestBuild",
+      "version": "latest",
+      "projects": "*",
+      "authTokenSecret": "ghTokenWorkflow"
+    }
+  ],
+  "enableCodeCop": true,
+  "enableUICop": true,
+  "enableCodeAnalyzersOnTestApps": true,
+  "failOn": "warning"
 }
