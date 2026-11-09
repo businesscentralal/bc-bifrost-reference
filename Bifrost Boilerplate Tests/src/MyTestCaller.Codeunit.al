@@ -40,7 +40,7 @@ codeunit 50050 "My Test Caller"
     var
         RequestContent: BigText;
         ResponseContent: BigText;
-        ResponseContentType: Text[50];
+        ResponseContentType: Text[100];
     begin
         if RequestText <> '' then
             RequestContent.AddText(RequestText);

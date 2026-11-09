@@ -124,7 +124,7 @@ Message types are your app's public API. A procedure call reaches only AL code t
 
     **The examples in this file use three example capabilities:** `Reference` (the types of this repository's `Bifrost Reference` app), `Legacy` (the `Legacy App` of §7) and `Contoso` (the §5.1–§5.4 code: the same `AssetMaintenance.Create` type as it would look in a partner's app). `MyApp` in §5.8 is the placeholder you replace with your own capability.
 
-18. **Register the app with `App Registry ori`,** even when it has no setup page and no secrets (pass 0 as the page). Foundation's setup wizard can only switch on outbound HTTP for apps it knows.
+18. **Register the app with `App Registry ori`,** even when it has no setup page and no secrets (pass 0 as the page). The subscriber needs `InherentPermissions = X;` and `InherentEntitlements = X;` (§5.5). Foundation's setup wizard can only switch on outbound HTTP for apps it knows.
 19. **At most one action on Foundation's `Setup ori` page.** Your settings live on your own page.
 20. **Never show your own HTTP, credentials or setup notification.** Foundation aggregates them on Bifrost Setup for every registered app.
 21. **One `Help.<Capability>.Get` directory type per capability you own** (§5.8), so usually one per app. Throughout this file, `Help.<App>.Get` means the same thing.
@@ -852,6 +852,8 @@ codeunit 50103 "Contoso Maint Create Help"
 codeunit 50110 "Contoso Registration"
 {
     Access = Internal;
+    InherentPermissions = X;
+    InherentEntitlements = X;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"App Registry ori", OnRegisterApps, '', false, false)]
     local procedure RegisterApp(var Apps: Record "Registered App ori" temporary)
@@ -887,6 +889,8 @@ pageextension 50111 "Contoso Setup Action" extends "Setup ori"
     }
 }
 ```
+
+**Registration contract:** every `OnRegisterApps` subscriber must declare both `InherentPermissions = X;` and `InherentEntitlements = X;`. Foundation's inherent Execute on `App Registry ori` does not grant Execute on a subscriber in a dependent app. This grant is only for metadata registration: module information plus `AddApp` on the temporary registry record. It grants no business actions or cross-extension `tabledata` access. Never add HTTP, credentials, licence/EULA, settings, jobs or business-data writes to a registration subscriber. Never silently drop an app from discovery because a permission is missing.
 
 **Secrets:** register in an install codeunit, then read with `TryGet` inside a `[NonDebuggable]` procedure:
 
@@ -1035,6 +1039,8 @@ Verified against Foundation 28.0. The test caller in §5.8 does exactly this.
 | Event | `[IntegrationEvent(false, false)] OnRegisterApps(var Apps: Record "Registered App ori" temporary)` |
 | Subscriber | `[EventSubscriber(ObjectType::Codeunit, Codeunit::"App Registry ori", OnRegisterApps, '', false, false)]` |
 | `AddApp` | `AddApp(var Apps: Record "Registered App ori" temporary; AppId: Guid; AppName: Text[250]; SetupPageId: Integer)`: pass 0 when there is no setup page. It is idempotent, and an empty GUID is ignored. |
+
+**Registration contract:** every `OnRegisterApps` subscriber must declare both `InherentPermissions = X;` and `InherentEntitlements = X;`. Foundation's inherent Execute on `App Registry ori` does not grant Execute on a subscriber in a dependent app. This grant is only for metadata registration: module information plus `AddApp` on the temporary registry record. It grants no business actions or cross-extension `tabledata` access. Never add HTTP, credentials, licence/EULA, settings, jobs or business-data writes to a registration subscriber. Never silently drop an app from discovery because a permission is missing. The subscriber must do nothing but register.
 
 #### Codeunit `"Secret Store ori"`
 

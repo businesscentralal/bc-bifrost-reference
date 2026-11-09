@@ -5,10 +5,13 @@ using Origo.Bifrost;
 /// <summary>
 /// Every app built on Bifröst registers once with the App Registry, so Foundation lists it in the
 /// setup wizard and its aggregated notifications. Legacy App has no setup page, so it passes 0.
+/// The inherent Execute grant exists only for metadata registration.
 /// </summary>
 codeunit 90107 "Legacy Adapter Registration"
 {
     Access = Internal;
+    InherentPermissions = X;
+    InherentEntitlements = X;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"App Registry ori", OnRegisterApps, '', false, false)]
     local procedure RegisterApp(var Apps: Record "Registered App ori" temporary)
