@@ -58,7 +58,9 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
         if not AdapterInput.GetText(Argument, RequestJson, 'itemFilter', true, 250, '"1896-S|1900-S" or "*" for all', ItemFilter) then
             exit(false);
 
-        Reservation.LockTable();
+        // Keep update locks without promoting the outer HTTP call to a write transaction.
+        // The isolated release rechecks the count and owns its writes.
+        Reservation.ReadIsolation := IsolationLevel::UpdLock;
         Reservation.SetFilter("Item No.", ItemFilter);
         Count := Reservation.Count();
         Summary := StrSubstNo(SelectionTxt, ItemFilter);
