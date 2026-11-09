@@ -1,0 +1,67 @@
+[
+  {
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "project": "Bifrost Boilerplate",
+    "exitCode": 1,
+    "errors": 4,
+    "warnings": 1,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ],
+    "at": "2026-11-09T01:56:21.488153+00:00"
+  },
+  {
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "project": "Legacy App v2 (headless)",
+    "exitCode": 1,
+    "errors": 6,
+    "warnings": 1,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ],
+    "at": "2026-11-09T01:56:31.853703+00:00"
+  },
+  {
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "project": "Bifrost Reference",
+    "exitCode": 1,
+    "errors": 4,
+    "warnings": 1,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ],
+    "at": "2026-11-09T01:56:41.868791+00:00"
+  },
+  {
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "project": "Bifrost Boilerplate Tests",
+    "exitCode": 1,
+    "errors": 6,
+    "warnings": 1,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ],
+    "at": "2026-11-09T01:56:54.235813+00:00"
+  },
+  {
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "project": "Bifrost Reference Tests",
+    "exitCode": 1,
+    "errors": 6,
+    "warnings": 1,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "AppSourceCop"
+    ],
+    "at": "2026-11-09T01:57:05.918778+00:00"
+  }
+]

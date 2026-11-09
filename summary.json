@@ -1,0 +1,100 @@
+{
+  "issue": "https://github.com/businesscentralal/bc-bifrost-reference/issues/6",
+  "owner": "Reginn (worker-6)",
+  "candidateSha": "05fab29b9fbec89781f6436d632a408bd7036458",
+  "branchUrl": "https://github.com/businesscentralal/bc-bifrost-reference/tree/fix/issue6-registration-execute",
+  "commitUrl": "https://github.com/businesscentralal/bc-bifrost-reference/commit/05fab29b9fbec89781f6436d632a408bd7036458",
+  "readiness": "BLOCKED; no PR, CI pass, review clearance, merge or delivery claimed",
+  "fullAcceptanceRetained": true,
+  "matrix": {
+    "AC01": {
+      "status": "PASS",
+      "evidence": "static-acceptance.json"
+    },
+    "AC02": {
+      "status": "PASS",
+      "evidence": "static-acceptance.json"
+    },
+    "AC03": {
+      "status": "PASS",
+      "evidence": "static-acceptance.json"
+    },
+    "AC04": {
+      "status": "PASS",
+      "evidence": "static-acceptance.json"
+    },
+    "AC05": {
+      "status": "PASS",
+      "evidence": "static-acceptance.json"
+    },
+    "AC06": {
+      "status": "PASS",
+      "evidence": "static-acceptance.json"
+    },
+    "AC12": {
+      "status": "PASS",
+      "evidence": "static-acceptance.json"
+    },
+    "AC07": {
+      "status": "PARTIAL",
+      "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+      "fiveAppPteCompile": "0 errors / 0 warnings with CodeCop, UICop and PerTenantExtensionCop",
+      "appSourceCop": "26 errors / 5 warnings from unchanged illustrative PTE ranges/packaging; disposition pending",
+      "prCI": "NOT_RUN: no PR opened"
+    },
+    "AC08": {
+      "status": "PASS",
+      "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+      "executed": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "restricted-regressions.json"
+    },
+    "AC09": {
+      "status": "BLOCKED",
+      "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+      "role": "BIFROST LicAdm ori only, no SUPER or sample roles",
+      "reason": "Company startup fails on platform User IndirectRead before the setup page opens. No role/tabledata grants broadened.",
+      "restricted1033": "2 page attempts blocked, 0 verified",
+      "restricted1039": "NOT_RUN: same known company-startup dependency",
+      "administratorSmoke": "4 separate UI scenarios passed in LCIDs1033/1039; does not resolve restricted-user acceptance"
+    },
+    "AC10": {
+      "status": "UNVERIFIED",
+      "test": "Foundation98677 LicAdm_Sync_PassesGateAndKeepsQuota",
+      "executed": 0,
+      "passed": 0,
+      "reason": "Genuine test-app installer requires setup writes prohibited by the current assignment; safe authorized setup remains pending",
+      "foundationVersion": "28.0.12.679"
+    },
+    "AC11": {
+      "status": "FAILED / DEPENDENT",
+      "priorFullSuiteSha": "adf8fad761553ff14c03387217cb047176727b70",
+      "priorExecuted": 33,
+      "priorPassed": 13,
+      "priorFailed": 20,
+      "priorSkipped": 0,
+      "currentSha": "05fab29b9fbec89781f6436d632a408bd7036458",
+      "currentFullSuite": "NOT_RUN: same known out-of-scope compatibility/help dependency; no old result claimed as a new-tip pass",
+      "evidence": "previous-full-suite.json"
+    }
+  },
+  "mcp": {
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "touchedMessageTypes": [],
+    "notApplicableReason": "The change adds metadata-only OnRegisterApps subscriber Execute properties and guide text, plus test-app regressions and response content-type buffers. No message handler, enum value, request/response schema or message-type behaviour changed. No MCP message-type pass claimed."
+  },
+  "cleanup": {
+    "id": "f0542aa346b1",
+    "owner": "worker-6",
+    "verifiedDeleted": true,
+    "deleteStatus": 204,
+    "readbackStatus": 404,
+    "verifiedAt": "2026-11-09T02:00:44.805Z",
+    "fixturesRemovedWithOwnedContainer": true,
+    "actualLastVerifiedDeployedSha": "05fab29b9fbec89781f6436d632a408bd7036458"
+  },
+  "canonicalGitHubVerifier": "Repository allowlist rejects reference; supplemental canonical API ref/commit/ref readback matches current candidate. Root repair pending.",
+  "nextAction": "Architect/Claude resolve scoped AppSource, sample-contract/full-suite, exact-role UI and safe Foundation98677 dependencies; root repairs canonical verifier; retained developer continues after an actual dependency change."
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "project": "Bifrost Boilerplate",
+    "appId": "b7e4c2a9-3f18-4d6e-9a5c-1e8f2d7b6c43",
+    "version": "1.0.0.0",
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "artifactSha256": "c4e6a83570c016f02d06a0018718783c0661dfd562a63670fb9b1e7a9f009bed",
+    "at": "2026-11-09T01:44:54.019509+00:00"
+  },
+  {
+    "project": "Legacy App v2 (headless)",
+    "appId": "8a3f2c1e-9d4b-4e7a-b6c3-1f5e8a2d4c9b",
+    "version": "2.0.0.0",
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "artifactSha256": "41947bf38c01d25bf848f92db12b5ef7a39826cb13d4949d1673ff254df1d728",
+    "at": "2026-11-09T01:45:06.845961+00:00"
+  },
+  {
+    "project": "Bifrost Reference",
+    "appId": "3f8a1c2e-6b4d-4a9f-9e2c-7d5b8a3f1e6c",
+    "version": "1.1.0.0",
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "artifactSha256": "79ce2d8450e2167634731c03de1997541cf31920f2ddb72d84c156df918369b0",
+    "at": "2026-11-09T01:45:19.795697+00:00"
+  },
+  {
+    "project": "Bifrost Boilerplate Tests",
+    "appId": "e2a9d6f1-7c34-4b8e-a15d-9f6c3b2e8a70",
+    "version": "1.0.0.0",
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "artifactSha256": "ff3a7e80f979fdd0bc0047a052ee11256e478791133e8a499224a1f33c6a424e",
+    "at": "2026-11-09T01:45:30.756131+00:00"
+  },
+  {
+    "project": "Bifrost Reference Tests",
+    "appId": "6c1e9b4a-2f7d-4e3b-a8c5-9d0f1b2e3a47",
+    "version": "1.0.0.0",
+    "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "artifactSha256": "3416b0a80ff2aee312447d6bee5cec09b8f99b15daec90f64e20676a841ba45f",
+    "at": "2026-11-09T01:45:41.288958+00:00"
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "AC01": [
+    {
+      "file": "Bifrost Boilerplate/src/Lifecycle/MyRegistration.Codeunit.al",
+      "id": "50006",
+      "propertiesOnlyPlusSummary": true,
+      "eventAndAddAppUnchanged": true
+    },
+    {
+      "file": "Bifrost Reference/src/Lifecycle/RefRegistration.Codeunit.al",
+      "id": "90006",
+      "propertiesOnlyPlusSummary": true,
+      "eventAndAddAppUnchanged": true
+    },
+    {
+      "file": "Legacy App v2 (headless)/src/MessageTypes/LegacyAdapterRegistration.Codeunit.al",
+      "id": "90107",
+      "propertiesOnlyPlusSummary": true,
+      "eventAndAddAppUnchanged": true
+    }
+  ],
+  "AC02": "Object IDs/names unchanged; no permission-set or tabledata grant edits. Test-only Permissions Mock dependency and response buffers updated.",
+  "AC03": "Exact registration bodies/skip flags match main",
+  "AC04_AC05": "Mandatory metadata-only contract in5.5 and5.7; corrected50110snippet; rule18pointer",
+  "AC06": "Only module metadata and temporary AddApp in subscribers; exact previous body preserved",
+  "AC12": {
+    "auditedSubscriberFiles": [
+      "START-HERE.md",
+      "Bifrost Boilerplate/src/Lifecycle/MyRegistration.Codeunit.al",
+      "Bifrost Reference/src/Lifecycle/RefRegistration.Codeunit.al",
+      "Legacy App v2 (headless)/src/MessageTypes/LegacyAdapterRegistration.Codeunit.al"
+    ],
+    "allHaveBothProperties": true
+  },
+  "notVerified": [
+    "AppSourceCop packaging conflict",
+    "AC08newtipfocusedpending",
+    "AC09restrictedUIpending",
+    "AC10installerdependency",
+    "AC11previousfullsuite20failures; newtipfullsuitependingdependency"
+  ],
+  "noNewSuppressions": true
+}

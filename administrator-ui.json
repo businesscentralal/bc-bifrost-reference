@@ -1,0 +1,76 @@
+{
+  "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+  "scope": "Separate administrator smoke inspection; restricted AC09 remains BLOCKED beforecompanyopen, not superseded",
+  "verified": true,
+  "executed": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "lcids": [
+    1033,
+    1039
+  ],
+  "finishedIn1033": true,
+  "events": [
+    {
+      "lcid": 1033,
+      "selectedLanguage": "English (United States)",
+      "confirmedHeading": "Bifrost Setup",
+      "at": "2026-11-09T01:58:46.902Z"
+    },
+    {
+      "lcid": 1039,
+      "selectedLanguage": "Icelandic (Iceland)",
+      "confirmedHeading": "Uppsetning Bifr\u00f6st",
+      "at": "2026-11-09T01:59:05.416Z"
+    },
+    {
+      "lcid": 1033,
+      "selectedLanguage": "English (United States)",
+      "confirmedHeading": "Bifrost Setup",
+      "at": "2026-11-09T01:59:22.944Z"
+    }
+  ],
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "page": 10077914,
+      "passed": true,
+      "scenario": "Localized Bifrost Setup opens and renders",
+      "appNamesVisible": [
+        "My Bifrost App",
+        "Bifrost Reference",
+        "Legacy App"
+      ],
+      "noLicenceActionsInvoked": true
+    },
+    {
+      "lcid": 1033,
+      "page": 10077925,
+      "passed": true,
+      "scenario": "Localized setup wizard welcome renders without EULA/trial/HTTP actions",
+      "appNamesVisible": [],
+      "noLicenceActionsInvoked": true
+    },
+    {
+      "lcid": 1039,
+      "page": 10077914,
+      "passed": true,
+      "scenario": "Localized Bifrost Setup opens and renders",
+      "appNamesVisible": [
+        "My Bifrost App",
+        "Bifrost Reference",
+        "Legacy App"
+      ],
+      "noLicenceActionsInvoked": true
+    },
+    {
+      "lcid": 1039,
+      "page": 10077925,
+      "passed": true,
+      "scenario": "Localized setup wizard welcome renders without EULA/trial/HTTP actions",
+      "appNamesVisible": [],
+      "noLicenceActionsInvoked": true
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+[
+  {
+    "testApp": "reference",
+    "sha": "adf8fad761553ff14c03387217cb047176727b70",
+    "executed": 24,
+    "passed": 8,
+    "failed": 16,
+    "skipped": 0,
+    "tests": [
+      {
+        "codeunit": "90151 Selection Card Lint",
+        "method": "EveryCardStatesItsEffectAndMatchesItsDirection",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "90152 Asset Maintenance Tests",
+        "method": "LocalDateFormatIsRefusedWithTheIsoFormat",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90152 Asset Maintenance Tests",
+        "method": "UnknownAssetIsNotFoundRatherThanMissing",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90152 Asset Maintenance Tests",
+        "method": "NoAssetAtAllIsMissingRatherThanNotFound",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90152 Asset Maintenance Tests",
+        "method": "MaintenanceInTheFutureIsRefused",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90152 Asset Maintenance Tests",
+        "method": "HoursOutOfRangeIsRefused",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90152 Asset Maintenance Tests",
+        "method": "SameExternalIdTwiceWritesOneEntry",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90152 Asset Maintenance Tests",
+        "method": "HelpListsTheErrorTheTypeReallyReturns",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "ReserveOverStockWithoutTheFlagIsRefused",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "ReserveOverStockWithTheFlagIsAllowedAndSaysSo",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "AllowOverStockMustBeTrueOrFalse",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "CancelWithNothingToCancelSaysSo",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "ReleaseAllWithTheWrongCountIsRefused",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "ReleaseAllWithoutAFilterIsRefused",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "ReleaseAllWithTheListedCountReleasesAndLogs",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "HelpQuotesTheFacadesOverStockError",
+        "result": "failed",
+        "failureCategory": "Existing help contract expectation"
+      },
+      {
+        "codeunit": "90153 Legacy Adapter Tests",
+        "method": "DirectoryListsEveryLegacyType",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "90154 GL Account Overview Tests",
+        "method": "PostingAccountAnswersTheBaseAppAmounts",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90154 GL Account Overview Tests",
+        "method": "UnknownAccountIsNotFoundRatherThanMissing",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "90154 GL Account Overview Tests",
+        "method": "FromDateAfterAsOfDateIsRefused",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "90154 GL Account Overview Tests",
+        "method": "NetChangeIsNullWithoutFromDate",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "90155 Help Sections Lint",
+        "method": "EveryHelpHasAllElevenSections",
+        "result": "failed",
+        "failureCategory": "Existing help contract expectation"
+      },
+      {
+        "codeunit": "90156 Ref Registration Tests",
+        "method": "Scenario_AC08_LicAdm_RegistersBothAppsOnce",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "90156 Ref Registration Tests",
+        "method": "Scenario_AC08_LicAdm_CannotWriteSampleSetup",
+        "result": "passed",
+        "failureCategory": null
+      }
+    ]
+  },
+  {
+    "testApp": "boilerplate",
+    "sha": "adf8fad761553ff14c03387217cb047176727b70",
+    "executed": 9,
+    "passed": 5,
+    "failed": 4,
+    "skipped": 0,
+    "tests": [
+      {
+        "codeunit": "50051 My Selection Card Lint",
+        "method": "EveryCardStatesItsEffectAndMatchesItsDirection",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "50052 My Item Tests",
+        "method": "SummaryReturnsTheItemWithNullForNoBaseUnit",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "50052 My Item Tests",
+        "method": "UnknownItemIsNotFoundRatherThanMissing",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "50052 My Item Tests",
+        "method": "LocalDateFormatIsRefusedWithTheIsoFormat",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "50052 My Item Tests",
+        "method": "ListIsCappedAndSaysThereIsMore",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "50053 My Hello Tests",
+        "method": "HelloGreetsByNameAndNamesTheApp",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "50053 My Hello Tests",
+        "method": "HelloRefusesATooLongName",
+        "result": "failed",
+        "failureCategory": "Existing sample behaviour / Foundation strict-validation compatibility"
+      },
+      {
+        "codeunit": "50054 My Registration Tests",
+        "method": "Scenario_AC08_LicAdm_RegistersBoilerplateOnce",
+        "result": "passed",
+        "failureCategory": null
+      },
+      {
+        "codeunit": "50054 My Registration Tests",
+        "method": "Scenario_AC08_LicAdm_CannotReadSampleBusinessData",
+        "result": "passed",
+        "failureCategory": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "sha": "05fab29b9fbec89781f6436d632a408bd7036458",
+  "fullSuite": false,
+  "executed": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "role": "BIFROST LicAdm ori",
+  "onlyThatRole": true,
+  "scenarios": [
+    {
+      "codeunit": "90156 Ref Registration Tests",
+      "test": "Scenario_AC08_LicAdm_RegistersBothAppsOnce",
+      "passed": true
+    },
+    {
+      "codeunit": "90156 Ref Registration Tests",
+      "test": "Scenario_AC08_LicAdm_CannotWriteSampleSetup",
+      "passed": true
+    },
+    {
+      "codeunit": "50054 My Registration Tests",
+      "test": "Scenario_AC08_LicAdm_RegistersBoilerplateOnce",
+      "passed": true
+    },
+    {
+      "codeunit": "50054 My Registration Tests",
+      "test": "Scenario_AC08_LicAdm_CannotReadSampleBusinessData",
+      "passed": true
+    }
+  ]
+}
