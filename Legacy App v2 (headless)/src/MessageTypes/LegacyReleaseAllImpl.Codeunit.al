@@ -157,8 +157,8 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
     end;
 
     /// <summary>
-    /// The count mismatch comes from the Label in Legacy Release All Process; the rest from
-    /// Legacy Adapter Input. An invalid filter is answered with Business Central's own text (see notes).
+    /// Foundation returns ConfirmationMismatch before execution when the listed count changed.
+    /// The isolated process repeats the count check; input and filter errors remain documented here.
     /// </summary>
     procedure GetErrors(var Errors: JsonArray): Boolean
     var
@@ -222,7 +222,7 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
             '{"itemFilter":"19*","released":2}'));
         Examples.Add(ContractMgt.Example('The reservations changed after the list',
             '{"type":"Legacy.Stock.ReleaseAll","data":{"itemFilter":"19*","expectedCount":2}}',
-            '{"status":"Error","error":"itemFilter ''19*'' matches 3 reservations, not the 2 you sent in expectedCount. Nothing was released. Check with Legacy.Stock.List and send its count."}'));
+            '{"status":"Error","code":"ConfirmationMismatch","error":"You sent expectedCount 2, but the call would now affect 3 (Stock reservations matching 19*). Nothing was changed.","parameter":"expectedCount","received":"2","expected":"3","nextStep":"Check the preview and send expectedCount 3 if that is what you want."}'));
         exit(true);
     end;
 
