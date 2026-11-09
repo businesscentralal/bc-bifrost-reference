@@ -1,0 +1,110 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "tier": "Minimal PTE multi-project samples",
+  "layer1": [
+    {
+      "project": "My Bifrost App",
+      "files_scanned": 8,
+      "checks": {
+        "ready": false,
+        "total": 23,
+        "failed": 8,
+        "passed": 15
+      },
+      "findings": {
+        "app_json": 1,
+        "changelog": 1,
+        "caption_translation": 4,
+        "try_prefix_convention": 1,
+        "format_evaluate_enum": 1,
+        "read_isolation": 2,
+        "xml_doc_comments": 72,
+        "one_statement_per_line": 12
+      }
+    },
+    {
+      "project": "My Bifrost App Tests",
+      "files_scanned": 5,
+      "checks": {
+        "failed": 4,
+        "total": 23,
+        "ready": false,
+        "passed": 19
+      },
+      "findings": {
+        "xml_doc_comments": 9,
+        "changelog": 1,
+        "one_statement_per_line": 2,
+        "app_json": 2
+      }
+    },
+    {
+      "project": "Bifrost Reference",
+      "files_scanned": 29,
+      "checks": {
+        "failed": 9,
+        "passed": 14,
+        "total": 23,
+        "ready": false
+      },
+      "findings": {
+        "page_code_minimal": 3,
+        "format_evaluate_enum": 2,
+        "changelog": 1,
+        "one_statement_per_line": 16,
+        "xml_doc_comments": 188,
+        "caption_translation": 10,
+        "try_prefix_convention": 3,
+        "read_isolation": 3,
+        "app_json": 1
+      }
+    },
+    {
+      "project": "Bifrost Reference Tests",
+      "files_scanned": 6,
+      "checks": {
+        "ready": false,
+        "total": 23,
+        "passed": 18,
+        "failed": 5
+      },
+      "findings": {
+        "app_json": 2,
+        "xml_doc_comments": 25,
+        "changelog": 1,
+        "one_statement_per_line": 2,
+        "read_isolation": 3
+      }
+    },
+    {
+      "project": "Legacy App",
+      "files_scanned": 20,
+      "checks": {
+        "passed": 15,
+        "ready": false,
+        "total": 23,
+        "failed": 8
+      },
+      "findings": {
+        "caption_translation": 6,
+        "xml_doc_comments": 125,
+        "page_code_minimal": 3,
+        "read_isolation": 8,
+        "app_json": 2,
+        "confirm_in_page": 1,
+        "changelog": 1,
+        "one_statement_per_line": 9
+      }
+    }
+  ],
+  "scope": "Review amendment: complete Unreleased object inventory; authenticated executable Foundation dependency/all5 CI projects; Legacy filtered bulk confirmation implementation and stronger native regressions.",
+  "review": {
+    "changelog": "48 changed/deleted/added objects exhaustively inventoried from base and head. Unreleased requested by Reviewer; version-heading scanner findings do not indicate missing requested content.",
+    "CI": "AL-Go authenticated probing ghTokenWorkflow pinned release28.0.11; all3products+2tests and failOn warning. No new suppressions.",
+    "API": "Added MsgConfirm implementation to internalcodeunit90109/enumextension90100; preserve publicAPI/IDs. Confirm and release remain in Foundation isolated MessageTask.Run; no nested BooleanRun after lock; noCommit. Legacy minFoundation28.0.11.669.",
+    "XLF": "All163 units have source/translation parity; new localized selection label. Correct en-US/is-IS headers.",
+    "sourceStandards": "Layer1 includes advisory legacy methods/doc comments, Boolean Try parsers, technical locked captions and AL signature semicolons/comment matches; not silently advertised clean.",
+    "pending": "Current-tip CI; canonical wrapper repository/amend conflicts; Architect template analyzer/pipeline disposition. AppSourceCop 26 errors/5 warnings is not waived.",
+    "runtime": "Native 64/64, MCP 110/110 and UI 6/6 in LCIDs1033/1039 at75f9559. Owned container deletion204, subsequent404 and absence from inventory verified."
+  }
+}

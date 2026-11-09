@@ -1,0 +1,153 @@
+{
+  "at": "2026-11-09T02:53:56.338Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "messageType": "Reference.ApiKey.Set",
+    "lcid": 1039
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.ApiKey.Set",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "Reference.ApiKey.Set",
+      "isEnabled": true,
+      "filterTableNo": 0,
+      "description": "Store the API key for the reference app's exchange rates service. Commits; the key goes to the Bifrost secret store and is removed from the request log. People can also use Bifrost Setup > Apps.",
+      "selectionDescription": "Vista API-lykilinn sem gengisþjónustan notar í leyndarmálageymslu Bifrastar. Lyklinum er aldrei skilað. Fyrir samþættingar, ekki spjall: fólk slær lykilinn inn í Bifrost Setup > Apps. Til að fá gengi, notaðu Reference.ExchangeRate.Get.",
+      "messageDirection": "Inbound",
+      "keywords": [
+        "setja api-lykil",
+        "vista api-lykil",
+        "breyta api-lykli",
+        "lykill gengisþjónustu",
+        "vista lykil gengisþjónustu"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "notUsed",
+          "description": "There is one key per company."
+        },
+        "dataRequired": true,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "parameters": [
+        {
+          "name": "apiKey",
+          "type": "string",
+          "required": true,
+          "description": "The API key, at most 500 characters, not empty. Stored exactly as sent."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "stored",
+            "type": "boolean",
+            "description": "Always true: the key was stored. The key itself is never returned."
+          }
+        ]
+      },
+      "errors": [
+        {
+          "error": "Parameter 'apiKey' is required. Send it as text, for example \"your-key\".",
+          "when": "apiKey is missing.",
+          "fix": "Send apiKey."
+        },
+        {
+          "error": "Parameter 'apiKey' is empty. Send a value, for example \"your-key\".",
+          "when": "apiKey is an empty string.",
+          "fix": "Send the key."
+        },
+        {
+          "error": "Parameter 'apiKey' is {length} characters long; the maximum is 500.",
+          "when": "apiKey is too long.",
+          "fix": "Check that you send the key only."
+        },
+        {
+          "error": "Parameter 'apiKey' must be a single value (text or number), not an object or an array.",
+          "when": "apiKey is an object or an array.",
+          "fix": "Send it as text."
+        },
+        {
+          "error": "The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }.",
+          "when": "data is an array or plain text.",
+          "fix": "Send a JSON object."
+        },
+        {
+          "code": "Retryable",
+          "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+          "fix": "Retry the same call after a few seconds; nothing was changed."
+        }
+      ],
+      "effect": {
+        "effect": "write",
+        "changes": "Stores the key in the Bifrost secret store for the current company, replacing any stored key, and replaces the request body with a placeholder in the Bifrost message log. Nothing is stored when an error is returned.",
+        "idempotent": true,
+        "preconditions": [
+          "The caller can write Ref Setup; without it the type is not offered."
+        ]
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "Reference.ExchangeRate.Get",
+          "useInsteadWhen": "You want a rate; it sends the stored key with every call."
+        }
+      ],
+      "workflow": {
+        "steps": [
+          {
+            "messageType": "Reference.ApiKey.Set",
+            "purpose": "Store the key, once."
+          },
+          {
+            "messageType": "Reference.ExchangeRate.Get",
+            "purpose": "Get rates; the stored key is sent with every call."
+          }
+        ],
+        "text": "Needed only when the configured rates service requires a key."
+      },
+      "examples": [
+        {
+          "title": "Store the key",
+          "request": {
+            "type": "Reference.ApiKey.Set",
+            "data": {
+              "apiKey": "<your-api-key>"
+            }
+          },
+          "response": {
+            "stored": true
+          }
+        },
+        {
+          "title": "The key is missing",
+          "request": {
+            "type": "Reference.ApiKey.Set",
+            "data": {}
+          },
+          "response": {
+            "status": "Error",
+            "error": "Parameter 'apiKey' is required. Send it as text, for example \"your-key\"."
+          }
+        }
+      ],
+      "overview": "Stores the API key the exchange rate service uses, in the Bifrost secret store. The key replaces any stored key for this company. People can do the same from Bifrost Setup > Apps > Bifrost Reference > Set API key. The default service needs no key.",
+      "notes": "For an integration or a setup script, not for a chat. An AI assistant must not ask a person to type or paste a key into the conversation: the conversation goes to the assistant's provider. Send the person to Bifrost Setup > Apps instead, where they enter the key themselves. The key is stored in the Bifrost secret store (Foundation's Secret Store ori), never in a table of this app, and is never returned by any message type: not in this response, not in errors, not in the setup page. The request body is redacted in the Bifrost message log on every path, errors included, so the key is not kept there in plain text. Safe to repeat: the same key is stored again and the answer is \"stored\": true; a different key replaces the first. The key is stored for the current company only."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  },
+  "passed": true
+}

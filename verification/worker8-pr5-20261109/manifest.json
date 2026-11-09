@@ -1,0 +1,642 @@
+[
+  {
+    "file": "appsource-diagnostics.json",
+    "sha256": "b815bb415c7ce95e324c4c254b84fee56974ff6e79f889aa0cddd9db566c86ff"
+  },
+  {
+    "file": "artifact-readback.json",
+    "sha256": "555f286aa511a4c3575430b3587b6d457fdcbf71f42b808cdcff137dcd9eb179"
+  },
+  {
+    "file": "boilerplate-appsource-compile.log",
+    "sha256": "af594a8cb22b15320bdb514d6a5eab99852ede8ab589ae5df0ed8cc8cd523e2f"
+  },
+  {
+    "file": "boilerplate-pte-compile.log",
+    "sha256": "c849cd2d1ce82066952fa4e04692f7ce6af31c351a1734de13540d12cec74308"
+  },
+  {
+    "file": "boilerplate-test-appsource-compile.log",
+    "sha256": "122be27b8a888d89e187d4e1381535777e3655d31938a7247cc924a829d7fb6f"
+  },
+  {
+    "file": "boilerplate-test-pte-compile.log",
+    "sha256": "16d737631bed90409cf7c06e414bc92cbe424361945a871a416935ac07291584"
+  },
+  {
+    "file": "cleanup-config-restored.json",
+    "sha256": "a0d7dfc24510da936f2c94fda0ebd30814b39c2d65cf85b7f3e7e2ea14962680"
+  },
+  {
+    "file": "cleanup-result.json",
+    "sha256": "c3e2f866229160f90d48f80cdc6be2d7d194a951c5ddc66a524db8e57bf48416"
+  },
+  {
+    "file": "compile.json",
+    "sha256": "a99327d70bbae6467a7a85b73efa91e832af74c9104616e4e9f3348a1c250822"
+  },
+  {
+    "file": "environment.json",
+    "sha256": "d247bcca5f8e8fef1225a2d8571b772270eb0c247175875561dd997ffb26d217"
+  },
+  {
+    "file": "gateway-layer2.json",
+    "sha256": "fb8836c8dbbc3be7b0917a7cb7844770caee1efb21338709b8183acb3209b525"
+  },
+  {
+    "file": "legacy-appsource-compile.log",
+    "sha256": "fb6ae8f2b43b79bc7595a2a9a1053e95f37ad04ce414d72a7dfaa7a3c6f9b11d"
+  },
+  {
+    "file": "legacy-pte-compile.log",
+    "sha256": "91f05b2a55539598dc0ba5e7e1c5bde1d9ed9fb3f8ed4f760616114233539916"
+  },
+  {
+    "file": "mcp-contract-1033-Help.Legacy.Get.json",
+    "sha256": "9b16f08371e837183fbdc6913c9eb95892fce52db1b0ec41c18f80f644e88bc9"
+  },
+  {
+    "file": "mcp-contract-1033-Help.MyApp.Get.json",
+    "sha256": "d97a6c25b763d798aabe0e2dd8495d9aac6791813094910c4e8fa0a0920eb41f"
+  },
+  {
+    "file": "mcp-contract-1033-Help.Reference.Get.json",
+    "sha256": "7ddc541547d0ecdefd124c9e4e73384f2d65cc69dd62a6ac229bfbb6a08a4e18"
+  },
+  {
+    "file": "mcp-contract-1033-Legacy.Stock.CancelReservation.json",
+    "sha256": "743b01b7441c0026436e017f6a64463fa407e2c67199fe0cf82792ca6d376832"
+  },
+  {
+    "file": "mcp-contract-1033-Legacy.Stock.Get.json",
+    "sha256": "f78bbd354583938bb8c75ec803d6ba926ceb6c5e3e7d04453e5abe3800397437"
+  },
+  {
+    "file": "mcp-contract-1033-Legacy.Stock.List.json",
+    "sha256": "c43ecd0705164ec3a1037473b83f18a8fd4efb8ee133c2d8191de854d77b57ed"
+  },
+  {
+    "file": "mcp-contract-1033-Legacy.Stock.ReleaseAll.json",
+    "sha256": "005b3f5aaf32bcc34806f01aa88a74d92f62e1ab312da878e3c76b762207dbd1"
+  },
+  {
+    "file": "mcp-contract-1033-Legacy.Stock.Reserve.json",
+    "sha256": "ee048690ed48cf142f2e3984e8500f513f73b320d5fff517753fec8541676034"
+  },
+  {
+    "file": "mcp-contract-1033-MyApp.Hello.Get.json",
+    "sha256": "a0f4e38a366ca0cadd6762fd55c74553ba14b238ccf9d1e7a2f9689fdd3c2b0a"
+  },
+  {
+    "file": "mcp-contract-1033-MyApp.Item.List.json",
+    "sha256": "eed14c2ca83aea71816567cae1e7df5c314e279c1b704ffcd9719ff37aa4ecfa"
+  },
+  {
+    "file": "mcp-contract-1033-MyApp.Item.Summary.Get.json",
+    "sha256": "354470f41987411bee731da824df7ec7959f3bee585983bcd035ace9ab47b537"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.ApiKey.Set.json",
+    "sha256": "538d4ff6e3d8f5565576b6ad94dc246b6ddc92bcb701dfdb4c1df13cd4a2e4ca"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.AssetMaintenance.Create.json",
+    "sha256": "bc879f87db3d49f91c80a3fcfd5fb8fa9a751987638a6c86989d51be6d23ebc1"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.Echo.Get.json",
+    "sha256": "d88bfc19bf8cb5d85a8f5ae82cf2a46870d0dbb00f4d78f6052ca1d381e644f1"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.ExchangeRate.Get.json",
+    "sha256": "a98a1404ec1be851c0b266c5ebe569f59d60a3740ca2e19fca53cbbbf0d6db8c"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.GLAccount.Overview.Get.json",
+    "sha256": "84a0ee47ff8baa0ccbbfa2fa11c922b8c7e7740b78d511a8f736ca0c28481f83"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.ItemPrice.ApplyAdjustment.json",
+    "sha256": "a21f453e7e5ea75e57da91946898b83868ff8cd4d0d3d1f4078dd024b286e844"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.ItemPrice.PreviewAdjustment.json",
+    "sha256": "16f5824cabb178ab9597adeffd457fc2e141222474df8c1ebf78aa43ab1c20f1"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.Note.Add.json",
+    "sha256": "71ff2295cf310b1ae444b59f7e8fecbecc760a4b4f8e2c009283e1d1722de298"
+  },
+  {
+    "file": "mcp-contract-1033-Reference.Table.Get.json",
+    "sha256": "05afeaf974dd9476ea962206a2daa1fa7b217267bb429e7d445b0c238445c5e0"
+  },
+  {
+    "file": "mcp-contract-1039-Help.Legacy.Get.json",
+    "sha256": "d4814d887af7231d52d448d4d8e100cd96eaa99b42d5e04048353ad9a61ba0a7"
+  },
+  {
+    "file": "mcp-contract-1039-Help.MyApp.Get.json",
+    "sha256": "e1c540dfc53a19de1dcd6304dd722414f07283b08e9d13a95a4ce8f24db9d38f"
+  },
+  {
+    "file": "mcp-contract-1039-Help.Reference.Get.json",
+    "sha256": "12cc7ee9b456c4cfb1a3a81717a197a350262b51508bdfca1b1fed77aabd9e6c"
+  },
+  {
+    "file": "mcp-contract-1039-Legacy.Stock.CancelReservation.json",
+    "sha256": "eececb17fc038b9c4ed735778478acf87a15d38a565afe573e44dff3229a8f76"
+  },
+  {
+    "file": "mcp-contract-1039-Legacy.Stock.Get.json",
+    "sha256": "9da46bcb0d307c90db4ca24fbb6bdde78570f5e6d4af474f41f51ac50375fab1"
+  },
+  {
+    "file": "mcp-contract-1039-Legacy.Stock.List.json",
+    "sha256": "f6797de3e54a184b8d7bcbc144addfa6098ddc8f5cb218ff4d0e57943802fef8"
+  },
+  {
+    "file": "mcp-contract-1039-Legacy.Stock.ReleaseAll.json",
+    "sha256": "5db32c9f6e3a37a76ac131c66700017600cd03290de785ebdf06e674b506ea5f"
+  },
+  {
+    "file": "mcp-contract-1039-Legacy.Stock.Reserve.json",
+    "sha256": "3ecd43a53d391efc496074bdf69628b2282a4ab7c77ff81bf132c4ecbbd1ee5f"
+  },
+  {
+    "file": "mcp-contract-1039-MyApp.Hello.Get.json",
+    "sha256": "c5190abf9d20e3326b5ed222bad34a6809e58e5b21139b03855b26a4c63550d1"
+  },
+  {
+    "file": "mcp-contract-1039-MyApp.Item.List.json",
+    "sha256": "6e977a0b0d51472fc45d61219d5f6c0d70ab5095ae0e1b516b661c45c8ede6aa"
+  },
+  {
+    "file": "mcp-contract-1039-MyApp.Item.Summary.Get.json",
+    "sha256": "f90bfbb392d471828a585fd861d8f7f73f71baa58de586c5767c5f467171dbc0"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.ApiKey.Set.json",
+    "sha256": "91ab23bf274a5129f098e689a1c4ba65603869ee961066b15681e9d3c8e3edd1"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.AssetMaintenance.Create.json",
+    "sha256": "37502d66f06f8f3e1573822ce75baaa895693451c5b7bef9f0a9f8e343de67f5"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.Echo.Get.json",
+    "sha256": "2b84cb45859a86687ddb8f402d629f21ffd4bec8830dfa19663b1679fb71d080"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.ExchangeRate.Get.json",
+    "sha256": "6440919150c5a43c8807e4f585ea35df360cd06750b25f878149e7e70b90a271"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.GLAccount.Overview.Get.json",
+    "sha256": "d5a1127e417a300021a87d5ee0d2a3ba7fa18aa0bf8aa4e61743c86016000d8e"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.ItemPrice.ApplyAdjustment.json",
+    "sha256": "15e4983be77d758793ff1ddb5ee6ab5ef5fe081dea78a7761870d1dceabed76d"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.ItemPrice.PreviewAdjustment.json",
+    "sha256": "6c243fe2d50d9a58c03bc019d25673056c6c177d39f9e953ff06937760bfe799"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.Note.Add.json",
+    "sha256": "ba09639154d702f77b3c2775ba09bd27d82b222107c99f1592f832b41bb42f49"
+  },
+  {
+    "file": "mcp-contract-1039-Reference.Table.Get.json",
+    "sha256": "acb9712af7b8abed7f845c6c8e3c131bcec042af36639f9a9aee53903a573577"
+  },
+  {
+    "file": "mcp-contract-progress.json",
+    "sha256": "2c1a18e584cbfee86da5eab481ceff7452cc795fc5cef7a479b839c8c69d38db"
+  },
+  {
+    "file": "mcp-contract-summary.json",
+    "sha256": "daac74b547f0e1eac20e0c3a917d3dcc41595dd5949cf78dea360ad121b7a8f4"
+  },
+  {
+    "file": "mcp-extra-scenario-item-count-refusal-1033.json",
+    "sha256": "bbcacce9c5960de309555afba50380830a04f7bf8b6f812ec8d602afed04852d"
+  },
+  {
+    "file": "mcp-extra-scenario-item-count-refusal-1039.json",
+    "sha256": "74d8f6fec37e8a4d5588db2db22303d598fd0128683a03684db4fdbd96af7c83"
+  },
+  {
+    "file": "mcp-extra-scenario-price-apply-1033.json",
+    "sha256": "f3843cc7b2c72b4ac675728c25cf7a953cc7e376537dd06497b335de7711f572"
+  },
+  {
+    "file": "mcp-extra-scenario-price-apply-1039.json",
+    "sha256": "7b7d8716c8f8a4aaec4a89e243834910ef50f9ed4b766d12defb14f5f9ee5774"
+  },
+  {
+    "file": "mcp-extra-scenario-price-readback-1033.json",
+    "sha256": "b859f682c00f677cc74f333c7d29e0071dce1abc5708394c4bfa78f88e52a2d6"
+  },
+  {
+    "file": "mcp-extra-scenario-price-readback-1039.json",
+    "sha256": "fe4c65d12499bd4cb06d56551f6fc6087673b02315a05d0fa4b5ffa636e1212b"
+  },
+  {
+    "file": "mcp-extra-scenario-progress.json",
+    "sha256": "af5560c1a89768658c13464f23afee59f678f4d1fd169bd3458f033d2c0c40cc"
+  },
+  {
+    "file": "mcp-extra-summary.json",
+    "sha256": "0698bdc87542757bbb0481d5f13e7b6807e795491c6a944b85965938da1bfdd1"
+  },
+  {
+    "file": "mcp-negative-assertion-audit.json",
+    "sha256": "5b89beeda7ca217b8836aaedb12fa6dab124d5536839b94ac311b833d0386d2a"
+  },
+  {
+    "file": "mcp-scenario-apikey-missing-1033.json",
+    "sha256": "2b7b0f78863281a4110654d2e7864864b0b046bababb0ec850fd34ea82c4dbea"
+  },
+  {
+    "file": "mcp-scenario-apikey-missing-1039.json",
+    "sha256": "e60b6982eada1abe8a915bd4f73565d881f01a8ca8c385693ec974b618868ca0"
+  },
+  {
+    "file": "mcp-scenario-bulk-cleanup-readback-1033.json",
+    "sha256": "1d968d55db469a5304e51d0deed825f403e0c6d0f21d32dccad3c42e3491c869"
+  },
+  {
+    "file": "mcp-scenario-bulk-cleanup-readback-1039.json",
+    "sha256": "59e04ef9c01330b7a24a46124a5a6362e0f6112a159d557e9bb31f164e4cbcdf"
+  },
+  {
+    "file": "mcp-scenario-bulk-count-refusal-1033.json",
+    "sha256": "7e651a535a91868ce54791abc1d9d10136051d5e6cd1dbc2fabb0a4d3a8e4d9a"
+  },
+  {
+    "file": "mcp-scenario-bulk-count-refusal-1039.json",
+    "sha256": "2e47f22c0985814ceae373d5ee856e57005abd7c5ea19e8aedcebccd2656467c"
+  },
+  {
+    "file": "mcp-scenario-bulk-list-1033.json",
+    "sha256": "8d48cbd49c3fb868f1c9ba39e44e49a9467acf7759d4e3c037c84db9b6eaea6f"
+  },
+  {
+    "file": "mcp-scenario-bulk-list-1039.json",
+    "sha256": "2b7e01879289b79b95e9b17a5813b0a8b3cf004c8cac345c906623b8387cccb2"
+  },
+  {
+    "file": "mcp-scenario-bulk-preserved-1033.json",
+    "sha256": "c7fe23ad46e9ff14e469646aa980ee2c5a183626c737b1e4a3e848eec1ad904f"
+  },
+  {
+    "file": "mcp-scenario-bulk-preserved-1039.json",
+    "sha256": "eeb80a351bca8a84c18da908398570a07788b94286472cd9bce4be189528b51b"
+  },
+  {
+    "file": "mcp-scenario-bulk-release-1033.json",
+    "sha256": "8dad9be3868dc86c2b7c92aa456c8162a284884ace2967025e1c9cc7814b1261"
+  },
+  {
+    "file": "mcp-scenario-bulk-release-1039.json",
+    "sha256": "82f29e283746ad4bc67a3282ede8b2670ddc2cc6b008c5c2a56b553f78db8a68"
+  },
+  {
+    "file": "mcp-scenario-cancel-1033.json",
+    "sha256": "2c1949e4bdaa1cfa4c9af970c6672deee1aaec2b7b287f04a4cf5882d7b27c1f"
+  },
+  {
+    "file": "mcp-scenario-cancel-1039.json",
+    "sha256": "b4a5b5d68c2a0551ffcc1d161b5047387bc4f13a11045c1df69a626bb21933b3"
+  },
+  {
+    "file": "mcp-scenario-cancel-repeat-1033.json",
+    "sha256": "6d1d2bc60ceab1a030f25809297e35b2254f96f75019743a214a1ab0403332e6"
+  },
+  {
+    "file": "mcp-scenario-cancel-repeat-1039.json",
+    "sha256": "43d94d841236a15b57225cdae46d4e561eb7993bb37ccd7c4a687d3cbd3e1a41"
+  },
+  {
+    "file": "mcp-scenario-directory-Help.Legacy.Get-1033.json",
+    "sha256": "5812df529a31354c6824f0f54e9629a8948a0fb6019d949f3c047d00a26e7bca"
+  },
+  {
+    "file": "mcp-scenario-directory-Help.Legacy.Get-1039.json",
+    "sha256": "0f95056b54525deb026907b5c0384f09dad8b9386f2e9171ff30eabaac14f4c5"
+  },
+  {
+    "file": "mcp-scenario-directory-Help.MyApp.Get-1033.json",
+    "sha256": "6e87e2aca55788eab1aa9ebaf5f5fb9df2c00ab1899abc5c881e075cd6825600"
+  },
+  {
+    "file": "mcp-scenario-directory-Help.MyApp.Get-1039.json",
+    "sha256": "97c13d8d17fb8cc17d46226fa117546774671794ecc5b773e270a9d939a6e11d"
+  },
+  {
+    "file": "mcp-scenario-directory-Help.Reference.Get-1033.json",
+    "sha256": "8804626306a3e29f8182b0e1add1468c56194f3310c85c1b0d7edebfd610200d"
+  },
+  {
+    "file": "mcp-scenario-directory-Help.Reference.Get-1039.json",
+    "sha256": "d92686a7e876cc3bc41c7b275c5ed91b98e420eab4d678e1660cc23d00b2ea4d"
+  },
+  {
+    "file": "mcp-scenario-echo-1033.json",
+    "sha256": "334d6e7895a908f23a51e24c7997063f113bbefa1d45d996e1247624eb287417"
+  },
+  {
+    "file": "mcp-scenario-echo-1039.json",
+    "sha256": "40b5b6b887a4bc455619114f005c28a9f4d622eeb4196243fe0232d5a39e4380"
+  },
+  {
+    "file": "mcp-scenario-exchange-invalid-1033.json",
+    "sha256": "a142c650a12689340b59372495653d8d946d1bf46c66ac2194842268ccad07e1"
+  },
+  {
+    "file": "mcp-scenario-exchange-invalid-1039.json",
+    "sha256": "a42c3b6dbb80de49afcac8ea73bd03794f342fd75c0c31c3af737437b10940dc"
+  },
+  {
+    "file": "mcp-scenario-gl-1033.json",
+    "sha256": "c22f0b7c42f5826f5ab108f2ca837184f143ed034d027b257c1d1001b875a901"
+  },
+  {
+    "file": "mcp-scenario-gl-1039.json",
+    "sha256": "790f9387dbb7d07011fb196eeec5531512c878d56b548e41321986f8445f9c59"
+  },
+  {
+    "file": "mcp-scenario-hello-1033.json",
+    "sha256": "8cbc8e6842aa798740bedaf45c900e66e6fd2947440ffb3003a99711879e49c5"
+  },
+  {
+    "file": "mcp-scenario-hello-1039.json",
+    "sha256": "d7d62420367894b760c0f986ee0d14e5c5d6a2289bce3fdb5d410ad81cc768b3"
+  },
+  {
+    "file": "mcp-scenario-hello-length-1033.json",
+    "sha256": "630e7024164e33cd3b8d16f168a88fac7a25870d6fb9befbfed534a440675beb"
+  },
+  {
+    "file": "mcp-scenario-hello-length-1039.json",
+    "sha256": "2bf179a1deb6a1cb798626a6c33278c6b416abbd62738c1536de985633b751ac"
+  },
+  {
+    "file": "mcp-scenario-item-list-1033.json",
+    "sha256": "eba562f8633af58b7cf6a69bbe1cd128c7f8936f959c3489d71dc12904a6ba9d"
+  },
+  {
+    "file": "mcp-scenario-item-list-1039.json",
+    "sha256": "fd87713b04bfaf9e2661adfc56a6d40334adbe02b8696060b0a54ef0bfbdf050"
+  },
+  {
+    "file": "mcp-scenario-item-summary-1033.json",
+    "sha256": "a27768a85490ca484ea38a7ed60cd7a5012ff180c45124793943a1a43d19bb3c"
+  },
+  {
+    "file": "mcp-scenario-item-summary-1039.json",
+    "sha256": "3be42af1bfb233665c46f244b024c81fa000fb4dce0e29e916e6291dc11ea58d"
+  },
+  {
+    "file": "mcp-scenario-maintenance-1033.json",
+    "sha256": "3702001abb7bd063d32b3fc92d0dfa11f5ec7de51bab2f2993a51c988df9bfa3"
+  },
+  {
+    "file": "mcp-scenario-maintenance-1039.json",
+    "sha256": "5a14ca99958bbb216b2a48a41fcf44d72022d0ba692f4ade452dc9f01fab4633"
+  },
+  {
+    "file": "mcp-scenario-maintenance-repeat-1033.json",
+    "sha256": "dc6a0549eab9a32bd41bb361dbd6b7d4b0aea50d30a64b2f82ec13d51f4495ef"
+  },
+  {
+    "file": "mcp-scenario-maintenance-repeat-1039.json",
+    "sha256": "7c3c600d1110736028a9d43304c2abd33b559870d93388f8193ac41e0b643726"
+  },
+  {
+    "file": "mcp-scenario-note-1033.json",
+    "sha256": "4ecd64fdc2bdd531db84304be42848590e756555b61f3722e1e4abc49d7e3b5d"
+  },
+  {
+    "file": "mcp-scenario-note-1039.json",
+    "sha256": "c5ba5cf43d8d99e6f416491d9aec5d7583ed8a5bb95e5bd05e145f7eca8f3a3b"
+  },
+  {
+    "file": "mcp-scenario-note-duplicate-1033.json",
+    "sha256": "1d7c71fde55fd657cc96015271dbbc0fd978f8c66d65feda6de7da78afe20ffb"
+  },
+  {
+    "file": "mcp-scenario-note-duplicate-1039.json",
+    "sha256": "5299e0054af250329edb2a23edbdd6e4116e91b2600a89dfe814c0e3a81c4770"
+  },
+  {
+    "file": "mcp-scenario-price-count-refusal-1033.json",
+    "sha256": "6882e15bd775cfad12d54b911b5f4a128384d7743a732631fac015b9e7c98ed4"
+  },
+  {
+    "file": "mcp-scenario-price-count-refusal-1039.json",
+    "sha256": "79d6b45b7805259ede576968b320f143cede7957c8acb9385abadb243ea5c91d"
+  },
+  {
+    "file": "mcp-scenario-price-preview-1033.json",
+    "sha256": "fa31b89a2d832581dd8aaf4f586cba4a2c54928e6698b5638b36d9a679a3fff9"
+  },
+  {
+    "file": "mcp-scenario-price-preview-1039.json",
+    "sha256": "31f841506cab7f2d75e327e41471a2a9ccd62aaeee7542ab072cde15dc591f27"
+  },
+  {
+    "file": "mcp-scenario-progress.json",
+    "sha256": "cf8c2144bf01da2caca39eb12b03fce48d721f128eddf6103f210a2c08c7a7d4"
+  },
+  {
+    "file": "mcp-scenario-release-empty-1033.json",
+    "sha256": "e5c0fa5d420935cf25efe9fd0750c825b603d96a1e03cc6652ed07019e4c675f"
+  },
+  {
+    "file": "mcp-scenario-release-empty-1039.json",
+    "sha256": "e0f4805db6f8f171f754dd4be4862eefea0485dc78894f6bfe69301b92db41df"
+  },
+  {
+    "file": "mcp-scenario-reserve-1033.json",
+    "sha256": "d942bbb87e393d4288779713cc2eb88f6419f653d98da0af5af6e6e1744ae29f"
+  },
+  {
+    "file": "mcp-scenario-reserve-1039.json",
+    "sha256": "c251a853c8adbfa82c9ca32cff0681bb6588577f7259af2252200a2af0640555"
+  },
+  {
+    "file": "mcp-scenario-reserve-bulk1-1033.json",
+    "sha256": "2e615f1a44b1cd0657d1463441002a86712c60c10e5cac3ea64a7d8e475f310f"
+  },
+  {
+    "file": "mcp-scenario-reserve-bulk1-1039.json",
+    "sha256": "51c7248e93c39b6d67c01be3f32baa151b277647f7c95603e61e8b010bc6ca37"
+  },
+  {
+    "file": "mcp-scenario-reserve-bulk2-1033.json",
+    "sha256": "89823f021a332f3cb9dba2e824c6e3ece9a52765bb621c16b1949ff261501b0c"
+  },
+  {
+    "file": "mcp-scenario-reserve-bulk2-1039.json",
+    "sha256": "b06307db97875bc1b6cd339ae395be903755504556bc36c68cc085126fa1a843"
+  },
+  {
+    "file": "mcp-scenario-stock-get-1033.json",
+    "sha256": "df7da6babaa4945046972c5b6d678d8968e1c6b3c3fc4142d39e3dc75251f898"
+  },
+  {
+    "file": "mcp-scenario-stock-get-1039.json",
+    "sha256": "601f55eb90703dd2143165cc097759f3040b72a0a90be7182b60c3042c9292fb"
+  },
+  {
+    "file": "mcp-scenario-stock-list-1033.json",
+    "sha256": "3e67113032dd9ea764257a4e5549cf1678c9230c353e99f4e09ce35c42d2771d"
+  },
+  {
+    "file": "mcp-scenario-stock-list-1039.json",
+    "sha256": "6c88cca49ef188acc16109c92b49516ff453862481e310ce6dc566ff329e6504"
+  },
+  {
+    "file": "mcp-scenario-summary.json",
+    "sha256": "0085d9827abd2d05c1b8532cf606ac57264cdbdf3d1c433bbb53f0c23b411a4f"
+  },
+  {
+    "file": "mcp-scenario-table-1033.json",
+    "sha256": "ca1d719414d31f6c6311ed9a1e90c474604cad9ff78c9ca3190b1f7f7dc93f50"
+  },
+  {
+    "file": "mcp-scenario-table-1039.json",
+    "sha256": "e73279e3c4c7b6eccf5bda155eeae6432a89dd36158a1ed9fb43aa0efcfab03a"
+  },
+  {
+    "file": "mcp-scenario-table-notfound-1033.json",
+    "sha256": "38199e8cfbebbfe2ace1952ae0323f614848c81e147074eb39f81f5537db83c7"
+  },
+  {
+    "file": "mcp-scenario-table-notfound-1039.json",
+    "sha256": "9f4ccc3a5376f5ebb44a83d9cd523e6a4af3c1bbce8d211f78033f2b5503e005"
+  },
+  {
+    "file": "publication-current.json",
+    "sha256": "90b41c00f7355b7f6cfb764ca6895d9d76c0bc0d41cbe7f238870b1deb805222"
+  },
+  {
+    "file": "README.md",
+    "sha256": "bbd9297445071c12e8a1c849e3735b5eafb0d92d1840333df01ef8d33c9c667f"
+  },
+  {
+    "file": "reference-appsource-compile.log",
+    "sha256": "9ae96b80c27d0d7380d318a746bd2e70bc7321d6b8d0393df1b8b22a8fffbee9"
+  },
+  {
+    "file": "reference-pte-compile.log",
+    "sha256": "51051c78e79cba2611919537d2db541eae9b3057a746e1755810ec7b6af2fb96"
+  },
+  {
+    "file": "reference-test-appsource-compile.log",
+    "sha256": "275f4124fbbccec7f85185cf3fd32866f3874971bf56d358172c6cf2d89f3d5b"
+  },
+  {
+    "file": "reference-test-pte-compile.log",
+    "sha256": "28cc6579a5ebefd3622fc0f8cc6aa9b3779ffaf12602da21c8db05d7b4e66d01"
+  },
+  {
+    "file": "release-boilerplate-en.json",
+    "sha256": "941cde9660d4d62d2ccff910df546ea3ae46c8d463f28c9c271ca09c4f64d8c3"
+  },
+  {
+    "file": "release-boilerplate-en.junit",
+    "sha256": "e3f34a029cee65cddbb41aecde0bfb09b7910f59d31de316869b7bb315570e2f"
+  },
+  {
+    "file": "release-boilerplate-is.json",
+    "sha256": "b346e0c7c9a96d09218fc72253cc9e8672d50bd108477cc25ddd571083fa3343"
+  },
+  {
+    "file": "release-boilerplate-is.junit",
+    "sha256": "f2865d0c032e7c4ee860d48b3e248072388e2642d80d11a17844a1c08b4d08e2"
+  },
+  {
+    "file": "release-reference-en.json",
+    "sha256": "10f7125c26d7cf32b1c2a4bb0c68aaef7f58f9d72e1efeee6ba1cab7add052b8"
+  },
+  {
+    "file": "release-reference-en.junit",
+    "sha256": "b00b138dc9eea6fdaaadc4b43628ddd33573403084f277646cad72a3a4bd82d6"
+  },
+  {
+    "file": "release-reference-is.json",
+    "sha256": "d77ba5ccdc3480a4b9f7417df907026de00363366cfda51df0c2d18fda7583b6"
+  },
+  {
+    "file": "release-reference-is.junit",
+    "sha256": "4428f8f4ab9f609e52ec7ea4b1dddc7c12c6d4351406b5b37b33eb29160b2b69"
+  },
+  {
+    "file": "review-learning-confirmation.json",
+    "sha256": "c5561dd6504195a27a39e3c1b1c5607056c0a4a7fb5553dbb58a5d5bfb442cd6"
+  },
+  {
+    "file": "ui-en-maintenance.png",
+    "sha256": "f8f9017e859f419cdfc141ba11959d2286f3c4d4d2e40aaed2b4b56a44d385d1"
+  },
+  {
+    "file": "ui-en-record-views-verified.json",
+    "sha256": "5aae44af4af4fe86bae1041ad3f5671783e5a7ea2f4cc9fbe9fadad54e15326f"
+  },
+  {
+    "file": "ui-en-reservations.png",
+    "sha256": "9f11dfca78ae9ea1550056c26f17350ccdb2a430dc66e89f57d0c3c2b184fd1c"
+  },
+  {
+    "file": "ui-en-setup.json",
+    "sha256": "1c0ef0300a2cca31c4cfce3aa670636a428dd78cdfad7d762cdec58171aac53a"
+  },
+  {
+    "file": "ui-en-setup.png",
+    "sha256": "65ece9b12d7ffac74b75b97b1dbdd334d0de77c2eeeade467518be09c554e647"
+  },
+  {
+    "file": "ui-is-maintenance.png",
+    "sha256": "d1eefba8a44021ebe33f9ae3a3f92294b4ad783f1262bc9f1869c05f5960e293"
+  },
+  {
+    "file": "ui-is-record-views.json",
+    "sha256": "23244f49adf40bd1d1a48113b5bc7205f19db042e23619f98785cf57889d7476"
+  },
+  {
+    "file": "ui-is-reservations.png",
+    "sha256": "086ceeb0796810b9b1fb0af25bbff369b2d1d93fd995b07d8d09d90734f6b914"
+  },
+  {
+    "file": "ui-is-setup.json",
+    "sha256": "228de88e7e047fa83a997c1425b7a9c5208dbb351ad594b017675e699162a267"
+  },
+  {
+    "file": "ui-is-setup.png",
+    "sha256": "2132b878ce57899f8e46ee35ee235fb3cc498aabf9ad5e6ee2e2381ff404a8c6"
+  },
+  {
+    "file": "ui-locale-en-settings.json",
+    "sha256": "a6e959b34df45c0d9fb64eb04c20955117af98e4c50571b890fd7903bd19cb8d"
+  },
+  {
+    "file": "ui-locale-is-commit.json",
+    "sha256": "84f36df49ba78aba7d567bf1dd0a7401bd24e888db3318a8bc8170c9c556239e"
+  },
+  {
+    "file": "ui-summary.json",
+    "sha256": "5e813cfbd1cdd20d8df51c8785763001d9eb0f0cca6cf5a5e1aace7844648368"
+  },
+  {
+    "file": "verification-summary.json",
+    "sha256": "239f577528a4c12fbd17c78068434881351f0f7b7875f748aea4860224421ffc"
+  },
+  {
+    "file": "xlf-validation.json",
+    "sha256": "fcc33938e0d60c7cbdefe0c06d18ea72dd90971df8356a266d71e6708530c148"
+  }
+]

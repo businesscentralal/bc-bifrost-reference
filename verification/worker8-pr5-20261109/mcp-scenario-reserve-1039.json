@@ -1,0 +1,27 @@
+{
+  "at": "2026-11-09T02:54:15.532Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Legacy.Stock.Reserve",
+    "data": {
+      "quantity": 2,
+      "allowOverStock": true
+    },
+    "lcid": 1039,
+    "subject": "R5W8-IS1"
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Legacy.Stock.Reserve",
+    "itemNo": "R5W8-IS1",
+    "quantityAdded": 2,
+    "totalReserved": 2,
+    "availableToReserve": -2
+  },
+  "label": "reserve-1039",
+  "type": "Legacy.Stock.Reserve",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

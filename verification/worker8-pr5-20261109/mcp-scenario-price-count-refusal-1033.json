@@ -1,0 +1,28 @@
+{
+  "at": "2026-11-09T02:54:04.770Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "data": {
+      "itemCategoryCode": "R5W8-EN",
+      "percent": 10,
+      "expectedItemCount": 3
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "status": "Error",
+    "code": "ConfirmationRequired",
+    "error": "This call cannot be undone and was not run. It would affect 1 (record R5W8-EN). Nothing was changed.",
+    "parameter": "expectedCount",
+    "expected": "1",
+    "nextStep": "Send the same request again with expectedCount set to 1.",
+    "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Reference.ItemPrice.ApplyAdjustment\". Always read the help before calling a message type."
+  },
+  "label": "price-count-refusal-1033",
+  "type": "Reference.ItemPrice.ApplyAdjustment",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

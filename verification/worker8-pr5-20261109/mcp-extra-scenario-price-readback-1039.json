@@ -1,0 +1,48 @@
+{
+  "at": "2026-11-09T02:55:40.053Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Data.Records.Get",
+    "data": {
+      "tableId": 27,
+      "tableView": "WHERE(No.=FILTER(R5W8-IS?))",
+      "fieldNumbers": [
+        1,
+        18
+      ]
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Data.Records.Get",
+    "status": "Success",
+    "noOfRecords": 2,
+    "result": [
+      {
+        "id": "EF4F81E5-E5DB-F111-B7A5-F032C3A48F35",
+        "primaryKey": {
+          "No_": "R5W8-IS1"
+        },
+        "fields": {
+          "UnitPrice": "110"
+        }
+      },
+      {
+        "id": "F14F81E5-E5DB-F111-B7A5-F032C3A48F35",
+        "primaryKey": {
+          "No_": "R5W8-IS2"
+        },
+        "fields": {
+          "UnitPrice": "220"
+        }
+      }
+    ]
+  },
+  "label": "price-readback-1039",
+  "type": "Data.Records.Get",
+  "lcid": 1039,
+  "kind": "readback",
+  "passed": true
+}

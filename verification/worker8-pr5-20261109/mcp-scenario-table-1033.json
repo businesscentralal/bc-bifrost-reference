@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-09T02:54:01.893Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.Table.Get",
+    "data": {
+      "tableName": "Item"
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.Table.Get",
+    "tableName": "Item",
+    "tableId": 27
+  },
+  "label": "table-1033",
+  "type": "Reference.Table.Get",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

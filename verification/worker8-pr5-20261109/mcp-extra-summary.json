@@ -1,0 +1,53 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "executed": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "rows": [
+    {
+      "label": "item-count-refusal-1033",
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-apply-1033",
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-readback-1033",
+      "type": "Data.Records.Get",
+      "lcid": 1033,
+      "kind": "readback",
+      "passed": true
+    },
+    {
+      "label": "item-count-refusal-1039",
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-apply-1039",
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-readback-1039",
+      "type": "Data.Records.Get",
+      "lcid": 1039,
+      "kind": "readback",
+      "passed": true
+    }
+  ],
+  "limitations": "ExchangeRate validation only; no outbound HTTP permission/provider configuration changed. ApiKey missing-input/redaction path only; no credential changes. Price apply confirms one category operation and separately guards the item count, then checks persisted item prices. Full destructive fixture cleanup by owned container deletion pending."
+}

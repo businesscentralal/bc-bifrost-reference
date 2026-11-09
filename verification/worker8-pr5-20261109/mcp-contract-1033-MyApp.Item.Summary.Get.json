@@ -1,0 +1,221 @@
+{
+  "at": "2026-11-09T02:53:48.452Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "messageType": "MyApp.Item.Summary.Get",
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "MyApp.Item.Summary.Get",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "MyApp.Item.Summary.Get",
+      "isEnabled": true,
+      "filterTableNo": 27,
+      "description": "Get one item's description, base unit, unit price and inventory as of a date (default: the work date). Read-only. Item by subject (No. or SystemId). For many items use MyApp.Item.List; for ledger entries, Data.Records.Get.",
+      "selectionDescription": "One item's description, base unit, unit price and quantity on hand as of a date. For many items, use MyApp.Item.List; for the entries behind the inventory, use Data.Records.Get on Item Ledger Entry.",
+      "messageDirection": "Outbound",
+      "keywords": [
+        "item price and stock",
+        "how many do we have",
+        "what does this item cost",
+        "inventory of an item",
+        "quantity on hand",
+        "item summary"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "optional",
+          "description": "The item: its SystemId (GUID) or its number. Leave it empty to send itemNo in data instead."
+        },
+        "dataRequired": false,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "target": [
+        {
+          "source": "subject",
+          "form": "SystemId (GUID)",
+          "description": "The item's SystemId. Tried first."
+        },
+        {
+          "source": "subject",
+          "form": "item number",
+          "description": "The item number, for example 1896-S, case-insensitive."
+        },
+        {
+          "source": "data.itemNo",
+          "form": "item number",
+          "description": "Used only when subject is empty."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "itemNo",
+          "type": "string",
+          "required": false,
+          "description": "The item number, at most 20 characters. Needed only when subject is empty."
+        },
+        {
+          "name": "asOfDate",
+          "type": "string",
+          "required": false,
+          "description": "A date in the format YYYY-MM-DD. The inventory counts entries posted on or before it. Omitted: the work date. 26.09.2026 is refused."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "itemNo",
+            "type": "string",
+            "description": "The item number."
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "description": "The item description."
+          },
+          {
+            "name": "baseUnitOfMeasure",
+            "type": "string",
+            "description": "The base unit of measure, or null when none is set up; never \"\"."
+          },
+          {
+            "name": "unitPrice",
+            "type": "number",
+            "description": "The unit price on the item card, in local currency (LCY); 0 when none is set."
+          },
+          {
+            "name": "asOfDate",
+            "type": "string",
+            "description": "The date the inventory is for, YYYY-MM-DD: yours, or the work date."
+          },
+          {
+            "name": "inventory",
+            "type": "number",
+            "description": "Quantity on hand in the base unit, from entries posted on or before asOfDate; 0 when there are none."
+          },
+          {
+            "name": "blocked",
+            "type": "boolean",
+            "description": "true when the item is blocked."
+          }
+        ]
+      },
+      "errors": [
+        {
+          "error": "No item was given. Send the item number in subject or as \"itemNo\", or its SystemId in subject.",
+          "when": "subject is empty and data has no itemNo.",
+          "fix": "Send the item number in subject."
+        },
+        {
+          "error": "Item '{item}' was not found. Check the number, or search for the item with Data.Records.Get on table Item.",
+          "when": "No item has that number or SystemId.",
+          "fix": "Check the number, or search by description with Data.Records.Get."
+        },
+        {
+          "error": "Parameter 'asOfDate' has the value '{value}', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.",
+          "when": "asOfDate is not YYYY-MM-DD, for example 26.09.2026.",
+          "fix": "Send the date as YYYY-MM-DD."
+        },
+        {
+          "error": "Parameter '{parameter}' is {length} characters long; the maximum is {maximum}.",
+          "when": "itemNo is longer than 20 characters, or asOfDate longer than 30.",
+          "fix": "Send the item number, or the date as YYYY-MM-DD."
+        },
+        {
+          "error": "Parameter '{parameter}' must be a single value (text or number), not an object or an array.",
+          "when": "itemNo or asOfDate is an object or an array.",
+          "fix": "Send it as text."
+        },
+        {
+          "error": "The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }.",
+          "when": "data is an array or plain text.",
+          "fix": "Send a JSON object, or no body at all."
+        }
+      ],
+      "effect": {
+        "effect": "read",
+        "changes": "Nothing. Reads Item and calculates its Net Change FlowField over Item Ledger Entry.",
+        "idempotent": true,
+        "preconditions": [
+          "The caller can read Item; without it the type is not offered."
+        ]
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "MyApp.Item.List",
+          "useInsteadWhen": "You want many items, or need to find the item number."
+        },
+        {
+          "name": "Data.Records.Get",
+          "useInsteadWhen": "You want the entries behind the inventory (table Item Ledger Entry), or to search items by description (table Item)."
+        }
+      ],
+      "workflow": {
+        "steps": [
+          {
+            "messageType": "MyApp.Item.List",
+            "purpose": "Optional: find the item number."
+          },
+          {
+            "messageType": "MyApp.Item.Summary.Get",
+            "purpose": "Get the item's price and inventory."
+          }
+        ],
+        "text": "Standalone when you know the item number."
+      },
+      "examples": [
+        {
+          "title": "Price and inventory of an item on a date",
+          "request": {
+            "type": "MyApp.Item.Summary.Get",
+            "subject": "1896-S",
+            "data": {
+              "asOfDate": "2026-09-26"
+            }
+          },
+          "response": {
+            "itemNo": "1896-S",
+            "description": "ATHENS Desk",
+            "baseUnitOfMeasure": "PCS",
+            "unitPrice": 1000.8,
+            "asOfDate": "2026-09-26",
+            "inventory": 12,
+            "blocked": false
+          }
+        },
+        {
+          "title": "A date in the wrong format",
+          "request": {
+            "type": "MyApp.Item.Summary.Get",
+            "subject": "1896-S",
+            "data": {
+              "asOfDate": "26.09.2026"
+            }
+          },
+          "response": {
+            "status": "Error",
+            "error": "Parameter 'asOfDate' has the value '26.09.2026', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."
+          }
+        }
+      ],
+      "overview": "Returns one item's description, base unit of measure, unit price and inventory (quantity on hand) as of a date: the work date unless you send asOfDate. Use it to answer \"how many of this item do we have, and what does it cost?\". Not for many items at once (use MyApp.Item.List), and not for the entries behind the inventory (use Data.Records.Get on Item Ledger Entry).",
+      "notes": "Safe to repeat: two identical calls give the same answer unless entries were posted or the item card changed in between. \"No item was given\" and \"Item 'X' was not found\" never mix: the first means nothing identified the item, the second echoes the value that matched no item. Prices and quantities are JSON numbers with a dot as decimal separator; dates are YYYY-MM-DD in and out. Error texts follow lcid when a translation is installed."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  },
+  "passed": true
+}

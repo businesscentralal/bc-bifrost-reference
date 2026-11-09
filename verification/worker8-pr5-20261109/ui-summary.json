@@ -1,0 +1,61 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "owner": "worker-8",
+  "verified": true,
+  "languages": [
+    1033,
+    1039
+  ],
+  "scenarios": [
+    {
+      "lcid": 1033,
+      "scenario": "Reference setup loads with localized captions and key-unset status",
+      "passed": true,
+      "text": "\n\n\n\n\n\n\n\nBifrost Reference Setup\nActions\n\nExchange rates service\nRates Base URL\nhttps://api.frankfurter.dev/v1\nAPI key\nNot set (the default service works without a key)\n"
+    },
+    {
+      "lcid": 1033,
+      "scenario": "maintenance",
+      "passed": true,
+      "text": "Skip to main content\nCRONUS International Ltd.\nFinance\nCash Management\nSales\nPurchasing\nShopify\nAll Reports\n\nReference Asset Maintenance:\nAll\n\n\n\n\n\n\t\nEntry No.\n\t\n\t\nFA No.\n\t\nMaintenance Date\n\t\nHours\n\t\nDescription\n\t\nExternal Id\n\t\n\t\t\n\t\t\t\t\t\t\n\t6\t\n\tR5W8-ENFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ENMAINT\t\n\t9\t\tR5W8-ENFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ENMAINT2\t\n\t12\t\tR5W8-ENFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ENMAINT3\t\n\t13\t\tR5W8-ISFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ISMAINT3\t\nUse the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.\n\nList with title \"Reference Asset Maintenance\" now has 4 items\n\nEntry No., sorted in Ascending order"
+    },
+    {
+      "lcid": 1033,
+      "scenario": "reservations",
+      "passed": true,
+      "text": "Skip to main content\nCRONUS International Ltd.\nFinance\nCash Management\nSales\nPurchasing\nShopify\nAll Reports\n\nLegacy Stock Reservations:\nAll\n\n\nReserve stock...\nCancel reservation\nRelease all reservations\n\n\n\n\t\nItem No.\n\t\n\t\nQuantity\n\t\n\t\t\n\t\t\n(There is nothing to show in this view)\nUse the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.\n\nItem No., sorted in Ascending order"
+    },
+    {
+      "lcid": 1039,
+      "scenario": "reservations",
+      "passed": true,
+      "text": "Fara í aðalefni\nCRONUS International Ltd.\nFinance\nCash Management\nSales\nPurchasing\nShopify\nAllar skýrslur\n\nFrátekningar birgða (eldra forrit):\nAllt\n\n\nTaka frá birgðir...\nHætta við frátekningu\nLosa allar frátekningar\n\n\n\n\t\nVörunr.\n\t\n\t\nMagn\n\t\n\t\t\n\t\t\n(Það eru engin atriði til að sýna í þessu yfirliti)\nNotaðu hægri og vinstri örvalyklana til að stilla stærðina. Notaðu Escape-lykilinn til að afturkalla eða Enter-lykilinn til að staðfesta.\n\nVörunr., raðað í pöntunina Hækkandi"
+    },
+    {
+      "lcid": 1039,
+      "scenario": "maintenance",
+      "passed": true,
+      "text": "Fara í aðalefni\nCRONUS International Ltd.\nFinance\nCash Management\nSales\nPurchasing\nShopify\nAllar skýrslur\n\nViðhald eigna (sýnidæmi):\nAllt\n\n\n\n\n\n\t\nFærslunr.\n\t\n\t\nEignanr.\n\t\nDagsetning viðhalds\n\t\nKlukkustundir\n\t\nLýsing\n\t\nYtra auðkenni\n\t\n\t\t\n\t\t\t\t\t\t\n\t6\t\n\tR5W8-ENFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ENMAINT\t\n\t9\t\tR5W8-ENFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ENMAINT2\t\n\t12\t\tR5W8-ENFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ENMAINT3\t\n\t13\t\tR5W8-ISFA\t1/1/2020\t1\tOwned PR5 maintenance\tR5W8-ISMAINT3\t\nNotaðu hægri og vinstri örvalyklana til að stilla stærðina. Notaðu Escape-lykilinn til að afturkalla eða Enter-lykilinn til að staðfesta.\n\nListi með titilinn „Viðhald eigna (sýnidæmi)“ hefur nú 4 atriði\n\nFærslunr., raðað í pöntunina Hækkandi"
+    },
+    {
+      "lcid": 1039,
+      "scenario": "Reference setup loads with Icelandic captions and key-unset status",
+      "passed": true,
+      "text": "\n\n\n\n\n\n\n\nUppsetning Bifrost Reference\nAðgerðir\n\nGengisþjónusta\nGrunnslóð gengisþjónustu\nhttps://api.frankfurter.dev/v1\nAPI-lykill\nEkki skráður (sjálfgefna þjónustan virkar án lykils)\n"
+    }
+  ],
+  "executed": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "screenshots": [
+    "ui-en-maintenance.png",
+    "ui-en-reservations.png",
+    "ui-en-setup.png",
+    "ui-is-maintenance.png",
+    "ui-is-reservations.png",
+    "ui-is-setup.png"
+  ],
+  "notes": "Six final acceptance scenarios. Earlier setup/navigation/locator errors remain in private receipts; they are not counted as passes. No credential,HTTP,EULA,trial orlicence settings changed."
+}

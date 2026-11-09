@@ -1,0 +1,12 @@
+{
+  "finding": "Native Dispatcher tests with OmitCommit=true missed an HTTP failure: Foundation ConfirmGate locks the selected rows before handler execution; a nested Boolean Process.Run fails after that transaction began. ReadIsolation UpdLock alone did not fix it.",
+  "cause": "Different transaction ownership between the test Dispatcher and Task API.",
+  "prevention": "After MsgConfirm locks the selection, run the Process codeunit without a Boolean result inside Foundation existing isolated MessageTask.Run. Foundation rolls back/formats HTTP failures; an AL caller owns its transaction. No added Commit.",
+  "sourceEvidence": [
+    "Foundation28.0.11.669 Message.table.al lines580-586 outer Boolean MessageTask.Run",
+    "MessageError.Codeunit.al rollback error formatting",
+    "MessageTask.Codeunit.al lines283-288 ConfirmGate before handler"
+  ],
+  "candidateSha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "verification": "64/64 native executions and110/110 MCP checks at75f9559, including empty/mismatch/preservation/multirow release over normalHTTP in1033/1039."
+}

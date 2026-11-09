@@ -1,0 +1,13 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "at": "2026-11-09T02:56:44.429Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "### Result\n{\"lcid\":1033,\"language\":\"English (United States)\",\"verified\":true}\n### Ran Playwright code\n```js\nawait (async(page)=>{const f=page.frameLocator('iframe');const d=f.getByRole('dialog').filter({hasText:'My Settings'});await d.waitFor({timeout:10000});const text=await d.innerText();if(!text.includes('English (United States)'))throw Error('Unexpected UI language: '+text);await d.getByRole('button',{name:'Cancel',exact:true}).click();return {lcid:1033,language:'English (United States)',verified:true};})(page);\n```\n### Page\n- Page URL: https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0f90a9f13aa/?company=CRONUS%20International%20Ltd.&tenant=default&page=30&dc=0&bookmark=1B_GwAAAAJ7_1IANQBXADgALQBJAFMAMg\n- Page Title: Item Card - R5W8-IS2 ∙ PR5 owned second item IS\n- Console: 2 errors, 1 warnings\n### Events\n- New console entries: evidence/console-2026-11-09T02-24-29-803Z.log#L16-L18"
+      }
+    ]
+  }
+}

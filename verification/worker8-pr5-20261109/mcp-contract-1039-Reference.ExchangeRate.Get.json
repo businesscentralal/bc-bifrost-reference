@@ -1,0 +1,200 @@
+{
+  "at": "2026-11-09T02:53:56.134Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "messageType": "Reference.ExchangeRate.Get",
+    "lcid": 1039
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.ExchangeRate.Get",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "Reference.ExchangeRate.Get",
+      "isEnabled": true,
+      "filterTableNo": 0,
+      "description": "Get today's exchange rate between two currencies, e.g. euro to krona (EUR to ISK), from ECB data. Read-only; calls the internet. Not for BC's Currency Exchange Rate table or Central Bank of Iceland indices.",
+      "selectionDescription": "Viðmiðunargengi dagsins milli tveggja gjaldmiðla frá ytri þjónustu (gögn Seðlabanka Evrópu). Kallar á netið; skrifar ekkert. Fyrir töfluna Currency Exchange Rate í Business Central, notaðu Data.Records.Get.",
+      "messageDirection": "Outbound",
+      "keywords": [
+        "gengi",
+        "evra í krónur",
+        "gengi gjaldmiðils í dag",
+        "umreikna gjaldmiðil",
+        "hvað kostar evran",
+        "gengi seðlabanka evrópu"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "notUsed",
+          "description": "The currencies are from and to in data."
+        },
+        "dataRequired": true,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "parameters": [
+        {
+          "name": "from",
+          "type": "string",
+          "required": true,
+          "description": "A 3-letter ISO currency code, for example EUR. Case-insensitive."
+        },
+        {
+          "name": "to",
+          "type": "string",
+          "required": true,
+          "description": "A 3-letter ISO currency code, different from from, for example ISK. Case-insensitive."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "from",
+            "type": "string",
+            "description": "The from currency, in upper case."
+          },
+          {
+            "name": "to",
+            "type": "string",
+            "description": "The to currency, in upper case."
+          },
+          {
+            "name": "rate",
+            "type": "number",
+            "description": "1 from = rate to."
+          },
+          {
+            "name": "rateDate",
+            "type": "string",
+            "description": "The day the rate was published, YYYY-MM-DD. Can be a few days before today around weekends and holidays. Left out when the service sends no date."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "Where the rate comes from."
+          }
+        ]
+      },
+      "errors": [
+        {
+          "error": "Parameter '{parameter}' is required. Send it as text, for example \"EUR\".",
+          "when": "from or to is missing.",
+          "fix": "Send both from and to."
+        },
+        {
+          "error": "Parameter '{parameter}' is empty. Send a value, for example \"EUR\".",
+          "when": "from or to is an empty string.",
+          "fix": "Send a currency code."
+        },
+        {
+          "error": "Parameter '{parameter}' is {length} characters long; the maximum is 10.",
+          "when": "from or to is far too long to be a currency code.",
+          "fix": "Send a 3-letter code."
+        },
+        {
+          "error": "Parameter '{parameter}' must be a single value (text or number), not an object or an array.",
+          "when": "from or to is an object or an array.",
+          "fix": "Send a 3-letter code as text."
+        },
+        {
+          "error": "Parameter '{parameter}' is '{value}'. Send a 3-letter ISO currency code, for example EUR or ISK.",
+          "when": "from or to is not three letters, for example EURO.",
+          "fix": "Use ISO currency codes."
+        },
+        {
+          "error": "Parameters 'from' and 'to' are both {currency}. Send two different currencies.",
+          "when": "The same currency on both sides.",
+          "fix": "Send two different codes."
+        },
+        {
+          "error": "The exchange rate service at {baseUrl} could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup > Start setup wizard).",
+          "when": "No network, or outbound HTTP is blocked for this app. The platform's reason may follow as \" Details: {details}\".",
+          "fix": "Run the Bifrost Setup Wizard and enable HTTP for Bifrost Reference."
+        },
+        {
+          "error": "The exchange rate service answered HTTP {status} for {from} to {to}. Check that both are ISO currency codes the service supports (for example EUR, USD, ISK).",
+          "when": "The service does not know one of the currencies, or failed.",
+          "fix": "Use a currency the service supports."
+        },
+        {
+          "error": "The exchange rate service returned an answer without a rate for {to}. Try again later, or check Rates Base URL on the Bifrost Reference Setup page.",
+          "when": "The service gave an unexpected answer.",
+          "fix": "Try again later, or check Rates Base URL."
+        },
+        {
+          "error": "The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }.",
+          "when": "data is an array or plain text.",
+          "fix": "Send a JSON object."
+        }
+      ],
+      "effect": {
+        "effect": "read",
+        "changes": "Nothing in Business Central. Makes one outbound HTTPS GET to the configured rates service, which gives up after 15 seconds.",
+        "idempotent": true,
+        "preconditions": [
+          "The caller can read Ref Setup (it holds the service URL); without it the type is not offered.",
+          "Outbound HTTP is allowed for Bifrost Reference."
+        ]
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "Reference.ApiKey.Set",
+          "useInsteadWhen": "The configured service needs an API key; the default service does not."
+        },
+        {
+          "name": "Data.Records.Get",
+          "useInsteadWhen": "You want the rates stored in Business Central (table Currency Exchange Rate)."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Euro to krona",
+          "request": {
+            "type": "Reference.ExchangeRate.Get",
+            "data": {
+              "from": "EUR",
+              "to": "ISK"
+            }
+          },
+          "response": {
+            "from": "EUR",
+            "to": "ISK",
+            "rate": 136.6,
+            "rateDate": "2026-09-25",
+            "source": "European Central Bank reference rates via the configured rates service"
+          }
+        },
+        {
+          "title": "Not a currency code",
+          "request": {
+            "type": "Reference.ExchangeRate.Get",
+            "data": {
+              "from": "EUR",
+              "to": "EURO"
+            }
+          },
+          "response": {
+            "status": "Error",
+            "error": "Parameter 'to' is 'EURO'. Send a 3-letter ISO currency code, for example EUR or ISK."
+          }
+        }
+      ],
+      "overview": "Returns the latest reference exchange rate between two currencies from an external service (European Central Bank data, published once per working day). Makes one outbound HTTPS call; writes nothing in Business Central. Not for Business Central's own Currency Exchange Rate table (read that with Data.Records.Get), and not for historical rates.",
+      "notes": "Safe to repeat; the rate changes only when the service publishes a new one. If an API key is stored (see Reference.ApiKey.Set), it is sent in the X-Api-Key header and never appears in the response or in error texts. Currency codes are returned in upper case; rate is a JSON number with a dot as decimal separator. Error texts follow lcid when a translation is installed."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  },
+  "passed": true
+}

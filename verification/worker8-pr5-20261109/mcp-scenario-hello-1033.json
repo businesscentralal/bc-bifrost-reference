@@ -1,0 +1,27 @@
+{
+  "at": "2026-11-09T02:53:59.448Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "MyApp.Hello.Get",
+    "data": {
+      "name": "PR5"
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "MyApp.Hello.Get",
+    "message": "Hello, PR5! My Bifrost App is working in CRONUS International Ltd..",
+    "user": "[redacted operator identifier]",
+    "language": 1033,
+    "serverTime": "2026-11-09T02:53:59.094Z",
+    "app": "My Bifrost App",
+    "appVersion": "1.0.0.0"
+  },
+  "label": "hello-1033",
+  "type": "MyApp.Hello.Get",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

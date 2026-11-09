@@ -1,0 +1,106 @@
+{
+  "sourceSha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "sourceCommitUrl": "https://github.com/businesscentralal/bc-bifrost-reference/commit/75f955948db847f1dfe339903f0d0506729a2d51",
+  "owner": "worker-8",
+  "displayName": "Þráinn",
+  "containerId": "f0f90a9f13aa",
+  "productApps": 3,
+  "testApps": 2,
+  "compilePte": {
+    "errors": 0,
+    "warnings": 0,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ]
+  },
+  "appSourceCop": {
+    "errors": 26,
+    "warnings": 5,
+    "status": "FAIL; no exception assumed"
+  },
+  "native": {
+    "fullConfiguredSuite": true,
+    "methods": 32,
+    "languages": [
+      1033,
+      1039
+    ],
+    "executed": 64,
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0
+  },
+  "mcp": {
+    "touchedTypes": [
+      "MyApp.Hello.Get",
+      "MyApp.Item.Summary.Get",
+      "MyApp.Item.List",
+      "Help.MyApp.Get",
+      "Reference.Echo.Get",
+      "Reference.Table.Get",
+      "Reference.Note.Add",
+      "Help.Reference.Get",
+      "Reference.GLAccount.Overview.Get",
+      "Reference.AssetMaintenance.Create",
+      "Reference.ItemPrice.PreviewAdjustment",
+      "Reference.ItemPrice.ApplyAdjustment",
+      "Reference.ExchangeRate.Get",
+      "Reference.ApiKey.Set",
+      "Legacy.Stock.Reserve",
+      "Legacy.Stock.CancelReservation",
+      "Legacy.Stock.Get",
+      "Legacy.Stock.List",
+      "Legacy.Stock.ReleaseAll",
+      "Help.Legacy.Get"
+    ],
+    "languages": [
+      1033,
+      1039
+    ],
+    "contractChecks": 40,
+    "runtimeScenarios": 70,
+    "executed": 110,
+    "passed": 110,
+    "failed": 0,
+    "skipped": 0,
+    "fixtureCreation": "All business fixtures self-created through owned WebClient and MCP, with MCP readback. Data.Records.Set setup refusal at an earlier candidate retained privately; guard unchanged.",
+    "limitations": "ExchangeRate ISO validation only; ApiKey missing-input refusal only. No outbound provider or secret mutation claimed. Base price refusal is Foundation ConfirmationRequired; explicit item-count mismatch, successful application and persisted prices are verified in mcp-extra-summary.json. Owned container deletion proves fixture cleanup."
+  },
+  "ui": {
+    "languages": [
+      1033,
+      1039
+    ],
+    "executed": 6,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "scenarios": [
+      "Reference setup translated captions and key-unset status",
+      "MCP-created maintenance records",
+      "Empty Legacy reservations after confirmed release"
+    ],
+    "priorAttempts": "Earlier locator/navigation/setup attempts are retained privately and not counted as passed scenarios."
+  },
+  "cleanup": {
+    "at": "2026-11-09T03:02:51.784Z",
+    "id": "f0f90a9f13aa",
+    "owner": "worker-8",
+    "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+    "deleteStatus": 204,
+    "verified": true,
+    "checks": [
+      {
+        "at": "2026-11-09T03:02:51.863Z",
+        "status": 404
+      }
+    ],
+    "absentFromInventory": true,
+    "finishedAt": "2026-11-09T03:02:53.920Z"
+  },
+  "ciUrl": "https://github.com/businesscentralal/bc-bifrost-reference/actions/runs/42553159830",
+  "readiness": "Pending CI and canonical wrapper/policy disposition; no review clearance or delivery claimed.",
+  "packagedAt": "2026-11-09T03:07:21.114437+00:00"
+}

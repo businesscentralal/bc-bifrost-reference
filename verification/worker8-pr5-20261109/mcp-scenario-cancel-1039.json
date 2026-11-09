@@ -1,0 +1,22 @@
+{
+  "at": "2026-11-09T02:54:16.170Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Legacy.Stock.CancelReservation",
+    "data": {},
+    "lcid": 1039,
+    "subject": "R5W8-IS1"
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Legacy.Stock.CancelReservation",
+    "itemNo": "R5W8-IS1",
+    "cancelled": true
+  },
+  "label": "cancel-1039",
+  "type": "Legacy.Stock.CancelReservation",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

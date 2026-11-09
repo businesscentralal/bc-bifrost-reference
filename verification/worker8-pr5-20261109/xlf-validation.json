@@ -1,0 +1,29 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "rows": [
+    {
+      "project": "boilerplate",
+      "generated": 23,
+      "translated": 23,
+      "sourceLanguage": "en-US",
+      "targetLanguage": "is-IS",
+      "problems": []
+    },
+    {
+      "project": "reference",
+      "generated": 83,
+      "translated": 83,
+      "sourceLanguage": "en-US",
+      "targetLanguage": "is-IS",
+      "problems": []
+    },
+    {
+      "project": "legacy",
+      "generated": 57,
+      "translated": 57,
+      "sourceLanguage": "en-US",
+      "targetLanguage": "is-IS",
+      "problems": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "at": "2026-11-09T02:54:10.689Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "MyApp.Item.Summary.Get",
+    "data": {},
+    "lcid": 1039,
+    "subject": "R5W8-IS1"
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "MyApp.Item.Summary.Get",
+    "itemNo": "R5W8-IS1",
+    "description": "PR5 owned first item IS",
+    "baseUnitOfMeasure": "PCS",
+    "unitPrice": 100,
+    "asOfDate": "2026-11-09",
+    "inventory": 0,
+    "blocked": false
+  },
+  "label": "item-summary-1039",
+  "type": "MyApp.Item.Summary.Get",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

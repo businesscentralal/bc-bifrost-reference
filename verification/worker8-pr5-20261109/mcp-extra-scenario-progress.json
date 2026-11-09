@@ -1,0 +1,44 @@
+[
+  {
+    "label": "item-count-refusal-1033",
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "lcid": 1033,
+    "kind": "scenario",
+    "passed": true
+  },
+  {
+    "label": "price-apply-1033",
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "lcid": 1033,
+    "kind": "scenario",
+    "passed": true
+  },
+  {
+    "label": "price-readback-1033",
+    "type": "Data.Records.Get",
+    "lcid": 1033,
+    "kind": "readback",
+    "passed": true
+  },
+  {
+    "label": "item-count-refusal-1039",
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "lcid": 1039,
+    "kind": "scenario",
+    "passed": true
+  },
+  {
+    "label": "price-apply-1039",
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "lcid": 1039,
+    "kind": "scenario",
+    "passed": true
+  },
+  {
+    "label": "price-readback-1039",
+    "type": "Data.Records.Get",
+    "lcid": 1039,
+    "kind": "readback",
+    "passed": true
+  }
+]

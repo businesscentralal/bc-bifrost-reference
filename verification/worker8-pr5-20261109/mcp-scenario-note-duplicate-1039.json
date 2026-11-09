@@ -1,0 +1,22 @@
+{
+  "at": "2026-11-09T02:54:13.233Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.Note.Add",
+    "data": {
+      "no": "R5W8-ISNOTE3",
+      "text": "Owned PR5 fixture"
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "status": "Error",
+    "error": "Athugasemd með nr. 'R5W8-ISNOTE3' er þegar til. Veldu annað nr.; ef þetta er endurtekning tókst fyrsta tilraunin líklega."
+  },
+  "label": "note-duplicate-1039",
+  "type": "Reference.Note.Add",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

@@ -1,0 +1,32 @@
+{
+  "at": "2026-11-09T02:54:13.864Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.AssetMaintenance.Create",
+    "data": {
+      "maintenanceDate": "2020-01-01",
+      "hours": 1,
+      "description": "Owned PR5 maintenance",
+      "externalId": "R5W8-ISMAINT3"
+    },
+    "lcid": 1039,
+    "subject": "R5W8-ISFA"
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.AssetMaintenance.Create",
+    "entryNo": 13,
+    "created": false,
+    "assetNo": "R5W8-ISFA",
+    "maintenanceDate": "2020-01-01",
+    "hours": 1,
+    "description": "Owned PR5 maintenance",
+    "externalId": "R5W8-ISMAINT3"
+  },
+  "label": "maintenance-repeat-1039",
+  "type": "Reference.AssetMaintenance.Create",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

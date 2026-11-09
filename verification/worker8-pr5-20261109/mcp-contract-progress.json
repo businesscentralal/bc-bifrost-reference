@@ -1,0 +1,242 @@
+[
+  {
+    "label": "contract-1033-MyApp.Hello.Get",
+    "type": "MyApp.Hello.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-MyApp.Item.Summary.Get",
+    "type": "MyApp.Item.Summary.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-MyApp.Item.List",
+    "type": "MyApp.Item.List",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Help.MyApp.Get",
+    "type": "Help.MyApp.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.Echo.Get",
+    "type": "Reference.Echo.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.Table.Get",
+    "type": "Reference.Table.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.Note.Add",
+    "type": "Reference.Note.Add",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Help.Reference.Get",
+    "type": "Help.Reference.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.GLAccount.Overview.Get",
+    "type": "Reference.GLAccount.Overview.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.AssetMaintenance.Create",
+    "type": "Reference.AssetMaintenance.Create",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.ItemPrice.PreviewAdjustment",
+    "type": "Reference.ItemPrice.PreviewAdjustment",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.ItemPrice.ApplyAdjustment",
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.ExchangeRate.Get",
+    "type": "Reference.ExchangeRate.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Reference.ApiKey.Set",
+    "type": "Reference.ApiKey.Set",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Legacy.Stock.Reserve",
+    "type": "Legacy.Stock.Reserve",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Legacy.Stock.CancelReservation",
+    "type": "Legacy.Stock.CancelReservation",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Legacy.Stock.Get",
+    "type": "Legacy.Stock.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Legacy.Stock.List",
+    "type": "Legacy.Stock.List",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Legacy.Stock.ReleaseAll",
+    "type": "Legacy.Stock.ReleaseAll",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1033-Help.Legacy.Get",
+    "type": "Help.Legacy.Get",
+    "lcid": 1033,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-MyApp.Hello.Get",
+    "type": "MyApp.Hello.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-MyApp.Item.Summary.Get",
+    "type": "MyApp.Item.Summary.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-MyApp.Item.List",
+    "type": "MyApp.Item.List",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Help.MyApp.Get",
+    "type": "Help.MyApp.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.Echo.Get",
+    "type": "Reference.Echo.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.Table.Get",
+    "type": "Reference.Table.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.Note.Add",
+    "type": "Reference.Note.Add",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Help.Reference.Get",
+    "type": "Help.Reference.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.GLAccount.Overview.Get",
+    "type": "Reference.GLAccount.Overview.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.AssetMaintenance.Create",
+    "type": "Reference.AssetMaintenance.Create",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.ItemPrice.PreviewAdjustment",
+    "type": "Reference.ItemPrice.PreviewAdjustment",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.ItemPrice.ApplyAdjustment",
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.ExchangeRate.Get",
+    "type": "Reference.ExchangeRate.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Reference.ApiKey.Set",
+    "type": "Reference.ApiKey.Set",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Legacy.Stock.Reserve",
+    "type": "Legacy.Stock.Reserve",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Legacy.Stock.CancelReservation",
+    "type": "Legacy.Stock.CancelReservation",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Legacy.Stock.Get",
+    "type": "Legacy.Stock.Get",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Legacy.Stock.List",
+    "type": "Legacy.Stock.List",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Legacy.Stock.ReleaseAll",
+    "type": "Legacy.Stock.ReleaseAll",
+    "lcid": 1039,
+    "passed": true
+  },
+  {
+    "label": "contract-1039-Help.Legacy.Get",
+    "type": "Help.Legacy.Get",
+    "lcid": 1039,
+    "passed": true
+  }
+]

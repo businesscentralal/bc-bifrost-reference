@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-09T02:54:00.739Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Help.MyApp.Get",
+    "data": {},
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Help.MyApp.Get",
+    "format": "markdown",
+    "markdown": "# My Bifrost App\r\n\r\nAn app built on Bifrost Foundation. It reads items: one item's price and inventory, or a\r\ncapped list of items.\r\n\r\n## Message types\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `MyApp.Hello.Get` | Read-only | Hello World: greeting, user, company and app version. Call it first. |\r\n| `MyApp.Item.Summary.Get` | Read-only | One item's description, base unit, unit price and inventory as of a date. |\r\n| `MyApp.Item.List` | Read-only | Items by number filter, at most 100 rows, with the total count. |\r\n| `Help.MyApp.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+  },
+  "label": "directory-Help.MyApp.Get-1033",
+  "type": "Help.MyApp.Get",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

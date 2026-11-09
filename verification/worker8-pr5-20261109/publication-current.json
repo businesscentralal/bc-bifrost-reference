@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-09T03:02:30.477Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "branchUrl": "https://github.com/businesscentralal/bc-bifrost-reference/tree/feat/contract-chapters",
+  "commitUrl": "https://github.com/businesscentralal/bc-bifrost-reference/commit/75f955948db847f1dfe339903f0d0506729a2d51",
+  "refBefore": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "commitRead": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "refAfter": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "canonicalHelperPassed": false,
+  "canonicalHelperError": "Expected an authorized Bifrost repository"
+}

@@ -1,0 +1,265 @@
+{
+  "at": "2026-11-09T02:53:56.542Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "messageType": "Legacy.Stock.Reserve",
+    "lcid": 1039
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Legacy.Stock.Reserve",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "Legacy.Stock.Reserve",
+      "isEnabled": true,
+      "filterTableNo": 90050,
+      "description": "Reserve a quantity of an item in Legacy App; adds to any existing reservation and returns the new total. Refuses more than is in stock unless allowOverStock. Commits; not safe to repeat. To remove use Legacy.Stock.CancelReservation.",
+      "selectionDescription": "Taka frá magn af einni vöru í Legacy App, bætt við það sem þegar er frátekið; meira en er til á lager aðeins ef notandinn samþykkir. Ekki til að fjarlægja frátekningu: notaðu Legacy.Stock.CancelReservation. Til að sjá hvað er frátekið, notaðu Legacy.Stock.Get.",
+      "messageDirection": "Inbound",
+      "keywords": [
+        "taka frá birgðir",
+        "leggja birgðir til hliðar",
+        "halda vörum fyrir pöntun",
+        "bóka birgðir fyrir vöru",
+        "setja vörur í bið",
+        "taka meira frá af vöru"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "optional",
+          "description": "The item number. Leave it empty to send itemNo in data instead."
+        },
+        "dataRequired": true,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "target": [
+        {
+          "source": "subject",
+          "form": "item number",
+          "description": "The item number, for example 1896-S, case-insensitive. Tried first."
+        },
+        {
+          "source": "data.itemNo",
+          "form": "item number",
+          "description": "Used only when subject is empty."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "itemNo",
+          "type": "string",
+          "required": false,
+          "description": "The item number, at most 20 characters, case-insensitive. Needed only when subject is empty."
+        },
+        {
+          "name": "quantity",
+          "type": "number",
+          "required": true,
+          "description": "The quantity to add to the reservation, greater than zero, with a dot as decimal separator."
+        },
+        {
+          "name": "allowOverStock",
+          "type": "boolean",
+          "required": false,
+          "description": "true allows the total reserved to exceed the inventory. Send true only when the user has explicitly agreed to reserve more than is in stock. Omitted: false."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "itemNo",
+            "type": "string",
+            "description": "The item number, in upper case."
+          },
+          {
+            "name": "quantityAdded",
+            "type": "number",
+            "description": "The quantity this call added."
+          },
+          {
+            "name": "totalReserved",
+            "type": "number",
+            "description": "The item's total reserved quantity after this call."
+          },
+          {
+            "name": "availableToReserve",
+            "type": "number",
+            "description": "Inventory minus the total reserved. Negative after an over-reservation."
+          }
+        ]
+      },
+      "errors": [
+        {
+          "error": "Parameter 'itemNo' is required. Send it as text, for example \"1896-S\".",
+          "when": "subject is empty and data has no itemNo.",
+          "fix": "Send the item number in subject."
+        },
+        {
+          "error": "Parameter 'itemNo' is empty. Send a value, for example \"1896-S\".",
+          "when": "subject is empty and itemNo is an empty string.",
+          "fix": "Send the item number."
+        },
+        {
+          "error": "Parameter 'itemNo' is {length} characters long; the maximum is 20.",
+          "when": "The item number in subject or itemNo is longer than 20 characters.",
+          "fix": "Check the number."
+        },
+        {
+          "error": "Parameter 'itemNo' must be a single value (text or number), not an object or an array.",
+          "when": "itemNo is an object or an array.",
+          "fix": "Send it as text."
+        },
+        {
+          "error": "The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }.",
+          "when": "data is an array or plain text.",
+          "fix": "Send a JSON object, or no body at all."
+        },
+        {
+          "error": "Item '{itemNo}' does not exist. Check the number, or find the item with Data.Records.Get on table Item.",
+          "when": "No item has that number.",
+          "fix": "Check the number."
+        },
+        {
+          "error": "Item '{itemNo}' is blocked, so stock cannot be reserved for it. Unblock the item or choose another.",
+          "when": "The item is blocked.",
+          "fix": "Unblock it or choose another item."
+        },
+        {
+          "error": "Parameter 'quantity' is required. Send it as a number, for example 2.5.",
+          "when": "quantity is missing.",
+          "fix": "Send quantity."
+        },
+        {
+          "error": "Parameter 'quantity' has the value '{value}', which is not a number. Send a number with a dot as decimal separator, for example 2.5.",
+          "when": "quantity is not a number.",
+          "fix": "Send a number, for example 2."
+        },
+        {
+          "error": "Parameter '{parameter}' must be a single value (text or number), not an object or an array.",
+          "when": "quantity or allowOverStock is an object or an array.",
+          "fix": "Send a single value."
+        },
+        {
+          "error": "The quantity to reserve is {quantity}. Send a quantity greater than zero; to remove a reservation, cancel it instead.",
+          "when": "quantity is zero or negative.",
+          "fix": "Send a positive quantity."
+        },
+        {
+          "error": "Item '{itemNo}' has {inventory} in inventory and {reserved} already reserved, so reserving {quantity} more would reserve more than is in stock. Reserve at most {available}, or explicitly allow over-reservation.",
+          "when": "The new total would exceed the inventory.",
+          "fix": "Reserve at most the number given, or ask the user and resend with \"allowOverStock\": true."
+        },
+        {
+          "error": "Parameter 'allowOverStock' has the value '{value}'. Send true or false, without quotes.",
+          "when": "allowOverStock is not true or false, for example \"yes\".",
+          "fix": "Send true or false."
+        },
+        {
+          "code": "Retryable",
+          "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+          "fix": "Retry the same call after a few seconds; nothing was changed."
+        }
+      ],
+      "effect": {
+        "effect": "write",
+        "changes": "Inserts or increases the item's Legacy Stock Reservation record. On any error nothing is written. Legacy.Stock.CancelReservation removes the reservation again.",
+        "idempotent": false,
+        "preconditions": [
+          "The caller can write Legacy Stock Reservation; without it the type is not offered."
+        ]
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "Legacy.Stock.Get",
+          "useInsteadWhen": "You want to see how much is reserved and how much can still be reserved, or whether an earlier call went through."
+        },
+        {
+          "name": "Legacy.Stock.CancelReservation",
+          "useInsteadWhen": "You want to remove the item's reservation."
+        }
+      ],
+      "workflow": {
+        "steps": [
+          {
+            "messageType": "Legacy.Stock.Get",
+            "purpose": "Optional: see how much can still be reserved without allowOverStock."
+          },
+          {
+            "messageType": "Legacy.Stock.Reserve",
+            "purpose": "Reserve the quantity."
+          },
+          {
+            "messageType": "Legacy.Stock.CancelReservation",
+            "purpose": "Optional: remove the reservation again."
+          }
+        ],
+        "text": "Standalone; check with Legacy.Stock.Get first when the stock may be short."
+      },
+      "examples": [
+        {
+          "title": "Reserve 2 of an item",
+          "request": {
+            "type": "Legacy.Stock.Reserve",
+            "subject": "1896-S",
+            "data": {
+              "quantity": 2
+            }
+          },
+          "response": {
+            "itemNo": "1896-S",
+            "quantityAdded": 2,
+            "totalReserved": 5,
+            "availableToReserve": 12
+          }
+        },
+        {
+          "title": "More than is in stock",
+          "request": {
+            "type": "Legacy.Stock.Reserve",
+            "subject": "1896-S",
+            "data": {
+              "quantity": 5
+            }
+          },
+          "response": {
+            "status": "Error",
+            "error": "Item '1896-S' has 10 in inventory and 8 already reserved, so reserving 5 more would reserve more than is in stock. Reserve at most 2, or explicitly allow over-reservation."
+          }
+        },
+        {
+          "title": "The user agreed to reserve more than is in stock",
+          "request": {
+            "type": "Legacy.Stock.Reserve",
+            "subject": "1896-S",
+            "data": {
+              "quantity": 5,
+              "allowOverStock": true
+            }
+          },
+          "response": {
+            "itemNo": "1896-S",
+            "quantityAdded": 5,
+            "totalReserved": 13,
+            "availableToReserve": -3
+          }
+        }
+      ],
+      "overview": "Reserves a quantity of one item in Legacy App. An existing reservation for the item is increased; otherwise one is created. Returns the new total and what can still be reserved. By default the total reserved may not exceed the inventory. Not for reducing or removing a reservation (use Legacy.Stock.CancelReservation), and not for reading it (use Legacy.Stock.Get).",
+      "notes": "Not safe to repeat: two identical calls reserve twice. When unsure whether an earlier call went through, check totalReserved with Legacy.Stock.Get before calling again. Never send allowOverStock: true on your own: ask the user first. Numbers use a dot as decimal separator. Error texts follow lcid when a translation is installed."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  },
+  "passed": true
+}

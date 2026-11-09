@@ -1,0 +1,283 @@
+{
+  "at": "2026-11-09T02:53:50.151Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "messageType": "Reference.GLAccount.Overview.Get",
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.GLAccount.Overview.Get",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "Reference.GLAccount.Overview.Get",
+      "isEnabled": true,
+      "filterTableNo": 15,
+      "description": "Get a G/L account's balance as of a date, and its net change for a period: e.g. \"what is on account 2910 at the end of August\". Read-only. Account by subject (No. or SystemId). For the entries themselves use Data.Records.Get on G/L Entry.",
+      "selectionDescription": "One G/L account's balance as of a date and, optionally, its net change for a period, in local currency. For the entries behind the amount, use Data.Records.Get on G/L Entry; to find an account by name, use Data.Records.Get on G/L Account.",
+      "messageDirection": "Outbound",
+      "keywords": [
+        "account balance",
+        "balance of a g/l account",
+        "net change on an account",
+        "how much is on account",
+        "movement in a period",
+        "ledger account balance at month end"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "optional",
+          "description": "The account: its SystemId (GUID) or its number. Leave it empty to send accountNo in data instead."
+        },
+        "dataRequired": false,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "target": [
+        {
+          "source": "subject",
+          "form": "SystemId (GUID)",
+          "description": "The account's SystemId. Tried first."
+        },
+        {
+          "source": "subject",
+          "form": "account number",
+          "description": "The account number, for example 2910, case-insensitive."
+        },
+        {
+          "source": "data.accountNo",
+          "form": "account number",
+          "description": "Used only when subject is empty."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "accountNo",
+          "type": "string",
+          "required": false,
+          "description": "The G/L account number, at most 20 characters. Needed only when subject is empty."
+        },
+        {
+          "name": "asOfDate",
+          "type": "string",
+          "required": false,
+          "description": "A date in the format YYYY-MM-DD. The balance includes entries posted on or before it. Omitted: the work date. 31.08.2026 is refused."
+        },
+        {
+          "name": "fromDate",
+          "type": "string",
+          "required": false,
+          "description": "A date in the format YYYY-MM-DD, on or before asOfDate: the start of the net-change period. Omitted: balance only, netChange is null."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "accountNo",
+            "type": "string",
+            "description": "The account number."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "The account name."
+          },
+          {
+            "name": "accountType",
+            "type": "string",
+            "description": "Posting, Heading, Total, Begin-Total or End-Total. Only Posting accounts carry postings of their own; the others answer totals over their Totaling range (a Heading has none, so 0)."
+          },
+          {
+            "name": "incomeBalance",
+            "type": "string",
+            "description": "Income Statement or Balance Sheet."
+          },
+          {
+            "name": "currencyCode",
+            "type": "string",
+            "description": "The local currency the amounts are in."
+          },
+          {
+            "name": "asOfDate",
+            "type": "string",
+            "description": "The date used, YYYY-MM-DD: yours, or the work date when you sent none."
+          },
+          {
+            "name": "balanceAsOf",
+            "type": "number",
+            "description": "The sum of all entries posted on or before asOfDate. Debit positive, credit negative."
+          },
+          {
+            "name": "fromDate",
+            "type": "string",
+            "description": "The start of the period, YYYY-MM-DD, or null when you sent no fromDate."
+          },
+          {
+            "name": "netChange",
+            "type": "number",
+            "description": "The sum of entries from fromDate to asOfDate, both included. null when no fromDate was sent, never 0."
+          },
+          {
+            "name": "blocked",
+            "type": "boolean",
+            "description": "true when the account is blocked for posting."
+          },
+          {
+            "name": "directPosting",
+            "type": "boolean",
+            "description": "true when journals may post to the account directly."
+          }
+        ]
+      },
+      "errors": [
+        {
+          "error": "No G/L account was given. Send the account number in subject or as \"accountNo\", or its SystemId in subject.",
+          "when": "subject is empty and data has no accountNo.",
+          "fix": "Send the account number in subject."
+        },
+        {
+          "error": "G/L account '{account}' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.",
+          "when": "No account has that number or SystemId.",
+          "fix": "Check the number, or search by name with Data.Records.Get."
+        },
+        {
+          "error": "Parameter '{parameter}' has the value '{value}', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.",
+          "when": "asOfDate or fromDate is not YYYY-MM-DD, for example 31.08.2026.",
+          "fix": "Send the date as YYYY-MM-DD, for example 2026-08-31."
+        },
+        {
+          "error": "Parameter 'fromDate' is {fromDate}, which is after 'asOfDate' {asOfDate}. Send a fromDate on or before the asOfDate, or leave fromDate out to get the balance only.",
+          "when": "The period ends before it starts.",
+          "fix": "Swap the dates, or leave fromDate out."
+        },
+        {
+          "error": "Parameter '{parameter}' must be a single value (text or number), not an object or an array.",
+          "when": "accountNo, asOfDate or fromDate is an object or an array.",
+          "fix": "Send it as text."
+        },
+        {
+          "error": "Parameter '{parameter}' is {length} characters long; the maximum is {maximum}.",
+          "when": "accountNo is longer than 20 characters, or a date longer than 30.",
+          "fix": "Send the account number, or the date as YYYY-MM-DD."
+        },
+        {
+          "error": "The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }.",
+          "when": "data is an array or plain text.",
+          "fix": "Send a JSON object, or no body at all."
+        }
+      ],
+      "effect": {
+        "effect": "read",
+        "changes": "Nothing. Reads G/L Account and calculates its balance FlowFields over G/L Entry.",
+        "idempotent": true,
+        "preconditions": [
+          "The caller can read G/L Account and G/L Entry; without it the type is not offered."
+        ]
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "Data.Records.Get",
+          "useInsteadWhen": "You want the entries behind the amounts (table G/L Entry), or need to find an account by name (table G/L Account)."
+        },
+        {
+          "name": "Help.Reference.Get",
+          "useInsteadWhen": "You want the other types in this app."
+        }
+      ],
+      "workflow": {
+        "steps": [
+          {
+            "messageType": "Data.Records.Get",
+            "purpose": "Optional: find the account number on table G/L Account when you know the account by name only."
+          },
+          {
+            "messageType": "Reference.GLAccount.Overview.Get",
+            "purpose": "Get the balance and, with fromDate, the net change."
+          },
+          {
+            "messageType": "Data.Records.Get",
+            "purpose": "Optional: list the entries behind the amount on table G/L Entry."
+          }
+        ],
+        "text": "Standalone when you know the account number; the other steps are only needed to find the account or explain the amount."
+      },
+      "examples": [
+        {
+          "title": "Balance at the end of August and the net change for August",
+          "request": {
+            "type": "Reference.GLAccount.Overview.Get",
+            "subject": "2910",
+            "data": {
+              "asOfDate": "2026-08-31",
+              "fromDate": "2026-08-01"
+            }
+          },
+          "response": {
+            "accountNo": "2910",
+            "name": "Bank, Checking",
+            "accountType": "Posting",
+            "incomeBalance": "Balance Sheet",
+            "currencyCode": "ISK",
+            "asOfDate": "2026-08-31",
+            "balanceAsOf": 1250000,
+            "fromDate": "2026-08-01",
+            "netChange": -300000,
+            "blocked": false,
+            "directPosting": true
+          }
+        },
+        {
+          "title": "Balance only, as of the work date",
+          "request": {
+            "type": "Reference.GLAccount.Overview.Get",
+            "data": {
+              "accountNo": "2910"
+            }
+          },
+          "response": {
+            "accountNo": "2910",
+            "name": "Bank, Checking",
+            "accountType": "Posting",
+            "incomeBalance": "Balance Sheet",
+            "currencyCode": "ISK",
+            "asOfDate": "2026-09-26",
+            "balanceAsOf": 1180000,
+            "fromDate": null,
+            "netChange": null,
+            "blocked": false,
+            "directPosting": true
+          }
+        },
+        {
+          "title": "A date in the wrong format",
+          "request": {
+            "type": "Reference.GLAccount.Overview.Get",
+            "subject": "2910",
+            "data": {
+              "asOfDate": "31.08.2026"
+            }
+          },
+          "response": {
+            "status": "Error",
+            "error": "Parameter 'asOfDate' has the value '31.08.2026', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."
+          }
+        }
+      ],
+      "overview": "Returns one G/L account's balance as of a date and, when you send a start date, its net change for the period from that date. All amounts are in local currency (LCY). Use it to answer \"what is on account 2910 at the end of August?\" or \"how much moved on this account in September?\". Not for listing the entries behind the amount (use Data.Records.Get on G/L Entry), and not for budgets, dimensions or changing the account.",
+      "notes": "Safe to repeat: the same call gives the same amounts until something is posted. \"No G/L account was given\" and \"G/L account 'X' was not found\" never mix: the first means nothing identified the account, the second echoes the value that matched no account. Check accountType before treating an amount as a posting balance: Heading, Total, Begin-Total and End-Total accounts answer totals over their Totaling range. Amounts are JSON numbers with a dot as decimal separator; dates are YYYY-MM-DD. Enum values (accountType, incomeBalance) are English names in every language. Error texts follow lcid when a translation is installed."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  },
+  "passed": true
+}

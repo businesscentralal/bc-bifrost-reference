@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-09T02:55:39.604Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "data": {
+      "itemCategoryCode": "R5W8-IS",
+      "percent": 10,
+      "expectedItemCount": 3,
+      "expectedCount": 1
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "status": "Error",
+    "error": "Valið hefur breyst frá forskoðun: búist var við 3 vörum í flokknum 'R5W8-IS' en þær eru 2. Keyrðu Reference.ItemPrice.PreviewAdjustment aftur og sendu itemCount sem expectedItemCount."
+  },
+  "label": "item-count-refusal-1039",
+  "type": "Reference.ItemPrice.ApplyAdjustment",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

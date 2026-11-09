@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-09T02:54:09.055Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Legacy.Stock.ReleaseAll",
+    "data": {
+      "itemFilter": "R5W8-EN?",
+      "expectedCount": 2
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Legacy.Stock.ReleaseAll",
+    "itemFilter": "R5W8-EN?",
+    "released": 2
+  },
+  "label": "bulk-release-1033",
+  "type": "Legacy.Stock.ReleaseAll",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

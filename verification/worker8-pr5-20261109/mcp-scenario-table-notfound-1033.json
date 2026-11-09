@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-09T02:54:02.374Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.Table.Get",
+    "data": {
+      "tableName": "R5W8-ENMISSING"
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "status": "Error",
+    "error": "Table 'R5W8-ENMISSING' was not found. Use the full object name with spaces, for example Sales Header, or list tables with Help.Tables.Get."
+  },
+  "label": "table-notfound-1033",
+  "type": "Reference.Table.Get",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

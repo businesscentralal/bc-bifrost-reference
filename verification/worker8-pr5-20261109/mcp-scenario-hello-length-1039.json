@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-09T02:54:10.470Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "MyApp.Hello.Get",
+    "data": {
+      "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "status": "Error",
+    "error": "Færibreytan 'name' er 60 stafir; hámarkið er 50."
+  },
+  "label": "hello-length-1039",
+  "type": "MyApp.Hello.Get",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

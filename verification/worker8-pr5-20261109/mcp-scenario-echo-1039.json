@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-09T02:54:11.939Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.Echo.Get",
+    "data": {
+      "marker": "R5W8-IS"
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.Echo.Get",
+    "marker": "R5W8-IS",
+    "serverTime": "2026-11-09T02:54:11.8780000Z"
+  },
+  "label": "echo-1039",
+  "type": "Reference.Echo.Get",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

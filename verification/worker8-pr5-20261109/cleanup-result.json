@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-09T03:02:51.784Z",
+  "id": "f0f90a9f13aa",
+  "owner": "worker-8",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "deleteStatus": 204,
+  "verified": true,
+  "checks": [
+    {
+      "at": "2026-11-09T03:02:51.863Z",
+      "status": 404
+    }
+  ],
+  "absentFromInventory": true,
+  "finishedAt": "2026-11-09T03:02:53.920Z"
+}

@@ -1,0 +1,28 @@
+{
+  "at": "2026-11-09T02:54:08.410Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Legacy.Stock.ReleaseAll",
+    "data": {
+      "itemFilter": "R5W8-EN?",
+      "expectedCount": 5
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "status": "Error",
+    "code": "ConfirmationMismatch",
+    "error": "You sent expectedCount 5, but the call would now affect 2 (Stock reservations matching R5W8-EN?). Nothing was changed.",
+    "parameter": "expectedCount",
+    "received": "5",
+    "expected": "2",
+    "nextStep": "Check the preview and send expectedCount 2 if that is what you want.",
+    "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Legacy.Stock.ReleaseAll\". Always read the help before calling a message type."
+  },
+  "label": "bulk-count-refusal-1033",
+  "type": "Legacy.Stock.ReleaseAll",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

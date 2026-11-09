@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-09T02:55:38.330Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "data": {
+      "itemCategoryCode": "R5W8-EN",
+      "percent": 10,
+      "expectedItemCount": 3,
+      "expectedCount": 1
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "status": "Error",
+    "error": "The selection changed since the preview: expected 3 items in category 'R5W8-EN', found 2. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount."
+  },
+  "label": "item-count-refusal-1033",
+  "type": "Reference.ItemPrice.ApplyAdjustment",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

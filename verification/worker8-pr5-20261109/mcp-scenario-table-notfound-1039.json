@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-09T02:54:12.614Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.Table.Get",
+    "data": {
+      "tableName": "R5W8-ISMISSING"
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "status": "Error",
+    "error": "Taflan 'R5W8-ISMISSING' fannst ekki. Notaðu fullt heiti með bilum, t.d. Sales Header, eða skoðaðu töflur með Help.Tables.Get."
+  },
+  "label": "table-notfound-1039",
+  "type": "Reference.Table.Get",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

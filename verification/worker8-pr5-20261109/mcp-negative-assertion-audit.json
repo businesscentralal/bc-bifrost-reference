@@ -1,0 +1,76 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "cases": [
+    {
+      "case": "hello-length",
+      "lcid": 1033,
+      "passed": true
+    },
+    {
+      "case": "table-notfound",
+      "lcid": 1033,
+      "passed": true
+    },
+    {
+      "case": "note-duplicate",
+      "lcid": 1033,
+      "passed": true
+    },
+    {
+      "case": "price-count-refusal",
+      "lcid": 1033,
+      "passed": true
+    },
+    {
+      "case": "exchange-invalid",
+      "lcid": 1033,
+      "passed": true
+    },
+    {
+      "case": "apikey-missing",
+      "lcid": 1033,
+      "passed": true
+    },
+    {
+      "case": "bulk-count-refusal",
+      "lcid": 1033,
+      "passed": true
+    },
+    {
+      "case": "hello-length",
+      "lcid": 1039,
+      "passed": true
+    },
+    {
+      "case": "table-notfound",
+      "lcid": 1039,
+      "passed": true
+    },
+    {
+      "case": "note-duplicate",
+      "lcid": 1039,
+      "passed": true
+    },
+    {
+      "case": "price-count-refusal",
+      "lcid": 1039,
+      "passed": true
+    },
+    {
+      "case": "exchange-invalid",
+      "lcid": 1039,
+      "passed": true
+    },
+    {
+      "case": "apikey-missing",
+      "lcid": 1039,
+      "passed": true
+    },
+    {
+      "case": "bulk-count-refusal",
+      "lcid": 1039,
+      "passed": true
+    }
+  ],
+  "note": "The original price-count-refusal payload verifies Foundation ConfirmationRequired. Explicit expectedItemCount mismatch is covered by the extra scenarios; no network failure is accepted as a semantic refusal."
+}

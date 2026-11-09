@@ -1,0 +1,459 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "executed": 64,
+  "passed": 64,
+  "failed": 0,
+  "skipped": 0,
+  "rows": [
+    {
+      "label": "hello-1033",
+      "type": "MyApp.Hello.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "hello-length-1033",
+      "type": "MyApp.Hello.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "item-summary-1033",
+      "type": "MyApp.Item.Summary.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "item-list-1033",
+      "type": "MyApp.Item.List",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "directory-Help.MyApp.Get-1033",
+      "type": "Help.MyApp.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "directory-Help.Reference.Get-1033",
+      "type": "Help.Reference.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "directory-Help.Legacy.Get-1033",
+      "type": "Help.Legacy.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "echo-1033",
+      "type": "Reference.Echo.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "table-1033",
+      "type": "Reference.Table.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "table-notfound-1033",
+      "type": "Reference.Table.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "note-1033",
+      "type": "Reference.Note.Add",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "note-duplicate-1033",
+      "type": "Reference.Note.Add",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "gl-1033",
+      "type": "Reference.GLAccount.Overview.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "maintenance-1033",
+      "type": "Reference.AssetMaintenance.Create",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "maintenance-repeat-1033",
+      "type": "Reference.AssetMaintenance.Create",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-preview-1033",
+      "type": "Reference.ItemPrice.PreviewAdjustment",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-count-refusal-1033",
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "exchange-invalid-1033",
+      "type": "Reference.ExchangeRate.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "apikey-missing-1033",
+      "type": "Reference.ApiKey.Set",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "reserve-1033",
+      "type": "Legacy.Stock.Reserve",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "stock-get-1033",
+      "type": "Legacy.Stock.Get",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "stock-list-1033",
+      "type": "Legacy.Stock.List",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "cancel-1033",
+      "type": "Legacy.Stock.CancelReservation",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "cancel-repeat-1033",
+      "type": "Legacy.Stock.CancelReservation",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "release-empty-1033",
+      "type": "Legacy.Stock.ReleaseAll",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "reserve-bulk1-1033",
+      "type": "Legacy.Stock.Reserve",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "reserve-bulk2-1033",
+      "type": "Legacy.Stock.Reserve",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-list-1033",
+      "type": "Legacy.Stock.List",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-count-refusal-1033",
+      "type": "Legacy.Stock.ReleaseAll",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-preserved-1033",
+      "type": "Legacy.Stock.List",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-release-1033",
+      "type": "Legacy.Stock.ReleaseAll",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-cleanup-readback-1033",
+      "type": "Legacy.Stock.List",
+      "lcid": 1033,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "hello-1039",
+      "type": "MyApp.Hello.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "hello-length-1039",
+      "type": "MyApp.Hello.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "item-summary-1039",
+      "type": "MyApp.Item.Summary.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "item-list-1039",
+      "type": "MyApp.Item.List",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "directory-Help.MyApp.Get-1039",
+      "type": "Help.MyApp.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "directory-Help.Reference.Get-1039",
+      "type": "Help.Reference.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "directory-Help.Legacy.Get-1039",
+      "type": "Help.Legacy.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "echo-1039",
+      "type": "Reference.Echo.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "table-1039",
+      "type": "Reference.Table.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "table-notfound-1039",
+      "type": "Reference.Table.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "note-1039",
+      "type": "Reference.Note.Add",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "note-duplicate-1039",
+      "type": "Reference.Note.Add",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "gl-1039",
+      "type": "Reference.GLAccount.Overview.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "maintenance-1039",
+      "type": "Reference.AssetMaintenance.Create",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "maintenance-repeat-1039",
+      "type": "Reference.AssetMaintenance.Create",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-preview-1039",
+      "type": "Reference.ItemPrice.PreviewAdjustment",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "price-count-refusal-1039",
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "exchange-invalid-1039",
+      "type": "Reference.ExchangeRate.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "apikey-missing-1039",
+      "type": "Reference.ApiKey.Set",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "reserve-1039",
+      "type": "Legacy.Stock.Reserve",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "stock-get-1039",
+      "type": "Legacy.Stock.Get",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "stock-list-1039",
+      "type": "Legacy.Stock.List",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "cancel-1039",
+      "type": "Legacy.Stock.CancelReservation",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "cancel-repeat-1039",
+      "type": "Legacy.Stock.CancelReservation",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "release-empty-1039",
+      "type": "Legacy.Stock.ReleaseAll",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "reserve-bulk1-1039",
+      "type": "Legacy.Stock.Reserve",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "reserve-bulk2-1039",
+      "type": "Legacy.Stock.Reserve",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-list-1039",
+      "type": "Legacy.Stock.List",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-count-refusal-1039",
+      "type": "Legacy.Stock.ReleaseAll",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-preserved-1039",
+      "type": "Legacy.Stock.List",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-release-1039",
+      "type": "Legacy.Stock.ReleaseAll",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    },
+    {
+      "label": "bulk-cleanup-readback-1039",
+      "type": "Legacy.Stock.List",
+      "lcid": 1039,
+      "kind": "scenario",
+      "passed": true
+    }
+  ],
+  "limitations": "ExchangeRate ISO validation only; ApiKey missing-input refusal only. No outbound provider or secret mutation claimed. Base price refusal is Foundation ConfirmationRequired; explicit item-count mismatch, successful application and persisted prices are verified in mcp-extra-summary.json. Owned container deletion proves fixture cleanup."
+}

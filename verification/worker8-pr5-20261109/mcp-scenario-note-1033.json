@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-09T02:54:02.595Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.Note.Add",
+    "data": {
+      "no": "R5W8-ENNOTE3",
+      "text": "Owned PR5 fixture"
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.Note.Add",
+    "no": "R5W8-ENNOTE3"
+  },
+  "label": "note-1033",
+  "type": "Reference.Note.Add",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

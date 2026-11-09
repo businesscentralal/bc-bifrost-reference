@@ -1,0 +1,47 @@
+{
+  "at": "2026-11-09T02:51:19.345Z",
+  "sourceSha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "rows": [
+    {
+      "kind": "boilerplate",
+      "name": "My Bifrost App",
+      "version": "1.0.0.0",
+      "downloadedSha256": "b8fa118eed1defd975da49b45583fbed2e658e076bdc81d5b06794db354db83b",
+      "localSha256": "b8fa118eed1defd975da49b45583fbed2e658e076bdc81d5b06794db354db83b",
+      "matches": true
+    },
+    {
+      "kind": "reference",
+      "name": "Bifrost Reference",
+      "version": "1.2.0.0",
+      "downloadedSha256": "0ba120d485871416a134ab29b0d12f0100b47c19d715420d5e2f6f5f86c2774b",
+      "localSha256": "0ba120d485871416a134ab29b0d12f0100b47c19d715420d5e2f6f5f86c2774b",
+      "matches": true
+    },
+    {
+      "kind": "legacy",
+      "name": "Legacy App",
+      "version": "2.2.0.0",
+      "downloadedSha256": "7fa599584cbf7601cd41cb8e06956c7cb4550b75b1d6aa4af01bed5c8f8cee9f",
+      "localSha256": "7fa599584cbf7601cd41cb8e06956c7cb4550b75b1d6aa4af01bed5c8f8cee9f",
+      "matches": true
+    },
+    {
+      "kind": "boilerplate-test",
+      "name": "My Bifrost App Tests",
+      "version": "1.0.0.0",
+      "downloadedSha256": "7643632096650e2aeadd4a1ae91c329f3c588f971989b6cd59551d54c81935f1",
+      "localSha256": "7643632096650e2aeadd4a1ae91c329f3c588f971989b6cd59551d54c81935f1",
+      "matches": true
+    },
+    {
+      "kind": "reference-test",
+      "name": "Bifrost Reference Tests",
+      "version": "1.0.0.0",
+      "downloadedSha256": "0c3f46e5e52dabea5dc43cfb18f335656832c46554b822ce32e678301814da54",
+      "localSha256": "0c3f46e5e52dabea5dc43cfb18f335656832c46554b822ce32e678301814da54",
+      "matches": true
+    }
+  ]
+}

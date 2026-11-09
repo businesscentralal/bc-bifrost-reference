@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-09T02:54:00.086Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "MyApp.Hello.Get",
+    "data": {
+      "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "status": "Error",
+    "error": "Parameter 'name' is 60 characters long; the maximum is 50."
+  },
+  "label": "hello-length-1033",
+  "type": "MyApp.Hello.Get",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

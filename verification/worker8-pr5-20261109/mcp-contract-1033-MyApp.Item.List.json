@@ -1,0 +1,243 @@
+{
+  "at": "2026-11-09T02:53:48.663Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "messageType": "MyApp.Item.List",
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "MyApp.Item.List",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "MyApp.Item.List",
+      "isEnabled": true,
+      "filterTableNo": 27,
+      "description": "List items, all or by number filter, with the total count (max 100 rows; more says when there are others). Read-only. Blocked items only on request. For one item's price and inventory use MyApp.Item.Summary.Get.",
+      "selectionDescription": "List items by item number filter, with the total count; at most 100 rows. Not for one item's price and inventory: use MyApp.Item.Summary.Get. To search by description or another field, use Data.Records.Get on Item.",
+      "messageDirection": "Outbound",
+      "keywords": [
+        "list items",
+        "show items",
+        "which items do we have",
+        "items starting with",
+        "find items by number",
+        "how many items"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "notUsed",
+          "description": "The items are chosen by itemFilter and includeBlocked in data."
+        },
+        "dataRequired": false,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "target": [
+        {
+          "source": "data.itemFilter",
+          "form": "item number filter",
+          "description": "Every item whose number matches, blocked ones only with includeBlocked. Empty or absent: all items. A filter that matches nothing is not an error: count is 0."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "itemFilter",
+          "type": "string",
+          "required": false,
+          "description": "A Business Central filter on the item number, at most 250 characters: 1896-S, 1000..1999 or 19*. Omitted: all items."
+        },
+        {
+          "name": "maxRows",
+          "type": "integer",
+          "required": false,
+          "description": "The most rows to return, 1 to 100. Omitted: 100."
+        },
+        {
+          "name": "includeBlocked",
+          "type": "boolean",
+          "required": false,
+          "description": "true also returns blocked items. Omitted: false."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "itemFilter",
+            "type": "string",
+            "description": "The filter used, as sent; empty for all."
+          },
+          {
+            "name": "includeBlocked",
+            "type": "boolean",
+            "description": "Whether blocked items were included."
+          },
+          {
+            "name": "count",
+            "type": "integer",
+            "description": "Every matching item, also when more is true."
+          },
+          {
+            "name": "returned",
+            "type": "integer",
+            "description": "The number of rows in items."
+          },
+          {
+            "name": "more",
+            "type": "boolean",
+            "description": "true when count is larger than returned. Narrow the filter to see the rest."
+          },
+          {
+            "name": "items",
+            "type": "array",
+            "description": "One element per item, at most maxRows; empty when nothing matches.",
+            "children": [
+              {
+                "name": "itemNo",
+                "type": "string",
+                "description": "The item number."
+              },
+              {
+                "name": "description",
+                "type": "string",
+                "description": "The item description."
+              },
+              {
+                "name": "blocked",
+                "type": "boolean",
+                "description": "true when the item is blocked."
+              }
+            ]
+          }
+        ]
+      },
+      "errors": [
+        {
+          "error": "Parameter 'itemFilter' is '{filter}', which is not a valid filter: {reason} Send an item number or a filter such as 1000..1999 or 19*.",
+          "when": "The filter syntax is invalid; {reason} is Business Central's own explanation.",
+          "fix": "Fix the filter."
+        },
+        {
+          "error": "Parameter 'maxRows' has the value '{value}', which is not a whole number. Send for example 12.",
+          "when": "maxRows is not a whole number.",
+          "fix": "Send for example 20."
+        },
+        {
+          "error": "Parameter 'maxRows' is {value}, but it must be between 1 and 100.",
+          "when": "maxRows is out of range.",
+          "fix": "Send 1 to 100."
+        },
+        {
+          "error": "Parameter 'includeBlocked' has the value '{value}'. Send true or false, without quotes.",
+          "when": "includeBlocked is not true or false, for example \"yes\".",
+          "fix": "Send true or false."
+        },
+        {
+          "error": "Parameter '{parameter}' is {length} characters long; the maximum is {maximum}.",
+          "when": "itemFilter is longer than 250 characters, or maxRows longer than 20.",
+          "fix": "Shorten it."
+        },
+        {
+          "error": "Parameter '{parameter}' must be a single value (text or number), not an object or an array.",
+          "when": "A parameter is an object or an array.",
+          "fix": "Send a single value."
+        },
+        {
+          "error": "The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }.",
+          "when": "data is an array or plain text.",
+          "fix": "Send a JSON object, or no body at all."
+        }
+      ],
+      "effect": {
+        "effect": "read",
+        "changes": "Nothing. Reads Item.",
+        "idempotent": true,
+        "preconditions": [
+          "The caller can read Item; without it the type is not offered."
+        ]
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "MyApp.Item.Summary.Get",
+          "useInsteadWhen": "You want one item's price and inventory."
+        },
+        {
+          "name": "Data.Records.Get",
+          "useInsteadWhen": "You want to search items by description or another field (table Item)."
+        }
+      ],
+      "workflow": {
+        "steps": [
+          {
+            "messageType": "MyApp.Item.List",
+            "purpose": "Find the items."
+          },
+          {
+            "messageType": "MyApp.Item.Summary.Get",
+            "purpose": "Optional: one item's price and inventory, with its itemNo as subject."
+          }
+        ],
+        "text": "List, pick an item, then its summary."
+      },
+      "examples": [
+        {
+          "title": "Items starting with 19, two rows at most",
+          "request": {
+            "type": "MyApp.Item.List",
+            "data": {
+              "itemFilter": "19*",
+              "maxRows": 2
+            }
+          },
+          "response": {
+            "itemFilter": "19*",
+            "includeBlocked": false,
+            "count": 5,
+            "returned": 2,
+            "more": true,
+            "items": [
+              {
+                "itemNo": "1900-S",
+                "description": "PARIS Guest Chair, black",
+                "blocked": false
+              },
+              {
+                "itemNo": "1906-S",
+                "description": "ATHENS Mobile Pedestal",
+                "blocked": false
+              }
+            ]
+          }
+        },
+        {
+          "title": "maxRows out of range",
+          "request": {
+            "type": "MyApp.Item.List",
+            "data": {
+              "maxRows": 500
+            }
+          },
+          "response": {
+            "status": "Error",
+            "error": "Parameter 'maxRows' is 500, but it must be between 1 and 100."
+          }
+        }
+      ],
+      "overview": "Lists items, all or those whose number matches a filter, with the total count. At most 100 rows are returned (fewer with maxRows); more is true when there are others. Blocked items are left out unless you send \"includeBlocked\": true. Not for one item's price and inventory (use MyApp.Item.Summary.Get), and not for a search by description (use Data.Records.Get on table Item).",
+      "notes": "Safe to repeat: the same call gives the same answer until items change. count always covers every matching item, even when only the first rows are returned. Numbers are JSON numbers. Error texts follow lcid when a translation is installed."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  },
+  "passed": true
+}

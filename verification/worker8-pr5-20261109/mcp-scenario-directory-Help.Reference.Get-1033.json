@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-09T02:54:00.957Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Help.Reference.Get",
+    "data": {},
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Help.Reference.Get",
+    "format": "markdown",
+    "markdown": "# Bifrost Reference\r\n\r\nA sample app built on Bifrost Foundation. Each message type shows one pattern a partner app\r\nneeds: reading a record, validated writes with safe retries, a preview/apply pair for a bulk\r\nchange, an external HTTP call with a secret. The data it writes is sample data only.\r\n\r\n## Message types\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `Reference.GLAccount.Overview.Get` | Read-only | A G/L account's balance as of a date and its net change for a period. |\r\n| `Reference.AssetMaintenance.Create` | Commits | Logs maintenance work on a fixed asset; safe to retry with externalId. |\r\n| `Reference.ItemPrice.PreviewAdjustment` | Read-only | Shows a % unit price change for an item category. |\r\n| `Reference.ItemPrice.ApplyAdjustment` | Commits | Applies that change; needs the preview's itemCount. |\r\n| `Reference.ExchangeRate.Get` | Read-only (internet) | Latest ECB rate between two currencies. |\r\n| `Reference.ApiKey.Set` | Commits | Stores the rates API key as a secret. |\r\n| `Reference.Echo.Get` | Read-only | Returns what you sent plus the server time. A connectivity check. |\r\n| `Reference.Table.Get` | Read-only | Returns a table's object ID from its name. |\r\n| `Reference.Note.Add` | Commits | Stores one note under a number you choose. |\r\n| `Help.Reference.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+  },
+  "label": "directory-Help.Reference.Get-1033",
+  "type": "Help.Reference.Get",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

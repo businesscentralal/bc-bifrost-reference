@@ -1,0 +1,45 @@
+{
+  "at": "2026-11-09T02:55:38.941Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "data": {
+      "itemCategoryCode": "R5W8-EN",
+      "percent": 10,
+      "expectedItemCount": 2,
+      "expectedCount": 1
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.ItemPrice.ApplyAdjustment",
+    "itemCategoryCode": "R5W8-EN",
+    "percent": 10,
+    "itemCount": 2,
+    "applied": true,
+    "totalCurrentUnitPrice": 300,
+    "totalNewUnitPrice": 330,
+    "itemsTruncated": false,
+    "items": [
+      {
+        "itemNo": "R5W8-EN1",
+        "description": "PR5 owned first item EN",
+        "currentUnitPrice": 100,
+        "newUnitPrice": 110
+      },
+      {
+        "itemNo": "R5W8-EN2",
+        "description": "PR5 owned second item EN",
+        "currentUnitPrice": 200,
+        "newUnitPrice": 220
+      }
+    ]
+  },
+  "label": "price-apply-1033",
+  "type": "Reference.ItemPrice.ApplyAdjustment",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

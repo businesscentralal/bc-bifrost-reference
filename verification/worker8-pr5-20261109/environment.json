@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-09T01:57:52.789Z",
+  "owner": "worker-8",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "country": "w1",
+  "version": "28.5.54151.55751",
+  "displayName": "codex-worker8-reference5-20261109-w1",
+  "id": "f0f90a9f13aa",
+  "provisionedFromSha": "e5220eba58f0ddfe9ecf083e27f6dbe244fb50c2",
+  "candidateSha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "deployed": "VERIFIED_THEN_DELETED",
+  "artifactReadback": "/workspace/checkpoints/reference5-20261109/artifact-readback-75f9559.json",
+  "cleanup": {
+    "at": "2026-11-09T03:02:51.784Z",
+    "id": "f0f90a9f13aa",
+    "owner": "worker-8",
+    "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+    "deleteStatus": 204,
+    "verified": true,
+    "checks": [
+      {
+        "at": "2026-11-09T03:02:51.863Z",
+        "status": 404
+      }
+    ],
+    "absentFromInventory": true,
+    "finishedAt": "2026-11-09T03:02:53.920Z"
+  }
+}

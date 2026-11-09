@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-11-09T02:52:36.951Z",
+  "finishedAt": "2026-11-09T02:53:01.471Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "culture": "en-US",
+  "range": "90150..90199",
+  "exitCode": 0,
+  "passed": 23,
+  "failed": 0,
+  "skipped": 0,
+  "errors": 0,
+  "failures": [],
+  "executed": 23,
+  "isPass": true
+}

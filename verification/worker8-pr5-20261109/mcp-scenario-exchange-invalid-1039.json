@@ -1,0 +1,22 @@
+{
+  "at": "2026-11-09T02:54:14.919Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.ExchangeRate.Get",
+    "data": {
+      "from": "EURO",
+      "to": "ISK"
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "status": "Error",
+    "error": "Færibreytan 'from' er 'EURO'. Sendu þriggja stafa ISO-gjaldmiðlakóða, til dæmis EUR eða ISK."
+  },
+  "label": "exchange-invalid-1039",
+  "type": "Reference.ExchangeRate.Get",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

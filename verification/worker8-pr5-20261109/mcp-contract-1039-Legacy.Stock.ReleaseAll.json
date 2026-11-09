@@ -1,0 +1,203 @@
+{
+  "at": "2026-11-09T02:53:57.524Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "messageType": "Legacy.Stock.ReleaseAll",
+    "lcid": 1039
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Legacy.Stock.ReleaseAll",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "Legacy.Stock.ReleaseAll",
+      "isEnabled": true,
+      "filterTableNo": 90050,
+      "description": "Release (cancel) every stock reservation matching an item filter in Legacy App, all or nothing, and log each. Commits; irreversible. Needs expectedCount from Legacy.Stock.List. For one item use Legacy.Stock.CancelReservation.",
+      "selectionDescription": "Losa allar frátekningar sem passa við síu á vörunúmer í Legacy App í einu, eftir að notandinn hefur séð þær; þarf fjöldann úr Legacy.Stock.List. Ekki fyrir eina vöru: notaðu Legacy.Stock.CancelReservation. Til að sjá hvað yrði losað, notaðu Legacy.Stock.List.",
+      "messageDirection": "Inbound",
+      "keywords": [
+        "losa allar frátekningar",
+        "hætta við allar frátekningar",
+        "hreinsa frátekningar",
+        "losa allar fráteknar birgðir",
+        "losa frátekningar fyrir þessar vörur",
+        "fjarlægja allar frátekningar"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "notUsed",
+          "description": "The reservations are selected by itemFilter in data."
+        },
+        "dataRequired": true,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "target": [
+        {
+          "source": "data.itemFilter",
+          "form": "item number filter",
+          "description": "Every reservation whose item number matches the filter. Required: send * to release all, on purpose."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "itemFilter",
+          "type": "string",
+          "required": true,
+          "description": "A Business Central filter on the item number, at most 250 characters: 1896-S|1900-S or 19*. Send * to release all, on purpose."
+        },
+        {
+          "name": "expectedCount",
+          "type": "integer",
+          "required": true,
+          "description": "The count Legacy.Stock.List returned for the same itemFilter. The call is refused when the filter now matches a different number of reservations."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "itemFilter",
+            "type": "string",
+            "description": "The filter used, as sent."
+          },
+          {
+            "name": "released",
+            "type": "integer",
+            "description": "The number of reservations released; always equal to expectedCount. 0 only when you sent expectedCount 0 and nothing matched."
+          }
+        ]
+      },
+      "errors": [
+        {
+          "error": "itemFilter '{filter}' matches {actual} reservations, not the {expected} you sent in expectedCount. Nothing was released. Check with Legacy.Stock.List and send its count.",
+          "when": "Reservations were added or removed after the list, or the count was guessed.",
+          "fix": "Run Legacy.Stock.List again, show the user the new result, and resend with its count."
+        },
+        {
+          "error": "Parameter 'itemFilter' is required. Send it as text, for example \"1896-S|1900-S\" or \"*\" for all.",
+          "when": "itemFilter is missing.",
+          "fix": "Send a filter; * for all."
+        },
+        {
+          "error": "Parameter 'itemFilter' is empty. Send a value, for example \"1896-S|1900-S\" or \"*\" for all.",
+          "when": "itemFilter is an empty string.",
+          "fix": "Send a filter; * for all."
+        },
+        {
+          "error": "Parameter 'itemFilter' is {length} characters long; the maximum is 250.",
+          "when": "itemFilter is too long.",
+          "fix": "Shorten the filter."
+        },
+        {
+          "error": "Parameter 'expectedCount' is required. Send it as a whole number, for example 3.",
+          "when": "The list was skipped.",
+          "fix": "Run Legacy.Stock.List first and send its count."
+        },
+        {
+          "error": "Parameter 'expectedCount' has the value '{value}', which is not a whole number. Send a whole number, for example 3.",
+          "when": "expectedCount is not a whole number.",
+          "fix": "Send the count from Legacy.Stock.List, for example 2."
+        },
+        {
+          "error": "Parameter '{parameter}' must be a single value (text or number), not an object or an array.",
+          "when": "itemFilter or expectedCount is an object or an array.",
+          "fix": "Send a single value."
+        },
+        {
+          "code": "ConfirmationMismatch",
+          "error": "You sent expectedCount {sent}, but the call would now affect {actual} ({selection}). Nothing was changed.",
+          "when": "The supplied count differs from the locked reservation count.",
+          "fix": "Run Legacy.Stock.List again with the same itemFilter and resend its count."
+        },
+        {
+          "error": "The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }.",
+          "when": "data is an array or plain text.",
+          "fix": "Send a JSON object, or no body at all."
+        }
+      ],
+      "effect": {
+        "effect": "irreversible",
+        "idempotent": true,
+        "preconditions": [
+          "The caller can write Legacy Stock Reservation and Legacy Cancellation Log; without it the type is not offered.",
+          "The reservations were listed: expectedCount must equal the number of reservations itemFilter matches now, as Legacy.Stock.List reports it."
+        ],
+        "changes": "Deletes every Legacy Stock Reservation record whose item number matches itemFilter and inserts one Legacy Cancellation Log entry for each. All or nothing. There is no undo type: the answer does not say which items or quantities were released, the stock is free for other callers at once, and the log entries stay. Needs expectedCount only when enabled in Bifrost Setup (on by default; an administrator can turn it off per company); always checked when sent. When enabled, call without it to see the preview."
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "Legacy.Stock.List",
+          "useInsteadWhen": "Always call it first with the same itemFilter, and show the user the result."
+        },
+        {
+          "name": "Legacy.Stock.CancelReservation",
+          "useInsteadWhen": "You want to cancel one item's reservation."
+        }
+      ],
+      "workflow": {
+        "steps": [
+          {
+            "messageType": "Legacy.Stock.List",
+            "purpose": "See which reservations the filter matches, and show the user what will be released."
+          },
+          {
+            "messageType": "Legacy.Stock.ReleaseAll",
+            "purpose": "When the user agrees: the same itemFilter, with the list's count as expectedCount."
+          }
+        ],
+        "text": "Always list first. The release needs the list's count, so it cannot run on a selection nobody looked at. When the user already saw that count earlier in the conversation, send it directly: if anything changed since, the release is refused and nothing is released."
+      },
+      "examples": [
+        {
+          "title": "Release the two reservations the list showed",
+          "request": {
+            "type": "Legacy.Stock.ReleaseAll",
+            "data": {
+              "itemFilter": "19*",
+              "expectedCount": 2
+            }
+          },
+          "response": {
+            "itemFilter": "19*",
+            "released": 2
+          }
+        },
+        {
+          "title": "The reservations changed after the list",
+          "request": {
+            "type": "Legacy.Stock.ReleaseAll",
+            "data": {
+              "itemFilter": "19*",
+              "expectedCount": 2
+            }
+          },
+          "response": {
+            "status": "Error",
+            "code": "ConfirmationMismatch",
+            "error": "You sent expectedCount 2, but the call would now affect 3 (Stock reservations matching 19*). Nothing was changed.",
+            "parameter": "expectedCount",
+            "received": "2",
+            "expected": "3",
+            "nextStep": "Check the preview and send expectedCount 3 if that is what you want."
+          }
+        }
+      ],
+      "overview": "Releases (cancels) every reservation in Legacy App whose item number matches itemFilter, and writes a cancellation log entry for each, in one transaction: all of them or, on any error, none. Run Legacy.Stock.List with the same filter first, show the user the result and get their agreement. Not for one item (use Legacy.Stock.CancelReservation).",
+      "notes": "Safe to repeat: after a release the filter matches no reservations, so a second identical call is refused on expectedCount and releases nothing. The guard compares counts only: if exactly as many reservations were added and removed since the list, the call goes through, so list again when time has passed. An invalid filter is answered with Business Central's own filter error text, which does not name the parameter; Legacy.Stock.List checks the same filter and names it. Error texts follow lcid when a translation is installed."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  },
+  "passed": true
+}

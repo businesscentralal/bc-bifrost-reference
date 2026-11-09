@@ -1,0 +1,22 @@
+{
+  "at": "2026-11-09T02:54:05.185Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.ExchangeRate.Get",
+    "data": {
+      "from": "EURO",
+      "to": "ISK"
+    },
+    "lcid": 1033
+  },
+  "result": {
+    "status": "Error",
+    "error": "Parameter 'from' is 'EURO'. Send a 3-letter ISO currency code, for example EUR or ISK."
+  },
+  "label": "exchange-invalid-1033",
+  "type": "Reference.ExchangeRate.Get",
+  "lcid": 1033,
+  "kind": "scenario",
+  "passed": true
+}

@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-09T02:54:13.437Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Reference.GLAccount.Overview.Get",
+    "data": {},
+    "lcid": 1039,
+    "subject": "R5W8-ISGL"
+  },
+  "result": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Reference.GLAccount.Overview.Get",
+    "accountNo": "R5W8-ISGL",
+    "name": "PR5 owned account R5W8-ISGL",
+    "accountType": "Posting",
+    "incomeBalance": "Income Statement",
+    "currencyCode": "GBP",
+    "asOfDate": "2026-11-09",
+    "balanceAsOf": 0,
+    "fromDate": null,
+    "netChange": null,
+    "blocked": false,
+    "directPosting": true
+  },
+  "label": "gl-1039",
+  "type": "Reference.GLAccount.Overview.Get",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

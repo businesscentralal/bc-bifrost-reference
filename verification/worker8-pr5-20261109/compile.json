@@ -1,0 +1,72 @@
+[
+  {
+    "project": "Bifrost Boilerplate",
+    "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+    "dirty": false,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "sha256": "b8fa118eed1defd975da49b45583fbed2e658e076bdc81d5b06794db354db83b"
+  },
+  {
+    "project": "Bifrost Reference",
+    "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+    "dirty": false,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "sha256": "0ba120d485871416a134ab29b0d12f0100b47c19d715420d5e2f6f5f86c2774b"
+  },
+  {
+    "project": "Legacy App v2 (headless)",
+    "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+    "dirty": false,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "sha256": "7fa599584cbf7601cd41cb8e06956c7cb4550b75b1d6aa4af01bed5c8f8cee9f"
+  },
+  {
+    "project": "Bifrost Boilerplate Tests",
+    "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+    "dirty": false,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "sha256": "7643632096650e2aeadd4a1ae91c329f3c588f971989b6cd59551d54c81935f1"
+  },
+  {
+    "project": "Bifrost Reference Tests",
+    "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+    "dirty": false,
+    "analyzers": [
+      "CodeCop",
+      "UICop",
+      "PerTenantExtensionCop"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "sha256": "0c3f46e5e52dabea5dc43cfb18f335656832c46554b822ce32e678301814da54"
+  }
+]

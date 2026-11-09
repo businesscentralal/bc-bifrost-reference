@@ -1,0 +1,13 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "at": "2026-11-09T03:00:26.980Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "### Result\n{\"lcid\":1039,\"language\":\"Icelandic (Iceland)\",\"committed\":true}\n### Ran Playwright code\n```js\nawait (async(page)=>{const f=page.frameLocator('iframe');const d=f.getByRole('dialog').filter({hasText:'My Settings'});const text=await d.innerText();if(!text.includes('Icelandic (Iceland)'))throw Error('Icelandic not selected');await d.getByRole('button',{name:'OK',exact:true}).click();return {lcid:1039,language:'Icelandic (Iceland)',committed:true};})(page);\n```\n### Page\n- Page URL: https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0f90a9f13aa/?company=CRONUS%20International%20Ltd.&tenant=default&page=90052&dc=0\n- Page Title: Loading https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0f90a9f13aa/?company=CRONUS%20International%20Ltd.&tenant=default&page=90052&dc=0\n- Console: 1 errors, 1 warnings"
+      }
+    ]
+  }
+}

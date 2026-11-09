@@ -1,0 +1,28 @@
+{
+  "at": "2026-11-09T02:54:17.599Z",
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "args": {
+    "type": "Legacy.Stock.ReleaseAll",
+    "data": {
+      "itemFilter": "R5W8-IS?",
+      "expectedCount": 5
+    },
+    "lcid": 1039
+  },
+  "result": {
+    "status": "Error",
+    "code": "ConfirmationMismatch",
+    "error": "Þú sendir expectedCount 5, en kallið myndi nú hafa áhrif á 2 (Birgðafrátekningar sem passa við R5W8-IS?). Engu var breytt.",
+    "parameter": "expectedCount",
+    "received": "5",
+    "expected": "2",
+    "nextStep": "Skoðaðu forskoðunina og sendu expectedCount 2 ef það er það sem þú vilt.",
+    "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Legacy.Stock.ReleaseAll\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+  },
+  "label": "bulk-count-refusal-1039",
+  "type": "Legacy.Stock.ReleaseAll",
+  "lcid": 1039,
+  "kind": "scenario",
+  "passed": true
+}

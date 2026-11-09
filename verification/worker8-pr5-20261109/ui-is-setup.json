@@ -1,0 +1,13 @@
+{
+  "sha": "75f955948db847f1dfe339903f0d0506729a2d51",
+  "containerId": "f0f90a9f13aa",
+  "at": "2026-11-09T03:01:21.993Z",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "### Result\n{\"lcid\":1039,\"scenario\":\"Reference setup loads with Icelandic captions and key-unset status\",\"passed\":true,\"text\":\"\\n\\n\\n\\n\\n\\n\\n\\nUppsetning Bifrost Reference\\nAðgerðir\\n\\nGengisþjónusta\\nGrunnslóð gengisþjónustu\\nhttps://api.frankfurter.dev/v1\\nAPI-lykill\\nEkki skráður (sjálfgefna þjónustan virkar án lykils)\\n\"}\n### Ran Playwright code\n```js\nawait (async(page)=>{await page.goto('https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0f90a9f13aa/?tenant=default&page=90011');const f=page.frameLocator('iframe');const form=f.getByRole('form',{name:/Uppsetning Bifrost Reference/});await form.waitFor({timeout:20000});const text=await form.innerText();if(!text.includes('Gengisþjónusta')||!text.includes('Ekki skráður (sjálfgefna þjónustan virkar án lykils)'))throw Error('Unexpected setup: '+text);await page.screenshot({path:'/workspace/checkpoints/reference5-20261109/ui-is-setup.png',fullPage:true});return {lcid:1039,scenario:'Reference setup loads with Icelandic captions and key-unset status',passed:true,text};})(page);\n```\n### Page\n- Page URL: https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0f90a9f13aa/?company=CRONUS%20International%20Ltd.&tenant=default&page=90011&dc=0&bookmark=B_m18BAAJ7\n- Page Title: Uppsetning Bifrost Reference\n- Console: 2 errors, 1 warnings\n### Events\n- New console entries: evidence/console-2026-11-09T02-24-29-803Z.log#L34-L36"
+      }
+    ]
+  }
+}
