@@ -1,7 +1,22 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v9.0/.Modules/settings.schema.json",
   "country": "w1",
-  "appFolders": ["Bifrost Reference", "Legacy App v2 (headless)"],
-  "testFolders": ["Bifrost Reference Tests"],
-  "bcptTestFolders": []
+  "appFolders": [
+    "Bifrost Boilerplate",
+    "Bifrost Reference",
+    "Legacy App v2 (headless)"
+  ],
+  "testFolders": [
+    "Bifrost Boilerplate Tests",
+    "Bifrost Reference Tests"
+  ],
+  "bcptTestFolders": [],
+  "installApps": [
+    "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core/releases/download/28.0.11/bc-origo-bifrost-core-main-Apps-1.0.11.669.zip"
+  ],
+  "enableCodeCop": true,
+  "enableUICop": true,
+  "enableCodeAnalyzersOnTestApps": true,
+  "failOn": "warning",
+  "doNotRunTests": false
 }
