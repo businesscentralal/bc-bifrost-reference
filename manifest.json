@@ -1,7 +1,7 @@
 {
   "candidateSha": "05fab29b9fbec89781f6436d632a408bd7036458",
   "owner": "worker-6",
-  "at": "2026-11-09T02:02:15.370Z",
+  "at": "2026-11-09T02:03:12.483Z",
   "files": [
     {
       "file": "Bifrost_Boilerplate-compile.log",
@@ -55,8 +55,8 @@
     },
     {
       "file": "static-acceptance.json",
-      "bytes": 1625,
-      "sha256": "03bf7db395dc6694e7f5097e0846f59c6b5a9aee183eb49014064b9d6688f0d8"
+      "bytes": 1615,
+      "sha256": "ed9d8827e2822cf23189aa4954d84ef955f18a0227ecaa0ba6d7c278204b04db"
     },
     {
       "file": "summary.json",

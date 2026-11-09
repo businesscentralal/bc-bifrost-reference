@@ -32,12 +32,6 @@
     ],
     "allHaveBothProperties": true
   },
-  "notVerified": [
-    "AppSourceCop packaging conflict",
-    "AC08newtipfocusedpending",
-    "AC09restrictedUIpending",
-    "AC10installerdependency",
-    "AC11previousfullsuite20failures; newtipfullsuitependingdependency"
-  ],
-  "noNewSuppressions": true
+  "noNewSuppressions": true,
+  "auditScope": "Static registration properties, unchanged bodies and documentation consistency only. Current runtime results and all remaining acceptance are recorded in summary.json and restricted-regressions.json."
 }
