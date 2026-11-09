@@ -6,6 +6,8 @@
 - Document the public Foundation API, setup order, permissions and headless adaptation patterns.
 - Build all three sample apps and both test apps in CI, install the executable Foundation release before publishing the samples, and fail on analyzer warnings.
 
+- Count the locked, filtered reservation selection through Foundation's `Msg Confirm ori` for `Legacy.Stock.ReleaseAll` (codeunit 90109, enumextension 90100); require Foundation 28.0.11.669. Tests in codeunit 90153 cover mismatch without writes, two matching records with an unrelated record preserved, and zero-record no-op.
+
 ### Changed AL objects
 
 Object IDs are scoped to each sample app. Removed help codeunits are listed from the base revision.

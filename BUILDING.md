@@ -120,6 +120,8 @@ Each chapter is one procedure. Return `true` when you fill it, `false` when it d
 
 \* Required: the contract lints (`My Contract Lint`, `Help Sections Lint`) fail without them.
 
+**Bulk confirmation:** when an irreversible type affects several records, implement `Msg Confirm ori.GetConfirmCount` and map it on the enum value. Count and lock the same filtered selection that execution changes, without writing data. Foundation's default is one subject; it cannot represent a bulk selection. `Legacy.Stock.ReleaseAll` shows the pattern and requires Foundation 28.0.11.669.
+
 **Answer the repeat question.** Safe (`Legacy.Stock.CancelReservation` answers `cancelled: false`), fails on repeat (`Reference.Note.Add` refuses an existing `no`; after a timeout treat that as "the first call went through"), or repeat has an effect (`Legacy.Stock.Reserve` reserves twice; check with `Legacy.Stock.Get`).
 
 **Change a Label and its `errors` entry in the same commit.** Callers match on the text.

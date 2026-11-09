@@ -339,6 +339,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Birgðafrátekningar (eldra forrit)</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet LEGACY STOCK - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3432071783 - Method 3507224617 - NamedType 445603364" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stock reservations matching %1</source>
+          <target state="translated">Birgðafrátekningar sem passa við %1</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item filter, is-IS=Birgðafrátekningar sem passa við %1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Release All Impl - Method GetConfirmCount - NamedType SelectionTxt</note>
+        </trans-unit>
       </group>
     </body>
   </file>

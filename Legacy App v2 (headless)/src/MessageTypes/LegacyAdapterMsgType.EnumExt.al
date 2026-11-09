@@ -33,7 +33,7 @@ enumextension 90100 "Legacy Adapter Msg Type" extends "Message Type ori"
     value(90104; "Legacy.Stock.ReleaseAll")
     {
         Caption = 'Legacy.Stock.ReleaseAll', Locked = true;
-        Implementation = "Msg Interface ori" = "Legacy Release All Impl", "Msg Discovery ori" = "Legacy Release All Impl", "Msg Contract ori" = "Legacy Release All Impl";
+        Implementation = "Msg Interface ori" = "Legacy Release All Impl", "Msg Discovery ori" = "Legacy Release All Impl", "Msg Contract ori" = "Legacy Release All Impl", "Msg Confirm ori" = "Legacy Release All Impl";
     }
     value(90105; "Help.Legacy.Get")
     {

@@ -13,7 +13,7 @@ using Origo.Bifrost;
 /// The contract states both guards as a workflow and a precondition, like the ItemPrice
 /// preview/apply pair in Bifrost Reference.
 /// </summary>
-codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
+codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori", "Msg Confirm ori"
 {
     Access = Internal;
 
@@ -38,6 +38,31 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
     procedure GetMessageDirection(): Enum "Msg Direction ori"
     begin
         exit(Enum::"Msg Direction ori"::Inbound);
+    end;
+
+    /// <summary>Counts the same locked reservation selection that ReleaseAll will change.</summary>
+    /// <param name="Argument">The request containing the required item filter.</param>
+    /// <param name="Count">Receives the number of matching reservations, including zero.</param>
+    /// <param name="Summary">Receives a localized description of the selection.</param>
+    /// <returns>False after an input error; otherwise true without changing any data.</returns>
+    procedure GetConfirmCount(var Argument: Record "Message Argument ori"; var Count: Integer; var Summary: Text): Boolean
+    var
+        Reservation: Record "Legacy Stock Reservation";
+        AdapterInput: Codeunit "Legacy Adapter Input";
+        RequestJson: JsonObject;
+        ItemFilter: Text;
+        SelectionTxt: Label 'Stock reservations matching %1', Comment = '%1 = item filter, is-IS=Birgðafrátekningar sem passa við %1';
+    begin
+        if not AdapterInput.ReadRequest(Argument, RequestJson) then
+            exit(false);
+        if not AdapterInput.GetText(Argument, RequestJson, 'itemFilter', true, 250, '"1896-S|1900-S" or "*" for all', ItemFilter) then
+            exit(false);
+
+        Reservation.LockTable();
+        Reservation.SetFilter("Item No.", ItemFilter);
+        Count := Reservation.Count();
+        Summary := StrSubstNo(SelectionTxt, ItemFilter);
+        exit(true);
     end;
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
@@ -147,6 +172,7 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''expectedCount'' is required. Send it as a whole number, for example 3.', 'The list was skipped.', 'Run Legacy.Stock.List first and send its count.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''expectedCount'' has the value ''{value}'', which is not a whole number. Send a whole number, for example 3.', 'expectedCount is not a whole number.', 'Send the count from Legacy.Stock.List, for example 2.'));
         Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'itemFilter or expectedCount is an object or an array.', 'Send a single value.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::ConfirmationMismatch, 'You sent expectedCount {sent}, but the call would now affect {actual} ({selection}). Nothing was changed.', 'The supplied count differs from the locked reservation count.', 'Run Legacy.Stock.List again with the same itemFilter and resend its count.'));
         Parts.AddBodyError(Errors);
         exit(true);
     end;
