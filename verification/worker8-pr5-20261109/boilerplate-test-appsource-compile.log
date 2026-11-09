@@ -1,0 +1,15 @@
+Microsoft (R) AL Compiler version 18.1.43.7601
+Copyright (C) Microsoft Corporation. All rights reserved
+
+Compilation started for project 'My Bifrost App Tests' containing '5' files at '02:51:20.616'.
+
+checkpoints/reference5-20261109/build/boilerplate-test-appsource/app.json(1,1): warning AS0092: The app.json file must specify an Azure Application Insights resource with the property 'applicationInsightsConnectionString' for monitoring operations related to this extension. See https://learn.microsoft.com/dynamics365/business-central/dev-itpro/administration/telemetry-overview for additional information.
+checkpoints/reference5-20261109/build/boilerplate-test-appsource/app.json(1,1): error AS0051: The manifest property 'help' must be specified and contain a meaningful value.
+checkpoints/reference5-20261109/build/boilerplate-test-appsource/app.json(1,1): error AS0051: The manifest property 'logo' must be specified and contain a meaningful value.
+checkpoints/reference5-20261109/build/boilerplate-test-appsource/app.json(1,1): error AS0051: The manifest property 'contextSensitiveHelpUrl' must be specified and contain a meaningful value.
+checkpoints/reference5-20261109/build/boilerplate-test-appsource/app.json(39,3): error AS0084: The ID range '[50050..50099]' is not valid. It must be within the range allocated to the partner for AppSource, within the range '[1000000..75999999]' allocated to AppSource applications, and outside the range '[50000..99999]' allocated to per-tenant customizations.
+checkpoints/reference5-20261109/build/boilerplate-test-appsource/app.json(1,1): error AS0015: The "TranslationFile" flag must be added to the "features" array in the app.json file.
+error AS0054: The AppSourceCop configuration must specify one of the following properties: 'mandatorySuffix', 'mandatoryPrefix', or 'mandatoryAffixes'
+
+Compilation ended at '02:51:26.905'.
+
