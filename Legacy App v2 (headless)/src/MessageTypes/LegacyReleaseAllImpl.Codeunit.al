@@ -58,9 +58,7 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
         if not AdapterInput.GetText(Argument, RequestJson, 'itemFilter', true, 250, '"1896-S|1900-S" or "*" for all', ItemFilter) then
             exit(false);
 
-        // Keep update locks without promoting the outer HTTP call to a write transaction.
-        // The isolated release rechecks the count and owns its writes.
-        Reservation.ReadIsolation := IsolationLevel::UpdLock;
+        Reservation.LockTable();
         Reservation.SetFilter("Item No.", ItemFilter);
         Count := Reservation.Count();
         Summary := StrSubstNo(SelectionTxt, ItemFilter);
@@ -89,11 +87,10 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
         // Everything is checked and written inside the isolated run: the count check and the
         // release are one transaction, so nothing can change between them.
         ReleaseProcess.SetRelease(ItemFilter, ExpectedCount);
-        if Argument."Omit Commit" then
-            ReleaseProcess.Run(Argument)
-        else
-            if not ReleaseProcess.Run(Argument) then
-                Argument.RespondWithError(GetLastErrorText());
+        // Foundation already isolated the HTTP message before confirmation took its locks.
+        // Keep execution in that transaction: a nested Boolean Run cannot start after locks.
+        // Foundation rolls back and formats HTTP errors; an AL caller owns its transaction.
+        ReleaseProcess.Run(Argument);
     end;
 
     // ---------- Msg Discovery ori ----------

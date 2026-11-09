@@ -245,3 +245,5 @@ Tests assert English fragments, so run them in a company whose default language 
 - **Long-running work:** enqueue, return an id, add a `…Status.Get` type.
 - **Posting:** a preview or check type paired with `Post` (`irreversible`), with base-app dialogs hidden.
 - **Delta sync:** a read filtered on `SystemModifiedAt`, paged with skip/take.
+
+When `Msg Confirm ori` has locked the selection, keep the operation in Foundation's existing isolated message transaction. A nested Boolean `Codeunit.Run` cannot start after those locks. `Legacy.Stock.ReleaseAll` calls its Process codeunit without a Boolean return: the Task API's outer run rolls back failures and Foundation formats the error, while an AL dispatcher caller owns its transaction. Do not add `Commit` to release the confirmation locks.

@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Keep codeunit 90109 confirmation reads under update locks without opening an outer write transaction, so the normal HTTP path can run the isolated bulk release.
+- Keep codeunit 90109 confirmation and bulk release in Foundation's isolated message transaction, preserving rollback and structured HTTP errors after the confirmation locks.
 
 - Replace help markdown codeunits with structured contract chapters for the Boilerplate, Reference and Legacy v2 message types. Keep discovery labels translated in en-US/is-IS and validate the chapters through the dispatcher tests.
 - Document the public Foundation API, setup order, permissions and headless adaptation patterns.
