@@ -9,7 +9,7 @@ using System.TestLibraries.Utilities;
 /// Proves the copied boilerplate registers for licence administrators without business access.
 /// Uses the public registry entry point instead of calling a subscriber directly.
 /// </summary>
-codeunit 50054 "My Registration Tests"
+codeunit 50055 "My Registration Tests"
 {
     Subtype = Test;
     TestPermissions = Restrictive;
