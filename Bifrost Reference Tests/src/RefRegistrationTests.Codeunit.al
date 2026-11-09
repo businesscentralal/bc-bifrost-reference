@@ -18,6 +18,7 @@ codeunit 90156 "Ref Registration Tests"
         Assert: Codeunit "Library Assert";
         PermissionsMock: Codeunit "Permissions Mock";
 
+    /// <summary>Discovers the app through the real registry event twice with only the licence administrator role.</summary>
     [Test]
     procedure Scenario_AC08_LicAdm_RegistersBothAppsOnce()
     var
@@ -58,6 +59,7 @@ codeunit 90156 "Ref Registration Tests"
         Assert.AreEqual(1, RepeatedLegacyCount, 'Legacy registration must remain repeat-safe.');
     end;
 
+    /// <summary>Confirms metadata registration does not grant permission to write sample administration data.</summary>
     [Test]
     procedure Scenario_AC08_LicAdm_CannotWriteSampleSetup()
     var

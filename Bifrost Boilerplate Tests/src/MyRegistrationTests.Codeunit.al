@@ -18,6 +18,7 @@ codeunit 50054 "My Registration Tests"
         Assert: Codeunit "Library Assert";
         PermissionsMock: Codeunit "Permissions Mock";
 
+    /// <summary>Discovers the app through the real registry event twice with only the licence administrator role.</summary>
     [Test]
     procedure Scenario_AC08_LicAdm_RegistersBoilerplateOnce()
     var
@@ -48,6 +49,7 @@ codeunit 50054 "My Registration Tests"
         Assert.AreEqual(1, RepeatedCount, 'Boilerplate registration must remain repeat-safe.');
     end;
 
+    /// <summary>Confirms metadata registration does not grant access to the Item data used by sample operations.</summary>
     [Test]
     procedure Scenario_AC08_LicAdm_CannotReadSampleBusinessData()
     var
