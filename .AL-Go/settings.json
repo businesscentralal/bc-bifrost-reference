@@ -11,12 +11,18 @@
     "Bifrost Reference Tests"
   ],
   "bcptTestFolders": [],
-  "installApps": [
-    "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core/releases/download/28.0.11/bc-origo-bifrost-core-main-Apps-1.0.11.669.zip"
-  ],
   "enableCodeCop": true,
   "enableUICop": true,
   "enableCodeAnalyzersOnTestApps": true,
   "failOn": "warning",
-  "doNotRunTests": false
+  "doNotRunTests": false,
+  "appDependencyProbingPaths": [
+    {
+      "repo": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core",
+      "release_status": "release",
+      "version": "28.0.11",
+      "projects": "*",
+      "authTokenSecret": "ghTokenWorkflow"
+    }
+  ]
 }
