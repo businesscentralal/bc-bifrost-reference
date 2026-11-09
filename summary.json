@@ -1,0 +1,238 @@
+{
+  "repo": "businesscentralal/bc-bifrost-reference",
+  "pr": 8,
+  "owner": "Sindri (worker-3)",
+  "candidateSha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+  "publication": {
+    "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+    "branch": "fix/issue6-registration-execute",
+    "branchUrl": "https://github.com/businesscentralal/bc-bifrost-reference/tree/fix/issue6-registration-execute",
+    "commitUrl": "https://github.com/businesscentralal/bc-bifrost-reference/commit/a00937c812704d1caf419b4144915e0ce8f1f6c7",
+    "remoteVerifiedAt": "2026-11-09T05:59:54.197Z",
+    "supplementalCanonicalApiReadbacks": true,
+    "canonicalVerifier": {
+      "passed": false,
+      "reason": "Expected an authorized Bifrost repository",
+      "owner": "root"
+    }
+  },
+  "amendment": {
+    "oldId": 50054,
+    "newId": 50055,
+    "object": "My Registration Tests",
+    "testBodyUnchanged": true,
+    "range": {
+      "from": 50050,
+      "to": 50099
+    }
+  },
+  "compile": [
+    {
+      "app": "Bifrost Boilerplate",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "pte",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ],
+      "startedAt": "2026-11-09T05:57:27.552Z",
+      "finishedAt": "2026-11-09T05:57:37.081Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "log": "pte-Bifrost-Boilerplate.log",
+      "artifactSha256": "607097b3f079d957b18d46b2c88aabfd16b3b8f932fbddf3913577cc62b58dd8"
+    },
+    {
+      "app": "Bifrost Boilerplate Tests",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "pte",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ],
+      "startedAt": "2026-11-09T05:57:37.091Z",
+      "finishedAt": "2026-11-09T05:57:47.385Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "log": "pte-Bifrost-Boilerplate-Tests.log",
+      "artifactSha256": "3e69787e5a9ba9bcea1e3afcb9741d749633beeea80009342ce54051d477500d"
+    },
+    {
+      "app": "Bifrost Reference",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "pte",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ],
+      "startedAt": "2026-11-09T05:57:47.391Z",
+      "finishedAt": "2026-11-09T05:57:57.773Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "log": "pte-Bifrost-Reference.log",
+      "artifactSha256": "3a03f2bb5fda4045088c95da4f3fe534d667d29ecb110f2ef02907fa5b114ecd"
+    },
+    {
+      "app": "Legacy App v2 (headless)",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "pte",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ],
+      "startedAt": "2026-11-09T05:57:57.780Z",
+      "finishedAt": "2026-11-09T05:58:08.741Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "log": "pte-Legacy-App-v2-headless-.log",
+      "artifactSha256": "a1188852b42cdbd241e8eb1ad41546fe0c2e1cd636ae2fc30164b836415f1148"
+    },
+    {
+      "app": "Bifrost Reference Tests",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "pte",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ],
+      "startedAt": "2026-11-09T05:58:08.751Z",
+      "finishedAt": "2026-11-09T05:58:18.587Z",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0,
+      "log": "pte-Bifrost-Reference-Tests.log",
+      "artifactSha256": "0bff9b04aa9c95855a6215e451c106a4b3bf42e96b985c3beb3fb128424ef64b"
+    },
+    {
+      "app": "Bifrost Boilerplate",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "appsource",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "AppSourceCop"
+      ],
+      "startedAt": "2026-11-09T05:58:18.594Z",
+      "finishedAt": "2026-11-09T05:58:28.541Z",
+      "exitCode": 1,
+      "errors": 4,
+      "warnings": 1,
+      "log": "appsource-Bifrost-Boilerplate.log"
+    },
+    {
+      "app": "Bifrost Boilerplate Tests",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "appsource",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "AppSourceCop"
+      ],
+      "startedAt": "2026-11-09T05:58:28.545Z",
+      "finishedAt": "2026-11-09T05:58:38.524Z",
+      "exitCode": 1,
+      "errors": 6,
+      "warnings": 1,
+      "log": "appsource-Bifrost-Boilerplate-Tests.log"
+    },
+    {
+      "app": "Bifrost Reference",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "appsource",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "AppSourceCop"
+      ],
+      "startedAt": "2026-11-09T05:58:38.530Z",
+      "finishedAt": "2026-11-09T05:58:47.764Z",
+      "exitCode": 1,
+      "errors": 4,
+      "warnings": 1,
+      "log": "appsource-Bifrost-Reference.log"
+    },
+    {
+      "app": "Legacy App v2 (headless)",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "appsource",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "AppSourceCop"
+      ],
+      "startedAt": "2026-11-09T05:58:47.768Z",
+      "finishedAt": "2026-11-09T05:58:57.242Z",
+      "exitCode": 1,
+      "errors": 6,
+      "warnings": 1,
+      "log": "appsource-Legacy-App-v2-headless-.log"
+    },
+    {
+      "app": "Bifrost Reference Tests",
+      "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+      "mode": "appsource",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "AppSourceCop"
+      ],
+      "startedAt": "2026-11-09T05:58:57.245Z",
+      "finishedAt": "2026-11-09T05:59:05.613Z",
+      "exitCode": 1,
+      "errors": 6,
+      "warnings": 1,
+      "log": "appsource-Bifrost-Reference-Tests.log"
+    }
+  ],
+  "tests": {
+    "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+    "status": "NOT_RUN",
+    "executed": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "reason": "Existing scoped full-suite contract/help and runnable Foundation dependency remain unresolved; older results do not prove this candidate."
+  },
+  "ui": {
+    "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+    "status": "NOT_RUN",
+    "scenariosExecuted": 0,
+    "lcids": [
+      1033,
+      1039
+    ],
+    "reason": "Existing restricted-role company startup dependency unresolved; no current candidate deployed."
+  },
+  "mcp": {
+    "sha": "a00937c812704d1caf419b4144915e0ce8f1f6c7",
+    "touchedMessageTypes": [],
+    "notApplicableReason": "Test-codeunit number only; no message handlers, enum values, request/response schemas or behavior changed."
+  },
+  "cleanup": {
+    "createdResources": [],
+    "createdFixtures": [],
+    "ownedCleanupNeeded": false
+  },
+  "ci": {
+    "runUrl": "https://github.com/businesscentralal/bc-bifrost-reference/actions/runs/42570320137",
+    "status": "queued-at-first-read",
+    "pairedBuildGreen": false
+  },
+  "publicationOnly": true,
+  "fullPrReadiness": false,
+  "retainedBlockerOwners": {
+    "Architect": "Genuine CI/runtime dependency and AppSource sample packaging/range disposition",
+    "ClaudeArchitect": "Existing sample contracts/help, restricted-role UI, safe98677 setup",
+    "root": "Canonical reference repository verifier allowlist"
+  },
+  "reviewLearning": "Check new typed IDs against main and all open sibling PRs; standalone builds omit sibling allocations."
+}
