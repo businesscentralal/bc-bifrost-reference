@@ -82,7 +82,7 @@ Each comes from a failure in live agent testing.
 
 **Platform**
 
-14. Register the app with `App Registry ori`, even without a setup page (pass 0), so the Bifrost Setup wizard can switch on outbound HTTP for it.
+14. Register the app with `App Registry ori`, even without a setup page (pass 0), so the Bifrost Setup wizard can switch on outbound HTTP for it. The subscriber needs `InherentPermissions = X;` and `InherentEntitlements = X;` (§6).
 15. At most one action on Foundation's `Setup ori` page; your settings live on your own page. No HTTP, credential or setup notifications of your own.
 16. Descriptions, contract text and errors are shown to every caller: keep personal data out. Request bodies are kept in the message log: send and store only what the type needs.
 
@@ -194,6 +194,8 @@ A success answer has no `status` field. Read `skip`/`take` with your input layer
 **Before the first call:** someone must approve the Terms of Use in the Bifrost Setup wizard. Until then every call answers `"code": "EULA_REQUIRED"` ("EULA approval is required before Bifrost calls can be processed."). Then the trial must be started in Bifrost Setup; until it is, calls to your types answer "Bifrost trial has not been started", and tests fail with that text.
 
 **`App Registry ori`:** subscribe to `OnRegisterApps` and call `AddApp(Apps, AppInfo.Id(), AppName, SetupPageId)`.
+
+**Registration contract:** every `OnRegisterApps` subscriber must declare both `InherentPermissions = X;` and `InherentEntitlements = X;`. Foundation's inherent Execute on `App Registry ori` does not grant Execute on a subscriber in a dependent app. This grant is only for metadata registration: module information plus `AddApp` on the temporary registry record. It grants no business actions or cross-extension `tabledata` access. Never add HTTP, credentials, licence/EULA, settings, jobs or business-data writes to a registration subscriber. Never silently drop an app from discovery because a permission is missing. The subscriber must do nothing but register.
 
 **`Secret Store ori`:** `Register` (in the install codeunit), `Set`, `TryGet` (in a `[NonDebuggable]` procedure), `IsSet`, `Clear`, `Unregister`. `SecretCode` is `Code[50]`, `AppId` is your module id.
 
