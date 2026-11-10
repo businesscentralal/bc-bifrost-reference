@@ -68,13 +68,23 @@ codeunit 90153 "Legacy Adapter Tests"
 
     [Test]
     procedure ReleaseAllWithTheWrongCountIsRefused()
+    var
+        Log: Record "Legacy Cancellation Log";
+        Response: JsonObject;
     begin
         // [GIVEN] two reservations matching the filter
         ReserveOverStock('BIFT-R1', 1);
         ReserveOverStock('BIFT-R2', 1);
         // [WHEN] the caller guesses the count  [THEN] it is refused
-        asserterror Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.ReleaseAll", '', '{"itemFilter":"BIFT-R*","expectedCount":5}');
-        Assert.ExpectedError('Nothing was released');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.ReleaseAll", '', '{"itemFilter":"BIFT-R*","expectedCount":5}');
+        Caller.AssertErrorAnswer(Response, 'Nothing was changed');
+        Assert.AreEqual('ConfirmationMismatch', Caller.GetText(Response, 'code'), 'The shared confirmation gate refuses a stale count.');
+        Assert.AreEqual('2', Caller.GetText(Response, 'expected'), 'Count the two matching reservations, not one default subject.');
+        Assert.AreEqual('5', Caller.GetText(Response, 'received'), 'Echo the rejected count.');
+        Assert.IsTrue(HasReservation('BIFT-R1'), 'A refused call must retain the first reservation.');
+        Assert.IsTrue(HasReservation('BIFT-R2'), 'A refused call must retain the second reservation.');
+        Log.SetFilter("Item No.", 'BIFT-R*');
+        Assert.RecordCount(Log, 0);
     end;
 
     [Test]
@@ -95,6 +105,7 @@ codeunit 90153 "Legacy Adapter Tests"
         // [GIVEN] two reservations, and the count as Legacy.Stock.List reports it
         ReserveOverStock('BIFT-S1', 1);
         ReserveOverStock('BIFT-S2', 3);
+        ReserveOverStock('BIFT-OUTSIDE', 2);
         Listed := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.List", '', '{"itemFilter":"BIFT-S*"}');
         Assert.AreEqual(2, Caller.GetDecimal(Listed, 'count'), 'List count');
         Assert.AreEqual(4, Caller.GetDecimal(Listed, 'totalQuantity'), 'List totalQuantity');
@@ -108,15 +119,35 @@ codeunit 90153 "Legacy Adapter Tests"
         Assert.AreEqual(2, Caller.GetDecimal(Released, 'released'), 'released');
         Assert.IsFalse(HasReservation('BIFT-S1'), 'BIFT-S1 should be released.');
         Assert.IsFalse(HasReservation('BIFT-S2'), 'BIFT-S2 should be released.');
+        Assert.IsTrue(HasReservation('BIFT-OUTSIDE'), 'The filter must preserve an unrelated reservation.');
         Log.SetFilter("Item No.", 'BIFT-S*');
         Assert.RecordCount(Log, 2);
     end;
 
     [Test]
+    procedure ReleaseAllWithZeroCountIsANoOp()
+    var
+        Log: Record "Legacy Cancellation Log";
+        Response: JsonObject;
+    begin
+        // PR #5, stale-count regression | Time: none | Risk: Foundation confirmation gate.
+        // [GIVEN] no reservations match this task-owned filter.
+        // [WHEN] the caller confirms the listed count of zero.
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.ReleaseAll", '', '{"itemFilter":"BIFT-NONE*","expectedCount":0}');
+        // [THEN] nothing is released or logged; the default single-subject count must not apply.
+        Caller.AssertOk(Response);
+        Assert.AreEqual(0, Caller.GetDecimal(Response, 'released'), 'An empty selection releases zero reservations.');
+        Log.SetFilter("Item No.", 'BIFT-NONE*');
+        Assert.RecordCount(Log, 0);
+    end;
+
+    [Test]
     procedure HelpQuotesTheFacadesOverStockError()
     begin
-        // The core's Label and the message type's help live in two codeunits; this keeps them in step.
-        Assert.IsTrue(Caller.GetHelp('Legacy.Stock.Reserve').Contains(OverStockPartTxt), 'The Reserve help should quote the over-stock error.');
+        // The core's Label and the contract's errors chapter live in two codeunits; this keeps them in step.
+        Assert.IsTrue(
+            Caller.GetContractChapter(Enum::"Message Type ori"::"Legacy.Stock.Reserve", 'errors').Contains(OverStockPartTxt),
+            'The errors chapter of Legacy.Stock.Reserve should quote the over-stock error.');
     end;
 
     [Test]
