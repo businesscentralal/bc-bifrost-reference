@@ -7,7 +7,7 @@
 
 ## What it shows
 
-Once a message type follows the contract in `START-HERE.md`, the Orchestrator can chain it with others, with no extra code. This folder holds reference playbooks that do exactly that, plus the rules a message type should follow to work well as a playbook step.
+Once a message type follows the contract in `BUILDING.md`, the Orchestrator can chain it with others, with no extra code. This folder holds reference playbooks that do exactly that, plus the rules a message type should follow to work well as a playbook step.
 
 | Playbook | Steps | Pattern |
 |---|---|---|
@@ -29,14 +29,14 @@ The definitions are in `playbooks/` as JSON, one file per playbook, readable by 
 
 ## Making a message type a good playbook step
 
-These rules add to the contract in `START-HERE.md` §4. The reference types already follow them.
+These rules add to the contract in `BUILDING.md` section 4. The reference types already follow them.
 
 1. **Answer "nothing to do" as success, with a count.** A condition can branch on `count = 0`. `Legacy.Stock.List` returns `count` and `totalQuantity`, including 0. **Keep errors apart from "nothing".** A type that answers with `RespondWithError` does not raise, so a Check step reads the missing count as "nothing to do" and the run ends Completed. Log `status` on the step and add an Error condition `status Equals Error`, as `REF-RELEASE` does. The run then ends Failed.
 2. **Put arrays under one stable key**, so a later step can iterate over them. `Legacy.Stock.List` uses `reservations`.
 3. **Keep a small summary next to the data.** The run report reads the summary paths, and later steps read the result paths.
 4. **Guard every bulk change with a value from an earlier read.** No rollback across steps means the write step must refuse if the world changed (`expectedCount`, `expectedItemCount`).
 5. **Report errors with `RespondWithError`**, so they land in the step log with their text.
-6. **Be safe to re-run.** A scheduled playbook runs again tomorrow. Make repeats harmless (`externalId`, the count guard) or say in the help that they aren't.
+6. **Be safe to re-run.** A scheduled playbook runs again tomorrow. Make repeats harmless (`externalId`, the count guard) or say in the contract's `effect` and `notes` that they aren't.
 
 ## Status
 

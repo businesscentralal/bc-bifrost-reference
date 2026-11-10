@@ -44,3 +44,6 @@ Thumbs.db
 ~$*
 cache_*
 *.log
+
+# Local helper scripts
+_commit-*.ps1

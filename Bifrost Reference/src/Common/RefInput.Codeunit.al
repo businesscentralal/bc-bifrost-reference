@@ -27,7 +27,7 @@ codeunit 90010 "Ref Input"
     Access = Internal;
 
     var
-        NotObjectErr: Label 'The request body must be a JSON object, for example { "accountNo": "2910" }.', Comment = 'is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "accountNo": "2910" }.';
+        NotObjectErr: Label 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', Comment = 'is-IS=Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.';
         MissingErr: Label 'Parameter ''%1'' is required. Send it as %2.', Comment = '%1 = parameter name, %2 = expected type and example, is-IS=Færibreytan ''%1'' er nauðsynleg. Sendu hana sem %2.';
         EmptyErr: Label 'Parameter ''%1'' is empty. Send a value, for example %2.', Comment = '%1 = parameter name, %2 = example, is-IS=Færibreytan ''%1'' er tóm. Sendu gildi, til dæmis %2.';
         NotAValueErr: Label 'Parameter ''%1'' must be a single value (text or number), not an object or an array.', Comment = '%1 = parameter name, is-IS=Færibreytan ''%1'' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.';

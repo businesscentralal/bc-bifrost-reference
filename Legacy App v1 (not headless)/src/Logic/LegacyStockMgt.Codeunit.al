@@ -6,8 +6,8 @@ using Microsoft.Inventory.Item;
 /// v1 - deliberately NOT headless. This is what a lot of real apps look like, and every
 /// procedure works fine for a person clicking through the UI.
 ///
-/// Each problem is marked "AUDIT -[pattern]", after the audit table in START-HERE.md §7.1,
-/// so you can find it by searching. "Legacy App" 2.0 fixes every marked line; its fixes are marked
+/// Each problem is marked "AUDIT -[pattern]", after the audit table in ADAPTING.md,
+/// so you can find it by searching. "Legacy App" 2.2.0.0 fixes every marked line; its fixes are marked
 /// "FIXED - [pattern]".
 /// </summary>
 codeunit 90050 "Legacy Stock Mgt"

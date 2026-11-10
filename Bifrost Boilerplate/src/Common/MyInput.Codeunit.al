@@ -22,14 +22,14 @@ using Origo.Bifrost;
 ///
 /// Every Get procedure returns false after it has already answered the caller with
 /// Argument.RespondWithError, so the calling code just does: if not ... then exit;
-/// Change a Label here and the Errors section of every help document in the same commit.
+/// Change a Label here and the GetErrors chapter of every type that uses it in the same commit.
 /// </summary>
 codeunit 50000 "My Input"
 {
     Access = Internal;
 
     var
-        NotObjectErr: Label 'The request body must be a JSON object, for example { "itemNo": "1896-S" }.', Comment = 'is-IS=Beiðnin verður að vera JSON-hlutur, til dæmis { "itemNo": "1896-S" }.';
+        NotObjectErr: Label 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', Comment = 'is-IS=Beiðnin verður að vera JSON-hlutur, með færibreytunum eftir heiti, til dæmis { "name": "value" }.';
         MissingErr: Label 'Parameter ''%1'' is required. Send it as %2.', Comment = '%1 = parameter name, %2 = expected type and example, is-IS=Færibreytan ''%1'' er nauðsynleg. Sendu hana sem %2.';
         EmptyErr: Label 'Parameter ''%1'' is empty. Send a value, for example %2.', Comment = '%1 = parameter name, %2 = example, is-IS=Færibreytan ''%1'' er tóm. Sendu gildi, til dæmis %2.';
         NotAValueErr: Label 'Parameter ''%1'' must be a single value (text or number), not an object or an array.', Comment = '%1 = parameter name, is-IS=Færibreytan ''%1'' verður að vera stakt gildi (texti eða tala), ekki hlutur eða fylki.';
@@ -69,7 +69,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="MaxLength">The longest value accepted.</param>
     /// <param name="ExampleValue">A good value, quoted, shown in the error texts.</param>
     /// <param name="Value">Receives the value.</param>
@@ -97,7 +97,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="MaxLength">The longest value accepted.</param>
     /// <param name="Value">Receives the value, or '' when absent.</param>
     /// <param name="Found">True when a non-empty value was sent.</param>
@@ -125,7 +125,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="Value">Receives the date.</param>
     /// <returns>False when the caller has already been answered with an error.</returns>
     procedure GetRequiredDate(var Argument: Record "Message Argument ori"; RequestJson: JsonObject; KeyName: Text; var Value: Date): Boolean
@@ -152,7 +152,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="DefaultValue">The date used when the key is absent, for example WorkDate().</param>
     /// <param name="Value">Receives the date.</param>
     /// <returns>False when the caller has already been answered with an error.</returns>
@@ -182,7 +182,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="MinValue">The smallest value accepted.</param>
     /// <param name="MaxValue">The largest value accepted.</param>
     /// <param name="Value">Receives the number.</param>
@@ -214,7 +214,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="MinValue">The smallest value accepted.</param>
     /// <param name="MaxValue">The largest value accepted.</param>
     /// <param name="Value">Receives the number.</param>
@@ -236,7 +236,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="MinValue">The smallest value accepted.</param>
     /// <param name="MaxValue">The largest value accepted.</param>
     /// <param name="DefaultValue">The number used when the key is absent.</param>
@@ -261,7 +261,7 @@ codeunit 50000 "My Input"
     /// </summary>
     /// <param name="Argument">The message argument of the call.</param>
     /// <param name="RequestJson">The request body.</param>
-    /// <param name="KeyName">The JSON key, as documented in the help.</param>
+    /// <param name="KeyName">The JSON key, as named in the contract's parameters chapter.</param>
     /// <param name="DefaultValue">The value used when the key is absent.</param>
     /// <param name="Value">Receives the value.</param>
     /// <returns>False when the caller has already been answered with an error.</returns>
