@@ -148,6 +148,7 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemFilter', 'string', 'The filter used, as sent.'));
         Fields.Add(ContractMgt.ResponseField('released', 'integer', 'The number of reservations released; always equal to expectedCount. 0 only when you sent expectedCount 0 and nothing matched.'));
         Response.Add('contentType', 'text/json');
@@ -164,13 +165,13 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Parts: Codeunit "Legacy Stock Contract";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('itemFilter ''{filter}'' matches {actual} reservations, not the {expected} you sent in expectedCount. Nothing was released. Check with Legacy.Stock.List and send its count.', 'Reservations were added or removed after the list, or the count was guessed.', 'Run Legacy.Stock.List again, show the user the new result, and resend with its count.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemFilter'' is required. Send it as text, for example "1896-S|1900-S" or "*" for all.', 'itemFilter is missing.', 'Send a filter; * for all.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemFilter'' is empty. Send a value, for example "1896-S|1900-S" or "*" for all.', 'itemFilter is an empty string.', 'Send a filter; * for all.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemFilter'' is {length} characters long; the maximum is 250.', 'itemFilter is too long.', 'Shorten the filter.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''expectedCount'' is required. Send it as a whole number, for example 3.', 'The list was skipped.', 'Run Legacy.Stock.List first and send its count.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''expectedCount'' has the value ''{value}'', which is not a whole number. Send a whole number, for example 3.', 'expectedCount is not a whole number.', 'Send the count from Legacy.Stock.List, for example 2.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'itemFilter or expectedCount is an object or an array.', 'Send a single value.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::BusinessCentralError, 'itemFilter ''{filter}'' matches {actual} reservations, not the {expected} you sent in expectedCount. Nothing was released. Check with Legacy.Stock.List and send its count.', 'Reservations were added or removed after the list, or the count was guessed.', 'Run Legacy.Stock.List again, show the user the new result, and resend with its count.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''itemFilter'' is required. Send it as text, for example "1896-S|1900-S" or "*" for all.', 'itemFilter is missing.', 'Send a filter; * for all.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''itemFilter'' is empty. Send a value, for example "1896-S|1900-S" or "*" for all.', 'itemFilter is an empty string.', 'Send a filter; * for all.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''itemFilter'' is {length} characters long; the maximum is 250.', 'itemFilter is too long.', 'Shorten the filter.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''expectedCount'' is required. Send it as a whole number, for example 3.', 'The list was skipped.', 'Run Legacy.Stock.List first and send its count.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''expectedCount'' has the value ''{value}'', which is not a whole number. Send a whole number, for example 3.', 'expectedCount is not a whole number.', 'Send the count from Legacy.Stock.List, for example 2.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'itemFilter or expectedCount is an object or an array.', 'Send a single value.'));
         Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::ConfirmationMismatch, 'You sent expectedCount {sent}, but the call would now affect {actual} ({selection}). Nothing was changed.', 'The supplied count differs from the locked reservation count.', 'Run Legacy.Stock.List again with the same itemFilter and resend its count.'));
         Parts.AddBodyError(Errors);
         exit(true);
@@ -218,7 +219,7 @@ codeunit 90109 "Legacy Release All Impl" implements "Msg Interface ori", "Msg Di
     begin
         Examples.Add(ContractMgt.Example('Release the two reservations the list showed',
             '{"type":"Legacy.Stock.ReleaseAll","data":{"itemFilter":"19*","expectedCount":2}}',
-            '{"itemFilter":"19*","released":2}'));
+            '{"status":"Success","itemFilter":"19*","released":2}'));
         Examples.Add(ContractMgt.Example('The reservations changed after the list',
             '{"type":"Legacy.Stock.ReleaseAll","data":{"itemFilter":"19*","expectedCount":2}}',
             '{"status":"Error","code":"ConfirmationMismatch","error":"You sent expectedCount 2, but the call would now affect 3 (Stock reservations matching 19*). Nothing was changed.","parameter":"expectedCount","received":"2","expected":"3","nextStep":"Check the preview and send expectedCount 3 if that is what you want."}'));

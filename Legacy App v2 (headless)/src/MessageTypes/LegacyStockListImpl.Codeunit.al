@@ -61,7 +61,7 @@ codeunit 90108 "Legacy Stock List Impl" implements "Msg Interface ori", "Msg Dis
         if not AdapterInput.GetText(Argument, RequestJson, 'itemFilter', false, 250, '"1896-S|1900-S"', ItemFilter) then
             exit;
         if not TryApplyFilter(Reservation, ItemFilter) then begin
-            Argument.RespondWithError(StrSubstNo(FilterErr, ItemFilter, GetLastErrorText()));
+            AdapterInput.Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, 'itemFilter', ItemFilter, StrSubstNo(FilterErr, ItemFilter, GetLastErrorText()));
             exit;
         end;
 
@@ -86,7 +86,7 @@ codeunit 90108 "Legacy Stock List Impl" implements "Msg Interface ori", "Msg Dis
         ResponseJson.Add('returned', Returned);
         ResponseJson.Add('more', ReservationCount > Returned);
         ResponseJson.Add('reservations', Rows);
-        Argument.SetResponseJson(ResponseJson);
+        AdapterInput.SetSuccess(Argument, ResponseJson);
     end;
 
     [TryFunction]
@@ -151,6 +151,7 @@ codeunit 90108 "Legacy Stock List Impl" implements "Msg Interface ori", "Msg Dis
         RowsField: JsonObject;
         RowChildren: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemFilter', 'string', 'The filter used, as sent; empty for all.'));
         Fields.Add(ContractMgt.ResponseField('count', 'integer', 'The number of matching reservations, also when more is true. Send it to Legacy.Stock.ReleaseAll as expectedCount.'));
         Fields.Add(ContractMgt.ResponseField('totalQuantity', 'number', 'The sum of the quantities of every matching reservation, also when more is true.'));
@@ -171,9 +172,9 @@ codeunit 90108 "Legacy Stock List Impl" implements "Msg Interface ori", "Msg Dis
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Parts: Codeunit "Legacy Stock Contract";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemFilter'' is ''{filter}'', which is not a valid filter: {reason} Send an item number or a filter such as 1896-S|1900-S or 19*.', 'The filter syntax is invalid; {reason} is Business Central''s own explanation.', 'Fix the filter.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemFilter'' is {length} characters long; the maximum is 250.', 'itemFilter is too long.', 'Shorten the filter.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemFilter'' must be a single value (text or number), not an object or an array.', 'itemFilter is an object or an array.', 'Send it as text.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''itemFilter'' is ''{filter}'', which is not a valid filter: {reason} Send an item number or a filter such as 1896-S|1900-S or 19*.', 'The filter syntax is invalid; {reason} is Business Central''s own explanation.', 'Fix the filter.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''itemFilter'' is {length} characters long; the maximum is 250.', 'itemFilter is too long.', 'Shorten the filter.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''itemFilter'' must be a single value (text or number), not an object or an array.', 'itemFilter is an object or an array.', 'Send it as text.'));
         Parts.AddBodyError(Errors);
         exit(true);
     end;
@@ -218,10 +219,10 @@ codeunit 90108 "Legacy Stock List Impl" implements "Msg Interface ori", "Msg Dis
     begin
         Examples.Add(ContractMgt.Example('Reservations for items starting with 19',
             '{"type":"Legacy.Stock.List","data":{"itemFilter":"19*"}}',
-            '{"itemFilter":"19*","count":2,"totalQuantity":7,"returned":2,"more":false,"reservations":[{"itemNo":"1896-S","quantity":5},{"itemNo":"1900-S","quantity":2}]}'));
+            '{"status":"Success","itemFilter":"19*","count":2,"totalQuantity":7,"returned":2,"more":false,"reservations":[{"itemNo":"1896-S","quantity":5},{"itemNo":"1900-S","quantity":2}]}'));
         Examples.Add(ContractMgt.Example('Every reservation',
             '{"type":"Legacy.Stock.List"}',
-            '{"itemFilter":"","count":3,"totalQuantity":9,"returned":3,"more":false,"reservations":[{"itemNo":"1896-S","quantity":5},{"itemNo":"1900-S","quantity":2},{"itemNo":"1906-S","quantity":2}]}'));
+            '{"status":"Success","itemFilter":"","count":3,"totalQuantity":9,"returned":3,"more":false,"reservations":[{"itemNo":"1896-S","quantity":5},{"itemNo":"1900-S","quantity":2},{"itemNo":"1906-S","quantity":2}]}'));
         exit(true);
     end;
 

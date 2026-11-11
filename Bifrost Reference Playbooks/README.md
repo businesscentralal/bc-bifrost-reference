@@ -35,7 +35,7 @@ These rules add to the contract in `BUILDING.md` section 4. The reference types 
 2. **Put arrays under one stable key**, so a later step can iterate over them. `Legacy.Stock.List` uses `reservations`.
 3. **Keep a small summary next to the data.** The run report reads the summary paths, and later steps read the result paths.
 4. **Guard every bulk change with a value from an earlier read.** No rollback across steps means the write step must refuse if the world changed (`expectedCount`, `expectedItemCount`).
-5. **Report errors with `RespondWithError`**, so they land in the step log with their text.
+5. **Report errors with a code** (`RespondWithError(ErrorCode, …)`, wrapped as `Reject` in the sample input codeunits), so they land in the step log with their code and text, and **answer success with `status: "Success"`**, so `status Equals Success` works as a Success condition.
 6. **Be safe to re-run.** A scheduled playbook runs again tomorrow. Make repeats harmless (`externalId`, the count guard) or say in the contract's `effect` and `notes` that they aren't.
 
 ## Status

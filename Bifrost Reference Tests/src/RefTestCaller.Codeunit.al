@@ -71,11 +71,97 @@ codeunit 90150 "Ref Test Caller"
     end;
 
     /// <summary>
-    /// Asserts that the answer is not an error.
+    /// Asserts that the answer is a success: status = Success, and status is the first key.
     /// </summary>
     procedure AssertOk(Response: JsonObject)
     begin
-        Assert.AreNotEqual('Error', GetText(Response, 'status'), 'Expected success. Answer: ' + AsJsonText(Response));
+        Assert.AreEqual('Success', GetText(Response, 'status'), 'Expected status Success. Answer: ' + AsJsonText(Response));
+        Assert.AreEqual('status', Response.Keys().Get(1), 'status should be the first key. Answer: ' + AsJsonText(Response));
+    end;
+
+    /// <summary>
+    /// Asserts that the answer is status = Error with the given code from "Bifrost Error Code ori".
+    /// </summary>
+    procedure AssertErrorCode(Response: JsonObject; ExpectedCode: Text)
+    begin
+        Assert.AreEqual('Error', GetText(Response, 'status'), 'Expected status Error. Answer: ' + AsJsonText(Response));
+        Assert.AreEqual(ExpectedCode, GetText(Response, 'code'), 'Expected error code. Answer: ' + AsJsonText(Response));
+    end;
+
+    /// <summary>
+    /// Asserts that the answer carries a warning with the given code for the given parameter.
+    /// </summary>
+    procedure AssertWarning(Response: JsonObject; ExpectedCode: Text; ExpectedParameter: Text)
+    begin
+        Assert.IsTrue(HasWarning(Response, ExpectedCode, ExpectedParameter), StrSubstNo('Expected a %1 warning for %2. Answer: %3', ExpectedCode, ExpectedParameter, AsJsonText(Response)));
+    end;
+
+    /// <summary>
+    /// True when the answer carries a warning with the given code for the given parameter.
+    /// </summary>
+    procedure HasWarning(Response: JsonObject; ExpectedCode: Text; ExpectedParameter: Text): Boolean
+    var
+        WarningsToken: JsonToken;
+        Warning: JsonToken;
+    begin
+        if not Response.Get('warnings', WarningsToken) then
+            exit(false);
+        if not WarningsToken.IsArray() then
+            exit(false);
+        foreach Warning in WarningsToken.AsArray() do
+            if Warning.IsObject() then
+                if (GetText(Warning.AsObject(), 'code') = ExpectedCode) and (GetText(Warning.AsObject(), 'parameter') = ExpectedParameter) then
+                    exit(true);
+        exit(false);
+    end;
+
+    /// <summary>
+    /// Asserts the envelope in a type's contract: the response chapter declares status first,
+    /// every errors entry has a code, every success example answer starts with status Success,
+    /// every error example has a code, and every example request sends only declared parameters.
+    /// </summary>
+    procedure AssertEnvelopeContract(MessageType: Enum "Message Type ori")
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Contract: JsonObject;
+        Token: JsonToken;
+        Entry: JsonToken;
+        FieldToken: JsonToken;
+        Declared: List of [Text];
+        DataKey: Text;
+        TypeName: Text;
+    begin
+        TypeName := Format(MessageType);
+        ContractMgt.GetContract(MessageType, Contract);
+        Assert.IsTrue(Contract.Get('response', Token), TypeName + ': response chapter');
+        Token.AsObject().Get('fields', Token);
+        Token.AsArray().Get(0, Entry);
+        Assert.AreEqual('status', GetText(Entry.AsObject(), 'name'), TypeName + ': the first response field should be status.');
+
+        Assert.IsTrue(Contract.Get('errors', Token), TypeName + ': errors chapter');
+        foreach Entry in Token.AsArray() do
+            Assert.AreNotEqual('', GetText(Entry.AsObject(), 'code'), TypeName + ': every errors entry needs a code: ' + GetText(Entry.AsObject(), 'error'));
+
+        if Contract.Get('parameters', Token) then
+            if Token.IsArray() then
+                foreach Entry in Token.AsArray() do
+                    Declared.Add(GetText(Entry.AsObject(), 'name'));
+
+        Assert.IsTrue(Contract.Get('examples', Token), TypeName + ': examples chapter');
+        foreach Entry in Token.AsArray() do begin
+            Entry.AsObject().Get('response', FieldToken);
+            if GetText(FieldToken.AsObject(), 'status') = 'Error' then
+                Assert.AreNotEqual('', GetText(FieldToken.AsObject(), 'code'), TypeName + ': every error example needs a code.')
+            else begin
+                Assert.AreEqual('Success', GetText(FieldToken.AsObject(), 'status'), TypeName + ': a success example should have status Success.');
+                Assert.AreEqual('status', FieldToken.AsObject().Keys().Get(1), TypeName + ': status should be the first key of a success example.');
+                Entry.AsObject().Get('request', FieldToken);
+                if FieldToken.AsObject().Get('data', FieldToken) then
+                    if FieldToken.IsObject() then
+                        foreach DataKey in FieldToken.AsObject().Keys() do
+                            Assert.IsTrue(Declared.Contains(DataKey), StrSubstNo('%1: example data key %2 is not a declared parameter.', TypeName, DataKey));
+            end;
+        end;
     end;
 
     procedure GetText(Response: JsonObject; KeyName: Text): Text

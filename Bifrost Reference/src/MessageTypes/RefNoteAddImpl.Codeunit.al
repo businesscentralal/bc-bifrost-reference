@@ -127,6 +127,7 @@ codeunit 90003 "Ref Note Add Impl" implements "Msg Interface ori", "Msg Discover
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('no', 'string', 'The number the note was stored under, in upper case. There is no empty result: the call either stores one note or fails.'));
         Response.Add('contentType', 'text/json');
         Response.Add('fields', Fields);
@@ -141,13 +142,13 @@ codeunit 90003 "Ref Note Add Impl" implements "Msg Interface ori", "Msg Discover
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''no'' is required. Send it as text, for example "NOTE-1".', 'The request has no no.', 'Send no.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''no'' is empty. Send a value, for example "NOTE-1".', 'no is an empty string.', 'Send a value.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''no'' is {length} characters long; the maximum is 20.', 'no is too long.', 'Shorten it.'));
-        Errors.Add(ContractMgt.TextErrorEntry('A note with no. ''{no}'' already exists. Choose a different no.; if this is a retry, the first attempt most likely succeeded.', 'A note with that no is already stored.', 'Choose a different no, or treat it as success when retrying.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''text'' is {length} characters long; the maximum is 250.', 'text is too long.', 'Shorten it.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''no'' must be a single value (text or number), not an object or an array.', 'no or text is an object or an array.', 'Send a single value.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, for example { "no": "NOTE-1" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''no'' is required. Send it as text, for example "NOTE-1".', 'The request has no no.', 'Send no.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''no'' is empty. Send a value, for example "NOTE-1".', 'no is an empty string.', 'Send a value.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''no'' is {length} characters long; the maximum is 20.', 'no is too long.', 'Shorten it.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::BusinessCentralError, 'A note with no. ''{no}'' already exists. Choose a different no.; if this is a retry, the first attempt most likely succeeded.', 'A note with that no is already stored.', 'Choose a different no, or treat it as success when retrying.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''text'' is {length} characters long; the maximum is 250.', 'text is too long.', 'Shorten it.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''no'' must be a single value (text or number), not an object or an array.', 'no or text is an object or an array.', 'Send a single value.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, for example { "no": "NOTE-1" }.', 'data is an array or plain text.', 'Send a JSON object.'));
         exit(true);
     end;
 
@@ -190,17 +191,17 @@ codeunit 90003 "Ref Note Add Impl" implements "Msg Interface ori", "Msg Discover
     begin
         Examples.Add(ContractMgt.Example('Store a note',
             '{"type":"Reference.Note.Add","data":{"no":"NOTE-1","text":"hello"}}',
-            '{"no":"NOTE-1"}'));
+            '{"status":"Success","no":"NOTE-1"}'));
         Examples.Add(ContractMgt.Example('The number already exists',
             '{"type":"Reference.Note.Add","data":{"no":"NOTE-1","text":"again"}}',
-            '{"status":"Error","error":"A note with no. ''NOTE-1'' already exists. Choose a different no.; if this is a retry, the first attempt most likely succeeded."}'));
+            '{"status":"Error","code":"BusinessCentralError","error":"A note with no. ''NOTE-1'' already exists. Choose a different no.; if this is a retry, the first attempt most likely succeeded."}'));
         exit(true);
     end;
 
     procedure GetNotes(var Notes: Text): Boolean
     begin
         Notes := 'Not safe to repeat with the same `no`: a retry after a timeout should treat "already exists" as "the first attempt went through", or use a fresh `no` per attempt. ' +
-            '`no` is stored in upper case, so `note-1` and `NOTE-1` are the same note. `text` is stored as sent. Error texts follow lcid when a translation is installed.';
+            '`no` is stored in upper case, so `note-1` and `NOTE-1` are the same note. `text` is stored as sent. Error texts follow lcid when a translation is installed. A misspelled key, such as txt for text, is never a silent success: the answer carries an UnknownParameter warning (a refusal once Foundation refuses unknown keys on writes).';
         exit(true);
     end;
 }

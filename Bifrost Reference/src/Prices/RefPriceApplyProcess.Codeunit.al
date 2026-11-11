@@ -17,9 +17,10 @@ codeunit 90019 "Ref Price Apply Process"
 
     trigger OnRun()
     var
+        RefInput: Codeunit "Ref Input";
         PriceAdjust: Codeunit "Ref Price Adjust";
     begin
-        Rec.SetResponseJson(PriceAdjust.BuildAndOptionallyApply(ItemCategoryCode, Percent, true));
+        RefInput.SetSuccess(Rec, PriceAdjust.BuildAndOptionallyApply(ItemCategoryCode, Percent, true));
     end;
 
     procedure SetAdjustment(NewItemCategoryCode: Code[20]; NewPercent: Decimal)

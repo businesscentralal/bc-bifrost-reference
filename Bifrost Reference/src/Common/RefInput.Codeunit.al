@@ -20,7 +20,7 @@ using Origo.Bifrost;
 ///  - every text is a translatable Label (is-IS comment), never a hard-coded literal.
 ///
 /// Every Get* procedure returns false after it has already answered the caller with
-/// Argument.RespondWithError, so the calling code just does: if not ... then exit;
+/// Reject or Argument.RespondWithLastError, so the calling code just does: if not ... then exit;
 /// </summary>
 codeunit 90010 "Ref Input"
 {
@@ -46,6 +46,46 @@ codeunit 90010 "Ref Input"
         IntegerExampleTok: Label 'a whole number, for example 12', Locked = true;
 
     /// <summary>
+    /// Answers a successful call. Builds the answer with "status": "Success" as its first key,
+    /// followed by every key of ResponseJson except a key named status, so a caller can never
+    /// forge the outcome by sending its own status. Foundation only adds its request warnings
+    /// (for example UnknownParameter) to an answer that carries status, so use this for every
+    /// success answer instead of Argument.SetResponseJson.
+    /// </summary>
+    /// <param name="Argument">The message argument of the call.</param>
+    /// <param name="ResponseJson">The answer fields, without status.</param>
+    procedure SetSuccess(var Argument: Record "Message Argument ori"; ResponseJson: JsonObject)
+    var
+        Envelope: JsonObject;
+        Token: JsonToken;
+        KeyName: Text;
+    begin
+        Envelope.Add('status', 'Success');
+        foreach KeyName in ResponseJson.Keys() do
+            if KeyName <> 'status' then begin
+                ResponseJson.Get(KeyName, Token);
+                Envelope.Add(KeyName, Token);
+            end;
+        Argument.SetResponseJson(Envelope);
+    end;
+
+    /// <summary>
+    /// Answers an error with a code from "Bifrost Error Code ori", the parameter it concerns
+    /// and the value received, so a caller can act on the code instead of parsing the text.
+    /// Message is the translated Label text, unchanged. Empty ParameterName or Received are
+    /// left out of the answer.
+    /// </summary>
+    /// <param name="Argument">The message argument of the call.</param>
+    /// <param name="ErrorCode">The error code, as listed in the type's errors chapter.</param>
+    /// <param name="ParameterName">The parameter the error concerns, or '' when none.</param>
+    /// <param name="Received">The value received, or '' when none.</param>
+    /// <param name="Message">The error text.</param>
+    procedure Reject(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; ParameterName: Text; Received: Text; Message: Text)
+    begin
+        Argument.RespondWithError(ErrorCode, Message, ParameterName, Received, '', '');
+    end;
+
+    /// <summary>
     /// Reads the request body as a JSON object. An empty body gives an empty object.
     /// A body that is not an object (an array, plain text) is answered with a clear error
     /// instead of the raw platform error GetRequestJson() would raise.
@@ -54,7 +94,7 @@ codeunit 90010 "Ref Input"
     begin
         if TryGetRequestJson(Argument, RequestJson) then
             exit(true);
-        Argument.RespondWithError(NotObjectErr);
+        Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, '', '', NotObjectErr);
         exit(false);
     end;
 
@@ -68,13 +108,13 @@ codeunit 90010 "Ref Input"
         Token: JsonToken;
     begin
         if not RequestJson.Get(KeyName, Token) then begin
-            Argument.RespondWithError(StrSubstNo(MissingErr, KeyName, StrSubstNo(TextExampleTok, ExampleValue)));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, KeyName, '', StrSubstNo(MissingErr, KeyName, StrSubstNo(TextExampleTok, ExampleValue)));
             exit(false);
         end;
         if not ReadTextToken(Argument, Token, KeyName, MaxLength, Value) then
             exit(false);
         if DelChr(Value, '<>', ' ') = '' then begin
-            Argument.RespondWithError(StrSubstNo(EmptyErr, KeyName, ExampleValue));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, KeyName, '', StrSubstNo(EmptyErr, KeyName, ExampleValue));
             exit(false);
         end;
         exit(true);
@@ -111,13 +151,13 @@ codeunit 90010 "Ref Input"
         DateText: Text;
     begin
         if not RequestJson.Get(KeyName, Token) then begin
-            Argument.RespondWithError(StrSubstNo(MissingErr, KeyName, DateExampleTok));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, KeyName, '', StrSubstNo(MissingErr, KeyName, DateExampleTok));
             exit(false);
         end;
         if not ReadTextToken(Argument, Token, KeyName, 30, DateText) then
             exit(false);
         if not TryParseIsoDate(DateText, Value) then begin
-            Argument.RespondWithError(StrSubstNo(DateFormatErr, KeyName, DateText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, DateText, StrSubstNo(DateFormatErr, KeyName, DateText));
             exit(false);
         end;
         exit(true);
@@ -138,7 +178,7 @@ codeunit 90010 "Ref Input"
         if not Found then
             exit(true);
         if not TryParseIsoDate(DateText, Value) then begin
-            Argument.RespondWithError(StrSubstNo(DateFormatErr, KeyName, DateText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, DateText, StrSubstNo(DateFormatErr, KeyName, DateText));
             exit(false);
         end;
         exit(true);
@@ -154,17 +194,17 @@ codeunit 90010 "Ref Input"
         NumberText: Text;
     begin
         if not RequestJson.Get(KeyName, Token) then begin
-            Argument.RespondWithError(StrSubstNo(MissingErr, KeyName, NumberExampleTok));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, KeyName, '', StrSubstNo(MissingErr, KeyName, NumberExampleTok));
             exit(false);
         end;
         if not ReadTextToken(Argument, Token, KeyName, 50, NumberText) then
             exit(false);
         if not Evaluate(Value, NumberText, 9) then begin
-            Argument.RespondWithError(StrSubstNo(NumberFormatErr, KeyName, NumberText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, NumberText, StrSubstNo(NumberFormatErr, KeyName, NumberText));
             exit(false);
         end;
         if (Value < MinValue) or (Value > MaxValue) then begin
-            Argument.RespondWithError(StrSubstNo(RangeErr, KeyName, Format(Value, 0, 9), Format(MinValue, 0, 9), Format(MaxValue, 0, 9)));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, KeyName, Format(Value, 0, 9), StrSubstNo(RangeErr, KeyName, Format(Value, 0, 9), Format(MinValue, 0, 9), Format(MaxValue, 0, 9)));
             exit(false);
         end;
         exit(true);
@@ -179,17 +219,17 @@ codeunit 90010 "Ref Input"
         NumberText: Text;
     begin
         if not RequestJson.Get(KeyName, Token) then begin
-            Argument.RespondWithError(StrSubstNo(MissingErr, KeyName, IntegerExampleTok));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, KeyName, '', StrSubstNo(MissingErr, KeyName, IntegerExampleTok));
             exit(false);
         end;
         if not ReadTextToken(Argument, Token, KeyName, 20, NumberText) then
             exit(false);
         if not Evaluate(Value, NumberText, 9) then begin
-            Argument.RespondWithError(StrSubstNo(IntegerFormatErr, KeyName, NumberText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, NumberText, StrSubstNo(IntegerFormatErr, KeyName, NumberText));
             exit(false);
         end;
         if (Value < MinValue) or (Value > MaxValue) then begin
-            Argument.RespondWithError(StrSubstNo(RangeErr, KeyName, Format(Value, 0, 9), Format(MinValue, 0, 9), Format(MaxValue, 0, 9)));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, KeyName, Format(Value, 0, 9), StrSubstNo(RangeErr, KeyName, Format(Value, 0, 9), Format(MinValue, 0, 9), Format(MaxValue, 0, 9)));
             exit(false);
         end;
         exit(true);
@@ -211,7 +251,7 @@ codeunit 90010 "Ref Input"
         if Argument.SubjectIsGuid() then begin
             if GLAccount.GetBySystemId(Argument.Subject) then
                 exit(true);
-            Argument.RespondWithError(StrSubstNo(GLAccountNotFoundErr, Argument.Subject));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::RecordNotFound, 'accountNo', Argument.Subject, StrSubstNo(GLAccountNotFoundErr, Argument.Subject));
             exit(false);
         end;
 
@@ -220,18 +260,18 @@ codeunit 90010 "Ref Input"
             if not GetOptionalText(Argument, RequestJson, 'accountNo', MaxStrLen(GLAccount."No."), AccountNoText, Found) then
                 exit(false);
             if not Found then begin
-                Argument.RespondWithError(GLAccountMissingErr);
+                Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, 'accountNo', '', GLAccountMissingErr);
                 exit(false);
             end;
         end;
 
         if StrLen(AccountNoText) > MaxStrLen(GLAccount."No.") then begin
-            Argument.RespondWithError(StrSubstNo(GLAccountNotFoundErr, AccountNoText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::RecordNotFound, 'accountNo', AccountNoText, StrSubstNo(GLAccountNotFoundErr, AccountNoText));
             exit(false);
         end;
         if GLAccount.Get(UpperCase(AccountNoText)) then
             exit(true);
-        Argument.RespondWithError(StrSubstNo(GLAccountNotFoundErr, AccountNoText));
+        Reject(Argument, Enum::"Bifrost Error Code ori"::RecordNotFound, 'accountNo', AccountNoText, StrSubstNo(GLAccountNotFoundErr, AccountNoText));
         exit(false);
     end;
 
@@ -249,7 +289,7 @@ codeunit 90010 "Ref Input"
         if Argument.SubjectIsGuid() then begin
             if FixedAsset.GetBySystemId(Argument.Subject) then
                 exit(true);
-            Argument.RespondWithError(StrSubstNo(FixedAssetNotFoundErr, Argument.Subject));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::RecordNotFound, 'assetNo', Argument.Subject, StrSubstNo(FixedAssetNotFoundErr, Argument.Subject));
             exit(false);
         end;
 
@@ -258,18 +298,18 @@ codeunit 90010 "Ref Input"
             if not GetOptionalText(Argument, RequestJson, 'assetNo', MaxStrLen(FixedAsset."No."), AssetNoText, Found) then
                 exit(false);
             if not Found then begin
-                Argument.RespondWithError(FixedAssetMissingErr);
+                Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, 'assetNo', '', FixedAssetMissingErr);
                 exit(false);
             end;
         end;
 
         if StrLen(AssetNoText) > MaxStrLen(FixedAsset."No.") then begin
-            Argument.RespondWithError(StrSubstNo(FixedAssetNotFoundErr, AssetNoText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::RecordNotFound, 'assetNo', AssetNoText, StrSubstNo(FixedAssetNotFoundErr, AssetNoText));
             exit(false);
         end;
         if FixedAsset.Get(UpperCase(AssetNoText)) then
             exit(true);
-        Argument.RespondWithError(StrSubstNo(FixedAssetNotFoundErr, AssetNoText));
+        Reject(Argument, Enum::"Bifrost Error Code ori"::RecordNotFound, 'assetNo', AssetNoText, StrSubstNo(FixedAssetNotFoundErr, AssetNoText));
         exit(false);
     end;
 
@@ -290,13 +330,13 @@ codeunit 90010 "Ref Input"
             exit;
         end;
         if not Codeunit.Run(CodeunitId, Argument) then
-            Argument.RespondWithError(GetLastErrorText());
+            Argument.RespondWithLastError();
     end;
 
     local procedure ReadTextToken(var Argument: Record "Message Argument ori"; Token: JsonToken; KeyName: Text; MaxLength: Integer; var Value: Text): Boolean
     begin
         if not Token.IsValue() then begin
-            Argument.RespondWithError(StrSubstNo(NotAValueErr, KeyName));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, '', StrSubstNo(NotAValueErr, KeyName));
             exit(false);
         end;
         if Token.AsValue().IsNull() then
@@ -304,7 +344,7 @@ codeunit 90010 "Ref Input"
         else
             Value := Token.AsValue().AsText();
         if StrLen(Value) > MaxLength then begin
-            Argument.RespondWithError(StrSubstNo(TooLongErr, KeyName, StrLen(Value), MaxLength));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, KeyName, '', StrSubstNo(TooLongErr, KeyName, StrLen(Value), MaxLength));
             exit(false);
         end;
         exit(true);

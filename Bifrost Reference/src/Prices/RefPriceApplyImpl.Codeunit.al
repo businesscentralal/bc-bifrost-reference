@@ -62,7 +62,7 @@ codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Disco
             exit;
         ActualItemCount := PriceAdjust.CountItems(ItemCategoryCode);
         if ActualItemCount <> ExpectedItemCount then begin
-            Argument.RespondWithError(StrSubstNo(SelectionChangedErr, ExpectedItemCount, ItemCategoryCode, ActualItemCount));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::PreconditionFailed, 'expectedItemCount', '', StrSubstNo(SelectionChangedErr, ExpectedItemCount, ItemCategoryCode, ActualItemCount));
             exit;
         end;
 
@@ -71,7 +71,7 @@ codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Disco
             ApplyProcess.Run(Argument)
         else
             if not ApplyProcess.Run(Argument) then
-                Argument.RespondWithError(GetLastErrorText());
+                Argument.RespondWithLastError();
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -178,10 +178,10 @@ codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Disco
     begin
         Examples.Add(ContractMgt.Example('Raise chairs by 5 % after the preview',
             '{"type":"Reference.ItemPrice.ApplyAdjustment","data":{"itemCategoryCode":"STÓLL","percent":5,"expectedItemCount":4}}',
-            '{"itemCategoryCode":"STÓLL","percent":5,"itemCount":4,"applied":true,"totalCurrentUnitPrice":50280,"totalNewUnitPrice":52794,"itemsTruncated":false,"items":[{"itemNo":"1900-S","description":"PARIS Guest Chair, black","currentUnitPrice":12570,"newUnitPrice":13198.5}]}'));
+            '{"status":"Success","itemCategoryCode":"STÓLL","percent":5,"itemCount":4,"applied":true,"totalCurrentUnitPrice":50280,"totalNewUnitPrice":52794,"itemsTruncated":false,"items":[{"itemNo":"1900-S","description":"PARIS Guest Chair, black","currentUnitPrice":12570,"newUnitPrice":13198.5}]}'));
         Examples.Add(ContractMgt.Example('The category changed after the preview',
             '{"type":"Reference.ItemPrice.ApplyAdjustment","data":{"itemCategoryCode":"STÓLL","percent":5,"expectedItemCount":4}}',
-            '{"status":"Error","error":"The selection changed since the preview: expected 4 items in category ''STÓLL'', found 5. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount."}'));
+            '{"status":"Error","code":"PreconditionFailed","error":"The selection changed since the preview: expected 4 items in category ''STÓLL'', found 5. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount."}'));
         exit(true);
     end;
 

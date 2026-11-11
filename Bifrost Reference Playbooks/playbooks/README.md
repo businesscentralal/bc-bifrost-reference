@@ -85,7 +85,7 @@ What each part does:
 - **Step 10's `Error` condition** fails the run when `Legacy.Stock.List` answers with an error body. See "Finding" below for why it is needed.
 - **Step 20 gets `expectedCount` from step 10** (`@10.count`, injected as a number). If the reservations changed between the two steps, `Legacy.Stock.ReleaseAll` refuses and writes nothing.
 - **Step 20's `released Exists`** fails the run on any error body, which has no `released`.
-- No `status Equals Success` condition: the Legacy types return no `status` on success, so that condition would always be false.
+- `released Exists` and `status Equals Success` are equivalent here: every Legacy success answer carries `status: "Success"`.
 
 ## Prepare test data
 

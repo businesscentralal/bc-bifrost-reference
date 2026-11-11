@@ -28,8 +28,48 @@ codeunit 90102 "Legacy Adapter Input"
     begin
         if TryGetRequestJson(Argument, RequestJson) then
             exit(true);
-        Argument.RespondWithError(NotObjectErr);
+        Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, '', '', NotObjectErr);
         exit(false);
+    end;
+
+    /// <summary>
+    /// Answers a successful call. Builds the answer with "status": "Success" as its first key,
+    /// followed by every key of ResponseJson except a key named status, so a caller can never
+    /// forge the outcome by sending its own status. Foundation only adds its request warnings
+    /// (for example UnknownParameter) to an answer that carries status, so use this for every
+    /// success answer instead of Argument.SetResponseJson.
+    /// </summary>
+    /// <param name="Argument">The message argument of the call.</param>
+    /// <param name="ResponseJson">The answer fields, without status.</param>
+    procedure SetSuccess(var Argument: Record "Message Argument ori"; ResponseJson: JsonObject)
+    var
+        Envelope: JsonObject;
+        Token: JsonToken;
+        KeyName: Text;
+    begin
+        Envelope.Add('status', 'Success');
+        foreach KeyName in ResponseJson.Keys() do
+            if KeyName <> 'status' then begin
+                ResponseJson.Get(KeyName, Token);
+                Envelope.Add(KeyName, Token);
+            end;
+        Argument.SetResponseJson(Envelope);
+    end;
+
+    /// <summary>
+    /// Answers an error with a code from "Bifrost Error Code ori", the parameter it concerns
+    /// and the value received, so a caller can act on the code instead of parsing the text.
+    /// Message is the translated Label text, unchanged. Empty ParameterName or Received are
+    /// left out of the answer.
+    /// </summary>
+    /// <param name="Argument">The message argument of the call.</param>
+    /// <param name="ErrorCode">The error code, as listed in the type's errors chapter.</param>
+    /// <param name="ParameterName">The parameter the error concerns, or '' when none.</param>
+    /// <param name="Received">The value received, or '' when none.</param>
+    /// <param name="Message">The error text.</param>
+    procedure Reject(var Argument: Record "Message Argument ori"; ErrorCode: Enum "Bifrost Error Code ori"; ParameterName: Text; Received: Text; Message: Text)
+    begin
+        Argument.RespondWithError(ErrorCode, Message, ParameterName, Received, '', '');
     end;
 
     /// <summary>
@@ -44,22 +84,22 @@ codeunit 90102 "Legacy Adapter Input"
         Value := DelChr(Argument.Subject, '<>', ' ');
         if Value = '' then begin
             if not RequestJson.Get('itemNo', Token) then begin
-                Argument.RespondWithError(StrSubstNo(MissingErr, 'itemNo', ItemExampleTok));
+                Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, 'itemNo', '', StrSubstNo(MissingErr, 'itemNo', ItemExampleTok));
                 exit(false);
             end;
             if not Token.IsValue() then begin
-                Argument.RespondWithError(StrSubstNo(NotAValueErr, 'itemNo'));
+                Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'itemNo', '', StrSubstNo(NotAValueErr, 'itemNo'));
                 exit(false);
             end;
             if not Token.AsValue().IsNull() then
                 Value := DelChr(Token.AsValue().AsText(), '<>', ' ');
             if Value = '' then begin
-                Argument.RespondWithError(StrSubstNo(EmptyErr, 'itemNo', '"1896-S"'));
+                Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, 'itemNo', '', StrSubstNo(EmptyErr, 'itemNo', '"1896-S"'));
                 exit(false);
             end;
         end;
         if StrLen(Value) > MaxStrLen(ItemNo) then begin
-            Argument.RespondWithError(StrSubstNo(TooLongErr, 'itemNo', StrLen(Value), MaxStrLen(ItemNo)));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, 'itemNo', '', StrSubstNo(TooLongErr, 'itemNo', StrLen(Value), MaxStrLen(ItemNo)));
             exit(false);
         end;
         ItemNo := CopyStr(UpperCase(Value), 1, MaxStrLen(ItemNo));
@@ -72,17 +112,17 @@ codeunit 90102 "Legacy Adapter Input"
         NumberText: Text;
     begin
         if not RequestJson.Get(KeyName, Token) then begin
-            Argument.RespondWithError(StrSubstNo(MissingErr, KeyName, NumberExampleTok));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, KeyName, '', StrSubstNo(MissingErr, KeyName, NumberExampleTok));
             exit(false);
         end;
         if not Token.IsValue() then begin
-            Argument.RespondWithError(StrSubstNo(NotAValueErr, KeyName));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, '', StrSubstNo(NotAValueErr, KeyName));
             exit(false);
         end;
         if not Token.AsValue().IsNull() then
             NumberText := Token.AsValue().AsText();
         if not Evaluate(Value, NumberText, 9) then begin
-            Argument.RespondWithError(StrSubstNo(NumberFormatErr, KeyName, NumberText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, NumberText, StrSubstNo(NumberFormatErr, KeyName, NumberText));
             exit(false);
         end;
         exit(true);
@@ -101,7 +141,7 @@ codeunit 90102 "Legacy Adapter Input"
         if not RequestJson.Get(KeyName, Token) then
             exit(true);
         if not Token.IsValue() then begin
-            Argument.RespondWithError(StrSubstNo(NotAValueErr, KeyName));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, '', StrSubstNo(NotAValueErr, KeyName));
             exit(false);
         end;
         if Token.AsValue().IsNull() then
@@ -113,7 +153,7 @@ codeunit 90102 "Legacy Adapter Input"
             'false':
                 Value := false;
             else begin
-                Argument.RespondWithError(StrSubstNo(BooleanFormatErr, KeyName, BoolText));
+                Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, BoolText, StrSubstNo(BooleanFormatErr, KeyName, BoolText));
                 exit(false);
             end;
         end;
@@ -129,17 +169,17 @@ codeunit 90102 "Legacy Adapter Input"
         NumberText: Text;
     begin
         if not RequestJson.Get(KeyName, Token) then begin
-            Argument.RespondWithError(StrSubstNo(MissingErr, KeyName, IntegerExampleTok));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, KeyName, '', StrSubstNo(MissingErr, KeyName, IntegerExampleTok));
             exit(false);
         end;
         if not Token.IsValue() then begin
-            Argument.RespondWithError(StrSubstNo(NotAValueErr, KeyName));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, '', StrSubstNo(NotAValueErr, KeyName));
             exit(false);
         end;
         if not Token.AsValue().IsNull() then
             NumberText := Token.AsValue().AsText();
         if not Evaluate(Value, NumberText, 9) then begin
-            Argument.RespondWithError(StrSubstNo(IntegerFormatErr, KeyName, NumberText));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, NumberText, StrSubstNo(IntegerFormatErr, KeyName, NumberText));
             exit(false);
         end;
         exit(true);
@@ -157,11 +197,11 @@ codeunit 90102 "Legacy Adapter Input"
         if not RequestJson.Get(KeyName, Token) then begin
             if not Required then
                 exit(true);
-            Argument.RespondWithError(StrSubstNo(MissingErr, KeyName, 'text, for example ' + ExampleValue));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::MissingParameter, KeyName, '', StrSubstNo(MissingErr, KeyName, 'text, for example ' + ExampleValue));
             exit(false);
         end;
         if not Token.IsValue() then begin
-            Argument.RespondWithError(StrSubstNo(NotAValueErr, KeyName));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, '', StrSubstNo(NotAValueErr, KeyName));
             exit(false);
         end;
         if not Token.AsValue().IsNull() then
@@ -169,11 +209,11 @@ codeunit 90102 "Legacy Adapter Input"
         if Value = '' then begin
             if not Required then
                 exit(true);
-            Argument.RespondWithError(StrSubstNo(EmptyErr, KeyName, ExampleValue));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, KeyName, '', StrSubstNo(EmptyErr, KeyName, ExampleValue));
             exit(false);
         end;
         if StrLen(Value) > MaxLength then begin
-            Argument.RespondWithError(StrSubstNo(TooLongErr, KeyName, StrLen(Value), MaxLength));
+            Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, KeyName, '', StrSubstNo(TooLongErr, KeyName, StrLen(Value), MaxLength));
             exit(false);
         end;
         exit(true);

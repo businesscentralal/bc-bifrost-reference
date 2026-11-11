@@ -54,7 +54,7 @@ codeunit 90105 "Legacy Stock Get Impl" implements "Msg Interface ori", "Msg Disc
         ResponseJson.Add('hasReservation', LegacyStockAPI.HasReservation(ItemNo));
         ResponseJson.Add('reservedQuantity', LegacyStockAPI.GetReservedQuantity(ItemNo));
         ResponseJson.Add('availableToReserve', LegacyStockAPI.GetAvailableToReserve(ItemNo));
-        Argument.SetResponseJson(ResponseJson);
+        AdapterInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -111,6 +111,7 @@ codeunit 90105 "Legacy Stock Get Impl" implements "Msg Interface ori", "Msg Disc
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemNo', 'string', 'The item number, in upper case.'));
         Fields.Add(ContractMgt.ResponseField('hasReservation', 'boolean', 'true when the item has a reservation.'));
         Fields.Add(ContractMgt.ResponseField('reservedQuantity', 'number', 'The total reserved quantity; 0 when the item has no reservation.'));
@@ -166,10 +167,10 @@ codeunit 90105 "Legacy Stock Get Impl" implements "Msg Interface ori", "Msg Disc
     begin
         Examples.Add(ContractMgt.Example('How much is reserved for an item',
             '{"type":"Legacy.Stock.Get","subject":"1896-S"}',
-            '{"itemNo":"1896-S","hasReservation":true,"reservedQuantity":5,"availableToReserve":12}'));
+            '{"status":"Success","itemNo":"1896-S","hasReservation":true,"reservedQuantity":5,"availableToReserve":12}'));
         Examples.Add(ContractMgt.Example('No item given',
             '{"type":"Legacy.Stock.Get","data":{}}',
-            '{"status":"Error","error":"Parameter ''itemNo'' is required. Send it as text, for example \"1896-S\"."}'));
+            '{"status":"Error","code":"MissingParameter","error":"Parameter ''itemNo'' is required. Send it as text, for example \"1896-S\"."}'));
         exit(true);
     end;
 

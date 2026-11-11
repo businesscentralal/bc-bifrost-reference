@@ -50,6 +50,7 @@ codeunit 90020 "Ref Price Contract"
         ItemField: JsonObject;
         ItemChildren: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemCategoryCode', 'string', 'The category, in upper case.'));
         Fields.Add(ContractMgt.ResponseField('percent', 'number', 'The percent applied or previewed.'));
         Fields.Add(ContractMgt.ResponseField('itemCount', 'integer', 'How many items the change covers: every item in the category that is not blocked. Send it to the apply call as expectedItemCount.'));
@@ -72,16 +73,16 @@ codeunit 90020 "Ref Price Contract"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemCategoryCode'' is required. Send it as text, for example "STÓLL".', 'itemCategoryCode is missing.', 'Send the category code.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Item category ''{code}'' was not found. Check the code, or list categories with Data.Records.Get on table Item Category.', 'No item category has that code.', 'Check the code, or list the categories.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''percent'' has the value ''{value}'', which is not a number.', 'percent is not a number.', 'Send a number, for example 5 or -2.5.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''percent'' is {value}, but it must be between -50 and 100.', 'percent is out of range.', 'Stay within -50 to 100.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''percent'' is 0, which would change nothing. Send the change in percent, for example 5 for +5 % or -10 for -10 %.', 'percent is 0.', 'Send a non-zero percent.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''itemCategoryCode'' is required. Send it as text, for example "STÓLL".', 'itemCategoryCode is missing.', 'Send the category code.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::RecordNotFound, 'Item category ''{code}'' was not found. Check the code, or list categories with Data.Records.Get on table Item Category.', 'No item category has that code.', 'Check the code, or list the categories.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''percent'' has the value ''{value}'', which is not a number.', 'percent is not a number.', 'Send a number, for example 5 or -2.5.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''percent'' is {value}, but it must be between -50 and 100.', 'percent is out of range.', 'Stay within -50 to 100.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''percent'' is 0, which would change nothing. Send the change in percent, for example 5 for +5 % or -10 for -10 %.', 'percent is 0.', 'Send a non-zero percent.'));
         if IsApply then begin
-            Errors.Add(ContractMgt.TextErrorEntry('Parameter ''expectedItemCount'' is required. Send it as a whole number, for example 12.', 'The preview was skipped.', 'Run Reference.ItemPrice.PreviewAdjustment first and send its itemCount.'));
-            Errors.Add(ContractMgt.TextErrorEntry('The selection changed since the preview: expected {expected} items in category ''{code}'', found {actual}. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount.', 'Items were added, removed or blocked after the preview.', 'Run the preview again and show the user the new result.'));
+            Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''expectedItemCount'' is required. Send it as a whole number, for example 12.', 'The preview was skipped.', 'Run Reference.ItemPrice.PreviewAdjustment first and send its itemCount.'));
+            Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'The selection changed since the preview: expected {expected} items in category ''{code}'', found {actual}. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount.', 'Items were added, removed or blocked after the preview.', 'Run the preview again and show the user the new result.'));
         end;
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
     end;
 
     procedure Workflow() Result: JsonObject

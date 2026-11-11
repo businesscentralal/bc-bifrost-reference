@@ -46,10 +46,10 @@ codeunit 90112 "Legacy Stock Contract"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemNo'' is required. Send it as text, for example "1896-S".', 'subject is empty and data has no itemNo.', 'Send the item number in subject.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemNo'' is empty. Send a value, for example "1896-S".', 'subject is empty and itemNo is an empty string.', 'Send the item number.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemNo'' is {length} characters long; the maximum is 20.', 'The item number in subject or itemNo is longer than 20 characters.', 'Check the number.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemNo'' must be a single value (text or number), not an object or an array.', 'itemNo is an object or an array.', 'Send it as text.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''itemNo'' is required. Send it as text, for example "1896-S".', 'subject is empty and data has no itemNo.', 'Send the item number in subject.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''itemNo'' is empty. Send a value, for example "1896-S".', 'subject is empty and itemNo is an empty string.', 'Send the item number.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''itemNo'' is {length} characters long; the maximum is 20.', 'The item number in subject or itemNo is longer than 20 characters.', 'Check the number.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''itemNo'' must be a single value (text or number), not an object or an array.', 'itemNo is an object or an array.', 'Send it as text.'));
         AddBodyError(Errors);
     end;
 
@@ -57,7 +57,7 @@ codeunit 90112 "Legacy Stock Contract"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
     end;
 
     procedure FilterEnvelope(DataRequired: Boolean) Result: JsonObject

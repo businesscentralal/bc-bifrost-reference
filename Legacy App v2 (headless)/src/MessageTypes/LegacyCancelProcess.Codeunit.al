@@ -16,12 +16,13 @@ codeunit 90104 "Legacy Cancel Process"
 
     trigger OnRun()
     var
+        LegacyAdapterInput: Codeunit "Legacy Adapter Input";
         LegacyStockAPI: Codeunit "Legacy Stock API";
         ResponseJson: JsonObject;
     begin
         ResponseJson.Add('itemNo', ItemNo);
         ResponseJson.Add('cancelled', LegacyStockAPI.CancelReservation(ItemNo));
-        Rec.SetResponseJson(ResponseJson);
+        LegacyAdapterInput.SetSuccess(Rec, ResponseJson);
     end;
 
     procedure SetItem(NewItemNo: Code[20])

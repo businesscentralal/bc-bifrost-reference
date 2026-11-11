@@ -55,7 +55,7 @@ codeunit 90101 "Legacy Cancel Reserve Impl" implements "Msg Interface ori", "Msg
             CancelProcess.Run(Argument)
         else
             if not CancelProcess.Run(Argument) then
-                Argument.RespondWithError(GetLastErrorText());
+                Argument.RespondWithLastError();
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -112,6 +112,7 @@ codeunit 90101 "Legacy Cancel Reserve Impl" implements "Msg Interface ori", "Msg
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemNo', 'string', 'The item number, in upper case.'));
         Fields.Add(ContractMgt.ResponseField('cancelled', 'boolean', 'true when a reservation was removed; false when the item had none, and then nothing was written. An unknown item number is not an error: it has nothing to cancel.'));
         Response.Add('contentType', 'text/json');
@@ -173,10 +174,10 @@ codeunit 90101 "Legacy Cancel Reserve Impl" implements "Msg Interface ori", "Msg
     begin
         Examples.Add(ContractMgt.Example('Cancel an item''s reservation',
             '{"type":"Legacy.Stock.CancelReservation","subject":"1896-S"}',
-            '{"itemNo":"1896-S","cancelled":true}'));
+            '{"status":"Success","itemNo":"1896-S","cancelled":true}'));
         Examples.Add(ContractMgt.Example('Nothing to cancel',
             '{"type":"Legacy.Stock.CancelReservation","subject":"1900-S"}',
-            '{"itemNo":"1900-S","cancelled":false}'));
+            '{"status":"Success","itemNo":"1900-S","cancelled":false}'));
         exit(true);
     end;
 

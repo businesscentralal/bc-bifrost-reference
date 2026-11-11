@@ -77,7 +77,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
             Item.SetRange(Blocked, false);
         if FilterFound then
             if not TryApplyFilter(Item, ItemFilter) then begin
-                Argument.RespondWithError(StrSubstNo(FilterErr, ItemFilter, GetLastErrorText()));
+                MyInput.Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, 'itemFilter', ItemFilter, StrSubstNo(FilterErr, ItemFilter, GetLastErrorText()));
                 exit;
             end;
 
@@ -101,7 +101,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
         ResponseJson.Add('returned', Returned);
         ResponseJson.Add('more', ItemCount > Returned);
         ResponseJson.Add('items', Rows);
-        Argument.SetResponseJson(ResponseJson);
+        MyInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -168,6 +168,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
         ItemsField: JsonObject;
         ItemChildren: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemFilter', 'string', 'The filter used, as sent; empty for all.'));
         Fields.Add(ContractMgt.ResponseField('includeBlocked', 'boolean', 'Whether blocked items were included.'));
         Fields.Add(ContractMgt.ResponseField('count', 'integer', 'Every matching item, also when more is true.'));
@@ -190,13 +191,13 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''itemFilter'' is ''{filter}'', which is not a valid filter: {reason} Send an item number or a filter such as 1000..1999 or 19*.', 'The filter syntax is invalid; {reason} is Business Central''s own explanation.', 'Fix the filter.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''maxRows'' has the value ''{value}'', which is not a whole number. Send for example 12.', 'maxRows is not a whole number.', 'Send for example 20.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''maxRows'' is {value}, but it must be between 1 and 100.', 'maxRows is out of range.', 'Send 1 to 100.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''includeBlocked'' has the value ''{value}''. Send true or false, without quotes.', 'includeBlocked is not true or false, for example "yes".', 'Send true or false.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'itemFilter is longer than 250 characters, or maxRows longer than 20.', 'Shorten it.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'A parameter is an object or an array.', 'Send a single value.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''itemFilter'' is ''{filter}'', which is not a valid filter: {reason} Send an item number or a filter such as 1000..1999 or 19*.', 'The filter syntax is invalid; {reason} is Business Central''s own explanation.', 'Fix the filter.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''maxRows'' has the value ''{value}'', which is not a whole number. Send for example 12.', 'maxRows is not a whole number.', 'Send for example 20.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''maxRows'' is {value}, but it must be between 1 and 100.', 'maxRows is out of range.', 'Send 1 to 100.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''includeBlocked'' has the value ''{value}''. Send true or false, without quotes.', 'includeBlocked is not true or false, for example "yes".', 'Send true or false.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'itemFilter is longer than 250 characters, or maxRows longer than 20.', 'Shorten it.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'A parameter is an object or an array.', 'Send a single value.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
         exit(true);
     end;
 
@@ -244,10 +245,10 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
     begin
         Examples.Add(ContractMgt.Example('Items starting with 19, two rows at most',
             '{"type":"MyApp.Item.List","data":{"itemFilter":"19*","maxRows":2}}',
-            '{"itemFilter":"19*","includeBlocked":false,"count":5,"returned":2,"more":true,"items":[{"itemNo":"1900-S","description":"PARIS Guest Chair, black","blocked":false},{"itemNo":"1906-S","description":"ATHENS Mobile Pedestal","blocked":false}]}'));
+            '{"status":"Success","itemFilter":"19*","includeBlocked":false,"count":5,"returned":2,"more":true,"items":[{"itemNo":"1900-S","description":"PARIS Guest Chair, black","blocked":false},{"itemNo":"1906-S","description":"ATHENS Mobile Pedestal","blocked":false}]}'));
         Examples.Add(ContractMgt.Example('maxRows out of range',
             '{"type":"MyApp.Item.List","data":{"maxRows":500}}',
-            '{"status":"Error","error":"Parameter ''maxRows'' is 500, but it must be between 1 and 100."}'));
+            '{"status":"Error","code":"InvalidParameter","error":"Parameter ''maxRows'' is 500, but it must be between 1 and 100."}'));
         exit(true);
     end;
 

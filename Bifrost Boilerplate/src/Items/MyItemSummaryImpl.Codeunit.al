@@ -83,7 +83,7 @@ codeunit 50001 "My Item Summary Impl" implements "Msg Interface ori", "Msg Disco
         ResponseJson.Add('asOfDate', Format(AsOfDate, 0, 9));
         ResponseJson.Add('inventory', Item."Net Change");
         ResponseJson.Add('blocked', Item.Blocked);
-        Argument.SetResponseJson(ResponseJson);
+        MyInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -150,6 +150,7 @@ codeunit 50001 "My Item Summary Impl" implements "Msg Interface ori", "Msg Disco
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemNo', 'string', 'The item number.'));
         Fields.Add(ContractMgt.ResponseField('description', 'string', 'The item description.'));
         Fields.Add(ContractMgt.ResponseField('baseUnitOfMeasure', 'string', 'The base unit of measure, or null when none is set up; never "".'));
@@ -167,12 +168,12 @@ codeunit 50001 "My Item Summary Impl" implements "Msg Interface ori", "Msg Disco
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('No item was given. Send the item number in subject or as "itemNo", or its SystemId in subject.', 'subject is empty and data has no itemNo.', 'Send the item number in subject.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Item ''{item}'' was not found. Check the number, or search for the item with Data.Records.Get on table Item.', 'No item has that number or SystemId.', 'Check the number, or search by description with Data.Records.Get.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''asOfDate'' has the value ''{value}'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.', 'asOfDate is not YYYY-MM-DD, for example 26.09.2026.', 'Send the date as YYYY-MM-DD.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'itemNo is longer than 20 characters, or asOfDate longer than 30.', 'Send the item number, or the date as YYYY-MM-DD.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'itemNo or asOfDate is an object or an array.', 'Send it as text.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'No item was given. Send the item number in subject or as "itemNo", or its SystemId in subject.', 'subject is empty and data has no itemNo.', 'Send the item number in subject.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::RecordNotFound, 'Item ''{item}'' was not found. Check the number, or search for the item with Data.Records.Get on table Item.', 'No item has that number or SystemId.', 'Check the number, or search by description with Data.Records.Get.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''asOfDate'' has the value ''{value}'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.', 'asOfDate is not YYYY-MM-DD, for example 26.09.2026.', 'Send the date as YYYY-MM-DD.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'itemNo is longer than 20 characters, or asOfDate longer than 30.', 'Send the item number, or the date as YYYY-MM-DD.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'itemNo or asOfDate is an object or an array.', 'Send it as text.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
         exit(true);
     end;
 
@@ -220,10 +221,10 @@ codeunit 50001 "My Item Summary Impl" implements "Msg Interface ori", "Msg Disco
     begin
         Examples.Add(ContractMgt.Example('Price and inventory of an item on a date',
             '{"type":"MyApp.Item.Summary.Get","subject":"1896-S","data":{"asOfDate":"2026-09-26"}}',
-            '{"itemNo":"1896-S","description":"ATHENS Desk","baseUnitOfMeasure":"PCS","unitPrice":1000.8,"asOfDate":"2026-09-26","inventory":12,"blocked":false}'));
+            '{"status":"Success","itemNo":"1896-S","description":"ATHENS Desk","baseUnitOfMeasure":"PCS","unitPrice":1000.8,"asOfDate":"2026-09-26","inventory":12,"blocked":false}'));
         Examples.Add(ContractMgt.Example('A date in the wrong format',
             '{"type":"MyApp.Item.Summary.Get","subject":"1896-S","data":{"asOfDate":"26.09.2026"}}',
-            '{"status":"Error","error":"Parameter ''asOfDate'' has the value ''26.09.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
+            '{"status":"Error","code":"InvalidParameterFormat","error":"Parameter ''asOfDate'' has the value ''26.09.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
         exit(true);
     end;
 

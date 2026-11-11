@@ -19,6 +19,7 @@ codeunit 90103 "Legacy Reserve Process"
 
     trigger OnRun()
     var
+        LegacyAdapterInput: Codeunit "Legacy Adapter Input";
         LegacyStockAPI: Codeunit "Legacy Stock API";
         ResponseJson: JsonObject;
         NewTotal: Decimal;
@@ -28,7 +29,7 @@ codeunit 90103 "Legacy Reserve Process"
         ResponseJson.Add('quantityAdded', Quantity);
         ResponseJson.Add('totalReserved', NewTotal);
         ResponseJson.Add('availableToReserve', LegacyStockAPI.GetAvailableToReserve(ItemNo));
-        Rec.SetResponseJson(ResponseJson);
+        LegacyAdapterInput.SetSuccess(Rec, ResponseJson);
     end;
 
     procedure SetReservation(NewItemNo: Code[20]; NewQuantity: Decimal; NewAllowOverStock: Boolean)

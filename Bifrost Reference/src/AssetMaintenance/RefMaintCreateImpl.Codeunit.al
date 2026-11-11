@@ -72,17 +72,17 @@ codeunit 90013 "Ref Maint Create Impl" implements "Msg Interface ori", "Msg Disc
         if not RefInput.ResolveFixedAsset(Argument, RequestJson, FixedAsset) then
             exit;
         if FixedAsset.Blocked then begin
-            Argument.RespondWithError(StrSubstNo(BlockedErr, FixedAsset."No."));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::PreconditionFailed, '', '', StrSubstNo(BlockedErr, FixedAsset."No."));
             exit;
         end;
         if FixedAsset.Inactive then begin
-            Argument.RespondWithError(StrSubstNo(InactiveErr, FixedAsset."No."));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::PreconditionFailed, '', '', StrSubstNo(InactiveErr, FixedAsset."No."));
             exit;
         end;
         if not RefInput.GetRequiredDate(Argument, RequestJson, 'maintenanceDate', MaintenanceDate) then
             exit;
         if MaintenanceDate > WorkDate() then begin
-            Argument.RespondWithError(StrSubstNo(FutureDateErr, Format(MaintenanceDate, 0, 9), Format(WorkDate(), 0, 9)));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::PreconditionFailed, 'maintenanceDate', Format(MaintenanceDate, 0, 9), StrSubstNo(FutureDateErr, Format(MaintenanceDate, 0, 9), Format(WorkDate(), 0, 9)));
             exit;
         end;
         if not RefInput.GetRequiredDecimal(Argument, RequestJson, 'hours', 0.25, 24, Hours) then
@@ -98,7 +98,7 @@ codeunit 90013 "Ref Maint Create Impl" implements "Msg Interface ori", "Msg Disc
             MaintProcess.Run(Argument)
         else
             if not MaintProcess.Run(Argument) then
-                Argument.RespondWithError(GetLastErrorText());
+                Argument.RespondWithLastError();
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -167,6 +167,7 @@ codeunit 90013 "Ref Maint Create Impl" implements "Msg Interface ori", "Msg Disc
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('entryNo', 'integer', 'The entry''s number in the maintenance log.'));
         Fields.Add(ContractMgt.ResponseField('created', 'boolean', 'false when the externalId already existed: the response then describes the entry the earlier call created, and nothing new is written.'));
         Fields.Add(ContractMgt.ResponseField('assetNo', 'string', 'The fixed asset number.'));
@@ -184,19 +185,19 @@ codeunit 90013 "Ref Maint Create Impl" implements "Msg Interface ori", "Msg Disc
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('No fixed asset was given. Send the asset number in subject or as "assetNo", or its SystemId in subject.', 'subject is empty and data has no assetNo.', 'Send the asset number in subject.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Fixed asset ''{asset}'' was not found. Check the number, or search for the asset with Data.Records.Get on table Fixed Asset.', 'No fixed asset has that number or SystemId.', 'Check the number, or search with Data.Records.Get.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Fixed asset ''{asset}'' is blocked, so no maintenance can be logged. Clear Blocked on the fixed asset card in Business Central, or choose another asset.', 'The asset is blocked.', 'Ask the user to unblock it, or choose another asset.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Fixed asset ''{asset}'' is inactive, so no maintenance can be logged. Clear Inactive on the fixed asset card in Business Central, or choose another asset.', 'The asset is inactive, for example sold or scrapped.', 'Ask the user whether the asset is still in use.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''maintenanceDate'' is required. Send it as a date in the format YYYY-MM-DD, for example "2026-09-26".', 'maintenanceDate is missing.', 'Send it.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''maintenanceDate'' has the value ''{value}'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.', 'maintenanceDate is not YYYY-MM-DD, for example 26.09.2026.', 'Send the date as YYYY-MM-DD.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''maintenanceDate'' is {date}, which is after the work date {workDate}. Maintenance is logged after it is done; send a date on or before {workDate}.', 'The date is in the future.', 'Log the work after it is done.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''hours'' is required. Send it as a number, for example 2.5.', 'hours is missing.', 'Send it.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''hours'' has the value ''{value}'', which is not a number. Send a number with a dot as decimal separator, for example 2.5.', 'hours is not a number.', 'Send for example 1.5.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''hours'' is {value}, but it must be between 0.25 and 24.', 'hours is out of range.', 'Send 0.25 to 24.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'A text is too long: description (100), externalId (50), assetNo (20).', 'Shorten it.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'A parameter is an object or an array.', 'Send a single value.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'No fixed asset was given. Send the asset number in subject or as "assetNo", or its SystemId in subject.', 'subject is empty and data has no assetNo.', 'Send the asset number in subject.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::RecordNotFound, 'Fixed asset ''{asset}'' was not found. Check the number, or search for the asset with Data.Records.Get on table Fixed Asset.', 'No fixed asset has that number or SystemId.', 'Check the number, or search with Data.Records.Get.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'Fixed asset ''{asset}'' is blocked, so no maintenance can be logged. Clear Blocked on the fixed asset card in Business Central, or choose another asset.', 'The asset is blocked.', 'Ask the user to unblock it, or choose another asset.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'Fixed asset ''{asset}'' is inactive, so no maintenance can be logged. Clear Inactive on the fixed asset card in Business Central, or choose another asset.', 'The asset is inactive, for example sold or scrapped.', 'Ask the user whether the asset is still in use.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''maintenanceDate'' is required. Send it as a date in the format YYYY-MM-DD, for example "2026-09-26".', 'maintenanceDate is missing.', 'Send it.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''maintenanceDate'' has the value ''{value}'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.', 'maintenanceDate is not YYYY-MM-DD, for example 26.09.2026.', 'Send the date as YYYY-MM-DD.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'Parameter ''maintenanceDate'' is {date}, which is after the work date {workDate}. Maintenance is logged after it is done; send a date on or before {workDate}.', 'The date is in the future.', 'Log the work after it is done.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''hours'' is required. Send it as a number, for example 2.5.', 'hours is missing.', 'Send it.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''hours'' has the value ''{value}'', which is not a number. Send a number with a dot as decimal separator, for example 2.5.', 'hours is not a number.', 'Send for example 1.5.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''hours'' is {value}, but it must be between 0.25 and 24.', 'hours is out of range.', 'Send 0.25 to 24.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'A text is too long: description (100), externalId (50), assetNo (20).', 'Shorten it.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'A parameter is an object or an array.', 'Send a single value.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
         exit(true);
     end;
 
@@ -245,13 +246,13 @@ codeunit 90013 "Ref Maint Create Impl" implements "Msg Interface ori", "Msg Disc
     begin
         Examples.Add(ContractMgt.Example('Log an oil change',
             '{"type":"Reference.AssetMaintenance.Create","subject":"FA000010","data":{"maintenanceDate":"2026-09-25","hours":1.5,"description":"Oil change","externalId":"WO-4711"}}',
-            '{"entryNo":12,"created":true,"assetNo":"FA000010","maintenanceDate":"2026-09-25","hours":1.5,"description":"Oil change","externalId":"WO-4711"}'));
+            '{"status":"Success","entryNo":12,"created":true,"assetNo":"FA000010","maintenanceDate":"2026-09-25","hours":1.5,"description":"Oil change","externalId":"WO-4711"}'));
         Examples.Add(ContractMgt.Example('A retry with the same externalId',
             '{"type":"Reference.AssetMaintenance.Create","subject":"FA000010","data":{"maintenanceDate":"2026-09-25","hours":1.5,"description":"Oil change","externalId":"WO-4711"}}',
-            '{"entryNo":12,"created":false,"assetNo":"FA000010","maintenanceDate":"2026-09-25","hours":1.5,"description":"Oil change","externalId":"WO-4711"}'));
+            '{"status":"Success","entryNo":12,"created":false,"assetNo":"FA000010","maintenanceDate":"2026-09-25","hours":1.5,"description":"Oil change","externalId":"WO-4711"}'));
         Examples.Add(ContractMgt.Example('A date in the wrong format',
             '{"type":"Reference.AssetMaintenance.Create","subject":"FA000010","data":{"maintenanceDate":"26.09.2026","hours":1.5}}',
-            '{"status":"Error","error":"Parameter ''maintenanceDate'' has the value ''26.09.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
+            '{"status":"Error","code":"InvalidParameterFormat","error":"Parameter ''maintenanceDate'' has the value ''26.09.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
         exit(true);
     end;
 

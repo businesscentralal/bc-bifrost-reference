@@ -2,6 +2,50 @@
 
 ## Unreleased
 
+- Give every MyApp, Reference and Legacy v2 answer Foundation's envelope (core#1149): each success answer starts with `"status":"Success"` through the new `SetSuccess` in `My Input` (50000), `Ref Input` (90010) and `Legacy Adapter Input` (90102), so Foundation's `UnknownParameter` warning reaches the caller; every input error carries a `code` and `parameter` through `Reject`; caught write/core errors answer `RespondWithLastError()` (`BusinessCentralError`). Contracts declare `status` first in the response chapter, use `ErrorEntry` with a code for every error, and start every success example with `status`. `Reference.Echo.Get` declares `message`. Label texts are unchanged, so no XLF change. `AssertOk` in both test callers now requires `status` = `Success` as the first key; new `AssertErrorCode`, `AssertWarning`, `AssertEnvelopeContract`; new test codeunits 50055, 90156, 90157. Write types still warn on an unknown key; they refuse once core#1148 is deployed.
+
+#### Changed AL objects (core#1149)
+
+| App | Change | Object | ID | Name |
+| --- | --- | --- | --- | --- |
+| Bifrost Boilerplate Tests | Added | codeunit | 50055 | My Envelope Tests |
+| Bifrost Boilerplate Tests | Changed | codeunit | 50050 | My Test Caller |
+| Bifrost Boilerplate | Changed | codeunit | 50000 | My Input |
+| Bifrost Boilerplate | Changed | codeunit | 50001 | My Item Summary Impl |
+| Bifrost Boilerplate | Changed | codeunit | 50003 | My Item List Impl |
+| Bifrost Boilerplate | Changed | codeunit | 50005 | My Help Get Impl |
+| Bifrost Boilerplate | Changed | codeunit | 50007 | My Hello Get Impl |
+| Bifrost Reference Tests | Added | codeunit | 90156 | Reference Envelope Tests |
+| Bifrost Reference Tests | Added | codeunit | 90157 | Legacy Envelope Tests |
+| Bifrost Reference Tests | Changed | codeunit | 90150 | Ref Test Caller |
+| Bifrost Reference | Changed | codeunit | 90000 | Ref Echo Set Impl |
+| Bifrost Reference | Changed | codeunit | 90001 | Ref Table Get Impl |
+| Bifrost Reference | Changed | codeunit | 90003 | Ref Note Add Impl |
+| Bifrost Reference | Changed | codeunit | 90004 | Ref Note Add Process |
+| Bifrost Reference | Changed | codeunit | 90007 | Ref Help Get Impl |
+| Bifrost Reference | Changed | codeunit | 90010 | Ref Input |
+| Bifrost Reference | Changed | codeunit | 90011 | Ref GLAcc Overview Impl |
+| Bifrost Reference | Changed | codeunit | 90013 | Ref Maint Create Impl |
+| Bifrost Reference | Changed | codeunit | 90014 | Ref Maint Create Process |
+| Bifrost Reference | Changed | codeunit | 90016 | Ref Price Adjust |
+| Bifrost Reference | Changed | codeunit | 90017 | Ref Price Preview Impl |
+| Bifrost Reference | Changed | codeunit | 90018 | Ref Price Apply Impl |
+| Bifrost Reference | Changed | codeunit | 90019 | Ref Price Apply Process |
+| Bifrost Reference | Changed | codeunit | 90020 | Ref Price Contract |
+| Bifrost Reference | Changed | codeunit | 90021 | Ref Exch Rate Get Impl |
+| Bifrost Reference | Changed | codeunit | 90023 | Ref Api Key Set Impl |
+| Legacy App v2 (headless) | Changed | codeunit | 90100 | Legacy Stock Reserve Impl |
+| Legacy App v2 (headless) | Changed | codeunit | 90101 | Legacy Cancel Reserve Impl |
+| Legacy App v2 (headless) | Changed | codeunit | 90102 | Legacy Adapter Input |
+| Legacy App v2 (headless) | Changed | codeunit | 90103 | Legacy Reserve Process |
+| Legacy App v2 (headless) | Changed | codeunit | 90104 | Legacy Cancel Process |
+| Legacy App v2 (headless) | Changed | codeunit | 90105 | Legacy Stock Get Impl |
+| Legacy App v2 (headless) | Changed | codeunit | 90108 | Legacy Stock List Impl |
+| Legacy App v2 (headless) | Changed | codeunit | 90109 | Legacy Release All Impl |
+| Legacy App v2 (headless) | Changed | codeunit | 90110 | Legacy Release All Process |
+| Legacy App v2 (headless) | Changed | codeunit | 90111 | Legacy Help Get Impl |
+| Legacy App v2 (headless) | Changed | codeunit | 90112 | Legacy Stock Contract |
+
 - Keep codeunit 90109 confirmation and bulk release in Foundation's isolated message transaction, preserving rollback and structured HTTP errors after the confirmation locks.
 
 - Replace help markdown codeunits with structured contract chapters for the Boilerplate, Reference and Legacy v2 message types. Keep discovery labels translated in en-US/is-IS and validate the chapters through the dispatcher tests.

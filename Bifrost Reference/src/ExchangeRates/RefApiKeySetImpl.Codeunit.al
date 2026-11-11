@@ -39,6 +39,7 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
+        RefInput: Codeunit "Ref Input";
         KeyProcess: Codeunit "Ref Api Key Set Process";
         ResponseJson: JsonObject;
         ApiKey: SecretText;
@@ -60,14 +61,14 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
             KeyProcess.Run(Argument)
         else
             if not KeyProcess.Run(Argument) then begin
-                Argument.RespondWithError(GetLastErrorText());
+                Argument.RespondWithLastError();
                 Argument.RedactRequestData();
                 exit;
             end;
         Argument.RedactRequestData();
 
         ResponseJson.Add('stored', true);
-        Argument.SetResponseJson(ResponseJson);
+        RefInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -126,6 +127,7 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('stored', 'boolean', 'Always true: the key was stored. The key itself is never returned.'));
         Response.Add('contentType', 'text/json');
         Response.Add('fields', Fields);
@@ -137,11 +139,11 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''apiKey'' is required. Send it as text, for example "your-key".', 'apiKey is missing.', 'Send apiKey.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''apiKey'' is empty. Send a value, for example "your-key".', 'apiKey is an empty string.', 'Send the key.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''apiKey'' is {length} characters long; the maximum is 500.', 'apiKey is too long.', 'Check that you send the key only.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''apiKey'' must be a single value (text or number), not an object or an array.', 'apiKey is an object or an array.', 'Send it as text.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''apiKey'' is required. Send it as text, for example "your-key".', 'apiKey is missing.', 'Send apiKey.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''apiKey'' is empty. Send a value, for example "your-key".', 'apiKey is an empty string.', 'Send the key.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''apiKey'' is {length} characters long; the maximum is 500.', 'apiKey is too long.', 'Check that you send the key only.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''apiKey'' must be a single value (text or number), not an object or an array.', 'apiKey is an object or an array.', 'Send it as text.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
         exit(true);
     end;
 
@@ -189,10 +191,10 @@ codeunit 90023 "Ref Api Key Set Impl" implements "Msg Interface ori", "Msg Disco
     begin
         Examples.Add(ContractMgt.Example('Store the key',
             '{"type":"Reference.ApiKey.Set","data":{"apiKey":"<your-api-key>"}}',
-            '{"stored":true}'));
+            '{"status":"Success","stored":true}'));
         Examples.Add(ContractMgt.Example('The key is missing',
             '{"type":"Reference.ApiKey.Set","data":{}}',
-            '{"status":"Error","error":"Parameter ''apiKey'' is required. Send it as text, for example \"your-key\"."}'));
+            '{"status":"Error","code":"MissingParameter","error":"Parameter ''apiKey'' is required. Send it as text, for example \"your-key\"."}'));
         exit(true);
     end;
 

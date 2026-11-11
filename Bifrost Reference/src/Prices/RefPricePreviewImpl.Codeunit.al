@@ -49,7 +49,7 @@ codeunit 90017 "Ref Price Preview Impl" implements "Msg Interface ori", "Msg Dis
             exit;
         if not PriceAdjust.ReadAdjustment(Argument, RequestJson, ItemCategoryCode, Percent) then
             exit;
-        Argument.SetResponseJson(PriceAdjust.BuildAndOptionallyApply(ItemCategoryCode, Percent, false));
+        RefInput.SetSuccess(Argument, PriceAdjust.BuildAndOptionallyApply(ItemCategoryCode, Percent, false));
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -155,7 +155,7 @@ codeunit 90017 "Ref Price Preview Impl" implements "Msg Interface ori", "Msg Dis
     begin
         Examples.Add(ContractMgt.Example('What would +5 % do to chairs',
             '{"type":"Reference.ItemPrice.PreviewAdjustment","data":{"itemCategoryCode":"STÓLL","percent":5}}',
-            '{"itemCategoryCode":"STÓLL","percent":5,"itemCount":4,"applied":false,"totalCurrentUnitPrice":50280,"totalNewUnitPrice":52794,"itemsTruncated":false,"items":[{"itemNo":"1900-S","description":"PARIS Guest Chair, black","currentUnitPrice":12570,"newUnitPrice":13198.5}]}'));
+            '{"status":"Success","itemCategoryCode":"STÓLL","percent":5,"itemCount":4,"applied":false,"totalCurrentUnitPrice":50280,"totalNewUnitPrice":52794,"itemsTruncated":false,"items":[{"itemNo":"1900-S","description":"PARIS Guest Chair, black","currentUnitPrice":12570,"newUnitPrice":13198.5}]}'));
         exit(true);
     end;
 
