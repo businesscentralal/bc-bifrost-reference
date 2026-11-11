@@ -26,7 +26,7 @@ codeunit 90156 "Reference Envelope Tests"
         Response := Caller.Call(Enum::"Message Type ori"::"Reference.Echo.Get", '', '{"message":"hi","status":"Error"}');
         Caller.AssertOk(Response);
         Assert.AreEqual('hi', Caller.GetText(Response, 'message'), 'message');
-        Assert.IsFalse(Caller.HasWarning(Response, 'UnknownParameter', 'message'), 'message is declared.');
+        Assert.IsFalse(Response.Contains('warnings'), 'The declared message and ignored caller status must not produce warnings.');
     end;
 
     [Test]

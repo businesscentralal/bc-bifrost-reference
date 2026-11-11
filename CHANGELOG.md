@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix core#1149 AC03 in `Ref Echo Set Impl` (90000): declare the ignored caller `status` input so `Reference.Echo.Get` returns `status: Success` without an unknown-key warning for that key. Other unknown keys still warn. Strengthen `Reference Envelope Tests` (90156) to reject every warning in this scenario. No Label or public signature changes.
+
 - Give every MyApp, Reference and Legacy v2 answer Foundation's envelope (core#1149): each success answer starts with `"status":"Success"` through the new `SetSuccess` in `My Input` (50000), `Ref Input` (90010) and `Legacy Adapter Input` (90102), so Foundation's `UnknownParameter` warning reaches the caller; every input error carries a `code` and `parameter` through `Reject`; caught write/core errors answer `RespondWithLastError()` (`BusinessCentralError`). Contracts declare `status` first in the response chapter, use `ErrorEntry` with a code for every error, and start every success example with `status`. `Reference.Echo.Get` declares `message`. Label texts are unchanged, so no XLF change. `AssertOk` in both test callers now requires `status` = `Success` as the first key; new `AssertErrorCode`, `AssertWarning`, `AssertEnvelopeContract`; new test codeunits 50055, 90156, 90157. Write types still warn on an unknown key; they refuse once core#1148 is deployed.
 
 #### Changed AL objects (core#1149)
