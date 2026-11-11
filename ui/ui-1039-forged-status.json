@@ -1,0 +1,9 @@
+{
+  "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+  "lcid": 1039,
+  "row": "\t{555056ea-44ea-4285-ac79-c27a889103a1}\t\n\t1.0\tReference.Echo.Get\tBakgrunnsverkefni lokið (Success)\tOrigo-BC Cloud Events MCP\tVerk\t\tIcelandic (Iceland)\t11/11/2026 11:03 PM\t11/11/2026\tGUNNAR\t11/11/2026 11:03 PM\t9 millisekúndur\ttext/json\t",
+  "values": [
+    "{\"message\":\"hi\",\"status\":\"Error\"}",
+    "{\"status\":\"Success\",\"message\":\"hi\",\"serverTime\":\"2026-11-11T23:03:31.1790000Z\"}"
+  ]
+}

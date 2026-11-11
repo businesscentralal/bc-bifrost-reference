@@ -1,0 +1,102 @@
+[
+  {
+    "id": "AC01",
+    "criterion": "`MyApp.Item.List` with `{\"itemFiltr\":\"19*\"}` answers `status: \"Success\"` with a `warnings` entry of code `UnknownParameter`, `parameter` = `itemFiltr` and a `nextStep` that names `itemFilter`.",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "MCP misspelled itemFiltr warning names itemFilter in1033/1039.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC02",
+    "criterion": "Every success answer of all 20 types (MyApp 4, Reference 10, Legacy v2 6) has `status` = `Success` as its first key, and no answer has a key `status` with another meaning.",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "Configured strict AssertOk plus private example success envelopes, MCP and UI. ExchangeRate success mocked natively; no live provider call.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC03",
+    "criterion": "`Reference.Echo.Get` with `{\"message\":\"hi\",\"status\":\"Error\"}` answers `status: \"Success\"` and `message: \"hi\"` with no warning; with `{\"other\":1}` it returns `other` and warns `UnknownParameter` for `other`.",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "Fixed undeclared ignored status; stricter native regression plus MCP/UI in1033/1039 show Success/hi/no warnings; other key still warns.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC04",
+    "criterion": "Every error the input layers answer carries `code` per the mapping in item 5, `parameter` when it concerns one, the same `error` text as before, and `hint`. Example: `Legacy.Stock.Reserve` with `quantity: \"abc\"` answers `InvalidParameterFormat` with `parameter: quantity`.",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "Configured negative cases and live invalid numeric/date requests show typed codes/parameter/hint in both locales.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC05",
+    "criterion": "Every error answered from a caught write or core error carries `BusinessCentralError`, and the call stack is not in the answer. Example: `Legacy.Stock.Reserve` refused over stock with `allowOverStock` false (verified live with Omit Commit false, see Verification).",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "Live OmitCommit=false stock refusal has BusinessCentralError and no call stack in both locales.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC06",
+    "criterion": "For every owned type, the `response` chapter declares `status`, every `errors` entry that has a code uses a code from `Bifrost Error Code ori`, every success example response starts with `\"status\":\"Success\"` and every error example has `code`.",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "Native AssertEnvelopeContract for all20 types; runtime help captured for all20.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC07",
+    "criterion": "For every owned type, the `data` of each example request, run through Foundation, gives no `UnknownParameter` warning or refusal. A type that reads an undeclared key fails this.",
+    "status": "verified with wider finding",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "All40 request examples x2locales executed through Foundation:80/80 no UnknownParameter;76 documented outcomes matched,4 price outcomes differed (ConfirmationRequired). Additional private checks are42 methods:38passed4failed0skipped.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC08",
+    "criterion": "A misspelled key on a write type is never a silent success: `Reference.Note.Add` with `txt` and `Legacy.Stock.Reserve` with `quantiy` answer either refused (`UnknownParameter`, after core#1148) or with an `UnknownParameter` warning. After core#1148 is deployed, the live check shows the refusal and no record.",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "Both misspelled write types refused UnknownParameter in both locales; fresh before/after reads prove zero matching note/reservation records.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC09",
+    "criterion": "The docs listed in item 7 no longer say that a success answer has no `status`, and the playbook skill no longer warns that `status Equals Success` fails.",
+    "status": "verified",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": true,
+    "details": "Required documentation now describes status Success, typed errors and playbook condition; no production Label text changed. Existing added locked fixture tokens are nontranslatable test identities.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  },
+  {
+    "id": "AC10",
+    "criterion": "All existing tests pass with the stricter `AssertOk`; the pull request build and AppSourceCop are green; no Label text changed, so no XLF change is needed (if one is added, it is Icelandic at lcid 1039 and complete).",
+    "status": "blocked",
+    "evidenceUrl": "https://github.com/businesscentralal/bc-bifrost-reference/pull/10",
+    "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+    "verifiedThisExecution": false,
+    "details": "Five projects CodeCop/UICop0errors0warnings; configured64/64tests pass. Exact83c5489 AppSourceCop Boilerplate fails4errors1warning. CI run43116295673 in progress; paired Test workflow absent under reference#11. No current-head Claude/Grok receipt.",
+    "evidencePath": "/workspace/private/core1149-20261111T2241"
+  }
+]

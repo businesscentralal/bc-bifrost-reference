@@ -1,0 +1,1598 @@
+[
+  {
+    "type": "MyApp.Hello.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "MyApp.Hello.Get",
+      "data": {
+        "name": "Litr fixture"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Hello.Get",
+      "status": "Success",
+      "message": "Hello, Litr fixture! My Bifrost App is working in CRONUS International Ltd..",
+      "user": "GUNNAR",
+      "language": 1033,
+      "serverTime": "2026-11-11T23:03:23.277Z",
+      "app": "My Bifrost App",
+      "appVersion": "1.0.0.0"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "MyApp.Item.Summary.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "MyApp.Item.Summary.Get",
+      "data": {
+        "asOfDate": "2026-09-26"
+      },
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Item.Summary.Get",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "description": "Owned example fixture",
+      "baseUnitOfMeasure": null,
+      "unitPrice": 100,
+      "asOfDate": "2026-09-26",
+      "inventory": 10,
+      "blocked": false
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "MyApp.Item.List",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "MyApp.Item.List",
+      "data": {
+        "itemFilter": "X1149-*",
+        "maxRows": 2
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Item.List",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "includeBlocked": false,
+      "count": 4,
+      "returned": 2,
+      "more": true,
+      "items": [
+        {
+          "itemNo": "X1149-A",
+          "description": "Owned example fixture",
+          "blocked": false
+        },
+        {
+          "itemNo": "X1149-B",
+          "description": "Owned example fixture",
+          "blocked": false
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Help.MyApp.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Help.MyApp.Get",
+      "data": {},
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Help.MyApp.Get",
+      "status": "Success",
+      "format": "markdown",
+      "markdown": "# My Bifrost App\r\n\r\nAn app built on Bifrost Foundation. It reads items: one item's price and inventory, or a\r\ncapped list of items.\r\n\r\n## Message types\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `MyApp.Hello.Get` | Read-only | Hello World: greeting, user, company and app version. Call it first. |\r\n| `MyApp.Item.Summary.Get` | Read-only | One item's description, base unit, unit price and inventory as of a date. |\r\n| `MyApp.Item.List` | Read-only | Items by number filter, at most 100 rows, with the total count. |\r\n| `Help.MyApp.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.Echo.Get",
+    "label": "forged status",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.Echo.Get",
+      "data": {
+        "message": "hi",
+        "status": "Error"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Echo.Get",
+      "status": "Success",
+      "message": "hi",
+      "serverTime": "2026-11-11T23:03:23.5510000Z"
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.Echo.Get",
+    "label": "unknown key",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.Echo.Get",
+      "data": {
+        "other": 1
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Echo.Get",
+      "status": "Success",
+      "other": 1,
+      "serverTime": "2026-11-11T23:03:23.6170000Z",
+      "warnings": [
+        {
+          "code": "UnknownParameter",
+          "message": "Parameter \"other\" is not declared by this message type and may be ignored.",
+          "parameter": "other",
+          "nextStep": "Remove this key or consult Help.Implementation.Get for the declared parameters."
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.Table.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.Table.Get",
+      "data": {
+        "tableName": "Item"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Table.Get",
+      "status": "Success",
+      "tableName": "Item",
+      "tableId": 27
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.Note.Add",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.Note.Add",
+      "data": {
+        "no": "X1149-N1033",
+        "text": "Owned fixture"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Note.Add",
+      "status": "Success",
+      "no": "X1149-N1033"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Help.Reference.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Help.Reference.Get",
+      "data": {},
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Help.Reference.Get",
+      "status": "Success",
+      "format": "markdown",
+      "markdown": "# Bifrost Reference\r\n\r\nA sample app built on Bifrost Foundation. Each message type shows one pattern a partner app\r\nneeds: reading a record, validated writes with safe retries, a preview/apply pair for a bulk\r\nchange, an external HTTP call with a secret. The data it writes is sample data only.\r\n\r\n## Message types\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `Reference.GLAccount.Overview.Get` | Read-only | A G/L account's balance as of a date and its net change for a period. |\r\n| `Reference.AssetMaintenance.Create` | Commits | Logs maintenance work on a fixed asset; safe to retry with externalId. |\r\n| `Reference.ItemPrice.PreviewAdjustment` | Read-only | Shows a % unit price change for an item category. |\r\n| `Reference.ItemPrice.ApplyAdjustment` | Commits | Applies that change; needs the preview's itemCount. |\r\n| `Reference.ExchangeRate.Get` | Read-only (internet) | Latest ECB rate between two currencies. |\r\n| `Reference.ApiKey.Set` | Commits | Stores the rates API key as a secret. |\r\n| `Reference.Echo.Get` | Read-only | Returns what you sent plus the server time. A connectivity check. |\r\n| `Reference.Table.Get` | Read-only | Returns a table's object ID from its name. |\r\n| `Reference.Note.Add` | Commits | Stores one note under a number you choose. |\r\n| `Help.Reference.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.GLAccount.Overview.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.GLAccount.Overview.Get",
+      "data": {
+        "asOfDate": "2026-09-26"
+      },
+      "lcid": 1033,
+      "subject": "X1149-GL"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.GLAccount.Overview.Get",
+      "status": "Success",
+      "accountNo": "X1149-GL",
+      "name": "Owned example fixture",
+      "accountType": "Posting",
+      "incomeBalance": "Income Statement",
+      "currencyCode": "GBP",
+      "asOfDate": "2026-09-26",
+      "balanceAsOf": 0,
+      "fromDate": null,
+      "netChange": null,
+      "blocked": false,
+      "directPosting": true
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.AssetMaintenance.Create",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.AssetMaintenance.Create",
+      "data": {
+        "maintenanceDate": "2026-09-25",
+        "hours": 1.5,
+        "description": "Owned fixture",
+        "externalId": "X1149-M1033"
+      },
+      "lcid": 1033,
+      "subject": "X1149-FA"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.AssetMaintenance.Create",
+      "status": "Success",
+      "entryNo": 12,
+      "created": true,
+      "assetNo": "X1149-FA",
+      "maintenanceDate": "2026-09-25",
+      "hours": 1.5,
+      "description": "Owned fixture",
+      "externalId": "X1149-M1033"
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.ItemPrice.PreviewAdjustment",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.ItemPrice.PreviewAdjustment",
+      "data": {
+        "itemCategoryCode": "X1149-CAT",
+        "percent": 5
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.ItemPrice.PreviewAdjustment",
+      "status": "Success",
+      "itemCategoryCode": "X1149-CAT",
+      "percent": 5,
+      "itemCount": 4,
+      "applied": false,
+      "totalCurrentUnitPrice": 400,
+      "totalNewUnitPrice": 420,
+      "itemsTruncated": false,
+      "items": [
+        {
+          "itemNo": "X1149-A",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-B",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-C",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-D",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "label": "second documented example: contract mismatch",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "data": {
+        "itemCategoryCode": "X1149-CAT",
+        "percent": 5,
+        "expectedItemCount": 4
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "status": "Error",
+      "code": "ConfirmationRequired",
+      "error": "This call cannot be undone and was not run. It would affect 1 (record X1149-CAT). Nothing was changed.",
+      "parameter": "expectedCount",
+      "expected": "1",
+      "nextStep": "Send the same request again with expectedCount set to 1.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Reference.ItemPrice.ApplyAdjustment\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "PreconditionFailed",
+    "passed": false
+  },
+  {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "label": "with Foundation confirmation token",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "data": {
+        "itemCategoryCode": "X1149-CAT",
+        "percent": 5,
+        "expectedItemCount": 4,
+        "expectedCount": 1
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.ItemPrice.ApplyAdjustment",
+      "status": "Success",
+      "itemCategoryCode": "X1149-CAT",
+      "percent": 5,
+      "itemCount": 4,
+      "applied": true,
+      "totalCurrentUnitPrice": 400,
+      "totalNewUnitPrice": 420,
+      "itemsTruncated": false,
+      "items": [
+        {
+          "itemNo": "X1149-A",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-B",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-C",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-D",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.ExchangeRate.Get",
+    "label": "no-provider validation",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.ExchangeRate.Get",
+      "data": {
+        "from": "EUR",
+        "to": "EUR"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "status": "Error",
+      "code": "PreconditionFailed",
+      "error": "Parameters 'from' and 'to' are both EUR. Send two different currencies.",
+      "parameter": "to",
+      "received": "EUR",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Reference.ExchangeRate.Get\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "PreconditionFailed",
+    "passed": true
+  },
+  {
+    "type": "Reference.ApiKey.Set",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.ApiKey.Set",
+      "data": {},
+      "lcid": 1033
+    },
+    "response": {
+      "status": "Error",
+      "code": "MissingParameter",
+      "error": "Parameter 'apiKey' is required. Send it as text, for example \"your-key\".",
+      "parameter": "apiKey",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Reference.ApiKey.Set\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "MissingParameter",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantity": 1,
+        "allowOverStock": true
+      },
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.Reserve",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "quantityAdded": 1,
+      "totalReserved": 4,
+      "availableToReserve": 6
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.Get",
+      "data": {},
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.Get",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "hasReservation": true,
+      "reservedQuantity": 4,
+      "availableToReserve": 6
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.List",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.List",
+      "data": {
+        "itemFilter": "X1149-*"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.List",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "count": 2,
+      "totalQuantity": 6,
+      "returned": 2,
+      "more": false,
+      "reservations": [
+        {
+          "itemNo": "X1149-A",
+          "quantity": 4
+        },
+        {
+          "itemNo": "X1149-B",
+          "quantity": 2
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.CancelReservation",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.CancelReservation",
+      "data": {},
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.CancelReservation",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "cancelled": true
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.List",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.List",
+      "data": {
+        "itemFilter": "X1149-*"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.List",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "count": 1,
+      "totalQuantity": 2,
+      "returned": 1,
+      "more": false,
+      "reservations": [
+        {
+          "itemNo": "X1149-B",
+          "quantity": 2
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.ReleaseAll",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.ReleaseAll",
+      "data": {
+        "itemFilter": "X1149-*",
+        "expectedCount": 1
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.ReleaseAll",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "released": 1
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Help.Legacy.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Help.Legacy.Get",
+      "data": {},
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Help.Legacy.Get",
+      "status": "Success",
+      "format": "markdown",
+      "markdown": "# Legacy App\r\n\r\nStock reservations per item, with a cancellation log. The same rules apply as in the\r\napp's own pages; questions a person answers there are explicit parameters here.\r\n\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `Legacy.Stock.Get` | Read-only | Reserved and still-available quantity of one item. |\r\n| `Legacy.Stock.List` | Read-only | All reservations or those matching an item filter, with count. |\r\n| `Legacy.Stock.Reserve` | Commits | Adds to an item's reservation; refuses over stock unless `allowOverStock`. Not safe to repeat. |\r\n| `Legacy.Stock.CancelReservation` | Commits | Cancels one item's reservation. Safe to repeat. |\r\n| `Legacy.Stock.ReleaseAll` | Commits, irreversible | Releases every reservation matching a filter; needs `expectedCount` from List. |\r\n| `Help.Legacy.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "MyApp.Item.List",
+    "label": "AC01",
+    "lcid": 1033,
+    "request": {
+      "type": "MyApp.Item.List",
+      "data": {
+        "itemFiltr": "X1149-*"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Item.List",
+      "status": "Success",
+      "itemFilter": "",
+      "includeBlocked": false,
+      "count": 153,
+      "returned": 100,
+      "more": true,
+      "warnings": [
+        {
+          "code": "UnknownParameter",
+          "message": "Parameter \"itemFiltr\" is not declared by this message type and may be ignored.",
+          "parameter": "itemFiltr",
+          "nextStep": "Use the declared parameter \"itemFilter\" instead."
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true,
+    "evidenceNote": "Returned demo-company item rows omitted; only warning/code/parameter/nextStep were asserted. The typo deliberately leaves the list unfiltered."
+  },
+  {
+    "type": "MyApp.Item.Summary.Get",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "MyApp.Item.Summary.Get",
+      "data": {
+        "asOfDate": "26.09.2026"
+      },
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "Parameter 'asOfDate' has the value '26.09.2026', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.",
+      "parameter": "asOfDate",
+      "received": "26.09.2026",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"MyApp.Item.Summary.Get\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "InvalidParameterFormat",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantity": "abc"
+      },
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "Parameter 'quantity' has the value 'abc', which is not a number. Send a number with a dot as decimal separator, for example 2.5.",
+      "parameter": "quantity",
+      "received": "abc",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Legacy.Stock.Reserve\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "InvalidParameterFormat",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "AC05",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantity": 999
+      },
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "BusinessCentralError",
+      "error": "Item 'X1149-A' has 10 in inventory and 0 already reserved, so reserving 999 more would reserve more than is in stock. Reserve at most 10, or explicitly allow over-reservation.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Legacy.Stock.Reserve\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "BusinessCentralError",
+    "passed": true
+  },
+  {
+    "type": "Reference.Note.Add",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Reference.Note.Add",
+      "data": {
+        "no": "X1149-TYPO1033",
+        "txt": "owned"
+      },
+      "lcid": 1033
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Parameter \"txt\" is not declared by this message type. Nothing was executed.",
+      "parameter": "txt",
+      "received": "owned",
+      "expected": "declared request parameters",
+      "nextStep": "Use the declared parameter \"text\" instead.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Reference.Note.Add\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "UnknownParameter",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "",
+    "lcid": 1033,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantiy": 1
+      },
+      "lcid": 1033,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Parameter \"quantiy\" is not declared by this message type. Nothing was executed.",
+      "parameter": "quantiy",
+      "received": "1",
+      "expected": "declared request parameters",
+      "nextStep": "Use the declared parameter \"quantity\" instead.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Legacy.Stock.Reserve\". Always read the help before calling a message type."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "UnknownParameter",
+    "passed": true
+  },
+  {
+    "type": "MyApp.Hello.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "MyApp.Hello.Get",
+      "data": {
+        "name": "Litr fixture"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Hello.Get",
+      "status": "Success",
+      "message": "Hall\u00f3, Litr fixture! My Bifrost App virkar \u00ed CRONUS International Ltd..",
+      "user": "GUNNAR",
+      "language": 1039,
+      "serverTime": "2026-11-11T23:03:30.949Z",
+      "app": "My Bifrost App",
+      "appVersion": "1.0.0.0"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "MyApp.Item.Summary.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "MyApp.Item.Summary.Get",
+      "data": {
+        "asOfDate": "2026-09-26"
+      },
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Item.Summary.Get",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "description": "Owned example fixture",
+      "baseUnitOfMeasure": null,
+      "unitPrice": 100,
+      "asOfDate": "2026-09-26",
+      "inventory": 10,
+      "blocked": false
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "MyApp.Item.List",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "MyApp.Item.List",
+      "data": {
+        "itemFilter": "X1149-*",
+        "maxRows": 2
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Item.List",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "includeBlocked": false,
+      "count": 4,
+      "returned": 2,
+      "more": true,
+      "items": [
+        {
+          "itemNo": "X1149-A",
+          "description": "Owned example fixture",
+          "blocked": false
+        },
+        {
+          "itemNo": "X1149-B",
+          "description": "Owned example fixture",
+          "blocked": false
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Help.MyApp.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Help.MyApp.Get",
+      "data": {},
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Help.MyApp.Get",
+      "status": "Success",
+      "format": "markdown",
+      "markdown": "# My Bifrost App\r\n\r\nAn app built on Bifrost Foundation. It reads items: one item's price and inventory, or a\r\ncapped list of items.\r\n\r\n## Message types\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `MyApp.Hello.Get` | Read-only | Hello World: greeting, user, company and app version. Call it first. |\r\n| `MyApp.Item.Summary.Get` | Read-only | One item's description, base unit, unit price and inventory as of a date. |\r\n| `MyApp.Item.List` | Read-only | Items by number filter, at most 100 rows, with the total count. |\r\n| `Help.MyApp.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.Echo.Get",
+    "label": "forged status",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.Echo.Get",
+      "data": {
+        "message": "hi",
+        "status": "Error"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Echo.Get",
+      "status": "Success",
+      "message": "hi",
+      "serverTime": "2026-11-11T23:03:31.1790000Z"
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.Echo.Get",
+    "label": "unknown key",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.Echo.Get",
+      "data": {
+        "other": 1
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Echo.Get",
+      "status": "Success",
+      "other": 1,
+      "serverTime": "2026-11-11T23:03:31.2330000Z",
+      "warnings": [
+        {
+          "code": "UnknownParameter",
+          "message": "Vi\u00f0fangi\u00f0 \"other\" er ekki skilgreint fyrir \u00feessa skilabo\u00f0ategund og kann a\u00f0 vera hunsa\u00f0.",
+          "parameter": "other",
+          "nextStep": "Fjarl\u00e6g\u00f0u \u00feennan lykil e\u00f0a sko\u00f0a\u00f0u Help.Implementation.Get til a\u00f0 sj\u00e1 skilgreind vi\u00f0f\u00f6ng."
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.Table.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.Table.Get",
+      "data": {
+        "tableName": "Item"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Table.Get",
+      "status": "Success",
+      "tableName": "Item",
+      "tableId": 27
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.Note.Add",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.Note.Add",
+      "data": {
+        "no": "X1149-N1039",
+        "text": "Owned fixture"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.Note.Add",
+      "status": "Success",
+      "no": "X1149-N1039"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Help.Reference.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Help.Reference.Get",
+      "data": {},
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Help.Reference.Get",
+      "status": "Success",
+      "format": "markdown",
+      "markdown": "# Bifrost Reference\r\n\r\nA sample app built on Bifrost Foundation. Each message type shows one pattern a partner app\r\nneeds: reading a record, validated writes with safe retries, a preview/apply pair for a bulk\r\nchange, an external HTTP call with a secret. The data it writes is sample data only.\r\n\r\n## Message types\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `Reference.GLAccount.Overview.Get` | Read-only | A G/L account's balance as of a date and its net change for a period. |\r\n| `Reference.AssetMaintenance.Create` | Commits | Logs maintenance work on a fixed asset; safe to retry with externalId. |\r\n| `Reference.ItemPrice.PreviewAdjustment` | Read-only | Shows a % unit price change for an item category. |\r\n| `Reference.ItemPrice.ApplyAdjustment` | Commits | Applies that change; needs the preview's itemCount. |\r\n| `Reference.ExchangeRate.Get` | Read-only (internet) | Latest ECB rate between two currencies. |\r\n| `Reference.ApiKey.Set` | Commits | Stores the rates API key as a secret. |\r\n| `Reference.Echo.Get` | Read-only | Returns what you sent plus the server time. A connectivity check. |\r\n| `Reference.Table.Get` | Read-only | Returns a table's object ID from its name. |\r\n| `Reference.Note.Add` | Commits | Stores one note under a number you choose. |\r\n| `Help.Reference.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.GLAccount.Overview.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.GLAccount.Overview.Get",
+      "data": {
+        "asOfDate": "2026-09-26"
+      },
+      "lcid": 1039,
+      "subject": "X1149-GL"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.GLAccount.Overview.Get",
+      "status": "Success",
+      "accountNo": "X1149-GL",
+      "name": "Owned example fixture",
+      "accountType": "Posting",
+      "incomeBalance": "Income Statement",
+      "currencyCode": "GBP",
+      "asOfDate": "2026-09-26",
+      "balanceAsOf": 0,
+      "fromDate": null,
+      "netChange": null,
+      "blocked": false,
+      "directPosting": true
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.AssetMaintenance.Create",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.AssetMaintenance.Create",
+      "data": {
+        "maintenanceDate": "2026-09-25",
+        "hours": 1.5,
+        "description": "Owned fixture",
+        "externalId": "X1149-M1039"
+      },
+      "lcid": 1039,
+      "subject": "X1149-FA"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.AssetMaintenance.Create",
+      "status": "Success",
+      "entryNo": 13,
+      "created": true,
+      "assetNo": "X1149-FA",
+      "maintenanceDate": "2026-09-25",
+      "hours": 1.5,
+      "description": "Owned fixture",
+      "externalId": "X1149-M1039"
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.ItemPrice.PreviewAdjustment",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.ItemPrice.PreviewAdjustment",
+      "data": {
+        "itemCategoryCode": "X1149-CAT",
+        "percent": 5
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.ItemPrice.PreviewAdjustment",
+      "status": "Success",
+      "itemCategoryCode": "X1149-CAT",
+      "percent": 5,
+      "itemCount": 4,
+      "applied": false,
+      "totalCurrentUnitPrice": 400,
+      "totalNewUnitPrice": 420,
+      "itemsTruncated": false,
+      "items": [
+        {
+          "itemNo": "X1149-A",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-B",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-C",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-D",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "label": "second documented example: contract mismatch",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "data": {
+        "itemCategoryCode": "X1149-CAT",
+        "percent": 5,
+        "expectedItemCount": 4
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "status": "Error",
+      "code": "ConfirmationRequired",
+      "error": "Ekki er h\u00e6gt a\u00f0 afturkalla \u00feetta kall og \u00fea\u00f0 var ekki keyrt. \u00dea\u00f0 myndi hafa \u00e1hrif \u00e1 1 (f\u00e6rsla X1149-CAT). Engu var breytt.",
+      "parameter": "expectedCount",
+      "expected": "1",
+      "nextStep": "Sendu s\u00f6mu bei\u00f0ni aftur me\u00f0 expectedCount stillt \u00e1 1.",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Reference.ItemPrice.ApplyAdjustment\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "PreconditionFailed",
+    "passed": false
+  },
+  {
+    "type": "Reference.ItemPrice.ApplyAdjustment",
+    "label": "with Foundation confirmation token",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.ItemPrice.ApplyAdjustment",
+      "data": {
+        "itemCategoryCode": "X1149-CAT",
+        "percent": 5,
+        "expectedItemCount": 4,
+        "expectedCount": 1
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Reference.ItemPrice.ApplyAdjustment",
+      "status": "Success",
+      "itemCategoryCode": "X1149-CAT",
+      "percent": 5,
+      "itemCount": 4,
+      "applied": true,
+      "totalCurrentUnitPrice": 400,
+      "totalNewUnitPrice": 420,
+      "itemsTruncated": false,
+      "items": [
+        {
+          "itemNo": "X1149-A",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-B",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-C",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        },
+        {
+          "itemNo": "X1149-D",
+          "description": "Owned example fixture",
+          "currentUnitPrice": 100,
+          "newUnitPrice": 105
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Reference.ExchangeRate.Get",
+    "label": "no-provider validation",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.ExchangeRate.Get",
+      "data": {
+        "from": "EUR",
+        "to": "EUR"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "status": "Error",
+      "code": "PreconditionFailed",
+      "error": "F\u00e6ribreyturnar 'from' og 'to' eru b\u00e1\u00f0ar EUR. Sendu tvo \u00f3l\u00edka gjaldmi\u00f0la.",
+      "parameter": "to",
+      "received": "EUR",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Reference.ExchangeRate.Get\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "PreconditionFailed",
+    "passed": true
+  },
+  {
+    "type": "Reference.ApiKey.Set",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.ApiKey.Set",
+      "data": {},
+      "lcid": 1039
+    },
+    "response": {
+      "status": "Error",
+      "code": "MissingParameter",
+      "error": "F\u00e6ribreytan 'apiKey' er nau\u00f0synleg. Sendu hana sem text, for example \"your-key\".",
+      "parameter": "apiKey",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Reference.ApiKey.Set\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "MissingParameter",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantity": 1,
+        "allowOverStock": true
+      },
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.Reserve",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "quantityAdded": 1,
+      "totalReserved": 4,
+      "availableToReserve": 6
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.Get",
+      "data": {},
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.Get",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "hasReservation": true,
+      "reservedQuantity": 4,
+      "availableToReserve": 6
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.List",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.List",
+      "data": {
+        "itemFilter": "X1149-*"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.List",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "count": 2,
+      "totalQuantity": 6,
+      "returned": 2,
+      "more": false,
+      "reservations": [
+        {
+          "itemNo": "X1149-A",
+          "quantity": 4
+        },
+        {
+          "itemNo": "X1149-B",
+          "quantity": 2
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.CancelReservation",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.CancelReservation",
+      "data": {},
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.CancelReservation",
+      "status": "Success",
+      "itemNo": "X1149-A",
+      "cancelled": true
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.List",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.List",
+      "data": {
+        "itemFilter": "X1149-*"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.List",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "count": 1,
+      "totalQuantity": 2,
+      "returned": 1,
+      "more": false,
+      "reservations": [
+        {
+          "itemNo": "X1149-B",
+          "quantity": 2
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.ReleaseAll",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.ReleaseAll",
+      "data": {
+        "itemFilter": "X1149-*",
+        "expectedCount": 1
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Legacy.Stock.ReleaseAll",
+      "status": "Success",
+      "itemFilter": "X1149-*",
+      "released": 1
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true
+  },
+  {
+    "type": "Help.Legacy.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Help.Legacy.Get",
+      "data": {},
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Help.Legacy.Get",
+      "status": "Success",
+      "format": "markdown",
+      "markdown": "# Legacy App\r\n\r\nStock reservations per item, with a cancellation log. The same rules apply as in the\r\napp's own pages; questions a person answers there are explicit parameters here.\r\n\r\n| Type | Effect | What it does |\r\n| --- | --- | --- |\r\n| `Legacy.Stock.Get` | Read-only | Reserved and still-available quantity of one item. |\r\n| `Legacy.Stock.List` | Read-only | All reservations or those matching an item filter, with count. |\r\n| `Legacy.Stock.Reserve` | Commits | Adds to an item's reservation; refuses over stock unless `allowOverStock`. Not safe to repeat. |\r\n| `Legacy.Stock.CancelReservation` | Commits | Cancels one item's reservation. Safe to repeat. |\r\n| `Legacy.Stock.ReleaseAll` | Commits, irreversible | Releases every reservation matching a filter; needs `expectedCount` from List. |\r\n| `Help.Legacy.Get` | Read-only | This overview. |\r\n\r\nFor the contract of any one type, call `Help.Implementation.Get` with its name.\r\n"
+    },
+    "expectedStatus": "Success",
+    "passed": true
+  },
+  {
+    "type": "MyApp.Item.List",
+    "label": "AC01",
+    "lcid": 1039,
+    "request": {
+      "type": "MyApp.Item.List",
+      "data": {
+        "itemFiltr": "X1149-*"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "MyApp.Item.List",
+      "status": "Success",
+      "itemFilter": "",
+      "includeBlocked": false,
+      "count": 153,
+      "returned": 100,
+      "more": true,
+      "warnings": [
+        {
+          "code": "UnknownParameter",
+          "message": "Vi\u00f0fangi\u00f0 \"itemFiltr\" er ekki skilgreint fyrir \u00feessa skilabo\u00f0ategund og kann a\u00f0 vera hunsa\u00f0.",
+          "parameter": "itemFiltr",
+          "nextStep": "Nota\u00f0u skilgreinda vi\u00f0fangi\u00f0 \"itemFilter\" \u00ed sta\u00f0inn."
+        }
+      ]
+    },
+    "expectedStatus": "Success",
+    "expectedCode": null,
+    "passed": true,
+    "evidenceNote": "Returned demo-company item rows omitted; only warning/code/parameter/nextStep were asserted. The typo deliberately leaves the list unfiltered."
+  },
+  {
+    "type": "MyApp.Item.Summary.Get",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "MyApp.Item.Summary.Get",
+      "data": {
+        "asOfDate": "26.09.2026"
+      },
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "F\u00e6ribreytan 'asOfDate' hefur gildi\u00f0 '26.09.2026', sem er ekki dagsetning \u00e1 sni\u00f0inu \u00c1\u00c1\u00c1\u00c1-MM-DD. Sendu til d\u00e6mis 2026-09-26.",
+      "parameter": "asOfDate",
+      "received": "26.09.2026",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"MyApp.Item.Summary.Get\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "InvalidParameterFormat",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantity": "abc"
+      },
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "F\u00e6ribreytan 'quantity' hefur gildi\u00f0 'abc', sem er ekki tala. Sendu t\u00f6lu me\u00f0 punkti sem aukastafaskilt\u00e1kn, til d\u00e6mis 2.5.",
+      "parameter": "quantity",
+      "received": "abc",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Legacy.Stock.Reserve\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "InvalidParameterFormat",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "AC05",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantity": 999
+      },
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "BusinessCentralError",
+      "error": "Varan 'X1149-A' \u00e1 10 \u00e1 lager og 0 eru \u00feegar fr\u00e1tekin, svo ef 999 v\u00e6ru tekin fr\u00e1 til vi\u00f0b\u00f3tar v\u00e6ri teki\u00f0 fr\u00e1 meira en er til. Taktu fr\u00e1 a\u00f0 h\u00e1marki 10 e\u00f0a leyf\u00f0u umframfr\u00e1tekningu s\u00e9rstaklega.",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Legacy.Stock.Reserve\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "BusinessCentralError",
+    "passed": true
+  },
+  {
+    "type": "Reference.Note.Add",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Reference.Note.Add",
+      "data": {
+        "no": "X1149-TYPO1039",
+        "txt": "owned"
+      },
+      "lcid": 1039
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Vi\u00f0fangi\u00f0 \"txt\" er ekki skilgreint fyrir \u00feessa skilabo\u00f0ategund. Ekkert var keyrt.",
+      "parameter": "txt",
+      "received": "owned",
+      "expected": "skilgreind bei\u00f0nivi\u00f0f\u00f6ng",
+      "nextStep": "Nota\u00f0u skilgreinda vi\u00f0fangi\u00f0 \"text\" \u00ed sta\u00f0inn.",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Reference.Note.Add\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "UnknownParameter",
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "label": "",
+    "lcid": 1039,
+    "request": {
+      "type": "Legacy.Stock.Reserve",
+      "data": {
+        "quantiy": 1
+      },
+      "lcid": 1039,
+      "subject": "X1149-A"
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Vi\u00f0fangi\u00f0 \"quantiy\" er ekki skilgreint fyrir \u00feessa skilabo\u00f0ategund. Ekkert var keyrt.",
+      "parameter": "quantiy",
+      "received": "1",
+      "expected": "skilgreind bei\u00f0nivi\u00f0f\u00f6ng",
+      "nextStep": "Nota\u00f0u skilgreinda vi\u00f0fangi\u00f0 \"quantity\" \u00ed sta\u00f0inn.",
+      "hint": "Til a\u00f0 sj\u00e1 notkunaruppl\u00fdsingar skaltu kalla \u00e1 skilabo\u00f0ategundina \"Help.Implementation.Get\" me\u00f0 subject \"Legacy.Stock.Reserve\". Lestu alltaf hj\u00e1lpina \u00e1\u00f0ur en \u00fe\u00fa kallar \u00e1 skilabo\u00f0ategund."
+    },
+    "expectedStatus": "Error",
+    "expectedCode": "UnknownParameter",
+    "passed": true
+  }
+]

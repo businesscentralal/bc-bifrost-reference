@@ -1,0 +1,126 @@
+[
+  {
+    "type": "Reference.Note.Add",
+    "lcid": 1033,
+    "before": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Parameter \"txt\" is not declared by this message type. Nothing was executed.",
+      "parameter": "txt",
+      "received": "owned",
+      "expected": "declared request parameters",
+      "nextStep": "Use the declared parameter \"text\" instead.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Reference.Note.Add\". Always read the help before calling a message type."
+    },
+    "after": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "lcid": 1033,
+    "before": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Parameter \"quantiy\" is not declared by this message type. Nothing was executed.",
+      "parameter": "quantiy",
+      "received": "1",
+      "expected": "declared request parameters",
+      "nextStep": "Use the declared parameter \"quantity\" instead.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Legacy.Stock.Reserve\". Always read the help before calling a message type."
+    },
+    "after": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "passed": true
+  },
+  {
+    "type": "Reference.Note.Add",
+    "lcid": 1039,
+    "before": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Viðfangið \"txt\" er ekki skilgreint fyrir þessa skilaboðategund. Ekkert var keyrt.",
+      "parameter": "txt",
+      "received": "owned",
+      "expected": "skilgreind beiðniviðföng",
+      "nextStep": "Notaðu skilgreinda viðfangið \"text\" í staðinn.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Reference.Note.Add\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    },
+    "after": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "passed": true
+  },
+  {
+    "type": "Legacy.Stock.Reserve",
+    "lcid": 1039,
+    "before": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "response": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Viðfangið \"quantiy\" er ekki skilgreint fyrir þessa skilaboðategund. Ekkert var keyrt.",
+      "parameter": "quantiy",
+      "received": "1",
+      "expected": "skilgreind beiðniviðföng",
+      "nextStep": "Notaðu skilgreinda viðfangið \"quantity\" í staðinn.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Legacy.Stock.Reserve\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    },
+    "after": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 0,
+      "securityFiltered": false,
+      "result": []
+    },
+    "passed": true
+  }
+]

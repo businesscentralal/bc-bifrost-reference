@@ -1,0 +1,386 @@
+[
+  {
+    "name": "Litr 1149 private verification",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "1b85dc8c-be5c-4f81-b3dd-e7bbfab21ebc",
+      "statusCode": 204,
+      "durationMs": 113,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "1b85dc8c-be5c-4f81-b3dd-e7bbfab21ebc",
+        "id": "db17d1dd-73c9-4a2f-9c38-18b127f11490",
+        "displayName": "Litr 1149 private verification",
+        "publisher": "Origo",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Litr 1149 private verification",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "1b85dc8c-be5c-4f81-b3dd-e7bbfab21ebc",
+      "statusCode": 204,
+      "durationMs": 145,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "1b85dc8c-be5c-4f81-b3dd-e7bbfab21ebc",
+        "id": "db17d1dd-73c9-4a2f-9c38-18b127f11490",
+        "displayName": "Litr 1149 private verification",
+        "publisher": "Origo",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Reference Tests",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "7b590666-4faf-466a-aa1e-c076beeea2fc",
+      "statusCode": 204,
+      "durationMs": 187,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "7b590666-4faf-466a-aa1e-c076beeea2fc",
+        "id": "6c1e9b4a-2f7d-4e3b-a8c5-9d0f1b2e3a47",
+        "displayName": "Bifrost Reference Tests",
+        "publisher": "Origo",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Reference Tests",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "7b590666-4faf-466a-aa1e-c076beeea2fc",
+      "statusCode": 204,
+      "durationMs": 130,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "7b590666-4faf-466a-aa1e-c076beeea2fc",
+        "id": "6c1e9b4a-2f7d-4e3b-a8c5-9d0f1b2e3a47",
+        "displayName": "Bifrost Reference Tests",
+        "publisher": "Origo",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "My Bifrost App Tests",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "8ddf2934-5ccb-4519-8f3d-720a81cd1f77",
+      "statusCode": 204,
+      "durationMs": 183,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "8ddf2934-5ccb-4519-8f3d-720a81cd1f77",
+        "id": "e2a9d6f1-7c34-4b8e-a15d-9f6c3b2e8a70",
+        "displayName": "My Bifrost App Tests",
+        "publisher": "My Company",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "My Bifrost App Tests",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "8ddf2934-5ccb-4519-8f3d-720a81cd1f77",
+      "statusCode": 204,
+      "durationMs": 120,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "8ddf2934-5ccb-4519-8f3d-720a81cd1f77",
+        "id": "e2a9d6f1-7c34-4b8e-a15d-9f6c3b2e8a70",
+        "displayName": "My Bifrost App Tests",
+        "publisher": "My Company",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Reference",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "ebbe0f3a-2a87-45e7-a4e1-f599c1385719",
+      "statusCode": 204,
+      "durationMs": 218,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "ebbe0f3a-2a87-45e7-a4e1-f599c1385719",
+        "id": "3f8a1c2e-6b4d-4a9f-9e2c-7d5b8a3f1e6c",
+        "displayName": "Bifrost Reference",
+        "publisher": "Origo",
+        "versionMajor": 1,
+        "versionMinor": 2,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Reference",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "ebbe0f3a-2a87-45e7-a4e1-f599c1385719",
+      "statusCode": 204,
+      "durationMs": 134,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "ebbe0f3a-2a87-45e7-a4e1-f599c1385719",
+        "id": "3f8a1c2e-6b4d-4a9f-9e2c-7d5b8a3f1e6c",
+        "displayName": "Bifrost Reference",
+        "publisher": "Origo",
+        "versionMajor": 1,
+        "versionMinor": 2,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Legacy App",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "4c001e40-d669-4ed4-839e-6b72307a85d1",
+      "statusCode": 204,
+      "durationMs": 211,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "4c001e40-d669-4ed4-839e-6b72307a85d1",
+        "id": "8a3f2c1e-9d4b-4e7a-b6c3-1f5e8a2d4c9b",
+        "displayName": "Legacy App",
+        "publisher": "Origo",
+        "versionMajor": 2,
+        "versionMinor": 2,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Legacy App",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "4c001e40-d669-4ed4-839e-6b72307a85d1",
+      "statusCode": 204,
+      "durationMs": 124,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "4c001e40-d669-4ed4-839e-6b72307a85d1",
+        "id": "8a3f2c1e-9d4b-4e7a-b6c3-1f5e8a2d4c9b",
+        "displayName": "Legacy App",
+        "publisher": "Origo",
+        "versionMajor": 2,
+        "versionMinor": 2,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "My Bifrost App",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "31623c51-fff8-4b1c-929d-0bacd913d78e",
+      "statusCode": 204,
+      "durationMs": 130,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "31623c51-fff8-4b1c-929d-0bacd913d78e",
+        "id": "b7e4c2a9-3f18-4d6e-9a5c-1e8f2d7b6c43",
+        "displayName": "My Bifrost App",
+        "publisher": "My Company",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "My Bifrost App",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "31623c51-fff8-4b1c-929d-0bacd913d78e",
+      "statusCode": 204,
+      "durationMs": 127,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "31623c51-fff8-4b1c-929d-0bacd913d78e",
+        "id": "b7e4c2a9-3f18-4d6e-9a5c-1e8f2d7b6c43",
+        "displayName": "My Bifrost App",
+        "publisher": "My Company",
+        "versionMajor": 1,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Foundation - Tests",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "fc68572f-ddb1-4079-89c5-9ec2f60d5dcc",
+      "statusCode": 204,
+      "durationMs": 296,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "fc68572f-ddb1-4079-89c5-9ec2f60d5dcc",
+        "id": "9db1a0c9-c503-4793-a9e4-bcda3d3f3c94",
+        "displayName": "Bifrost Foundation - Tests",
+        "publisher": "Origo",
+        "versionMajor": 28,
+        "versionMinor": 0,
+        "versionBuild": 13,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Foundation - Tests",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "fc68572f-ddb1-4079-89c5-9ec2f60d5dcc",
+      "statusCode": 204,
+      "durationMs": 293,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "fc68572f-ddb1-4079-89c5-9ec2f60d5dcc",
+        "id": "9db1a0c9-c503-4793-a9e4-bcda3d3f3c94",
+        "displayName": "Bifrost Foundation - Tests",
+        "publisher": "Origo",
+        "versionMajor": 28,
+        "versionMinor": 0,
+        "versionBuild": 13,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Foundation",
+    "action": "uninstallAndDeleteExtensionData",
+    "result": {
+      "action": "uninstallAndDeleteExtensionData",
+      "packageId": "207c0ee6-10df-43e3-9855-7678515a18d6",
+      "statusCode": 204,
+      "durationMs": 537,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "207c0ee6-10df-43e3-9855-7678515a18d6",
+        "id": "7505e808-6e52-4b96-a328-82573391297a",
+        "displayName": "Bifrost Foundation",
+        "publisher": "Origo",
+        "versionMajor": 28,
+        "versionMinor": 0,
+        "versionBuild": 13,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      }
+    }
+  },
+  {
+    "name": "Bifrost Foundation",
+    "action": "unpublish",
+    "result": {
+      "action": "unpublish",
+      "packageId": "207c0ee6-10df-43e3-9855-7678515a18d6",
+      "statusCode": 204,
+      "durationMs": 326,
+      "ok": true,
+      "body": null,
+      "match": {
+        "packageId": "207c0ee6-10df-43e3-9855-7678515a18d6",
+        "id": "7505e808-6e52-4b96-a328-82573391297a",
+        "displayName": "Bifrost Foundation",
+        "publisher": "Origo",
+        "versionMajor": 28,
+        "versionMinor": 0,
+        "versionBuild": 13,
+        "versionRevision": 0,
+        "isInstalled": false,
+        "publishedAs": " Dev"
+      }
+    }
+  }
+]

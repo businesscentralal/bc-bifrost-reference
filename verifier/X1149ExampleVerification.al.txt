@@ -1,0 +1,540 @@
+namespace Origo.Bifrost.Reference.Verification;
+
+using Microsoft.Finance.GeneralLedger.Account;
+using Microsoft.FixedAssets.FixedAsset;
+using Microsoft.Inventory.Item;
+using Microsoft.Inventory.Ledger;
+using Origo.Bifrost;
+using Origo.Bifrost.Reference;
+using Origo.Bifrost.Reference.Legacy;
+using System.TestLibraries.Utilities;
+
+/// <summary>Private acceptance verifier. Calls unchanged published template apps through Foundation; never performs a live provider request.</summary>
+codeunit 99190 "X1149 Example Verification"
+{
+    Subtype = Test;
+    TestPermissions = Disabled;
+    TestHttpRequestPolicy = BlockOutboundRequests;
+    RequiredTestIsolation = Disabled;
+
+    var
+        Assert: Codeunit "Library Assert";
+
+    [Test]
+    procedure Type01_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"MyApp.Item.List", 1033);
+    end;
+
+    [Test]
+    procedure Type01_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"MyApp.Item.List", 1039);
+    end;
+
+    [Test]
+    procedure Type02_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type02_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type03_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"MyApp.Hello.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type03_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"MyApp.Hello.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type04_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Help.MyApp.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type04_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Help.MyApp.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type05_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.AssetMaintenance.Create", 1033);
+    end;
+
+    [Test]
+    procedure Type05_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.AssetMaintenance.Create", 1039);
+    end;
+
+    [Test]
+    procedure Type06_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ApiKey.Set", 1033);
+    end;
+
+    [Test]
+    procedure Type06_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ApiKey.Set", 1039);
+    end;
+
+    [Test]
+    [HandlerFunctions('MockRates')]
+    procedure Type07_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ExchangeRate.Get", 1033);
+    end;
+
+    [Test]
+    [HandlerFunctions('MockRates')]
+    procedure Type07_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ExchangeRate.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type08_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type08_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type09_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.Echo.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type09_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.Echo.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type10_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Help.Reference.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type10_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Help.Reference.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type11_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.Note.Add", 1033);
+    end;
+
+    [Test]
+    procedure Type11_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.Note.Add", 1039);
+    end;
+
+    [Test]
+    procedure Type12_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.Table.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type12_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.Table.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type13_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", 1033);
+    end;
+
+    [Test]
+    procedure Type13_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", 1039);
+    end;
+
+    [Test]
+    procedure Type14_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ItemPrice.PreviewAdjustment", 1033);
+    end;
+
+    [Test]
+    procedure Type14_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Reference.ItemPrice.PreviewAdjustment", 1039);
+    end;
+
+    [Test]
+    procedure Type15_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 1033);
+    end;
+
+    [Test]
+    procedure Type15_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 1039);
+    end;
+
+    [Test]
+    procedure Type16_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Help.Legacy.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type16_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Help.Legacy.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type17_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.ReleaseAll", 1033);
+    end;
+
+    [Test]
+    procedure Type17_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.ReleaseAll", 1039);
+    end;
+
+    [Test]
+    procedure Type18_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.Get", 1033);
+    end;
+
+    [Test]
+    procedure Type18_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.Get", 1039);
+    end;
+
+    [Test]
+    procedure Type19_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.List", 1033);
+    end;
+
+    [Test]
+    procedure Type19_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.List", 1039);
+    end;
+
+    [Test]
+    procedure Type20_1033_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.Reserve", 1033);
+    end;
+
+    [Test]
+    procedure Type20_1039_ExamplesThroughFoundation()
+    begin
+        RunExamples(Enum::"Message Type ori"::"Legacy.Stock.Reserve", 1039);
+    end;
+
+    [Test]
+    procedure SeedOwnedMcpFixtures()
+    begin
+        PrepareFixtures(Enum::"Message Type ori"::"Reference.Echo.Get", 1);
+    end;
+
+    [Test]
+    procedure RemoveOwnedMcpFixtures()
+    begin
+        CleanupFixtures();
+    end;
+
+    [Test]
+    procedure RemainingPriceSecondExample1033()
+    begin
+        RunSecondPriceExample(1033);
+    end;
+
+    [Test]
+    procedure RemainingPriceSecondExample1039()
+    begin
+        RunSecondPriceExample(1039);
+    end;
+
+    local procedure RunSecondPriceExample(LanguageId: Integer)
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Contract: JsonObject;
+        Token: JsonToken;
+        Example: JsonToken;
+        Request: JsonObject;
+        Expected: JsonObject;
+        Response: JsonObject;
+        RequestText: Text;
+    begin
+        ContractMgt.GetContract(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", Contract);
+        Contract.Get('examples', Token);
+        Token.AsArray().Get(1, Example);
+        PrepareFixtures(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", 2);
+        Example.AsObject().Get('request', Token);
+        Token.WriteTo(RequestText);
+        RequestText := RequestText.Replace('STÓLL', 'X1149-CAT');
+        Request.ReadFrom(RequestText);
+        Example.AsObject().Get('response', Token);
+        Expected := Token.AsObject();
+        Response := Dispatch(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", Request, LanguageId);
+        CleanupFixtures();
+        Assert.AreNotEqual('UnknownParameter', GetText(Response, 'code'), 'No unknown parameter refusal');
+        AssertNoUnknownWarnings(Response);
+        Assert.AreEqual(GetText(Expected, 'status'), GetText(Response, 'status'), 'Second price example status');
+        Assert.AreEqual(GetText(Expected, 'code'), GetText(Response, 'code'), 'Second price example error: ' + JsonText(Response));
+    end;
+
+    local procedure RunExamples(MessageType: Enum "Message Type ori"; LanguageId: Integer)
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        Contract: JsonObject;
+        Token: JsonToken;
+        Example: JsonToken;
+        Request: JsonObject;
+        Expected: JsonObject;
+        Response: JsonObject;
+        RequestText: Text;
+        ExampleIndex: Integer;
+    begin
+        ContractMgt.GetContract(MessageType, Contract);
+        Assert.IsTrue(Contract.Get('examples', Token), 'Runtime contract has examples');
+        Assert.IsTrue(Token.AsArray().Count() > 0, 'Nonempty examples');
+        foreach Example in Token.AsArray() do begin
+            ExampleIndex += 1;
+            PrepareFixtures(MessageType, ExampleIndex);
+            Example.AsObject().Get('request', Token);
+            Token.WriteTo(RequestText);
+            // Substitute only fixture identities, preserving the complete set of declared request keys.
+            RequestText := RequestText.Replace('1896-S', 'X1149-A').Replace('1900-S', 'X1149-B').Replace('1906-S', 'X1149-C');
+            RequestText := RequestText.Replace('19*', 'X1149-*').Replace('FA000010', 'X1149-FA').Replace('2910', 'X1149-GL');
+            RequestText := RequestText.Replace('STÓLL', 'X1149-CAT').Replace('NOTE-1', 'X1149-NOTE').Replace('WO-4711', 'X1149-WO');
+            Clear(Request);
+            Request.ReadFrom(RequestText);
+            Example.AsObject().Get('response', Token);
+            Expected := Token.AsObject();
+            Response := Dispatch(MessageType, Request, LanguageId);
+            if MessageType = Enum::"Message Type ori"::"Reference.ApiKey.Set" then
+                ClearDummyKey();
+            Assert.AreNotEqual('UnknownParameter', GetText(Response, 'code'), 'Example must not be refused as unknown: ' + RequestText);
+            AssertNoUnknownWarnings(Response);
+            Assert.AreEqual(GetText(Expected, 'status'), GetText(Response, 'status'), 'Example outcome: ' + RequestText + ' ' + JsonText(Response));
+            if GetText(Expected, 'status') = 'Success' then
+                Assert.AreEqual('status', Response.Keys().Get(1), 'Success status is first')
+            else
+                Assert.AreEqual(GetText(Expected, 'code'), GetText(Response, 'code'), 'Example error code: ' + RequestText + ' ' + JsonText(Response));
+            CleanupFixtures();
+        end;
+    end;
+
+    local procedure Dispatch(MessageType: Enum "Message Type ori"; Request: JsonObject; LanguageId: Integer) Response: JsonObject
+    var
+        Dispatcher: Codeunit "Dispatcher ori";
+        RequestContent: BigText;
+        ResponseContent: BigText;
+        Token: JsonToken;
+        DataText: Text;
+        ResponseText: Text;
+        ContentType: Text[100];
+        TaskId: Guid;
+        MessageId: Guid;
+        Elapsed: Duration;
+    begin
+        if Request.Get('data', Token) then begin
+            Token.WriteTo(DataText);
+            RequestContent.AddText(DataText);
+        end;
+        Commit(); // Private verification only: shipping OmitCommit=false catch paths need no open fixture transaction.
+        Dispatcher.EnqueueAndProcess(MessageType, Enum::"Message Version ori"::"1.0", CopyStr(GetText(Request, 'subject'), 1, 250), 'X1149-verifier', 'application/json', RequestContent, TaskId, LanguageId, MessageId, ResponseContent, ContentType, Elapsed);
+        ResponseContent.GetSubText(ResponseText, 1);
+        Assert.IsTrue(Response.ReadFrom(ResponseText), 'Structured response: ' + ResponseText);
+    end;
+
+    local procedure PrepareFixtures(MessageType: Enum "Message Type ori"; ExampleIndex: Integer)
+    var
+        ItemCategory: Record "Item Category";
+        FixedAsset: Record "Fixed Asset";
+        GLAccount: Record "G/L Account";
+        Reservation: Record "Legacy Stock Reservation";
+        RefNote: Record "Ref Note";
+        Maintenance: Record "Ref Asset Maintenance";
+    begin
+        CleanupFixtures();
+        WorkDate(20260926D);
+        ItemCategory.Code := 'X1149-CAT';
+        ItemCategory.Insert();
+        CreateItem('X1149-A');
+        CreateItem('X1149-B');
+        CreateItem('X1149-C');
+        CreateItem('X1149-D');
+        if (MessageType = Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment") and (ExampleIndex = 2) then
+            CreateItem('X1149-E');
+        FixedAsset."No." := 'X1149-FA';
+        FixedAsset.Description := 'Owned example fixture';
+        FixedAsset.Insert();
+        GLAccount."No." := 'X1149-GL';
+        GLAccount.Name := 'Owned example fixture';
+        GLAccount.Insert();
+        Reservation."Item No." := 'X1149-A';
+        Reservation.Quantity := 3;
+        if (MessageType = Enum::"Message Type ori"::"Legacy.Stock.Reserve") and (ExampleIndex > 1) then
+            Reservation.Quantity := 8;
+        Reservation.Insert();
+        if MessageType <> Enum::"Message Type ori"::"Legacy.Stock.CancelReservation" then begin
+            Reservation."Item No." := 'X1149-B';
+            Reservation.Quantity := 2;
+            Reservation.Insert();
+        end;
+        if (MessageType = Enum::"Message Type ori"::"Legacy.Stock.ReleaseAll") and (ExampleIndex = 2) then begin
+            Reservation."Item No." := 'X1149-C';
+            Reservation.Insert();
+        end;
+        if (MessageType = Enum::"Message Type ori"::"Reference.Note.Add") and (ExampleIndex = 2) then begin
+            RefNote."No." := 'X1149-NOTE';
+            RefNote.Insert();
+        end;
+        if (MessageType = Enum::"Message Type ori"::"Reference.AssetMaintenance.Create") and (ExampleIndex = 2) then begin
+            Maintenance."FA No." := 'X1149-FA';
+            Maintenance."External Id" := 'X1149-WO';
+            Maintenance."Maintenance Date" := 20260925D;
+            Maintenance.Hours := 1.5;
+            Maintenance.Description := 'Oil change';
+            Maintenance.Insert();
+        end;
+        Commit();
+    end;
+
+    local procedure CreateItem(ItemNo: Code[20])
+    var
+        Item: Record Item;
+        ItemLedgerEntry: Record "Item Ledger Entry";
+        NextEntryNo: Integer;
+    begin
+        Item."No." := ItemNo;
+        Item.Description := 'Owned example fixture';
+        Item."Item Category Code" := 'X1149-CAT';
+        Item."Unit Price" := 100;
+        Item.Insert();
+        if ItemLedgerEntry.FindLast() then
+            NextEntryNo := ItemLedgerEntry."Entry No.";
+        ItemLedgerEntry.Init();
+        ItemLedgerEntry."Entry No." := NextEntryNo + 1;
+        ItemLedgerEntry."Item No." := ItemNo;
+        ItemLedgerEntry.Quantity := 10;
+        ItemLedgerEntry."Posting Date" := 20260801D;
+        ItemLedgerEntry.Insert();
+    end;
+
+    /// <summary>Mocks the sole provider call; no request is allowed to leave this test.</summary>
+    [HttpClientHandler]
+    procedure MockRates(Request: TestHttpRequestMessage; var Response: TestHttpResponseMessage): Boolean
+    var
+        Currency: Text;
+    begin
+        Assert.IsTrue(Request.Path.EndsWith('/latest'), 'Only the rates endpoint is mocked');
+        Request.QueryParameters.Get('base', Currency);
+        Assert.AreEqual('EUR', Currency, 'Source currency');
+        Response.Content.WriteFrom('{"rates":{"ISK":136.6},"date":"2026-09-25"}');
+        Response.HttpStatusCode := 200;
+        Response.ReasonPhrase := 'OK';
+        exit(false);
+    end;
+
+    local procedure AssertNoUnknownWarnings(Response: JsonObject)
+    var
+        Token: JsonToken;
+        Warning: JsonToken;
+    begin
+        if Response.Get('warnings', Token) then
+            foreach Warning in Token.AsArray() do
+                Assert.AreNotEqual('UnknownParameter', GetText(Warning.AsObject(), 'code'), 'Example has an unknown-key warning: ' + JsonText(Response));
+    end;
+
+    local procedure GetText(Value: JsonObject; KeyName: Text): Text
+    var
+        Token: JsonToken;
+    begin
+        if Value.Get(KeyName, Token) then
+            if Token.IsValue() then
+                exit(Token.AsValue().AsText());
+    end;
+
+    local procedure JsonText(Value: JsonObject) Result: Text
+    begin
+        Value.WriteTo(Result);
+    end;
+
+    local procedure ClearDummyKey()
+    var
+        Request: JsonObject;
+        Response: JsonObject;
+    begin
+        Request.ReadFrom('{"data":{"appId":"3f8a1c2e-6b4d-4a9f-9e2c-7d5b8a3f1e6c","code":"RATES-API-KEY"}}');
+        Response := Dispatch(Enum::"Message Type ori"::"Test.Secret.Clear", Request, 1033);
+        Assert.AreEqual('Success', GetText(Response, 'status'), 'Clear owned placeholder key');
+        Assert.AreEqual('false', GetText(Response, 'isSet'), 'Placeholder key removed');
+    end;
+
+    local procedure CleanupFixtures()
+    var
+        Item: Record Item;
+        ItemLedgerEntry: Record "Item Ledger Entry";
+        ItemCategory: Record "Item Category";
+        FixedAsset: Record "Fixed Asset";
+        GLAccount: Record "G/L Account";
+        Reservation: Record "Legacy Stock Reservation";
+        Cancellation: Record "Legacy Cancellation Log";
+        RefNote: Record "Ref Note";
+        Maintenance: Record "Ref Asset Maintenance";
+    begin
+        Maintenance.SetFilter("FA No.", 'X1149-*');
+        Maintenance.DeleteAll();
+        RefNote.SetFilter("No.", 'X1149-*');
+        RefNote.DeleteAll();
+        Cancellation.SetFilter("Item No.", 'X1149-*');
+        Cancellation.DeleteAll();
+        Reservation.SetFilter("Item No.", 'X1149-*');
+        Reservation.DeleteAll();
+        ItemLedgerEntry.SetFilter("Item No.", 'X1149-*');
+        ItemLedgerEntry.DeleteAll();
+        Item.SetFilter("No.", 'X1149-*');
+        Item.DeleteAll();
+        ItemCategory.SetFilter(Code, 'X1149-*');
+        ItemCategory.DeleteAll();
+        FixedAsset.SetFilter("No.", 'X1149-*');
+        FixedAsset.DeleteAll();
+        GLAccount.SetFilter("No.", 'X1149-*');
+        GLAccount.DeleteAll();
+        Commit();
+    end;
+}

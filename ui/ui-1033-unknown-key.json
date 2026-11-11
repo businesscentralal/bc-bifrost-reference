@@ -1,0 +1,9 @@
+{
+  "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+  "lcid": 1033,
+  "row": "\t{a8e923a1-c2a6-4e6e-821d-34f3c3caa7c1}\t\n\t1.0\tReference.Echo.Get\tTask completed (Success)\tOrigo-BC Cloud Events MCP\tTask\t\tEnglish (United States)\t11/11/2026 11:03 PM\t11/11/2026\tGUNNAR\t11/11/2026 11:03 PM\t11 milliseconds\ttext/json\t",
+  "values": [
+    "{\"other\":1}",
+    "{\"status\":\"Success\",\"other\":1,\"serverTime\":\"2026-11-11T23:03:23.6170000Z\",\"warnings\":[{\"code\":\"UnknownParameter\",\"message\":\"Parameter \n\"other\n\" is not declared by this message type and may be ignored.\",\"parameter\":\"other\",\"nextStep\":\"Remove this key or consult Help.Implementation.Get for the declared parameters.\"}]}"
+  ]
+}

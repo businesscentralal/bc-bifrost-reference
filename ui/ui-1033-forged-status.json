@@ -1,0 +1,9 @@
+{
+  "sha": "83c54892304762826cf1f36e76c29c4f92f3d7e4",
+  "lcid": 1033,
+  "row": "\t{6e84c8b1-4794-496e-a840-355fc5197fd0}\t\n\t1.0\tReference.Echo.Get\tTask completed (Success)\tOrigo-BC Cloud Events MCP\tTask\t\tEnglish (United States)\t11/11/2026 11:03 PM\t11/11/2026\tGUNNAR\t11/11/2026 11:03 PM\t9 milliseconds\ttext/json\t",
+  "values": [
+    "{\"message\":\"hi\",\"status\":\"Error\"}",
+    "{\"status\":\"Success\",\"message\":\"hi\",\"serverTime\":\"2026-11-11T23:03:23.5510000Z\"}"
+  ]
+}
