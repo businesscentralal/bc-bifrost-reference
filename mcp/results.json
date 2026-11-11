@@ -1,0 +1,194 @@
+[
+ {
+  "name": "AC01 MyApp.Item.List itemFiltr warns",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"itemFilter\":\"\",\"includeBlocked\":false,\"count\":323,\"returned\":100,\"more\":true,\"items\":[{\"itemNo\":\"1000\",\"description\":\"Bicycle\",\"blocked\":false},{\"itemNo\":\"1001\",\"description\":\"Touring Bicycle\",\"blocked\":false},{\"itemNo\":\"1100\",\"description\":\"Front Wheel\",\"blocked\":false},{\"itemNo\":\"1110\",\"description\":\"Rim\",\"blocked\":false},{\"itemNo\":\"1120\",\"description\":\"Spokes\",\"blocked\":false},{\"itemNo\":\"1150\",\"description\":\"Front Hub\",\"blocked\":false},{\"itemNo\":\"1151\",\"description\":\"Axle",
+  "warnings": [
+   {
+    "code": "UnknownParameter",
+    "message": "Parameter \"itemFiltr\" is not declared by this message type and may be ignored.",
+    "parameter": "itemFiltr",
+    "nextStep": "Use the declared parameter \"itemFilter\" instead."
+   }
+  ]
+ },
+ {
+  "name": "AC02 MyApp.Hello.Get success first",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"message\":\"Hello, Ada! My Bifrost App is working in CRONUS International Ltd..\",\"user\":\"GUNNAR\",\"language\":1033,\"serverTime\":\"2026-11-11T16:27:52.88Z\",\"app\":\"My Bifrost App\",\"appVersion\":\"1.0.0.0\"}"
+ },
+ {
+  "name": "AC04 Summary local date InvalidParameterFormat",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"InvalidParameterFormat\",\"error\":\"Parameter 'asOfDate' has the value '26.09.2026', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.\",\"parameter\":\"asOfDate\",\"received\":\"26.09.2026\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"MyApp.Item.Summary.Get\\\". Always read the help before calling a message type.\"}"
+ },
+ {
+  "name": "AC03 Echo message + forged status",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"message\":\"hi\",\"serverTime\":\"2026-11-11T16:28:12.8110000Z\",\"warnings\":[{\"code\":\"UnknownParameter\",\"message\":\"Parameter \\\"status\\\" is not declared by this message type and may be ignored.\",\"parameter\":\"status\",\"nextStep\":\"Remove this key or consult Help.Implementation.Get for the declared parameters.\"}]}",
+  "warnings": [
+   {
+    "code": "UnknownParameter",
+    "message": "Parameter \"status\" is not declared by this message type and may be ignored.",
+    "parameter": "status",
+    "nextStep": "Remove this key or consult Help.Implementation.Get for the declared parameters."
+   }
+  ]
+ },
+ {
+  "name": "AC03 Echo other warns",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"other\":1,\"serverTime\":\"2026-11-11T16:28:24.6920000Z\",\"warnings\":[{\"code\":\"UnknownParameter\",\"message\":\"Parameter \\\"other\\\" is not declared by this message type and may be ignored.\",\"parameter\":\"other\",\"nextStep\":\"Remove this key or consult Help.Implementation.Get for the declared parameters.\"}]}",
+  "warnings": [
+   {
+    "code": "UnknownParameter",
+    "message": "Parameter \"other\" is not declared by this message type and may be ignored.",
+    "parameter": "other",
+    "nextStep": "Remove this key or consult Help.Implementation.Get for the declared parameters."
+   }
+  ]
+ },
+ {
+  "name": "AC04 Table.Get missing MissingParameter",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"MissingParameter\",\"error\":\"Parameter 'tableName' is required. Send it as text, for example \\\"Item\\\".\",\"parameter\":\"tableName\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Reference.Table.Get\\\". Always read the help before calling a message type.\"}"
+ },
+ {
+  "name": "AC02 Table.Get success first",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"tableName\":\"Item\",\"tableId\":27}"
+ },
+ {
+  "name": "AC04 Reserve quantity abc InvalidParameterFormat",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"InvalidParameterFormat\",\"error\":\"Parameter 'quantity' has the value 'abc', which is not a number. Send a number with a dot as decimal separator, for example 2.5.\",\"parameter\":\"quantity\",\"received\":\"abc\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Legacy.Stock.Reserve\\\". Always read the help before calling a message type.\"}"
+ },
+ {
+  "name": "AC05 Reserve over stock BusinessCentralError no stack",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"BusinessCentralError\",\"error\":\"Item 'BIFT-MCP1149' has 0 in inventory and 0 already reserved, so reserving 1 more would reserve more than is in stock. Reserve at most 0, or explicitly allow over-reservation.\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Legacy.Stock.Reserve\\\". Always read the help before calling a message type.\"}"
+ },
+ {
+  "name": "AC08 Reserve quantiy never silent",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"UnknownParameter\",\"error\":\"Parameter \\\"quantiy\\\" is not declared by this message type. Nothing was executed.\",\"parameter\":\"quantiy\",\"received\":\"1\",\"expected\":\"declared request parameters\",\"nextStep\":\"Use the declared parameter \\\"quantity\\\" instead.\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Legacy.Stock.Reserve\\\". Always read the help before calling a message type.\"}"
+ },
+ {
+  "name": "AC02 Legacy.Stock.Get success first",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"itemNo\":\"BIFT-MCP1149\",\"hasReservation\":false,\"reservedQuantity\":0,\"availableToReserve\":0}"
+ },
+ {
+  "name": "AC08 Note.Add txt never silent",
+  "lcid": 1033,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"UnknownParameter\",\"error\":\"Parameter \\\"txt\\\" is not declared by this message type. Nothing was executed.\",\"parameter\":\"txt\",\"received\":\"hello\",\"expected\":\"declared request parameters\",\"nextStep\":\"Use the declared parameter \\\"text\\\" instead.\",\"hint\":\"For usage details, call the \\\"Help.Implementation.Get\\\" message type with subject \\\"Reference.Note.Add\\\". Always read the help before calling a message type.\"}"
+ },
+ {
+  "name": "AC01 MyApp.Item.List itemFiltr warns",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"itemFilter\":\"\",\"includeBlocked\":false,\"count\":323,\"returned\":100,\"more\":true,\"items\":[{\"itemNo\":\"1000\",\"description\":\"Bicycle\",\"blocked\":false},{\"itemNo\":\"1001\",\"description\":\"Touring Bicycle\",\"blocked\":false},{\"itemNo\":\"1100\",\"description\":\"Front Wheel\",\"blocked\":false},{\"itemNo\":\"1110\",\"description\":\"Rim\",\"blocked\":false},{\"itemNo\":\"1120\",\"description\":\"Spokes\",\"blocked\":false},{\"itemNo\":\"1150\",\"description\":\"Front Hub\",\"blocked\":false},{\"itemNo\":\"1151\",\"description\":\"Axle",
+  "warnings": [
+   {
+    "code": "UnknownParameter",
+    "message": "Viðfangið \"itemFiltr\" er ekki skilgreint fyrir þessa skilaboðategund og kann að vera hunsað.",
+    "parameter": "itemFiltr",
+    "nextStep": "Notaðu skilgreinda viðfangið \"itemFilter\" í staðinn."
+   }
+  ]
+ },
+ {
+  "name": "AC02 MyApp.Hello.Get success first",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"message\":\"Halló, Ada! My Bifrost App virkar í CRONUS International Ltd..\",\"user\":\"GUNNAR\",\"language\":1039,\"serverTime\":\"2026-11-11T16:29:59.964Z\",\"app\":\"My Bifrost App\",\"appVersion\":\"1.0.0.0\"}"
+ },
+ {
+  "name": "AC04 Summary local date InvalidParameterFormat",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"InvalidParameterFormat\",\"error\":\"Færibreytan 'asOfDate' hefur gildið '26.09.2026', sem er ekki dagsetning á sniðinu ÁÁÁÁ-MM-DD. Sendu til dæmis 2026-09-26.\",\"parameter\":\"asOfDate\",\"received\":\"26.09.2026\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"MyApp.Item.Summary.Get\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+ },
+ {
+  "name": "AC03 Echo message + forged status",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"message\":\"hi\",\"serverTime\":\"2026-11-11T16:30:26.1480000Z\",\"warnings\":[{\"code\":\"UnknownParameter\",\"message\":\"Viðfangið \\\"status\\\" er ekki skilgreint fyrir þessa skilaboðategund og kann að vera hunsað.\",\"parameter\":\"status\",\"nextStep\":\"Fjarlægðu þennan lykil eða skoðaðu Help.Implementation.Get til að sjá skilgreind viðföng.\"}]}",
+  "warnings": [
+   {
+    "code": "UnknownParameter",
+    "message": "Viðfangið \"status\" er ekki skilgreint fyrir þessa skilaboðategund og kann að vera hunsað.",
+    "parameter": "status",
+    "nextStep": "Fjarlægðu þennan lykil eða skoðaðu Help.Implementation.Get til að sjá skilgreind viðföng."
+   }
+  ]
+ },
+ {
+  "name": "AC03 Echo other warns",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"other\":1,\"serverTime\":\"2026-11-11T16:30:40.3210000Z\",\"warnings\":[{\"code\":\"UnknownParameter\",\"message\":\"Viðfangið \\\"other\\\" er ekki skilgreint fyrir þessa skilaboðategund og kann að vera hunsað.\",\"parameter\":\"other\",\"nextStep\":\"Fjarlægðu þennan lykil eða skoðaðu Help.Implementation.Get til að sjá skilgreind viðföng.\"}]}",
+  "warnings": [
+   {
+    "code": "UnknownParameter",
+    "message": "Viðfangið \"other\" er ekki skilgreint fyrir þessa skilaboðategund og kann að vera hunsað.",
+    "parameter": "other",
+    "nextStep": "Fjarlægðu þennan lykil eða skoðaðu Help.Implementation.Get til að sjá skilgreind viðföng."
+   }
+  ]
+ },
+ {
+  "name": "AC04 Table.Get missing MissingParameter",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"MissingParameter\",\"error\":\"Færibreytan 'tableName' er nauðsynleg. Sendu hana sem text, for example \\\"Item\\\".\",\"parameter\":\"tableName\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Reference.Table.Get\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+ },
+ {
+  "name": "AC02 Table.Get success first",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"tableName\":\"Item\",\"tableId\":27}"
+ },
+ {
+  "name": "AC04 Reserve quantity abc InvalidParameterFormat",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"InvalidParameterFormat\",\"error\":\"Færibreytan 'quantity' hefur gildið 'abc', sem er ekki tala. Sendu tölu með punkti sem aukastafaskiltákn, til dæmis 2.5.\",\"parameter\":\"quantity\",\"received\":\"abc\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Legacy.Stock.Reserve\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+ },
+ {
+  "name": "AC05 Reserve over stock BusinessCentralError no stack",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"BusinessCentralError\",\"error\":\"Varan 'BIFT-MCP1149' á 0 á lager og 0 eru þegar frátekin, svo ef 1 væru tekin frá til viðbótar væri tekið frá meira en er til. Taktu frá að hámarki 0 eða leyfðu umframfrátekningu sérstaklega.\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Legacy.Stock.Reserve\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+ },
+ {
+  "name": "AC08 Reserve quantiy never silent",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"UnknownParameter\",\"error\":\"Viðfangið \\\"quantiy\\\" er ekki skilgreint fyrir þessa skilaboðategund. Ekkert var keyrt.\",\"parameter\":\"quantiy\",\"received\":\"1\",\"expected\":\"skilgreind beiðniviðföng\",\"nextStep\":\"Notaðu skilgreinda viðfangið \\\"quantity\\\" í staðinn.\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Legacy.Stock.Reserve\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+ },
+ {
+  "name": "AC02 Legacy.Stock.Get success first",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Success\",\"itemNo\":\"BIFT-MCP1149\",\"hasReservation\":false,\"reservedQuantity\":0,\"availableToReserve\":0}"
+ },
+ {
+  "name": "AC08 Note.Add txt never silent",
+  "lcid": 1039,
+  "pass": true,
+  "resp": "{\"status\":\"Error\",\"code\":\"UnknownParameter\",\"error\":\"Viðfangið \\\"txt\\\" er ekki skilgreint fyrir þessa skilaboðategund. Ekkert var keyrt.\",\"parameter\":\"txt\",\"received\":\"hello\",\"expected\":\"skilgreind beiðniviðföng\",\"nextStep\":\"Notaðu skilgreinda viðfangið \\\"text\\\" í staðinn.\",\"hint\":\"Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \\\"Help.Implementation.Get\\\" með subject \\\"Reference.Note.Add\\\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund.\"}"
+ }
+]

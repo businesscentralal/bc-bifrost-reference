@@ -1,0 +1,155 @@
+Dynamics 365 Business Central
+
+
+
+
+G
+
+Skip to main content
+CRONUS International Ltd.
+Sales
+Purchasing
+Inventory
+Posted Documents
+Shopify
+All Reports
+
+Bifrost Messages:
+All
+
+
+Delete
+Edit List
+Task
+
+Request
+
+Response
+
+Export
+
+
+
+
+
+	
+Id
+	
+	
+Version
+	
+Type
+	
+Status
+	
+Source
+	
+Invocation Source
+	
+Subject
+	
+Language
+	
+Date & Time
+	
+Date
+	
+User ID
+	
+Last Modified
+	
+Response Time
+	
+Data Content Type
+	
+		
+														
+	{3fda58f9-d042-4f37-8eca-b3625e620ad5}	
+	1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Reference.Note.Add	English (United States)	11/11/2026 4:32 PM	11/11/2026	GUNNAR	11/11/2026 4:32 PM	10 milliseconds	text/json	
+	{a5b5c5ca-57e6-41f1-94f1-2c79deccd126}		1.0	Reference.Note.Add	Task completed (Error)	Origo-BC Cloud Events MCP	Task		Icelandic (Iceland)	11/11/2026 4:32 PM	11/11/2026	GUNNAR	11/11/2026 4:32 PM	7 milliseconds	text/json	
+	{557fdf08-ab91-4de0-bc0a-46c009aead77}		1.0	Legacy.Stock.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	Icelandic (Iceland)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	10 milliseconds	text/json	
+	{6271512b-8020-4258-9707-30cb3bd7591f}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Legacy.Stock.Reserve	English (United States)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	8 milliseconds	text/json	
+	{4172cb8d-2734-40c6-9c4b-0133a7cd8ffb}		1.0	Legacy.Stock.Reserve	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	Icelandic (Iceland)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	7 milliseconds	text/json	
+	{48df98fc-fa67-43cd-a998-f9a7add86dbb}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Legacy.Stock.Reserve	English (United States)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	10 milliseconds	text/json	
+	{103d07aa-d87a-4e24-8558-8e2667e73145}		1.0	Legacy.Stock.Reserve	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	Icelandic (Iceland)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	13 milliseconds	text/json	
+	{39da4cf6-085b-4d5e-a82e-647eac1670e6}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Legacy.Stock.Reserve	English (United States)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	7 milliseconds	text/json	
+	{d7713c4b-d9e0-4ec9-a446-4d0d516655d0}		1.0	Legacy.Stock.Reserve	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	Icelandic (Iceland)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	8 milliseconds	text/json	
+	{da674794-e581-4fd1-aad4-d65cb14409cc}		1.0	Reference.Table.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		Icelandic (Iceland)	11/11/2026 4:31 PM	11/11/2026	GUNNAR	11/11/2026 4:31 PM	10 milliseconds	text/json	
+	{12f20229-beb9-450b-b947-841d372ed4aa}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Reference.Table.Get	English (United States)	11/11/2026 4:30 PM	11/11/2026	GUNNAR	11/11/2026 4:30 PM	8 milliseconds	text/json	
+	{2eb0e9d4-46d3-431b-b2ea-85bd36ebb05b}		1.0	Reference.Table.Get	Task completed (Error)	Origo-BC Cloud Events MCP	Task		Icelandic (Iceland)	11/11/2026 4:30 PM	11/11/2026	GUNNAR	11/11/2026 4:30 PM	8 milliseconds	text/json	
+	{6c315431-194a-494f-a025-789d497558a1}		1.0	Reference.Echo.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		Icelandic (Iceland)	11/11/2026 4:30 PM	11/11/2026	GUNNAR	11/11/2026 4:30 PM	14 milliseconds	text/json	
+	{d9df4d05-791f-47b9-99f3-a10d551fdb7a}		1.0	Reference.Echo.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		Icelandic (Iceland)	11/11/2026 4:30 PM	11/11/2026	GUNNAR	11/11/2026 4:30 PM	15 milliseconds	text/json	
+	{05452dd0-330e-4dfa-a542-468fd284677e}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	MyApp.Item.Summary.Get	English (United States)	11/11/2026 4:30 PM	11/11/2026	GUNNAR	11/11/2026 4:30 PM	16 milliseconds	text/json	
+	{8feac00a-059a-4c9e-ac7a-9b90075973b8}		1.0	MyApp.Item.Summary.Get	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	Icelandic (Iceland)	11/11/2026 4:30 PM	11/11/2026	GUNNAR	11/11/2026 4:30 PM	10 milliseconds	text/json	
+	{834995ae-99a3-4264-968e-ee423240a6c3}		1.0	MyApp.Hello.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		Icelandic (Iceland)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	41 milliseconds	text/json	
+	{0f9e0e0f-3045-4c69-973f-2bc28608f1fd}		1.0	MyApp.Item.List	Task completed (Success)	Origo-BC Cloud Events MCP	Task		Icelandic (Iceland)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	34 milliseconds	text/json	
+	{5db45c2d-9f95-438b-841f-d8d8ab758533}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Reference.Note.Add	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	10 milliseconds	text/json	
+	{5ae4884e-d3aa-4683-a810-7fdfdd67b9d0}		1.0	Reference.Note.Add	Task completed (Error)	Origo-BC Cloud Events MCP	Task		English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	6 milliseconds	text/json	
+	{58db947a-3c81-4e29-b75b-ecd9a0a48a00}		1.0	Legacy.Stock.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	8 milliseconds	text/json	
+	{3a99a38f-61d5-4ae3-9780-b185408285aa}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Legacy.Stock.Reserve	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	10 milliseconds	text/json	
+	{dd54cc83-eee4-4f75-8008-3c2870a74ea2}		1.0	Legacy.Stock.Reserve	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	6 milliseconds	text/json	
+	{3c55cc1c-9a54-4ea2-824b-dfc83041f5fb}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Legacy.Stock.Reserve	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	8 milliseconds	text/json	
+	{1420ccd6-a2c6-423d-9d51-714dc857e1cc}		1.0	Legacy.Stock.Reserve	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	13 milliseconds	text/json	
+	{c40fc0cb-471e-4833-bb3d-6757065bec62}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Legacy.Stock.Reserve	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	11 milliseconds	text/json	
+	{33ad58b1-a4f9-4389-a639-2a4a3a7bab05}		1.0	Legacy.Stock.Reserve	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	English (United States)	11/11/2026 4:29 PM	11/11/2026	GUNNAR	11/11/2026 4:29 PM	7 milliseconds	text/json	
+	{f5d64d2a-133d-4952-9309-57ef838d222c}		1.0	Reference.Table.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		English (United States)	11/11/2026 4:28 PM	11/11/2026	GUNNAR	11/11/2026 4:28 PM	8 milliseconds	text/json	
+	{91161edc-ba6d-4d67-b432-80bdb073ca47}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	Reference.Table.Get	English (United States)	11/11/2026 4:28 PM	11/11/2026	GUNNAR	11/11/2026 4:28 PM	14 milliseconds	text/json	
+	{84714b57-bacb-497c-93c2-5a1bf9e7e744}		1.0	Reference.Table.Get	Task completed (Error)	Origo-BC Cloud Events MCP	Task		English (United States)	11/11/2026 4:28 PM	11/11/2026	GUNNAR	11/11/2026 4:28 PM	8 milliseconds	text/json	
+	{425eecf3-3e6f-478a-a8d6-d239a840ec4c}		1.0	Reference.Echo.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		English (United States)	11/11/2026 4:28 PM	11/11/2026	GUNNAR	11/11/2026 4:28 PM	6 milliseconds	text/json	
+	{8f770361-5dfd-4f7b-9378-789f41206fa2}		1.0	Reference.Echo.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		English (United States)	11/11/2026 4:28 PM	11/11/2026	GUNNAR	11/11/2026 4:28 PM	10 milliseconds	text/json	
+	{08e2d085-70bf-450c-b8d2-1639ccf697a2}		1.0	Help.Implementation.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task	MyApp.Item.Summary.Get	English (United States)	11/11/2026 4:28 PM	11/11/2026	GUNNAR	11/11/2026 4:28 PM	9 milliseconds	text/json	
+	{8558fe4b-ecd2-46bc-bdee-c85116c86b85}		1.0	MyApp.Item.Summary.Get	Task completed (Error)	Origo-BC Cloud Events MCP	Task	BIFT-MCP1149	English (United States)	11/11/2026 4:28 PM	11/11/2026	GUNNAR	11/11/2026 4:28 PM	7 milliseconds	text/json	
+	{666a98ac-9626-4a47-ad56-59eed4f3536c}		1.0	MyApp.Hello.Get	Task completed (Success)	Origo-BC Cloud Events MCP	Task		English (United States)	11/11/2026 4:27 PM	11/11/2026	GUNNAR	11/11/2026 4:27 PM	7 milliseconds	text/json	
+	{0d4f933f-65a3-47fa-b88a-17c2e61eae25}		1.0	MyApp.Item.List	Task completed (Success)	Origo-BC Cloud Events MCP	Task		English (United States)	11/11/2026 4:27 PM	11/11/2026	GUNNAR	11/11/2026 4:27 PM	18 milliseconds	text/json	
+
+Request Data
+Response Data
+Content Length
+Caller Identity
+Name
+Type
+
+Last Modified, sorted in Descending order
+
+Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+on
+
+
