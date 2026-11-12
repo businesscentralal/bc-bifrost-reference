@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Publish the TestApps and TestResults artifacts from the AL-Go build, and analyze normal test results when `doNotRunTests` is false. Pull request and main CI already compile and run Bifrost Boilerplate Tests and Bifrost Reference Tests inside the build; the workflow was dropping those outputs.
+
 - Keep codeunit 90109 confirmation and bulk release in Foundation's isolated message transaction, preserving rollback and structured HTTP errors after the confirmation locks.
 
 - Replace help markdown codeunits with structured contract chapters for the Boilerplate, Reference and Legacy v2 message types. Keep discovery labels translated in en-US/is-IS and validate the chapters through the dispatcher tests.
