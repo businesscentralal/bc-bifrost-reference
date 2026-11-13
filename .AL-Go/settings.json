@@ -13,6 +13,7 @@
   "bcptTestFolders": [],
   "enableCodeCop": true,
   "enableUICop": true,
+  "enablePerTenantExtensionCop": true,
   "enableCodeAnalyzersOnTestApps": true,
   "failOn": "warning",
   "doNotRunTests": false,
