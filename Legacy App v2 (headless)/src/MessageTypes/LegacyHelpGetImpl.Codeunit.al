@@ -35,12 +35,13 @@ codeunit 90111 "Legacy Help Get Impl" implements "Msg Interface ori", "Msg Disco
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
+        LegacyAdapterInput: Codeunit "Legacy Adapter Input";
         ResponseJson: JsonObject;
     begin
         Argument.AssertVersion1();
         ResponseJson.Add('format', 'markdown');
         ResponseJson.Add('markdown', BuildOverview());
-        Argument.SetResponseJson(ResponseJson);
+        LegacyAdapterInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -96,6 +97,7 @@ codeunit 90111 "Legacy Help Get Impl" implements "Msg Interface ori", "Msg Disco
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('format', 'string', 'Always markdown.'));
         Fields.Add(ContractMgt.ResponseField('markdown', 'string', 'The overview document as Markdown text with \n line breaks: a short introduction and a table of the app''s message types (type, effect, what it does). Never empty.'));
         Response.Add('contentType', 'text/json');
@@ -153,7 +155,7 @@ codeunit 90111 "Legacy Help Get Impl" implements "Msg Interface ori", "Msg Disco
     begin
         Examples.Add(ContractMgt.Example('Get the app overview',
             '{"type":"Help.Legacy.Get"}',
-            '{"format":"markdown","markdown":"# Legacy App\n\nStock reservations per item, with a cancellation log. ...\n\n| Type | Effect | What it does |\n..."}'));
+            '{"status":"Success","format":"markdown","markdown":"# Legacy App\n\nStock reservations per item, with a cancellation log. ...\n\n| Type | Effect | What it does |\n..."}'));
         exit(true);
     end;
 

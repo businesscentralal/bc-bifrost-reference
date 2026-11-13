@@ -36,13 +36,13 @@ codeunit 90016 "Ref Price Adjust"
         ItemCategoryCode := CopyStr(UpperCase(CategoryText), 1, MaxStrLen(ItemCategoryCode));
         ItemCategory.SetLoadFields(Code);
         if not ItemCategory.Get(ItemCategoryCode) then begin
-            Argument.RespondWithError(StrSubstNo(CategoryNotFoundErr, CategoryText));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::RecordNotFound, 'itemCategoryCode', CategoryText, StrSubstNo(CategoryNotFoundErr, CategoryText));
             exit(false);
         end;
         if not RefInput.GetRequiredDecimal(Argument, RequestJson, 'percent', -50, 100, Percent) then
             exit(false);
         if Percent = 0 then begin
-            Argument.RespondWithError(ZeroPercentErr);
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameter, 'percent', '', ZeroPercentErr);
             exit(false);
         end;
         exit(true);

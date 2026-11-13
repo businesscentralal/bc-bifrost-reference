@@ -73,7 +73,7 @@ Write with `set_records` (or `Data.Records.Set` with the table in `subject`). Th
   - `Error` runs after the step, against the **workspace**, and fails the run when true. The path is a workspace path, for example `10.status`.
   - Lines in the same group are all required; any one group holding is enough.
   - Operators: `Equals`, `NotEquals`, `Contains`, `GreaterThan`, `LessThan`, `GreaterOrEqual`, `LessOrEqual`, `Exists`.
-  - The guide suggests a Success condition `status Equals Success`. Use it only for types whose successful answer contains `status`, which you can check in `describe_message_type`. Many types, for example `Legacy.Stock.List`, return no `status` on success, so that condition would always be false. Test for a field only a real answer has instead (`count Exists`, `released Exists`).
+  - The guide suggests a Success condition `status Equals Success`. It works for every type of the sample apps (MyApp, Reference, Legacy v2): each success answer carries `status: "Success"`. For another app's type, check the response chapter in `describe_message_type` first. A field only a real answer has (`count Exists`, `released Exists`) also works.
 
 **Templates** use the message type's own parameter names:
 

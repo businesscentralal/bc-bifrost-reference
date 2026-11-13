@@ -10,7 +10,8 @@ Test a message type **the way a caller uses it**: through Foundation's public `D
 
 | The type answers with… | You get | Test it with |
 |---|---|---|
-| `Argument.RespondWithError` (input checks) | `{"status":"Error","error":"…"}` | `Caller.AssertErrorAnswer(Response, 'part of the text')` |
+| `Reject` in the input codeunit (input checks) | `{"status":"Error","code":"…","error":"…","parameter":"…"}` | `Caller.AssertErrorCode(Response, 'MissingParameter')`, `Caller.AssertErrorAnswer(Response, 'part of the text')` |
+| `SetSuccess` in the input codeunit (success) | `{"status":"Success",…}`, maybe with `warnings` | `Caller.AssertOk(Response)` (status Success, first key), `Caller.AssertWarning(Response, 'UnknownParameter', 'key')` |
 | `Error()` inside the isolated write (business rules in the app's core) | The error is raised out of the call | `asserterror Caller.Call(...)`, then `Assert.ExpectedError('part of the text')` |
 
 ## What is covered

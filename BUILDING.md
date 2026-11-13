@@ -183,11 +183,11 @@ Test the card the way it is used: ask a fresh agent in plain words, with no type
 |---|---|
 | Read | `GetRequestJson()` (wrap in a `[TryFunction]`: a non-object body raises), `SubjectIsGuid()` |
 | Answer | `SetResponseJson(JsonObject)`, `SetResponseMarkdown(Text)`, `SetResponsePdf(var Temp Blob)` |
-| Errors | `RespondWithError(Text)` → `{"status":"Error","error":…,"hint":…}`. The hint points the caller to `Help.Implementation.Get`. |
+| Errors | `RespondWithError(ErrorCode, Message, Parameter, Received, Expected, NextStep)` → `{"status":"Error","code":…,"error":…,"parameter":…,"received":…,"hint":…}`; empty properties are left out. Each sample app wraps it as `Reject` in its input codeunit. For an error you caught from an isolated write or the core, use `RespondWithLastError()`: code `BusinessCentralError`, and the call stack goes to telemetry, not to the caller. `RespondWithError(Text)` gives no `code`, so don't use it for new types. The hint points the caller to `Help.Implementation.Get`. |
 | Guards | `AssertVersion1()`, `AssertIsLicensed()` |
 | Secrets | `RedactRequestData()` replaces the stored request with `{"redacted":true}` |
 
-A success answer has no `status` field. Read `skip`/`take` with your input layer.
+A success answer carries `"status": "Success"` as its first key: answer through your input codeunit's `SetSuccess` (each sample app has one), not `SetResponseJson` directly. Foundation adds its request warnings, such as `UnknownParameter` for a key the parameters chapter does not declare, only to an answer that has `status`. Declare `status` as the first field of the response chapter and start every success example with it. Read `skip`/`take` with your input layer.
 
 **`Dispatcher ori`:** `Execute(…)` (8 parameters, `OmitCommit` = true; 9 with the flag) and `EnqueueAndProcess(…)` (adds Task Id, language, message id, response time; `OmitCommit` = false). Every overload writes a `Message ori` row and runs the full pipeline. Pass only the `data` object as `RequestContent`. `Execute` runs in the default language (Bifrost Setup, then Company Information, then 1033); pass `WindowsLanguageId` to `EnqueueAndProcess` to choose. See [INTEGRATING.md](INTEGRATING.md).
 

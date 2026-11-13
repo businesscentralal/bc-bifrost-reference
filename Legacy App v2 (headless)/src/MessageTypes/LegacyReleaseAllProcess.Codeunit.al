@@ -19,6 +19,7 @@ codeunit 90110 "Legacy Release All Process"
     trigger OnRun()
     var
         Reservation: Record "Legacy Stock Reservation";
+        LegacyAdapterInput: Codeunit "Legacy Adapter Input";
         LegacyStockAPI: Codeunit "Legacy Stock API";
         ResponseJson: JsonObject;
         ActualCount: Integer;
@@ -34,7 +35,7 @@ codeunit 90110 "Legacy Release All Process"
 
         ResponseJson.Add('itemFilter', ItemFilter);
         ResponseJson.Add('released', Released);
-        Rec.SetResponseJson(ResponseJson);
+        LegacyAdapterInput.SetSuccess(Rec, ResponseJson);
     end;
 
     procedure SetRelease(NewItemFilter: Text; NewExpectedCount: Integer)

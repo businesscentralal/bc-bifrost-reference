@@ -62,12 +62,12 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Dis
         if not ReadCurrency(Argument, RefInput, RequestJson, 'to', ToCurrency) then
             exit;
         if FromCurrency = ToCurrency then begin
-            Argument.RespondWithError(StrSubstNo(SameCurrencyErr, FromCurrency));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::PreconditionFailed, 'to', ToCurrency, StrSubstNo(SameCurrencyErr, FromCurrency));
             exit;
         end;
 
         if not RatesClient.TryGetLatestRate(FromCurrency, ToCurrency, Rate, RateDate, ErrorText) then begin
-            Argument.RespondWithError(ErrorText);
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::PreconditionFailed, '', '', ErrorText);
             exit;
         end;
 
@@ -77,7 +77,7 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Dis
         if RateDate <> 0D then
             ResponseJson.Add('rateDate', Format(RateDate, 0, 9));
         ResponseJson.Add('source', SourceTxt);
-        Argument.SetResponseJson(ResponseJson);
+        RefInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -137,6 +137,7 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Dis
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('from', 'string', 'The from currency, in upper case.'));
         Fields.Add(ContractMgt.ResponseField('to', 'string', 'The to currency, in upper case.'));
         Fields.Add(ContractMgt.ResponseField('rate', 'number', '1 from = rate to.'));
@@ -152,16 +153,16 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Dis
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is required. Send it as text, for example "EUR".', 'from or to is missing.', 'Send both from and to.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is empty. Send a value, for example "EUR".', 'from or to is an empty string.', 'Send a currency code.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is 10.', 'from or to is far too long to be a currency code.', 'Send a 3-letter code.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'from or to is an object or an array.', 'Send a 3-letter code as text.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is ''{value}''. Send a 3-letter ISO currency code, for example EUR or ISK.', 'from or to is not three letters, for example EURO.', 'Use ISO currency codes.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameters ''from'' and ''to'' are both {currency}. Send two different currencies.', 'The same currency on both sides.', 'Send two different codes.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service at {baseUrl} could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup > Start setup wizard).', 'No network, or outbound HTTP is blocked for this app. The platform''s reason may follow as " Details: {details}".', 'Run the Bifrost Setup Wizard and enable HTTP for Bifrost Reference.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service answered HTTP {status} for {from} to {to}. Check that both are ISO currency codes the service supports (for example EUR, USD, ISK).', 'The service does not know one of the currencies, or failed.', 'Use a currency the service supports.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The exchange rate service returned an answer without a rate for {to}. Try again later, or check Rates Base URL on the Bifrost Reference Setup page.', 'The service gave an unexpected answer.', 'Try again later, or check Rates Base URL.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''{parameter}'' is required. Send it as text, for example "EUR".', 'from or to is missing.', 'Send both from and to.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''{parameter}'' is empty. Send a value, for example "EUR".', 'from or to is an empty string.', 'Send a currency code.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''{parameter}'' is {length} characters long; the maximum is 10.', 'from or to is far too long to be a currency code.', 'Send a 3-letter code.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'from or to is an object or an array.', 'Send a 3-letter code as text.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' is ''{value}''. Send a 3-letter ISO currency code, for example EUR or ISK.', 'from or to is not three letters, for example EURO.', 'Use ISO currency codes.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'Parameters ''from'' and ''to'' are both {currency}. Send two different currencies.', 'The same currency on both sides.', 'Send two different codes.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'The exchange rate service at {baseUrl} could not be reached. If outbound HTTP is blocked, enable it for Bifrost Reference in the Bifrost Setup Wizard (Bifrost Setup > Start setup wizard).', 'No network, or outbound HTTP is blocked for this app. The platform''s reason may follow as " Details: {details}".', 'Run the Bifrost Setup Wizard and enable HTTP for Bifrost Reference.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'The exchange rate service answered HTTP {status} for {from} to {to}. Check that both are ISO currency codes the service supports (for example EUR, USD, ISK).', 'The service does not know one of the currencies, or failed.', 'Use a currency the service supports.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'The exchange rate service returned an answer without a rate for {to}. Try again later, or check Rates Base URL on the Bifrost Reference Setup page.', 'The service gave an unexpected answer.', 'Try again later, or check Rates Base URL.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object.'));
         exit(true);
     end;
 
@@ -204,10 +205,10 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Dis
     begin
         Examples.Add(ContractMgt.Example('Euro to krona',
             '{"type":"Reference.ExchangeRate.Get","data":{"from":"EUR","to":"ISK"}}',
-            '{"from":"EUR","to":"ISK","rate":136.6,"rateDate":"2026-09-25","source":"European Central Bank reference rates via the configured rates service"}'));
+            '{"status":"Success","from":"EUR","to":"ISK","rate":136.6,"rateDate":"2026-09-25","source":"European Central Bank reference rates via the configured rates service"}'));
         Examples.Add(ContractMgt.Example('Not a currency code',
             '{"type":"Reference.ExchangeRate.Get","data":{"from":"EUR","to":"EURO"}}',
-            '{"status":"Error","error":"Parameter ''to'' is ''EURO''. Send a 3-letter ISO currency code, for example EUR or ISK."}'));
+            '{"status":"Error","code":"InvalidParameterFormat","error":"Parameter ''to'' is ''EURO''. Send a 3-letter ISO currency code, for example EUR or ISK."}'));
         exit(true);
     end;
 
@@ -227,12 +228,12 @@ codeunit 90021 "Ref Exch Rate Get Impl" implements "Msg Interface ori", "Msg Dis
             exit(false);
         Value := UpperCase(DelChr(Value, '<>', ' '));
         if StrLen(Value) <> 3 then begin
-            Argument.RespondWithError(StrSubstNo(CurrencyFormatErr, KeyName, Value));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, Value, StrSubstNo(CurrencyFormatErr, KeyName, Value));
             exit(false);
         end;
         for Index := 1 to 3 do
             if not (Value[Index] in ['A' .. 'Z']) then begin
-                Argument.RespondWithError(StrSubstNo(CurrencyFormatErr, KeyName, Value));
+                RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::InvalidParameterFormat, KeyName, Value, StrSubstNo(CurrencyFormatErr, KeyName, Value));
                 exit(false);
             end;
         CurrencyCode := CopyStr(Value, 1, 3);

@@ -83,7 +83,7 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
         if not RefInput.GetOptionalDate(Argument, RequestJson, 'fromDate', FromDate, HasFromDate) then
             exit;
         if HasFromDate and (FromDate > AsOfDate) then begin
-            Argument.RespondWithError(StrSubstNo(FromAfterAsOfErr, Format(FromDate, 0, 9), Format(AsOfDate, 0, 9)));
+            RefInput.Reject(Argument, Enum::"Bifrost Error Code ori"::PreconditionFailed, 'fromDate', Format(FromDate, 0, 9), StrSubstNo(FromAfterAsOfErr, Format(FromDate, 0, 9), Format(AsOfDate, 0, 9)));
             exit;
         end;
 
@@ -117,7 +117,7 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
         end;
         ResponseJson.Add('blocked', GLAccount.Blocked);
         ResponseJson.Add('directPosting', GLAccount."Direct Posting");
-        Argument.SetResponseJson(ResponseJson);
+        RefInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -185,6 +185,7 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('accountNo', 'string', 'The account number.'));
         Fields.Add(ContractMgt.ResponseField('name', 'string', 'The account name.'));
         Fields.Add(ContractMgt.ResponseField('accountType', 'string', 'Posting, Heading, Total, Begin-Total or End-Total. Only Posting accounts carry postings of their own; the others answer totals over their Totaling range (a Heading has none, so 0).'));
@@ -205,13 +206,13 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('No G/L account was given. Send the account number in subject or as "accountNo", or its SystemId in subject.', 'subject is empty and data has no accountNo.', 'Send the account number in subject.'));
-        Errors.Add(ContractMgt.TextErrorEntry('G/L account ''{account}'' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.', 'No account has that number or SystemId.', 'Check the number, or search by name with Data.Records.Get.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' has the value ''{value}'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.', 'asOfDate or fromDate is not YYYY-MM-DD, for example 31.08.2026.', 'Send the date as YYYY-MM-DD, for example 2026-08-31.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''fromDate'' is {fromDate}, which is after ''asOfDate'' {asOfDate}. Send a fromDate on or before the asOfDate, or leave fromDate out to get the balance only.', 'The period ends before it starts.', 'Swap the dates, or leave fromDate out.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'accountNo, asOfDate or fromDate is an object or an array.', 'Send it as text.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'accountNo is longer than 20 characters, or a date longer than 30.', 'Send the account number, or the date as YYYY-MM-DD.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'No G/L account was given. Send the account number in subject or as "accountNo", or its SystemId in subject.', 'subject is empty and data has no accountNo.', 'Send the account number in subject.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::RecordNotFound, 'G/L account ''{account}'' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.', 'No account has that number or SystemId.', 'Check the number, or search by name with Data.Records.Get.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' has the value ''{value}'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26.', 'asOfDate or fromDate is not YYYY-MM-DD, for example 31.08.2026.', 'Send the date as YYYY-MM-DD, for example 2026-08-31.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::PreconditionFailed, 'Parameter ''fromDate'' is {fromDate}, which is after ''asOfDate'' {asOfDate}. Send a fromDate on or before the asOfDate, or leave fromDate out to get the balance only.', 'The period ends before it starts.', 'Swap the dates, or leave fromDate out.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'accountNo, asOfDate or fromDate is an object or an array.', 'Send it as text.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''{parameter}'' is {length} characters long; the maximum is {maximum}.', 'accountNo is longer than 20 characters, or a date longer than 30.', 'Send the account number, or the date as YYYY-MM-DD.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
         exit(true);
     end;
 
@@ -260,13 +261,13 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
     begin
         Examples.Add(ContractMgt.Example('Balance at the end of August and the net change for August',
             '{"type":"Reference.GLAccount.Overview.Get","subject":"2910","data":{"asOfDate":"2026-08-31","fromDate":"2026-08-01"}}',
-            '{"accountNo":"2910","name":"Bank, Checking","accountType":"Posting","incomeBalance":"Balance Sheet","currencyCode":"ISK","asOfDate":"2026-08-31","balanceAsOf":1250000,"fromDate":"2026-08-01","netChange":-300000,"blocked":false,"directPosting":true}'));
+            '{"status":"Success","accountNo":"2910","name":"Bank, Checking","accountType":"Posting","incomeBalance":"Balance Sheet","currencyCode":"ISK","asOfDate":"2026-08-31","balanceAsOf":1250000,"fromDate":"2026-08-01","netChange":-300000,"blocked":false,"directPosting":true}'));
         Examples.Add(ContractMgt.Example('Balance only, as of the work date',
             '{"type":"Reference.GLAccount.Overview.Get","data":{"accountNo":"2910"}}',
-            '{"accountNo":"2910","name":"Bank, Checking","accountType":"Posting","incomeBalance":"Balance Sheet","currencyCode":"ISK","asOfDate":"2026-09-26","balanceAsOf":1180000,"fromDate":null,"netChange":null,"blocked":false,"directPosting":true}'));
+            '{"status":"Success","accountNo":"2910","name":"Bank, Checking","accountType":"Posting","incomeBalance":"Balance Sheet","currencyCode":"ISK","asOfDate":"2026-09-26","balanceAsOf":1180000,"fromDate":null,"netChange":null,"blocked":false,"directPosting":true}'));
         Examples.Add(ContractMgt.Example('A date in the wrong format',
             '{"type":"Reference.GLAccount.Overview.Get","subject":"2910","data":{"asOfDate":"31.08.2026"}}',
-            '{"status":"Error","error":"Parameter ''asOfDate'' has the value ''31.08.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
+            '{"status":"Error","code":"InvalidParameterFormat","error":"Parameter ''asOfDate'' has the value ''31.08.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
         exit(true);
     end;
 

@@ -44,7 +44,7 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
             exit;
         if not RequestJson.Replace('serverTime', CurrentDateTime()) then
             RequestJson.Add('serverTime', CurrentDateTime());
-        Argument.SetResponseJson(RequestJson);
+        RefInput.SetSuccess(Argument, RequestJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -67,7 +67,7 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Returns the JSON object you sent, with one field added: `serverTime`, the date and time on the Business Central server when the call ran. ' +
+        Overview := 'Returns the JSON object you sent, with `status` Success first and one field added: `serverTime`, the date and time on the Business Central server when the call ran. A `status` you send is ignored without a warning; a key other than `message` or `status` is returned too, with an UnknownParameter warning. ' +
             'Use it to confirm that a call reaches Business Central and that request and response travel intact, or to read the server clock. Not for reading or writing business data: it touches no table.';
         exit(true);
     end;
@@ -89,10 +89,17 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
         exit(false);
     end;
 
-    /// <summary>No named parameters: any JSON object is returned as sent.</summary>
+    /// <summary>
+    /// Declares message and the ignored caller status. Any other key is still returned as sent, and Foundation
+    /// adds an UnknownParameter warning for it, so a caller sees which keys the type does not know.
+    /// </summary>
     procedure GetParameters(var Parameters: JsonArray): Boolean
+    var
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        exit(false);
+        Parameters.Add(ContractMgt.Parameter('message', 'string', false, 'Any text; it is returned unchanged.'));
+        Parameters.Add(ContractMgt.Parameter('status', 'string', false, 'Ignored. The response status is always Success when the call worked, regardless of the value sent.'));
+        exit(true);
     end;
 
     procedure GetResponse(var Response: JsonObject): Boolean
@@ -100,7 +107,9 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('serverTime', 'string', 'The server''s date and time when the call ran, ISO 8601 in UTC, for example 2026-09-18T10:15:30.123Z. Every other field is your request, returned unchanged in its own JSON type; a serverTime you sent is replaced.'));
+        Fields.Add(ContractMgt.ResponseField('message', 'string', 'The message you sent, unchanged. Other keys are returned with an UnknownParameter warning, except status: it is ignored without a warning and replaced by Success.'));
         Response.Add('contentType', 'text/json');
         Response.Add('fields', Fields);
         exit(true);
@@ -110,7 +119,7 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body.'));
         exit(true);
     end;
 
@@ -152,13 +161,13 @@ codeunit 90000 "Ref Echo Set Impl" implements "Msg Interface ori", "Msg Discover
     begin
         Examples.Add(ContractMgt.Example('Echo a message',
             '{"type":"Reference.Echo.Get","data":{"message":"hello"}}',
-            '{"message":"hello","serverTime":"2026-09-18T10:15:30.123Z"}'));
+            '{"status":"Success","message":"hello","serverTime":"2026-09-18T10:15:30.123Z"}'));
         Examples.Add(ContractMgt.Example('Empty request',
             '{"type":"Reference.Echo.Get","data":{}}',
-            '{"serverTime":"2026-09-18T10:15:30.123Z"}'));
+            '{"status":"Success","serverTime":"2026-09-18T10:15:30.123Z"}'));
         Examples.Add(ContractMgt.Example('The body is not an object',
             '{"type":"Reference.Echo.Get","data":["hello"]}',
-            '{"status":"Error","error":"The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }."}'));
+            '{"status":"Error","code":"InvalidParameterFormat","error":"The request body must be a JSON object, with its parameters by name, for example { \"name\": \"value\" }."}'));
         exit(true);
     end;
 

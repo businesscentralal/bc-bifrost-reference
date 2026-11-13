@@ -61,7 +61,7 @@ codeunit 90100 "Legacy Stock Reserve Impl" implements "Msg Interface ori", "Msg 
             ReserveProcess.Run(Argument)
         else
             if not ReserveProcess.Run(Argument) then
-                Argument.RespondWithError(GetLastErrorText());
+                Argument.RespondWithLastError();
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -121,6 +121,7 @@ codeunit 90100 "Legacy Stock Reserve Impl" implements "Msg Interface ori", "Msg 
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('itemNo', 'string', 'The item number, in upper case.'));
         Fields.Add(ContractMgt.ResponseField('quantityAdded', 'number', 'The quantity this call added.'));
         Fields.Add(ContractMgt.ResponseField('totalReserved', 'number', 'The item''s total reserved quantity after this call.'));
@@ -140,14 +141,14 @@ codeunit 90100 "Legacy Stock Reserve Impl" implements "Msg Interface ori", "Msg 
         Parts: Codeunit "Legacy Stock Contract";
     begin
         Parts.AddItemErrors(Errors);
-        Errors.Add(ContractMgt.TextErrorEntry('Item ''{itemNo}'' does not exist. Check the number, or find the item with Data.Records.Get on table Item.', 'No item has that number.', 'Check the number.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Item ''{itemNo}'' is blocked, so stock cannot be reserved for it. Unblock the item or choose another.', 'The item is blocked.', 'Unblock it or choose another item.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''quantity'' is required. Send it as a number, for example 2.5.', 'quantity is missing.', 'Send quantity.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''quantity'' has the value ''{value}'', which is not a number. Send a number with a dot as decimal separator, for example 2.5.', 'quantity is not a number.', 'Send a number, for example 2.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'quantity or allowOverStock is an object or an array.', 'Send a single value.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The quantity to reserve is {quantity}. Send a quantity greater than zero; to remove a reservation, cancel it instead.', 'quantity is zero or negative.', 'Send a positive quantity.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Item ''{itemNo}'' has {inventory} in inventory and {reserved} already reserved, so reserving {quantity} more would reserve more than is in stock. Reserve at most {available}, or explicitly allow over-reservation.', 'The new total would exceed the inventory.', 'Reserve at most the number given, or ask the user and resend with "allowOverStock": true.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''allowOverStock'' has the value ''{value}''. Send true or false, without quotes.', 'allowOverStock is not true or false, for example "yes".', 'Send true or false.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::BusinessCentralError, 'Item ''{itemNo}'' does not exist. Check the number, or find the item with Data.Records.Get on table Item.', 'No item has that number.', 'Check the number.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::BusinessCentralError, 'Item ''{itemNo}'' is blocked, so stock cannot be reserved for it. Unblock the item or choose another.', 'The item is blocked.', 'Unblock it or choose another item.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::MissingParameter, 'Parameter ''quantity'' is required. Send it as a number, for example 2.5.', 'quantity is missing.', 'Send quantity.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''quantity'' has the value ''{value}'', which is not a number. Send a number with a dot as decimal separator, for example 2.5.', 'quantity is not a number.', 'Send a number, for example 2.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''{parameter}'' must be a single value (text or number), not an object or an array.', 'quantity or allowOverStock is an object or an array.', 'Send a single value.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::BusinessCentralError, 'The quantity to reserve is {quantity}. Send a quantity greater than zero; to remove a reservation, cancel it instead.', 'quantity is zero or negative.', 'Send a positive quantity.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::BusinessCentralError, 'Item ''{itemNo}'' has {inventory} in inventory and {reserved} already reserved, so reserving {quantity} more would reserve more than is in stock. Reserve at most {available}, or explicitly allow over-reservation.', 'The new total would exceed the inventory.', 'Reserve at most the number given, or ask the user and resend with "allowOverStock": true.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''allowOverStock'' has the value ''{value}''. Send true or false, without quotes.', 'allowOverStock is not true or false, for example "yes".', 'Send true or false.'));
         exit(true);
     end;
 
@@ -196,13 +197,13 @@ codeunit 90100 "Legacy Stock Reserve Impl" implements "Msg Interface ori", "Msg 
     begin
         Examples.Add(ContractMgt.Example('Reserve 2 of an item',
             '{"type":"Legacy.Stock.Reserve","subject":"1896-S","data":{"quantity":2}}',
-            '{"itemNo":"1896-S","quantityAdded":2,"totalReserved":5,"availableToReserve":12}'));
+            '{"status":"Success","itemNo":"1896-S","quantityAdded":2,"totalReserved":5,"availableToReserve":12}'));
         Examples.Add(ContractMgt.Example('More than is in stock',
             '{"type":"Legacy.Stock.Reserve","subject":"1896-S","data":{"quantity":5}}',
-            '{"status":"Error","error":"Item ''1896-S'' has 10 in inventory and 8 already reserved, so reserving 5 more would reserve more than is in stock. Reserve at most 2, or explicitly allow over-reservation."}'));
+            '{"status":"Error","code":"BusinessCentralError","error":"Item ''1896-S'' has 10 in inventory and 8 already reserved, so reserving 5 more would reserve more than is in stock. Reserve at most 2, or explicitly allow over-reservation."}'));
         Examples.Add(ContractMgt.Example('The user agreed to reserve more than is in stock',
             '{"type":"Legacy.Stock.Reserve","subject":"1896-S","data":{"quantity":5,"allowOverStock":true}}',
-            '{"itemNo":"1896-S","quantityAdded":5,"totalReserved":13,"availableToReserve":-3}'));
+            '{"status":"Success","itemNo":"1896-S","quantityAdded":5,"totalReserved":13,"availableToReserve":-3}'));
         exit(true);
     end;
 

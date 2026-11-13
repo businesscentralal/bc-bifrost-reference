@@ -66,7 +66,7 @@ codeunit 50007 "My Hello Get Impl" implements "Msg Interface ori", "Msg Discover
         ResponseJson.Add('serverTime', Format(CurrentDateTime(), 0, 9));
         ResponseJson.Add('app', AppInfo.Name());
         ResponseJson.Add('appVersion', Format(AppInfo.AppVersion()));
-        Argument.SetResponseJson(ResponseJson);
+        MyInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori: words people say, and what it is NOT for. Translatable Labels, never Locked. ----------
@@ -102,6 +102,7 @@ codeunit 50007 "My Hello Get Impl" implements "Msg Interface ori", "Msg Discover
     var
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('message', 'string', 'The greeting, in the caller''s language when a translation is installed.'));
         Fields.Add(ContractMgt.ResponseField('user', 'string', 'The user who called.'));
         Fields.Add(ContractMgt.ResponseField('company', 'string', 'The company the call ran in.'));
@@ -117,9 +118,9 @@ codeunit 50007 "My Hello Get Impl" implements "Msg Interface ori", "Msg Discover
     procedure GetErrors(var Errors: JsonArray): Boolean
     begin
         // Verbatim from the Labels in My Input, %1 written as {placeholder}. Change both in one commit.
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''name'' is {length} characters long; the maximum is 50.', 'name is too long.', 'Send a shorter name.'));
-        Errors.Add(ContractMgt.TextErrorEntry('Parameter ''name'' must be a single value (text or number), not an object or an array.', 'name is an object or an array.', 'Send it as text.'));
-        Errors.Add(ContractMgt.TextErrorEntry('The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameter, 'Parameter ''name'' is {length} characters long; the maximum is 50.', 'name is too long.', 'Send a shorter name.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'Parameter ''name'' must be a single value (text or number), not an object or an array.', 'name is an object or an array.', 'Send it as text.'));
+        Errors.Add(ContractMgt.ErrorEntry(Enum::"Bifrost Error Code ori"::InvalidParameterFormat, 'The request body must be a JSON object, with its parameters by name, for example { "name": "value" }.', 'data is an array or plain text.', 'Send a JSON object, or no body at all.'));
         exit(true);
     end;
 
@@ -149,9 +150,9 @@ codeunit 50007 "My Hello Get Impl" implements "Msg Interface ori", "Msg Discover
     procedure GetExamples(var Examples: JsonArray): Boolean
     begin
         Examples.Add(ContractMgt.Example('Say hello', '{"type":"MyApp.Hello.Get","data":{"name":"World"}}',
-            '{"message":"Hello, World! My Bifrost App is working in CRONUS.","user":"ADMIN","company":"CRONUS","language":1033,"serverTime":"2026-09-27T09:15:00.000Z","app":"My Bifrost App","appVersion":"1.0.0.0"}'));
+            '{"status":"Success","message":"Hello, World! My Bifrost App is working in CRONUS.","user":"ADMIN","company":"CRONUS","language":1033,"serverTime":"2026-09-27T09:15:00.000Z","app":"My Bifrost App","appVersion":"1.0.0.0"}'));
         Examples.Add(ContractMgt.Example('A name that is too long', '{"type":"MyApp.Hello.Get","data":{"name":"A name of sixty characters ................................."}}',
-            '{"status":"Error","error":"Parameter ''name'' is 60 characters long; the maximum is 50."}'));
+            '{"status":"Error","code":"InvalidParameter","error":"Parameter ''name'' is 60 characters long; the maximum is 50."}'));
         exit(true);
     end;
 

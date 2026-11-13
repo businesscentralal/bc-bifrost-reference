@@ -47,9 +47,10 @@ curl -X POST "https://api.businesscentral.dynamics.com/v2.0/<tenant>/<environmen
 { "status": "Error", "error": "G/L account '99999' was not found. Check the number, or search for the account with Data.Records.Get on table G/L Account.", "hint": "..." }
 ```
 
-- **A response with no `status` field is a success.**
+- **A success answer has `"status": "Success"`** (the sample apps put it first). It can carry `warnings`, for example `UnknownParameter` for a key the type does not declare; the warning's `nextStep` names the right key.
+- Every error carries a `code` from Foundation's error codes (`MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `PreconditionFailed`, `BusinessCentralError`, …) and, when it concerns one, the `parameter`. Branch on the code, not the text.
 - Expected failures carry the exact text listed in the type's `errors` chapter. Match on it.
-- Unexpected failures carry the Business Central error text.
+- Unexpected failures carry code `BusinessCentralError` and the Business Central error text.
 - The `hint` points to `Help.Implementation.Get` for the type.
 
 ## Types to try first

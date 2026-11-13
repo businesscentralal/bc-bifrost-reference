@@ -40,6 +40,6 @@ codeunit 90004 "Ref Note Add Process"
         RefNote.Insert(true);
 
         ResponseJson.Add('no', RefNote."No.");
-        Rec.SetResponseJson(ResponseJson);
+        RefInput.SetSuccess(Rec, ResponseJson);
     end;
 }

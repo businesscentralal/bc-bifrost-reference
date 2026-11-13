@@ -36,12 +36,13 @@ codeunit 50005 "My Help Get Impl" implements "Msg Interface ori", "Msg Discovery
 
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
+        MyInput: Codeunit "My Input";
         ResponseJson: JsonObject;
     begin
         Argument.AssertVersion1();
         ResponseJson.Add('format', 'markdown');
         ResponseJson.Add('markdown', BuildOverview());
-        Argument.SetResponseJson(ResponseJson);
+        MyInput.SetSuccess(Argument, ResponseJson);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -99,6 +100,7 @@ codeunit 50005 "My Help Get Impl" implements "Msg Interface ori", "Msg Discovery
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Fields: JsonArray;
     begin
+        Fields.Add(ContractMgt.ResponseField('status', 'string', 'Success when the call worked.'));
         Fields.Add(ContractMgt.ResponseField('format', 'string', 'Always markdown.'));
         Fields.Add(ContractMgt.ResponseField('markdown', 'string', 'The overview document as Markdown text with \n line breaks: a short introduction and a table of the app''s message types (type, effect, what it does). Never empty.'));
         Response.Add('contentType', 'text/json');
@@ -156,7 +158,7 @@ codeunit 50005 "My Help Get Impl" implements "Msg Interface ori", "Msg Discovery
     begin
         Examples.Add(ContractMgt.Example('Get the app overview',
             '{"type":"Help.MyApp.Get"}',
-            '{"format":"markdown","markdown":"# My Bifrost App\n\nAn app built on Bifrost Foundation. ...\n\n## Message types\n| Type | Effect | What it does |\n..."}'));
+            '{"status":"Success","format":"markdown","markdown":"# My Bifrost App\n\nAn app built on Bifrost Foundation. ...\n\n## Message types\n| Type | Effect | What it does |\n..."}'));
         exit(true);
     end;
 

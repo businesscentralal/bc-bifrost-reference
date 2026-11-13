@@ -22,6 +22,7 @@ codeunit 90014 "Ref Maint Create Process"
     trigger OnRun()
     var
         AssetMaintenance: Record "Ref Asset Maintenance";
+        RefInput: Codeunit "Ref Input";
         Created: Boolean;
     begin
         // Safe retry: the same externalId returns the entry the first call created.
@@ -31,7 +32,7 @@ codeunit 90014 "Ref Maint Create Process"
             AssetMaintenance.SetCurrentKey("External Id");
             AssetMaintenance.SetRange("External Id", ExternalId);
             if AssetMaintenance.FindFirst() then begin
-                Rec.SetResponseJson(BuildResponse(AssetMaintenance, false));
+                RefInput.SetSuccess(Rec, BuildResponse(AssetMaintenance, false));
                 exit;
             end;
         end;
@@ -45,7 +46,7 @@ codeunit 90014 "Ref Maint Create Process"
         AssetMaintenance.Insert(true);
         Created := true;
 
-        Rec.SetResponseJson(BuildResponse(AssetMaintenance, Created));
+        RefInput.SetSuccess(Rec, BuildResponse(AssetMaintenance, Created));
     end;
 
     /// <summary>
