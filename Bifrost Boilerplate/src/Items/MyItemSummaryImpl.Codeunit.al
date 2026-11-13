@@ -4,7 +4,7 @@ using Microsoft.Inventory.Item;
 using Origo.Bifrost;
 
 /// <summary>
-/// MyApp.Item.Summary.Get - the sample READ. Replace it with your own first read, or delete it.
+/// MyApp.ItemSummary.Get - the sample READ. Replace it with your own first read, or delete it.
 ///
 /// Patterns shown:
 ///  - the target comes from subject (SystemId or No.) or the body, through the shared resolver,
@@ -103,7 +103,7 @@ codeunit 50001 "My Item Summary Impl" implements "Msg Interface ori", "Msg Disco
     end;
 
     // ---------- Msg Contract ori ----------
-    // TODO: rename MyApp.Item.Summary.Get in every chapter below together with the enum value.
+    // TODO: rename MyApp.ItemSummary.Get in every chapter below together with the enum value.
 
     procedure GetOverview(var Overview: Text): Boolean
     begin
@@ -208,7 +208,7 @@ codeunit 50001 "My Item Summary Impl" implements "Msg Interface ori", "Msg Disco
         Steps: JsonArray;
     begin
         Steps.Add(ContractMgt.WorkflowStep('MyApp.Item.List', 'Optional: find the item number.'));
-        Steps.Add(ContractMgt.WorkflowStep('MyApp.Item.Summary.Get', 'Get the item''s price and inventory.'));
+        Steps.Add(ContractMgt.WorkflowStep('MyApp.ItemSummary.Get', 'Get the item''s price and inventory.'));
         Workflow.Add('steps', Steps);
         Workflow.Add('text', 'Standalone when you know the item number.');
         exit(true);
@@ -219,10 +219,10 @@ codeunit 50001 "My Item Summary Impl" implements "Msg Interface ori", "Msg Disco
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Examples.Add(ContractMgt.Example('Price and inventory of an item on a date',
-            '{"type":"MyApp.Item.Summary.Get","subject":"1896-S","data":{"asOfDate":"2026-09-26"}}',
+            '{"type":"MyApp.ItemSummary.Get","subject":"1896-S","data":{"asOfDate":"2026-09-26"}}',
             '{"itemNo":"1896-S","description":"ATHENS Desk","baseUnitOfMeasure":"PCS","unitPrice":1000.8,"asOfDate":"2026-09-26","inventory":12,"blocked":false}'));
         Examples.Add(ContractMgt.Example('A date in the wrong format',
-            '{"type":"MyApp.Item.Summary.Get","subject":"1896-S","data":{"asOfDate":"26.09.2026"}}',
+            '{"type":"MyApp.ItemSummary.Get","subject":"1896-S","data":{"asOfDate":"26.09.2026"}}',
             '{"status":"Error","error":"Parameter ''asOfDate'' has the value ''26.09.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
         exit(true);
     end;

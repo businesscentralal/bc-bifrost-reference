@@ -37,7 +37,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
     procedure GetDescription(): Text[250]
     begin
         // TODO: rewrite the selection card for your own type (at most 250 characters; say "Read-only" for an Outbound type).
-        exit('List items, all or by number filter, with the total count (max 100 rows; more says when there are others). Read-only. Blocked items only on request. For one item''s price and inventory use MyApp.Item.Summary.Get.');
+        exit('List items, all or by number filter, with the total count (max 100 rows; more says when there are others). Read-only. Blocked items only on request. For one item''s price and inventory use MyApp.ItemSummary.Get.');
     end;
 
     procedure GetMessageDirection(): Enum "Msg Direction ori"
@@ -115,7 +115,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
 
     procedure GetSelectionDescription(): Text
     var
-        SelectionLbl: Label 'List items by item number filter, with the total count; at most 100 rows. Not for one item''s price and inventory: use MyApp.Item.Summary.Get. To search by description or another field, use Data.Records.Get on Item.', Comment = 'is-IS=Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.Item.Summary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.';
+        SelectionLbl: Label 'List items by item number filter, with the total count; at most 100 rows. Not for one item''s price and inventory: use MyApp.ItemSummary.Get. To search by description or another field, use Data.Records.Get on Item.', Comment = 'is-IS=Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.ItemSummary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.';
     begin
         exit(SelectionLbl);
     end;
@@ -126,7 +126,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
     procedure GetOverview(var Overview: Text): Boolean
     begin
         Overview := 'Lists items, all or those whose number matches a filter, with the total count. At most 100 rows are returned (fewer with maxRows); more is true when there are others. ' +
-            'Blocked items are left out unless you send "includeBlocked": true. Not for one item''s price and inventory (use MyApp.Item.Summary.Get), and not for a search by description (use Data.Records.Get on table Item).';
+            'Blocked items are left out unless you send "includeBlocked": true. Not for one item''s price and inventory (use MyApp.ItemSummary.Get), and not for a search by description (use Data.Records.Get on table Item).';
         exit(true);
     end;
 
@@ -221,7 +221,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
-        Related.Add(ContractMgt.RelatedEntry('MyApp.Item.Summary.Get', 'You want one item''s price and inventory.'));
+        Related.Add(ContractMgt.RelatedEntry('MyApp.ItemSummary.Get', 'You want one item''s price and inventory.'));
         Related.Add(ContractMgt.RelatedEntry('Data.Records.Get', 'You want to search items by description or another field (table Item).'));
         exit(true);
     end;
@@ -232,7 +232,7 @@ codeunit 50003 "My Item List Impl" implements "Msg Interface ori", "Msg Discover
         Steps: JsonArray;
     begin
         Steps.Add(ContractMgt.WorkflowStep('MyApp.Item.List', 'Find the items.'));
-        Steps.Add(ContractMgt.WorkflowStep('MyApp.Item.Summary.Get', 'Optional: one item''s price and inventory, with its itemNo as subject.'));
+        Steps.Add(ContractMgt.WorkflowStep('MyApp.ItemSummary.Get', 'Optional: one item''s price and inventory, with its itemNo as subject.'));
         Workflow.Add('steps', Steps);
         Workflow.Add('text', 'List, pick an item, then its summary.');
         exit(true);

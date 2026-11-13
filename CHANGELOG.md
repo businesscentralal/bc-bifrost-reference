@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Add AL-Go build modes Default and Test. Default compiles the three sample apps and does not build or run tests. Test compiles and runs Bifrost Boilerplate Tests and Bifrost Reference Tests, skips upgrade, and does not sign. The workflow publishes the TestApps and TestResults artifacts and analyzes normal test results when tests run.
+- #4: Rename `MyApp.Item.Summary.Get` → `MyApp.ItemSummary.Get` (enumextension 50000, value 50000) and `Reference.GLAccount.Overview.Get` → `Reference.GLAccountOverview.Get` (enumextension 90000, value 90004), preserving ordinals. Update codeunits 50001/50003/50005/90007/90011, dispatcher tests 50052/90154, contract examples, discovery text, is-IS translations and partner docs together. Product message names must have exactly three parts; adopt Foundation #1037's reusable product-only source guard with no allow-list. Test apps remain exempt.
+
 
 - Keep codeunit 90109 confirmation and bulk release in Foundation's isolated message transaction, preserving rollback and structured HTTP errors after the confirmation locks.
 

@@ -18,7 +18,7 @@ All four pages filter to `SystemCreatedBy = UserSecurityId()`: the identity that
 ```json
 {
   "specversion": "1.0",
-  "type": "Reference.GLAccount.Overview.Get",
+  "type": "Reference.GLAccountOverview.Get",
   "source": "my-integration",
   "subject": "2910",
   "datacontenttype": "application/json",
@@ -34,7 +34,7 @@ All four pages filter to `SystemCreatedBy = UserSecurityId()`: the identity that
 ```bash
 curl -X POST "https://api.businesscentral.dynamics.com/v2.0/<tenant>/<environment>/api/origo/bifrost/v1.0/companies(<company id>)/tasks" \
   -H "Authorization: Bearer <token>" -H "Content-Type: application/json" \
-  -d '{"specversion":"1.0","type":"Reference.GLAccount.Overview.Get","source":"my-integration","subject":"2910","datacontenttype":"application/json","data":"{\"asOfDate\":\"2026-08-31\"}"}'
+  -d '{"specversion":"1.0","type":"Reference.GLAccountOverview.Get","source":"my-integration","subject":"2910","datacontenttype":"application/json","data":"{\"asOfDate\":\"2026-08-31\"}"}'
 ```
 
 ## Read the contract first
@@ -58,7 +58,7 @@ curl -X POST "https://api.businesscentral.dynamics.com/v2.0/<tenant>/<environmen
 |---|---|---|
 | `MyApp.Hello.Get` | `data`: `{"name":"World"}` | The app is live, and which version answered |
 | `Reference.Echo.Get` | `data`: `{"message":"hi"}` | The envelope round trip |
-| `Reference.GLAccount.Overview.Get` | `subject`: `2910`, `data`: `{"asOfDate":"2026-08-31"}` | A read; send `99999` for "not found" |
+| `Reference.GLAccountOverview.Get` | `subject`: `2910`, `data`: `{"asOfDate":"2026-08-31"}` | A read; send `99999` for "not found" |
 | `Legacy.Stock.Get` | `subject`: `1896-S` | A read from an existing app made headless |
 | `Reference.Note.Add` | `data`: `{"no":"NOTE-1","text":"hello"}` | A write; send the same `no` twice for "already exists" |
 

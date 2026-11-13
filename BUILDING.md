@@ -41,10 +41,10 @@ The caption is `Locked`: callers in every language send the same string. Value i
 
 ## 2. Name and effect
 
-Name types `Capability.Entity.Verb` in words a user would say. The name is the strongest search signal.
+Name types with exactly three nonempty dot-separated parts, `Capability.Entity.Verb` (`Domain.Entity.Action`), in words a user would say. Two parts or four or more are not allowed in product apps; test apps are exempt. The name is the strongest search signal.
 
 - **Capability:** your app's product area, one word, **yours alone**. Never add types to someone else's (`Sales`, `Data`, `Help`, `Document`, `Reference`, `Legacy` …). Two extensions can't add the same enum value name; check `Help.MessageTypes.Get` in your sandbox first.
-- **Entity:** the business object, singular. Keep names to three parts, `Capability.Entity.Verb`; put any qualifier in the entity word or a parameter. A filter is a parameter, not part of the name. (Two sample types still have four parts; see issue #4.)
+- **Entity:** the business object, singular. Keep names to three parts, `Capability.Entity.Verb`; put any qualifier in the entity word or a parameter. A filter is a parameter, not part of the name.
 - **Verb:** the promise. A `Get` that writes is a bug.
 
 | Verb | Direction | `effect` | Meaning |
@@ -82,7 +82,7 @@ Each comes from a failure in live agent testing.
 
 **Platform**
 
-14. Register the app with `App Registry ori`, even without a setup page (pass 0), so the Bifrost Setup wizard can switch on outbound HTTP for it.
+14. Register the app with `App Registry ori`, even without a setup page (pass 0), so the Bifrost Setup wizard can switch on outbound HTTP for it. The subscriber needs `InherentPermissions = X;` and `InherentEntitlements = X;` (§6).
 15. At most one action on Foundation's `Setup ori` page; your settings live on your own page. No HTTP, credential or setup notifications of your own.
 16. Descriptions, contract text and errors are shown to every caller: keep personal data out. Request bodies are kept in the message log: send and store only what the type needs.
 
@@ -157,7 +157,7 @@ Test the card the way it is used: ask a fresh agent in plain words, with no type
 | Need | Copy |
 |---|---|
 | Shared input layer: required/optional text, ISO dates, numbers with ranges, booleans, record resolvers, `RunIsolated` | `Bifrost Boilerplate/src/Common/MyInput.Codeunit.al` (or the fuller `Bifrost Reference/src/Common/RefInput.Codeunit.al`) |
-| A read of one record | `MyApp.Item.Summary.Get`, `Reference.GLAccount.Overview.Get` |
+| A read of one record | `MyApp.ItemSummary.Get`, `Reference.GLAccountOverview.Get` |
 | A capped list (`count`, `returned`, `more`) | `MyApp.Item.List`, `Legacy.Stock.List` |
 | A write in an isolated sub-codeunit | `Reference.Note.Add` (`RefNoteAddProcess.Codeunit.al`) |
 | Validation before write, safe retry with `externalId` | `Reference.AssetMaintenance.Create` (`Bifrost Reference/src/AssetMaintenance/`) |
@@ -195,6 +195,8 @@ A success answer has no `status` field. Read `skip`/`take` with your input layer
 
 **`App Registry ori`:** subscribe to `OnRegisterApps` and call `AddApp(Apps, AppInfo.Id(), AppName, SetupPageId)`.
 
+**Registration contract:** every `OnRegisterApps` subscriber must declare both `InherentPermissions = X;` and `InherentEntitlements = X;`. Foundation's inherent Execute on `App Registry ori` does not grant Execute on a subscriber in a dependent app. This grant is only for metadata registration: module information plus `AddApp` on the temporary registry record. It grants no business actions or cross-extension `tabledata` access. Never add HTTP, credentials, licence/EULA, settings, jobs or business-data writes to a registration subscriber. Never silently drop an app from discovery because a permission is missing. The subscriber must do nothing but register.
+
 **`Secret Store ori`:** `Register` (in the install codeunit), `Set`, `TryGet` (in a `[NonDebuggable]` procedure), `IsSet`, `Clear`, `Unregister`. `SecretCode` is `Code[50]`, `AppId` is your module id.
 
 **`Msg Metering ori`** (optional): `OnMessageCompleted` runs after each successful call of your type, for your own meters. It never changes the response.
@@ -228,6 +230,7 @@ Tests assert English fragments, so run them in a company whose default language 
 - [ ] Narrow permission set shipped; no inherent or indirect permission the task doesn't need; responses carry no personal data the task doesn't need; your sensitive tables and fields are listed for customers.
 - [ ] Compiles with 0 errors and 0 warnings under CodeCop, UICop and PerTenantExtensionCop. For AppSource, first set your own ID range, logo and help URL in `app.json`; the samples use per-tenant ranges and fail AppSourceCop as shipped.
 - [ ] Unit tests and lints pass; the break set passes live.
+- [ ] Run `pwsh -NoProfile -File tools/Test-ReferenceMessageTypeNames.ps1` before publication. It applies Foundation's source guard to every configured product app; test apps are exempt.
 
 ## 9. Shipping your app
 

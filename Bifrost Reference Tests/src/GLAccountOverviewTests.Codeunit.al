@@ -5,7 +5,7 @@ using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
 /// <summary>
-/// Reference.GLAccount.Overview.Get - the reference read, as unit tests: the amounts match the
+/// Reference.GLAccountOverview.Get - the reference read, as unit tests: the amounts match the
 /// base app's own FlowFields, "not found" is not "missing", the period rule is enforced, and a
 /// value that was not asked for is JSON null rather than 0.
 /// The account is taken from the company's chart of accounts, never hard-coded.
@@ -31,7 +31,7 @@ codeunit 90154 "GL Account Overview Tests"
         FromDate := CalcDate('<-CM>', WorkDate());
 
         // [WHEN] the overview is asked for that period
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", GLAccount."No.",
+        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", GLAccount."No.",
             StrSubstNo('{"asOfDate":"%1","fromDate":"%2"}', Format(WorkDate(), 0, 9), Format(FromDate, 0, 9)));
 
         // [THEN] the answer carries the account and the same amounts the base app calculates
@@ -48,7 +48,7 @@ codeunit 90154 "GL Account Overview Tests"
     procedure UnknownAccountIsNotFoundRatherThanMissing()
     begin
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", 'BIFT-NOPE', ''),
+            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", 'BIFT-NOPE', ''),
             'was not found');
     end;
 
@@ -59,7 +59,7 @@ codeunit 90154 "GL Account Overview Tests"
     begin
         FindPostingAccount(GLAccount);
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", GLAccount."No.", '{"asOfDate":"2026-08-31","fromDate":"2026-09-01"}'),
+            Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", GLAccount."No.", '{"asOfDate":"2026-08-31","fromDate":"2026-09-01"}'),
             'after ''asOfDate''');
     end;
 
@@ -72,13 +72,31 @@ codeunit 90154 "GL Account Overview Tests"
     begin
         // [GIVEN] a posting account  [WHEN] no fromDate is sent
         FindPostingAccount(GLAccount);
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccount.Overview.Get", GLAccount."No.", '');
+        Response := Caller.Call(Enum::"Message Type ori"::"Reference.GLAccountOverview.Get", GLAccount."No.", '');
 
         // [THEN] netChange is JSON null - never 0 pretending to be a value - and the balance is still given
         Caller.AssertOk(Response);
         Assert.IsTrue(Response.Get('netChange', Token), 'netChange should always be present.');
         Assert.IsTrue(Token.AsValue().IsNull(), 'netChange should be null when no fromDate was sent.');
         Assert.AreEqual(Format(WorkDate(), 0, 9), Caller.GetText(Response, 'asOfDate'), 'asOfDate should default to the work date.');
+    end;
+
+    /// <summary>Verifies AC01: the renamed GLOverview type keeps its ordinal and contract example names.</summary>
+    [Test]
+    procedure Scenario_AC01_GLOverviewKeepsItsOrdinalAndThreePartName()
+    var
+        MessageType: Enum "Message Type ori";
+        Examples: Text;
+    begin
+        // [SCENARIO] AC01: renaming the public type preserves its ordinal and contract calls.
+        // [GIVEN] the renamed product message type
+        MessageType := Enum::"Message Type ori"::"Reference.GLAccountOverview.Get";
+        // [WHEN] its public enum name and examples chapter are read through the public contract manager
+        Examples := Caller.GetContractChapter(MessageType, 'examples');
+        // [THEN] existing ordinal routing and copied contract calls use the same three-part name
+        Assert.AreEqual(90004, MessageType.AsInteger(), 'Renaming must preserve the enum ordinal.');
+        Assert.AreEqual('Reference.GLAccountOverview.Get', MessageType.Names().Get(MessageType.Ordinals().IndexOf(90004)), 'Public message type name.');
+        Assert.IsTrue(Examples.Contains('Reference.GLAccountOverview.Get'), 'Contract examples must call the renamed type.');
     end;
 
     local procedure FindPostingAccount(var GLAccount: Record "G/L Account")

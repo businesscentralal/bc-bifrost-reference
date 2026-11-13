@@ -6,7 +6,7 @@ using Microsoft.Finance.GeneralLedger.Setup;
 using Origo.Bifrost;
 
 /// <summary>
-/// Reference.GLAccount.Overview.Get - the reference READ.
+/// Reference.GLAccountOverview.Get - the reference READ.
 ///
 /// Patterns shown:
 ///  - the target comes from subject (SystemId or No.) or the body, through the shared resolver,
@@ -247,7 +247,7 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
         Steps: JsonArray;
     begin
         Steps.Add(ContractMgt.WorkflowStep('Data.Records.Get', 'Optional: find the account number on table G/L Account when you know the account by name only.'));
-        Steps.Add(ContractMgt.WorkflowStep('Reference.GLAccount.Overview.Get', 'Get the balance and, with fromDate, the net change.'));
+        Steps.Add(ContractMgt.WorkflowStep('Reference.GLAccountOverview.Get', 'Get the balance and, with fromDate, the net change.'));
         Steps.Add(ContractMgt.WorkflowStep('Data.Records.Get', 'Optional: list the entries behind the amount on table G/L Entry.'));
         Workflow.Add('steps', Steps);
         Workflow.Add('text', 'Standalone when you know the account number; the other steps are only needed to find the account or explain the amount.');
@@ -259,13 +259,13 @@ codeunit 90011 "Ref GLAcc Overview Impl" implements "Msg Interface ori", "Msg Di
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Examples.Add(ContractMgt.Example('Balance at the end of August and the net change for August',
-            '{"type":"Reference.GLAccount.Overview.Get","subject":"2910","data":{"asOfDate":"2026-08-31","fromDate":"2026-08-01"}}',
+            '{"type":"Reference.GLAccountOverview.Get","subject":"2910","data":{"asOfDate":"2026-08-31","fromDate":"2026-08-01"}}',
             '{"accountNo":"2910","name":"Bank, Checking","accountType":"Posting","incomeBalance":"Balance Sheet","currencyCode":"ISK","asOfDate":"2026-08-31","balanceAsOf":1250000,"fromDate":"2026-08-01","netChange":-300000,"blocked":false,"directPosting":true}'));
         Examples.Add(ContractMgt.Example('Balance only, as of the work date',
-            '{"type":"Reference.GLAccount.Overview.Get","data":{"accountNo":"2910"}}',
+            '{"type":"Reference.GLAccountOverview.Get","data":{"accountNo":"2910"}}',
             '{"accountNo":"2910","name":"Bank, Checking","accountType":"Posting","incomeBalance":"Balance Sheet","currencyCode":"ISK","asOfDate":"2026-09-26","balanceAsOf":1180000,"fromDate":null,"netChange":null,"blocked":false,"directPosting":true}'));
         Examples.Add(ContractMgt.Example('A date in the wrong format',
-            '{"type":"Reference.GLAccount.Overview.Get","subject":"2910","data":{"asOfDate":"31.08.2026"}}',
+            '{"type":"Reference.GLAccountOverview.Get","subject":"2910","data":{"asOfDate":"31.08.2026"}}',
             '{"status":"Error","error":"Parameter ''asOfDate'' has the value ''31.08.2026'', which is not a date in the format YYYY-MM-DD. Send for example 2026-09-26."}'));
         exit(true);
     end;
