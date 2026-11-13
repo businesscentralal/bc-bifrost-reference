@@ -81,6 +81,7 @@ codeunit 90154 "GL Account Overview Tests"
         Assert.AreEqual(Format(WorkDate(), 0, 9), Caller.GetText(Response, 'asOfDate'), 'asOfDate should default to the work date.');
     end;
 
+    /// <summary>Verifies AC01: the renamed GLOverview type keeps its ordinal and contract example names.</summary>
     [Test]
     procedure Scenario_AC01_GLOverviewKeepsItsOrdinalAndThreePartName()
     var

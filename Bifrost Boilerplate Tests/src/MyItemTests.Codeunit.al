@@ -89,6 +89,7 @@ codeunit 50052 "My Item Tests"
         Assert.IsTrue(Caller.GetBoolean(Response, 'more'), 'more should be true when rows were left out.');
     end;
 
+    /// <summary>Verifies AC01: the renamed ItemSummary type keeps its ordinal and contract example names.</summary>
     [Test]
     procedure Scenario_AC01_ItemSummaryKeepsItsOrdinalAndThreePartName()
     var
