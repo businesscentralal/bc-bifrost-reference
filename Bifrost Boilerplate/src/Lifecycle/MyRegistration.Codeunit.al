@@ -13,10 +13,13 @@ using Origo.Bifrost;
 ///
 /// Every Bifröst app has exactly one of these. The last argument is the app's own setup page,
 /// or 0 when the app has none (as here).
+/// The inherent Execute grant exists only for metadata registration.
 /// </summary>
 codeunit 50006 "My Registration"
 {
     Access = Internal;
+    InherentPermissions = X;
+    InherentEntitlements = X;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"App Registry ori", OnRegisterApps, '', false, false)]
     local procedure RegisterApp(var Apps: Record "Registered App ori" temporary)

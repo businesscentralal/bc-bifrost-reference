@@ -12,10 +12,13 @@ using Origo.Bifrost;
 /// for HTTP or credentials; it registers here and Foundation aggregates.
 ///
 /// Every Bifröst app has exactly one of these. The last argument is the app's own setup page.
+/// The inherent Execute grant exists only for metadata registration.
 /// </summary>
 codeunit 90006 "Ref Registration"
 {
     Access = Internal;
+    InherentPermissions = X;
+    InherentEntitlements = X;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"App Registry ori", OnRegisterApps, '', false, false)]
     local procedure RegisterApp(var Apps: Record "Registered App ori" temporary)
