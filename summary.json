@@ -1,0 +1,194 @@
+{
+  "repo": "businesscentralal/bc-bifrost-reference",
+  "pr": 8,
+  "issue": 6,
+  "owner": "Brokkr (worker-2)",
+  "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+  "publication": {
+    "repo": "businesscentralal/bc-bifrost-reference",
+    "branch": "fix/issue6-registration-execute",
+    "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+    "branchUrl": "https://github.com/businesscentralal/bc-bifrost-reference/tree/fix/issue6-registration-execute",
+    "commitUrl": "https://github.com/businesscentralal/bc-bifrost-reference/commit/76c644805f242020d1018d193223bb0ca1b9946f",
+    "remoteVerifiedAt": "2026-11-13T08:14:40.457Z"
+  },
+  "compile": [
+    {
+      "project": "Legacy App v2 (headless)",
+      "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "log": "compile-Legacy_App_v2_(headless).log",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ]
+    },
+    {
+      "project": "Bifrost Boilerplate",
+      "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "log": "compile-Bifrost_Boilerplate.log",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ]
+    },
+    {
+      "project": "Bifrost Reference",
+      "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "log": "compile-Bifrost_Reference.log",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ]
+    },
+    {
+      "project": "Bifrost Boilerplate Tests",
+      "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "log": "compile-Bifrost_Boilerplate_Tests.log",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ]
+    },
+    {
+      "project": "Bifrost Reference Tests",
+      "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "log": "compile-Bifrost_Reference_Tests.log",
+      "analyzers": [
+        "CodeCop",
+        "UICop",
+        "PerTenantExtensionCop"
+      ]
+    }
+  ],
+  "runtime": {
+    "tenant": "w129-12",
+    "server": "BC290",
+    "company": "CRONUS International Ltd.",
+    "foundation": "28.0.13.0",
+    "foundationSourceSha": "UNKNOWN; existing own baseline package, manifest Source empty; not equated with earlier a274e33 build or CI28.0.11.669.",
+    "samples": {
+      "Legacy": "2.2.0.0",
+      "Reference": "1.2.0.0",
+      "Boilerplate": "1.0.0.0",
+      "ReferenceTests": "1.0.0.0",
+      "BoilerplateTests": "1.0.0.0"
+    }
+  },
+  "native": {
+    "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+    "fullSuite": true,
+    "total": 36,
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "boilerplate": 11,
+    "reference": 25,
+    "restrictedTests": 4,
+    "tenant": "w129-12",
+    "foundation": "28.0.13.0",
+    "files": [
+      "full-boilerplate.json",
+      "full-reference.json"
+    ]
+  },
+  "ui": {
+    "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+    "tenant": "w129-12",
+    "identity": "administrator",
+    "scenarios": [
+      {
+        "lcid": 1033,
+        "passed": true,
+        "page": 10077914,
+        "heading": "Bifrost Setup",
+        "discoveredApps": [
+          "Bifrost Reference",
+          "Legacy App",
+          "My Bifrost App"
+        ]
+      },
+      {
+        "lcid": 1039,
+        "passed": true,
+        "page": 10077914,
+        "heading": "Uppsetning Bifröst",
+        "discoveredApps": [
+          "Bifrost Reference",
+          "Legacy App",
+          "My Bifrost App"
+        ]
+      }
+    ],
+    "restrictedAC09": "NOT_RUN; prior startup permission failure remains, no new unavailable probe.",
+    "languageRestore": {
+      "restoredTo": 1033
+    }
+  },
+  "mcp": {
+    "touchedMessageTypes": [],
+    "notApplicableReason": "Registration metadata properties, regression tests and docs only; incoming main adds PTECop setting. No message-type behavior changed.",
+    "cleanupReadOnlyScenario": "Legacy.Stock.List itemFilter BIFT-* returns0 reservations; no provider calls."
+  },
+  "ac10": {
+    "status": "NOT_RUN",
+    "executed": 0,
+    "passed": 0,
+    "reason": "Foundation Tests is not installed on worker2 tenant. Inspected genuine Foundation test installer: InitializeLicenseState writes licence balances and EnableFoundationHttpForTestSuite changes HTTP permission. No such setup writes authorized; no installer substitution or failed runtime probe attempted. Need safe operator-approved genuine Foundation Tests setup."
+  },
+  "acceptanceMatrix": {
+    "AC01": "Source checks retained; three samples declare both Execute properties.",
+    "AC02": "Existing object IDs/names and production permission sets unchanged.",
+    "AC03": "false,false and AddApp arguments preserved.",
+    "AC04": "Registration contract carried to BUILDING.md by prior main merge.",
+    "AC05": "Registry API contract present in BUILDING.md.",
+    "AC06": "Registration metadata-only.",
+    "AC07": "Five projects locally0/0; fresh CI pending.",
+    "AC08": "All4registration regressions pass within36/36 suite.",
+    "AC09": "NOT_RUN: restricted-user Web Client startup baseline needs Architect/Claude.",
+    "AC10": "NOT_RUN: genuine Foundation Tests absent; installer setup writes need safe disposition.",
+    "AC11": "Full sample suite36/36.",
+    "AC12": "No sample OnRegisterApps subscriber lacks either property."
+  },
+  "pipelineDisposition": {
+    "url": "https://github.com/businesscentralal/bc-bifrost-reference/pull/5#issuecomment-6755726247",
+    "summary": "Explicitly covers PR8; CodeCop/UICop/PTECop0/0; AppSourceCop not applicable; Default-only,unsigned accepted. Main PR12 enables PTECop."
+  },
+  "cleanup": {
+    "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+    "tenant": "w129-12",
+    "removedApps": 5,
+    "uninstalledWithDeleteExtensionData": true,
+    "unpublished": 5,
+    "sampleAppEntriesRemaining": 0,
+    "baselinePackageIdsAndInstallStatesUnchanged": true,
+    "fixtureReadbacks": {
+      "items": 0,
+      "fixedAssets": 0,
+      "reservations": 0,
+      "assetMaintenance": 0
+    },
+    "languageRestoredTo": 1033,
+    "providerCalls": 0,
+    "verifiedAt": "2026-11-13T08:20:30.957Z"
+  },
+  "providerCalls": 0
+}

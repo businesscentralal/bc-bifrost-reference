@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Bifrost_Boilerplate.own.app",
+    "bytes": 37178,
+    "sha256": "18cf26277453e6499b60b8ba771dabb2fa6883ba1d05a501331de5efc23b7ddd"
+  },
+  {
+    "name": "Bifrost_Boilerplate_Tests.own.app",
+    "bytes": 14048,
+    "sha256": "41e0dc9d113d02ada8e39a2811ded30ca2f6d4e6683ca6ef59c303471fb43a9c"
+  },
+  {
+    "name": "Bifrost_Reference.own.app",
+    "bytes": 92292,
+    "sha256": "a4279fa70787fb6aa147a8c5a21050f47f6b21172f6a6b3d323cf29ccf2ad73e"
+  },
+  {
+    "name": "Bifrost_Reference_Tests.own.app",
+    "bytes": 17488,
+    "sha256": "a02817adeba8f79537954f613fff8ce247cba483610e11dcc779573dc15a843a"
+  },
+  {
+    "name": "Legacy_App_v2_(headless).own.app",
+    "bytes": 62036,
+    "sha256": "9725f1c3e809fe69578701de8a70dc9011ca0021451425a87cd78bb6f231adca"
+  }
+]

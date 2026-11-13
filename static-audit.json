@@ -1,0 +1,43 @@
+{
+  "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+  "registration": [
+    {
+      "file": "Bifrost Boilerplate/src/Lifecycle/MyRegistration.Codeunit.al",
+      "inherentPermissions": true,
+      "inherentEntitlements": true,
+      "internal": true,
+      "skipFlagsPreserved": true
+    },
+    {
+      "file": "Bifrost Reference/src/Lifecycle/RefRegistration.Codeunit.al",
+      "inherentPermissions": true,
+      "inherentEntitlements": true,
+      "internal": true,
+      "skipFlagsPreserved": true
+    },
+    {
+      "file": "Legacy App v2 (headless)/src/MessageTypes/LegacyAdapterRegistration.Codeunit.al",
+      "inherentPermissions": true,
+      "inherentEntitlements": true,
+      "internal": true,
+      "skipFlagsPreserved": true
+    }
+  ],
+  "testAttributes": {
+    "Bifrost Boilerplate Tests": 11,
+    "Bifrost Reference Tests": 25
+  },
+  "changedFiles": [
+    "BUILDING.md",
+    "Bifrost Boilerplate Tests/CHANGELOG.md",
+    "Bifrost Boilerplate Tests/app.json",
+    "Bifrost Boilerplate Tests/src/MyRegistrationTests.Codeunit.al",
+    "Bifrost Boilerplate/src/Lifecycle/MyRegistration.Codeunit.al",
+    "Bifrost Reference Tests/app.json",
+    "Bifrost Reference Tests/src/RefRegistrationTests.Codeunit.al",
+    "Bifrost Reference/src/Lifecycle/RefRegistration.Codeunit.al",
+    "Legacy App v2 (headless)/src/MessageTypes/LegacyAdapterRegistration.Codeunit.al"
+  ],
+  "permissionSetChanged": false,
+  "mainIncluded": true
+}

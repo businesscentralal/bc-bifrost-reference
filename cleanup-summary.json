@@ -1,0 +1,18 @@
+{
+  "sha": "76c644805f242020d1018d193223bb0ca1b9946f",
+  "tenant": "w129-12",
+  "removedApps": 5,
+  "uninstalledWithDeleteExtensionData": true,
+  "unpublished": 5,
+  "sampleAppEntriesRemaining": 0,
+  "baselinePackageIdsAndInstallStatesUnchanged": true,
+  "fixtureReadbacks": {
+    "items": 0,
+    "fixedAssets": 0,
+    "reservations": 0,
+    "assetMaintenance": 0
+  },
+  "languageRestoredTo": 1033,
+  "providerCalls": 0,
+  "verifiedAt": "2026-11-13T08:20:30.957Z"
+}
