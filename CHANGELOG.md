@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Publish the TestApps and TestResults artifacts from the AL-Go build, and analyze normal test results when `doNotRunTests` is false. Pull request and main CI already compile and run Bifrost Boilerplate Tests and Bifrost Reference Tests inside the build; the workflow was dropping those outputs.
+- Add AL-Go build modes Default and Test. Default compiles the three sample apps and does not build or run tests. Test compiles and runs Bifrost Boilerplate Tests and Bifrost Reference Tests, skips upgrade, and does not sign. The workflow publishes the TestApps and TestResults artifacts and analyzes normal test results when tests run.
 
 - Keep codeunit 90109 confirmation and bulk release in Foundation's isolated message transaction, preserving rollback and structured HTTP errors after the confirmation locks.
 
