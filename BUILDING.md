@@ -41,10 +41,10 @@ The caption is `Locked`: callers in every language send the same string. Value i
 
 ## 2. Name and effect
 
-Name types `Capability.Entity.Verb` in words a user would say. The name is the strongest search signal.
+Name types with exactly three nonempty dot-separated parts, `Capability.Entity.Verb` (`Domain.Entity.Action`), in words a user would say. Two parts or four or more are not allowed in product apps; test apps are exempt. The name is the strongest search signal.
 
 - **Capability:** your app's product area, one word, **yours alone**. Never add types to someone else's (`Sales`, `Data`, `Help`, `Document`, `Reference`, `Legacy` …). Two extensions can't add the same enum value name; check `Help.MessageTypes.Get` in your sandbox first.
-- **Entity:** the business object, singular. Keep names to three parts, `Capability.Entity.Verb`; put any qualifier in the entity word or a parameter. A filter is a parameter, not part of the name. (Two sample types still have four parts; see issue #4.)
+- **Entity:** the business object, singular. Keep names to three parts, `Capability.Entity.Verb`; put any qualifier in the entity word or a parameter. A filter is a parameter, not part of the name.
 - **Verb:** the promise. A `Get` that writes is a bug.
 
 | Verb | Direction | `effect` | Meaning |
@@ -157,7 +157,7 @@ Test the card the way it is used: ask a fresh agent in plain words, with no type
 | Need | Copy |
 |---|---|
 | Shared input layer: required/optional text, ISO dates, numbers with ranges, booleans, record resolvers, `RunIsolated` | `Bifrost Boilerplate/src/Common/MyInput.Codeunit.al` (or the fuller `Bifrost Reference/src/Common/RefInput.Codeunit.al`) |
-| A read of one record | `MyApp.Item.Summary.Get`, `Reference.GLAccount.Overview.Get` |
+| A read of one record | `MyApp.ItemSummary.Get`, `Reference.GLAccountOverview.Get` |
 | A capped list (`count`, `returned`, `more`) | `MyApp.Item.List`, `Legacy.Stock.List` |
 | A write in an isolated sub-codeunit | `Reference.Note.Add` (`RefNoteAddProcess.Codeunit.al`) |
 | Validation before write, safe retry with `externalId` | `Reference.AssetMaintenance.Create` (`Bifrost Reference/src/AssetMaintenance/`) |
@@ -228,6 +228,7 @@ Tests assert English fragments, so run them in a company whose default language 
 - [ ] Narrow permission set shipped; no inherent or indirect permission the task doesn't need; responses carry no personal data the task doesn't need; your sensitive tables and fields are listed for customers.
 - [ ] Compiles with 0 errors and 0 warnings under CodeCop, UICop and PerTenantExtensionCop. For AppSource, first set your own ID range, logo and help URL in `app.json`; the samples use per-tenant ranges and fail AppSourceCop as shipped.
 - [ ] Unit tests and lints pass; the break set passes live.
+- [ ] Run `pwsh -NoProfile -File tools/Test-ReferenceMessageTypeNames.ps1` before publication. It applies Foundation's source guard to every configured product app; test apps are exempt.
 
 ## 9. Shipping your app
 

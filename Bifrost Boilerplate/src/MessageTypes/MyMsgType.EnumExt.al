@@ -22,9 +22,9 @@ enumextension 50000 "My Msg Type" extends "Message Type ori"
         Implementation = "Msg Interface ori" = "My Hello Get Impl", "Msg Discovery ori" = "My Hello Get Impl", "Msg Contract ori" = "My Hello Get Impl";
     }
     // Read: a record resolved from subject, an optional date, FlowFields, nulls. See src/Items.
-    value(50000; "MyApp.Item.Summary.Get")
+    value(50000; "MyApp.ItemSummary.Get")
     {
-        Caption = 'MyApp.Item.Summary.Get', Locked = true;
+        Caption = 'MyApp.ItemSummary.Get', Locked = true;
         Implementation = "Msg Interface ori" = "My Item Summary Impl", "Msg Discovery ori" = "My Item Summary Impl", "Msg Contract ori" = "My Item Summary Impl";
     }
     // Capped list: optional filter, count, returned, more. See src/Items.

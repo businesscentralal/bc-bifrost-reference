@@ -37,9 +37,9 @@ enumextension 90000 "Ref Msg Type" extends "Message Type ori"
     // Read: a record resolved from subject, optional dates, FlowFields, nulls. See src/GLAccounts.
     // Ordinals 90004 and 90005 were renamed when the samples moved off personal data (GDPR):
     // a reference app shows patterns on business data only. The ordinals are unchanged.
-    value(90004; "Reference.GLAccount.Overview.Get")
+    value(90004; "Reference.GLAccountOverview.Get")
     {
-        Caption = 'Reference.GLAccount.Overview.Get', Locked = true;
+        Caption = 'Reference.GLAccountOverview.Get', Locked = true;
         Implementation = "Msg Interface ori" = "Ref GLAcc Overview Impl", "Msg Discovery ori" = "Ref GLAcc Overview Impl", "Msg Contract ori" = "Ref GLAcc Overview Impl";
     }
     // Write: validated input, isolated write, safe retry. See src/AssetMaintenance.

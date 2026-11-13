@@ -11,3 +11,7 @@ Instructions for coding agents in this repository. Read [BUILDING.md](BUILDING.m
 - **Every Label, Caption and ToolTip** carries its is-IS text in `Comment`. Keep `Access = Internal` on Impl codeunits and the existing procedure signatures.
 
 Use only the public Foundation API and this repository. Product documentation: <https://docs.bifrost.origo.is>.
+
+## Message type naming
+
+Use exactly three nonempty dot-separated parts, `Domain.Entity.Action` (`Capability.Entity.Verb`): for example `MyApp.ItemSummary.Get` and `Reference.GLAccountOverview.Get`. Two parts, four or more parts, empty parts and whitespace in parts are invalid for product apps; test apps are exempt. Keep enum ordinals when renaming, and update callers, contract chapters, discovery labels, translations and documentation together. Before publication run `pwsh -NoProfile -File tools/Test-ReferenceMessageTypeNames.ps1`; it applies the unchanged Foundation #1037 guard to every product folder in `.AL-Go/settings.json`.

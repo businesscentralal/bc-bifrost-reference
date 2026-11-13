@@ -5,7 +5,7 @@ using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
 /// <summary>
-/// MyApp.Item.Summary.Get and MyApp.Item.List - the happy path and the break set, as unit
+/// MyApp.ItemSummary.Get and MyApp.Item.List - the happy path and the break set, as unit
 /// tests. Each test is one answer an agent relies on, so a change that breaks it fails the build
 /// instead of a user's first call. Items are created with the BIFT-BP prefix.
 /// </summary>
@@ -31,7 +31,7 @@ codeunit 50052 "My Item Tests"
         ExpectedNo := ItemNoTok;
 
         // [WHEN] the summary is asked for by item number in subject
-        Response := Caller.Call(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", ItemNoTok, '');
+        Response := Caller.Call(Enum::"Message Type ori"::"MyApp.ItemSummary.Get", ItemNoTok, '');
 
         // [THEN] the item is found, the inventory is 0 as of the work date and "no unit" is null, not ''
         Caller.AssertOk(Response);
@@ -45,7 +45,7 @@ codeunit 50052 "My Item Tests"
     procedure UnknownItemIsNotFoundRatherThanMissing()
     begin
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", 'BIFT-NOPE', ''),
+            Caller.Call(Enum::"Message Type ori"::"MyApp.ItemSummary.Get", 'BIFT-NOPE', ''),
             'was not found');
     end;
 
@@ -56,7 +56,7 @@ codeunit 50052 "My Item Tests"
         CreateItem(ItemNoTok);
         // [THEN] the answer names the parameter, echoes the value and gives the format to send
         Caller.AssertErrorAnswer(
-            Caller.Call(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", ItemNoTok, '{"asOfDate":"26.09.2026"}'),
+            Caller.Call(Enum::"Message Type ori"::"MyApp.ItemSummary.Get", ItemNoTok, '{"asOfDate":"26.09.2026"}'),
             'YYYY-MM-DD');
     end;
 
@@ -66,7 +66,7 @@ codeunit 50052 "My Item Tests"
         // The contract is the agent's only guide: its errors chapter must quote the real error text
         // from My Input, not an old one. Change the Label and the chapter together.
         Assert.IsTrue(
-            Caller.GetContractChapter(Enum::"Message Type ori"::"MyApp.Item.Summary.Get", 'errors').Contains('which is not a date in the format YYYY-MM-DD'),
+            Caller.GetContractChapter(Enum::"Message Type ori"::"MyApp.ItemSummary.Get", 'errors').Contains('which is not a date in the format YYYY-MM-DD'),
             'The errors chapter should document the date format error.');
     end;
 
@@ -87,6 +87,24 @@ codeunit 50052 "My Item Tests"
         Assert.AreEqual(2, Caller.GetDecimal(Response, 'count'), 'count should cover every matching item.');
         Assert.AreEqual(1, Caller.GetDecimal(Response, 'returned'), 'returned should respect maxRows.');
         Assert.IsTrue(Caller.GetBoolean(Response, 'more'), 'more should be true when rows were left out.');
+    end;
+
+    /// <summary>Verifies AC01: the renamed ItemSummary type keeps its ordinal and contract example names.</summary>
+    [Test]
+    procedure Scenario_AC01_ItemSummaryKeepsItsOrdinalAndThreePartName()
+    var
+        MessageType: Enum "Message Type ori";
+        Examples: Text;
+    begin
+        // [SCENARIO] AC01: renaming the public type preserves its ordinal and contract calls.
+        // [GIVEN] the renamed product message type
+        MessageType := Enum::"Message Type ori"::"MyApp.ItemSummary.Get";
+        // [WHEN] its public enum name and examples chapter are read through the public contract manager
+        Examples := Caller.GetContractChapter(MessageType, 'examples');
+        // [THEN] existing ordinal routing and copied contract calls use the same three-part name
+        Assert.AreEqual(50000, MessageType.AsInteger(), 'Renaming must preserve the enum ordinal.');
+        Assert.AreEqual('MyApp.ItemSummary.Get', MessageType.Names().Get(MessageType.Ordinals().IndexOf(50000)), 'Public message type name.');
+        Assert.IsTrue(Examples.Contains('MyApp.ItemSummary.Get'), 'Contract examples must call the renamed type.');
     end;
 
     local procedure CreateItem(ItemNo: Code[20])

@@ -21,7 +21,7 @@ Then build your own with [BUILDING.md](BUILDING.md).
 |---|---|
 | `Reference.Echo.Get` | The smallest possible type: returns the request with `serverTime` added. |
 | `Reference.Table.Get` | A read whose "not found" is a `RespondWithError` answer. |
-| `Reference.GLAccount.Overview.Get` | Resolving a record from `subject` ("not given" vs "not found"), FlowFields as of a date, `null` instead of 0, enums by name. |
+| `Reference.GLAccountOverview.Get` | Resolving a record from `subject` ("not given" vs "not found"), FlowFields as of a date, `null` instead of 0, enums by name. |
 | `Reference.AssetMaintenance.Create` | Validate every input before any write; business-rule errors that say what to do; safe retry with `externalId`. |
 | `Reference.ExchangeRate.Get` + `Reference.ApiKey.Set` | Outbound HTTP in a TryFunction with an optional key; receiving a secret as `SecretText` into `Secret Store ori` with `RedactRequestData()`. |
 | `Help.MyApp.Get`, `Help.Reference.Get`, `Help.Legacy.Get` | The app's directory: one per capability, listing its types. |
@@ -92,3 +92,7 @@ For your own app use 50000–99999 (per-tenant extension) or your AppSource rang
 The code and documentation are licensed under the [MIT License](LICENSE). Copy the samples into your own apps, commercial ones included. The licence does not cover Bifrost Foundation or any other Origo app (never commit their symbols; `.gitignore` excludes `.alpackages/` and `*.app`), nor the names and logos "Bifröst" and "Origo", which are trademarks of Origo ehf. You may say your app works with Bifröst, but not suggest it is made or endorsed by Origo.
 
 The only external call in this repository is `Reference.ExchangeRate.Get`, which uses a free public ECB rates service.
+
+## Message type naming
+
+Product message types have exactly three nonempty dot-separated parts: `Domain.Entity.Action` (called `Capability.Entity.Verb` in the build guide). Put qualifiers in the entity word: `MyApp.ItemSummary.Get` and `Reference.GLAccountOverview.Get`. Two parts or four or more are not allowed; test apps are exempt. Run `pwsh -NoProfile -File tools/Test-ReferenceMessageTypeNames.ps1` to check all configured product samples with Foundation's source guard.

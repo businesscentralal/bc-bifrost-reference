@@ -118,9 +118,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item List Impl - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1472980933 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
-          <source>List items by item number filter, with the total count; at most 100 rows. Not for one item's price and inventory: use MyApp.Item.Summary.Get. To search by description or another field, use Data.Records.Get on Item.</source>
-          <target state="translated">Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.Item.Summary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.Item.Summary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.</note>
+          <source>List items by item number filter, with the total count; at most 100 rows. Not for one item's price and inventory: use MyApp.ItemSummary.Get. To search by description or another field, use Data.Records.Get on Item.</source>
+          <target state="translated">Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.ItemSummary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lista vörur eftir síu á vörunúmer, með heildarfjölda; að hámarki 100 línur. Ekki fyrir verð og birgðir einnar vöru: notaðu MyApp.ItemSummary.Get. Til að leita eftir lýsingu eða öðrum reit, notaðu Data.Records.Get á Item.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit My Item List Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 231972383 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
