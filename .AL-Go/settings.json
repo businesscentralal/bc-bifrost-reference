@@ -21,6 +21,10 @@
     "Default",
     "Test"
   ],
+  "fullBuildPatterns": [
+    ".AL-Go/settings.json",
+    ".github/workflows/**"
+  ],
   "conditionalSettings": [
     {
       "buildModes": [
