@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add AL-Go build modes Default and Test. Default compiles the three sample apps and does not build or run tests. Test compiles and runs Bifrost Boilerplate Tests and Bifrost Reference Tests, skips upgrade, and does not sign. The workflow publishes the TestApps and TestResults artifacts and analyzes normal test results when tests run. In Test mode AL-Go names the unsigned product-app artifact `…-TestApps-…` and the test apps `…-TestTestApps-…`, so receipt tooling takes product apps from `TestApps` and test apps from `TestTestApps`. Changes to `.AL-Go/settings.json` and `.github/workflows/**` are full-build patterns, so a pull request that changes only those files still runs Default and Test.
 - #4: Rename `MyApp.Item.Summary.Get` → `MyApp.ItemSummary.Get` (enumextension 50000, value 50000) and `Reference.GLAccount.Overview.Get` → `Reference.GLAccountOverview.Get` (enumextension 90000, value 90004), preserving ordinals. Update codeunits 50001/50003/50005/90007/90011, dispatcher tests 50052/90154, contract examples, discovery text, is-IS translations and partner docs together. Product message names must have exactly three parts; adopt Foundation #1037's reusable product-only source guard with no allow-list. Test apps remain exempt.
 
 
