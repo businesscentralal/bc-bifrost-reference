@@ -35,12 +35,15 @@ codeunit 90020 "Ref Price Contract"
     var
         ContractMgt: Codeunit "Msg Contract Mgt ori";
         Percent: JsonObject;
+        CountUnitLbl: Label 'expectedCount counts nonblocked Item records in itemCategoryCode, not the returned items array (which is capped at 1000). With confirmation enabled, send the same request without expectedCount and read expected without changing prices. Reference.ItemPrice.PreviewAdjustment also returns this count as itemCount; send it as both expectedItemCount and expectedCount.', Comment = 'is-IS=expectedCount telur ólokaðar Item-færslur í itemCategoryCode, ekki fylkið items í svarinu (sem er takmarkað við 1000). Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta verði. Reference.ItemPrice.PreviewAdjustment skilar einnig þessum fjölda sem itemCount; sendu hann bæði sem expectedItemCount og expectedCount.';
     begin
         Parameters.Add(ContractMgt.Parameter('itemCategoryCode', 'string', true, 'An existing item category code, at most 20 characters, case-insensitive.'));
         Percent := ContractMgt.Parameter('percent', 'number', true, 'The change in percent, from -50 to 100, not 0. 5 means +5 %, -10 means -10 %.');
         Parameters.Add(Percent);
-        if IsApply then
+        if IsApply then begin
             Parameters.Add(ContractMgt.Parameter('expectedItemCount', 'integer', true, 'The itemCount the preview returned. The call is refused when the category now holds a different number of items, or when no preview was made.'));
+            Parameters.Add(ContractMgt.Parameter('expectedCount', 'integer', false, CountUnitLbl));
+        end;
     end;
 
     procedure Response() Result: JsonObject
@@ -90,7 +93,7 @@ codeunit 90020 "Ref Price Contract"
         Steps: JsonArray;
     begin
         Steps.Add(ContractMgt.WorkflowStep('Reference.ItemPrice.PreviewAdjustment', 'See what the change would do, and show the user the current and new prices.'));
-        Steps.Add(ContractMgt.WorkflowStep('Reference.ItemPrice.ApplyAdjustment', 'When the user agrees: the same itemCategoryCode and percent, with the preview''s itemCount as expectedItemCount.'));
+        Steps.Add(ContractMgt.WorkflowStep('Reference.ItemPrice.ApplyAdjustment', 'When the user agrees: the same itemCategoryCode and percent, with the preview''s itemCount as expectedItemCount and, when confirmation is enabled, as expectedCount.'));
         Result.Add('steps', Steps);
         Result.Add('text', 'Always preview first. The apply call needs the preview''s itemCount, so it cannot run on a selection nobody looked at.');
     end;

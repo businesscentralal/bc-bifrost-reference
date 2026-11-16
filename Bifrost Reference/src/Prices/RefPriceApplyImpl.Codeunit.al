@@ -10,7 +10,7 @@ using Origo.Bifrost;
 /// expectedItemCount. That one number is a cheap but effective guard: an agent cannot apply
 /// a bulk change it never previewed, and a change is refused when the selection moved.
 /// </summary>
-codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
+codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori", "Msg Confirm ori"
 {
     Access = Internal;
 
@@ -67,11 +67,35 @@ codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Disco
         end;
 
         ApplyProcess.SetAdjustment(ItemCategoryCode, Percent);
-        if Argument."Omit Commit" then
-            ApplyProcess.Run(Argument)
-        else
-            if not ApplyProcess.Run(Argument) then
-                Argument.RespondWithError(GetLastErrorText());
+        // Confirmation holds the selection locks in Foundation's isolated transaction.
+        // Do not start a nested Boolean Run after acquiring those locks.
+        ApplyProcess.Run(Argument);
+    end;
+
+    /// <summary>Counts and locks the same nonblocked items the adjustment changes, without writing.</summary>
+    /// <param name="Argument">The category and percentage request.</param>
+    /// <param name="Count">The number of nonblocked items, including zero.</param>
+    /// <param name="Summary">The localized selection description.</param>
+    /// <returns>False when the request is invalid; otherwise true.</returns>
+    procedure GetConfirmCount(var Argument: Record "Message Argument ori"; var Count: Integer; var Summary: Text): Boolean
+    var
+        Item: Record Item;
+        RefInput: Codeunit "Ref Input";
+        PriceAdjust: Codeunit "Ref Price Adjust";
+        RequestJson: JsonObject;
+        ItemCategoryCode: Code[20];
+        Percent: Decimal;
+        SelectionLbl: Label 'Nonblocked items in category %1', Comment = '%1 = item category code, is-IS=Ólokaðar vörur í flokknum %1';
+    begin
+        if not RefInput.ReadRequest(Argument, RequestJson) then
+            exit(false);
+        if not PriceAdjust.ReadAdjustment(Argument, RequestJson, ItemCategoryCode, Percent) then
+            exit(false);
+        Item.LockTable();
+        PriceAdjust.SelectItems(Item, ItemCategoryCode);
+        Count := Item.Count();
+        Summary := StrSubstNo(SelectionLbl, ItemCategoryCode);
+        exit(true);
     end;
 
     // ---------- Msg Discovery ori ----------
@@ -141,9 +165,10 @@ codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Disco
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Preconditions: JsonArray;
+        CountUnitLbl: Label 'expectedCount counts nonblocked Item records in itemCategoryCode, not the returned items array (which is capped at 1000). With confirmation enabled, send the same request without expectedCount and read expected without changing prices. Reference.ItemPrice.PreviewAdjustment also returns this count as itemCount; send it as both expectedItemCount and expectedCount.', Comment = 'is-IS=expectedCount telur ólokaðar Item-færslur í itemCategoryCode, ekki fylkið items í svarinu (sem er takmarkað við 1000). Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta verði. Reference.ItemPrice.PreviewAdjustment skilar einnig þessum fjölda sem itemCount; sendu hann bæði sem expectedItemCount og expectedCount.';
     begin
         Effect.Add('effect', 'irreversible');
-        Effect.Add('changes', 'Modifies Unit Price on every item in the category that is not blocked, through the Item table''s own validation. All or nothing. There is no undo type: reversing +10 % with -10 % does not give the original price, because of rounding.');
+        Effect.Add('changes', 'Modifies Unit Price on every item in the category that is not blocked, through the Item table''s own validation. All or nothing. There is no undo type: reversing +10 % with -10 % does not give the original price, because of rounding. ' + CountUnitLbl);
         Effect.Add('idempotent', false);
         Preconditions.Add('The caller can write Item; without it the type is not offered.');
         Preconditions.Add('A preview was made: expectedItemCount must match the number of items in the category now.');
@@ -177,10 +202,10 @@ codeunit 90018 "Ref Price Apply Impl" implements "Msg Interface ori", "Msg Disco
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Examples.Add(ContractMgt.Example('Raise chairs by 5 % after the preview',
-            '{"type":"Reference.ItemPrice.ApplyAdjustment","data":{"itemCategoryCode":"STÓLL","percent":5,"expectedItemCount":4}}',
+            '{"type":"Reference.ItemPrice.ApplyAdjustment","data":{"itemCategoryCode":"STÓLL","percent":5,"expectedItemCount":4,"expectedCount":4}}',
             '{"itemCategoryCode":"STÓLL","percent":5,"itemCount":4,"applied":true,"totalCurrentUnitPrice":50280,"totalNewUnitPrice":52794,"itemsTruncated":false,"items":[{"itemNo":"1900-S","description":"PARIS Guest Chair, black","currentUnitPrice":12570,"newUnitPrice":13198.5}]}'));
         Examples.Add(ContractMgt.Example('The category changed after the preview',
-            '{"type":"Reference.ItemPrice.ApplyAdjustment","data":{"itemCategoryCode":"STÓLL","percent":5,"expectedItemCount":4}}',
+            '{"type":"Reference.ItemPrice.ApplyAdjustment","data":{"itemCategoryCode":"STÓLL","percent":5,"expectedItemCount":4,"expectedCount":5}}',
             '{"status":"Error","error":"The selection changed since the preview: expected 4 items in category ''STÓLL'', found 5. Run Reference.ItemPrice.PreviewAdjustment again and send its itemCount as expectedItemCount."}'));
         exit(true);
     end;
