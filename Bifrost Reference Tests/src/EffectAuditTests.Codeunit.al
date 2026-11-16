@@ -14,6 +14,11 @@ codeunit 90157 "Effect Audit Tests"
     var
         Assert: Codeunit "Library Assert";
         Caller: Codeunit "Ref Test Caller";
+        CancelItemNo: Code[20];
+        ItemCategoryCode: Code[20];
+        FirstPriceItem: Code[20];
+        SecondPriceItem: Code[20];
+        BlockedPriceItem: Code[20];
 
     /// <summary>Cancellation preview preserves the reservation and cancellation log.</summary>
     [Test]
@@ -25,11 +30,11 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC01 | Time: independent of Today/WorkDate | Risk: shared confirmation gate.
         SetConfirmationRequired(true);
         ReserveItem();
-        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'E17-CANCEL', '');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", CancelItemNo, '');
         Assert.AreEqual('ConfirmationRequired', Caller.GetText(Response, 'code'), 'Cancellation must preview before deletion.');
         Assert.AreEqual(1, Caller.GetDecimal(Response, 'expected'), 'One named item is confirmed.');
         AssertReservation(true);
-        Log.SetRange("Item No.", 'E17-CANCEL');
+        Log.SetRange("Item No.", CancelItemNo);
         Assert.RecordCount(Log, 0);
     end;
 
@@ -42,7 +47,7 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC01 | Time: none | Risk: shared confirmation gate.
         SetConfirmationRequired(true);
         ReserveItem();
-        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'E17-CANCEL', '{"expectedCount":2}');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", CancelItemNo, '{"expectedCount":2}');
         Assert.AreEqual('ConfirmationMismatch', Caller.GetText(Response, 'code'), 'Refuse the wrong count.');
         AssertReservation(true);
     end;
@@ -57,14 +62,14 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC01 | Time: none | Risk: repeat safety and log cardinality.
         SetConfirmationRequired(true);
         ReserveItem();
-        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'E17-CANCEL', '{"expectedCount":1}');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", CancelItemNo, '{"expectedCount":1}');
         Caller.AssertOk(Response);
         Assert.IsTrue(Caller.GetBoolean(Response, 'cancelled'), 'The reservation must be cancelled.');
         AssertReservation(false);
-        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'E17-CANCEL', '{"expectedCount":1}');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", CancelItemNo, '{"expectedCount":1}');
         Caller.AssertOk(Response);
         Assert.IsFalse(Caller.GetBoolean(Response, 'cancelled'), 'Retry must be a no-op.');
-        Log.SetRange("Item No.", 'E17-CANCEL');
+        Log.SetRange("Item No.", CancelItemNo);
         Assert.RecordCount(Log, 1);
     end;
 
@@ -88,12 +93,12 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC02 | Time: none | Risk: count must match the real selection.
         SetConfirmationRequired(true);
         CreatePriceItems();
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', '{"itemCategoryCode":"E17-CATEGORY","percent":10,"expectedItemCount":2}');
+        Response := CallPrice('{"itemCategoryCode":"%1","percent":10,"expectedItemCount":2}');
         Assert.AreEqual('ConfirmationRequired', Caller.GetText(Response, 'code'), 'Preview before applying.');
         Assert.AreEqual(2, Caller.GetDecimal(Response, 'expected'), 'Count both nonblocked items, not a default one subject.');
-        AssertPrice('E17-PRICE1', 100);
-        AssertPrice('E17-PRICE2', 100);
-        AssertPrice('E17-BLOCKED', 100);
+        AssertPrice(FirstPriceItem, 100);
+        AssertPrice(SecondPriceItem, 100);
+        AssertPrice(BlockedPriceItem, 100);
     end;
 
     /// <summary>Both confirmation guards protect prices and a valid count applies the change.</summary>
@@ -105,18 +110,18 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC02 | Time: none | Risk: existing expectedItemCount contract must remain enforced.
         SetConfirmationRequired(true);
         CreatePriceItems();
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', '{"itemCategoryCode":"E17-CATEGORY","percent":10,"expectedItemCount":2,"expectedCount":1}');
+        Response := CallPrice('{"itemCategoryCode":"%1","percent":10,"expectedItemCount":2,"expectedCount":1}');
         Assert.AreEqual('ConfirmationMismatch', Caller.GetText(Response, 'code'), 'Foundation must use the item count.');
-        AssertPrice('E17-PRICE1', 100);
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', '{"itemCategoryCode":"E17-CATEGORY","percent":10,"expectedItemCount":1,"expectedCount":2}');
+        AssertPrice(FirstPriceItem, 100);
+        Response := CallPrice('{"itemCategoryCode":"%1","percent":10,"expectedItemCount":1,"expectedCount":2}');
         Caller.AssertErrorAnswer(Response, 'selection changed');
-        AssertPrice('E17-PRICE1', 100);
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', '{"itemCategoryCode":"E17-CATEGORY","percent":10,"expectedItemCount":2,"expectedCount":2}');
+        AssertPrice(FirstPriceItem, 100);
+        Response := CallPrice('{"itemCategoryCode":"%1","percent":10,"expectedItemCount":2,"expectedCount":2}');
         Caller.AssertOk(Response);
         Assert.AreEqual(2, Caller.GetDecimal(Response, 'itemCount'), 'Exactly the confirmed items changed.');
-        AssertPrice('E17-PRICE1', 110);
-        AssertPrice('E17-PRICE2', 110);
-        AssertPrice('E17-BLOCKED', 100);
+        AssertPrice(FirstPriceItem, 110);
+        AssertPrice(SecondPriceItem, 110);
+        AssertPrice(BlockedPriceItem, 100);
     end;
 
     /// <summary>An empty category previews and confirms zero without changing any item.</summary>
@@ -128,10 +133,10 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC02 | Time: none | Risk: zero must not become the default one.
         SetConfirmationRequired(true);
         CreateCategory();
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', '{"itemCategoryCode":"E17-CATEGORY","percent":10,"expectedItemCount":0}');
+        Response := CallPrice('{"itemCategoryCode":"%1","percent":10,"expectedItemCount":0}');
         Assert.AreEqual('ConfirmationRequired', Caller.GetText(Response, 'code'), 'Even an empty selection previews first.');
         Assert.AreEqual(0, Caller.GetDecimal(Response, 'expected'), 'Empty category count.');
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', '{"itemCategoryCode":"E17-CATEGORY","percent":10,"expectedItemCount":0,"expectedCount":0}');
+        Response := CallPrice('{"itemCategoryCode":"%1","percent":10,"expectedItemCount":0,"expectedCount":0}');
         Caller.AssertOk(Response);
         Assert.AreEqual(0, Caller.GetDecimal(Response, 'itemCount'), 'Zero confirmed items.');
     end;
@@ -145,9 +150,9 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC02 | Time: none | Risk: invalid input before any write.
         SetConfirmationRequired(true);
         CreatePriceItems();
-        Response := Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', '{"itemCategoryCode":"E17-CATEGORY","percent":10,"expectedItemCount":2,"expectedCount":-1}');
+        Response := CallPrice('{"itemCategoryCode":"%1","percent":10,"expectedItemCount":2,"expectedCount":-1}');
         Caller.AssertErrorAnswer(Response, 'whole number');
-        AssertPrice('E17-PRICE1', 100);
+        AssertPrice(FirstPriceItem, 100);
     end;
 
     /// <summary>Contract help names the count and a side-effect-free preview in both supported caller languages.</summary>
@@ -161,6 +166,7 @@ codeunit 90157 "Effect Audit Tests"
         Languages: List of [Integer];
     begin
         // Story #17, AC03 | Time: none | Risk: Foundation renders contract chapters in English in every locale.
+        SetConfirmationRequired(true);
         OriginalLanguage := GlobalLanguage();
         Languages.Add(1033);
         Languages.Add(1039);
@@ -191,10 +197,10 @@ codeunit 90157 "Effect Audit Tests"
         // Story #17, AC01 | Time: none | Risk: preserve Foundation's per-company confirmation setting.
         SetConfirmationRequired(false);
         ReserveItem();
-        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'E17-CANCEL', '{"expectedCount":2}');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", CancelItemNo, '{"expectedCount":2}');
         Assert.AreEqual('ConfirmationMismatch', Caller.GetText(Response, 'code'), 'Opt-out does not bypass a supplied count.');
         AssertReservation(true);
-        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'E17-CANCEL', '');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", CancelItemNo, '');
         Caller.AssertOk(Response);
         Assert.IsTrue(Caller.GetBoolean(Response, 'cancelled'), 'Opt-out permits execution without a count.');
     end;
@@ -211,30 +217,35 @@ codeunit 90157 "Effect Audit Tests"
 
     local procedure ReserveItem()
     begin
-        CreateItem('E17-CANCEL', '', false);
-        Caller.AssertOk(Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.Reserve", 'E17-CANCEL', '{"quantity":2,"allowOverStock":true}'));
+        CancelItemNo := NewFixtureCode();
+        CreateItem(CancelItemNo, '', false);
+        Caller.AssertOk(Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.Reserve", CancelItemNo, '{"quantity":2,"allowOverStock":true}'));
     end;
 
     local procedure AssertReservation(Expected: Boolean)
     begin
-        Assert.AreEqual(Expected, Caller.GetBoolean(Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.Get", 'E17-CANCEL', ''), 'hasReservation'), 'Reservation state.');
+        Assert.AreEqual(Expected, Caller.GetBoolean(Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.Get", CancelItemNo, ''), 'hasReservation'), 'Reservation state.');
     end;
 
     local procedure CreateCategory()
     var
         ItemCategory: Record "Item Category";
     begin
+        ItemCategoryCode := NewFixtureCode();
         ItemCategory.Init();
-        ItemCategory.Code := 'E17-CATEGORY';
+        ItemCategory.Code := ItemCategoryCode;
         ItemCategory.Insert(true);
     end;
 
     local procedure CreatePriceItems()
     begin
         CreateCategory();
-        CreateItem('E17-PRICE1', 'E17-CATEGORY', false);
-        CreateItem('E17-PRICE2', 'E17-CATEGORY', false);
-        CreateItem('E17-BLOCKED', 'E17-CATEGORY', true);
+        FirstPriceItem := CopyStr(ItemCategoryCode + '-1', 1, MaxStrLen(FirstPriceItem));
+        SecondPriceItem := CopyStr(ItemCategoryCode + '-2', 1, MaxStrLen(SecondPriceItem));
+        BlockedPriceItem := CopyStr(ItemCategoryCode + '-B', 1, MaxStrLen(BlockedPriceItem));
+        CreateItem(FirstPriceItem, ItemCategoryCode, false);
+        CreateItem(SecondPriceItem, ItemCategoryCode, false);
+        CreateItem(BlockedPriceItem, ItemCategoryCode, true);
     end;
 
     local procedure CreateItem(ItemNo: Code[20]; Category: Code[20]; Blocked: Boolean)
@@ -247,6 +258,16 @@ codeunit 90157 "Effect Audit Tests"
         Item."Unit Price" := 100;
         Item.Blocked := Blocked;
         Item.Insert(true);
+    end;
+
+    local procedure NewFixtureCode(): Code[20]
+    begin
+        exit(CopyStr('E17-' + DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, 16));
+    end;
+
+    local procedure CallPrice(RequestText: Text): JsonObject
+    begin
+        exit(Caller.Call(Enum::"Message Type ori"::"Reference.ItemPrice.ApplyAdjustment", '', StrSubstNo(RequestText, ItemCategoryCode)));
     end;
 
     local procedure AssertPrice(ItemNo: Code[20]; Expected: Decimal)
