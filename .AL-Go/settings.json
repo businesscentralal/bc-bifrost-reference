@@ -17,6 +17,34 @@
   "enableCodeAnalyzersOnTestApps": true,
   "failOn": "warning",
   "doNotRunTests": false,
+  "buildModes": [
+    "Default",
+    "Test"
+  ],
+  "fullBuildPatterns": [
+    ".AL-Go/settings.json",
+    ".github/workflows/**"
+  ],
+  "conditionalSettings": [
+    {
+      "buildModes": [
+        "Default"
+      ],
+      "settings": {
+        "doNotBuildTests": true,
+        "doNotRunTests": true
+      }
+    },
+    {
+      "buildModes": [
+        "Test"
+      ],
+      "settings": {
+        "doNotSignApps": true,
+        "skipUpgrade": true
+      }
+    }
+  ],
   "appDependencyProbingPaths": [
     {
       "repo": "https://github.com/OrigoSoftwareSolutions/bc-origo-bifrost-core",
