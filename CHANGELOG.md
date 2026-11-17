@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- #17: Classify `Legacy.Stock.CancelReservation` as irreversible (codeunit 90101), preserving repeat-safe cancellation. Define its one-item confirmation count and the nonblocked-item count for `Reference.ItemPrice.ApplyAdjustment` in translated help. Map price adjustment to the locked selection counter (codeunit 90018, enumextension 90000), preserve its `expectedItemCount` guard, and keep execution in Foundation's transaction. Update contract codeunit 90020 and cancellation tests 90153; add dispatcher effect/count/help regression codeunit 90157. Require Foundation 28.0.11.669 for the price confirmation interface.
+
 - #4: Rename `MyApp.Item.Summary.Get` → `MyApp.ItemSummary.Get` (enumextension 50000, value 50000) and `Reference.GLAccount.Overview.Get` → `Reference.GLAccountOverview.Get` (enumextension 90000, value 90004), preserving ordinals. Update codeunits 50001/50003/50005/90007/90011, dispatcher tests 50052/90154, contract examples, discovery text, is-IS translations and partner docs together. Product message names must have exactly three parts; adopt Foundation #1037's reusable product-only source guard with no allow-list. Test apps remain exempt.
 
 

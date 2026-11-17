@@ -93,11 +93,23 @@
           <note from="Developer" annotates="general" priority="2">%1 = parameter name, %2 = actual length, %3 = maximum length, is-IS=Færibreytan '%1' er %2 stafir; hámarkið er %3.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Adapter Input - NamedType TooLongErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 92220189 - Method 1479631707 - NamedType 2791681145" size-unit="char" translate="yes" xml:space="preserve">
+          <source>expectedCount counts the one named item (1), even when it has no reservation. With confirmation enabled, send the same request without expectedCount and read expected without changing data. Send that value as expectedCount to confirm.</source>
+          <target state="translated">expectedCount telur eina tilgreinda vöru (1), jafnvel þótt hún hafi enga frátekningu. Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta gögnum. Sendu það gildi sem expectedCount til að staðfesta.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=expectedCount telur eina tilgreinda vöru (1), jafnvel þótt hún hafi enga frátekningu. Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta gögnum. Sendu það gildi sem expectedCount til að staðfesta.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Cancel Reserve Impl - Method GetEffect - NamedType CountUnitLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 92220189 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
           <source>cancel a reservation, remove the reservation, unreserve an item, release the stock for one item, free up reserved stock, undo a reservation</source>
           <target state="translated">hætta við frátekningu, fjarlægja frátekningu, taka frátekningu af vöru, losa birgðir einnar vöru, losa frátekið magn, afturkalla frátekningu</target>
           <note from="Developer" annotates="general" priority="2">is-IS=hætta við frátekningu, fjarlægja frátekningu, taka frátekningu af vöru, losa birgðir einnar vöru, losa frátekið magn, afturkalla frátekningu</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Cancel Reserve Impl - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 92220189 - Method 3615801952 - NamedType 2791681145" size-unit="char" translate="yes" xml:space="preserve">
+          <source>expectedCount counts the one named item (1), even when it has no reservation. With confirmation enabled, send the same request without expectedCount and read expected without changing data. Send that value as expectedCount to confirm.</source>
+          <target state="translated">expectedCount telur eina tilgreinda vöru (1), jafnvel þótt hún hafi enga frátekningu. Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta gögnum. Sendu það gildi sem expectedCount til að staðfesta.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=expectedCount telur eina tilgreinda vöru (1), jafnvel þótt hún hafi enga frátekningu. Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta gögnum. Sendu það gildi sem expectedCount til að staðfesta.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Cancel Reserve Impl - Method GetParameters - NamedType CountUnitLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 92220189 - Method 79446908 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
           <source>Cancel the whole reservation of one item in Legacy App and log it; answers cancelled: false when there was nothing to cancel. It cannot reduce a reservation partly. For many items at once, use Legacy.Stock.ReleaseAll; to reserve, use Legacy.Stock.Reserve.</source>
@@ -116,6 +128,12 @@
           <target state="translated">Yfirlit yfir Legacy App og skilaboðategundirnar fyrir birgðafrátekningar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Yfirlit yfir Legacy App og skilaboðategundirnar fyrir birgðafrátekningar sem það bætir við, ein lína fyrir hverja. Fyrir samning einnar tegundar, notaðu Help.Implementation.Get; fyrir öll uppsett öpp, notaðu Help.MessageTypes.Get.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Help Get Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3432071783 - Method 3507224617 - NamedType 445603364" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stock reservations matching %1</source>
+          <target state="translated">Birgðafrátekningar sem passa við %1</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item filter, is-IS=Birgðafrátekningar sem passa við %1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Release All Impl - Method GetConfirmCount - NamedType SelectionTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3432071783 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
           <source>release all reservations, cancel every reservation, clear reservations, free all reserved stock, release reservations for these items, remove all reservations</source>
@@ -338,12 +356,6 @@
           <target state="translated">Birgðafrátekningar (eldra forrit)</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Birgðafrátekningar (eldra forrit)</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet LEGACY STOCK - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3432071783 - Method 3507224617 - NamedType 445603364" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Stock reservations matching %1</source>
-          <target state="translated">Birgðafrátekningar sem passa við %1</target>
-          <note from="Developer" annotates="general" priority="2">%1 = item filter, is-IS=Birgðafrátekningar sem passa við %1</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Legacy Release All Impl - Method GetConfirmCount - NamedType SelectionTxt</note>
         </trans-unit>
       </group>
     </body>

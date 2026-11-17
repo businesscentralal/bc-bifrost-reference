@@ -102,8 +102,11 @@ codeunit 90101 "Legacy Cancel Reserve Impl" implements "Msg Interface ori", "Msg
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
         Parts: Codeunit "Legacy Stock Contract";
+        ContractMgt: Codeunit "Msg Contract Mgt ori";
+        CountUnitLbl: Label 'expectedCount counts the one named item (1), even when it has no reservation. With confirmation enabled, send the same request without expectedCount and read expected without changing data. Send that value as expectedCount to confirm.', Comment = 'is-IS=expectedCount telur eina tilgreinda vöru (1), jafnvel þótt hún hafi enga frátekningu. Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta gögnum. Sendu það gildi sem expectedCount til að staðfesta.';
     begin
         Parameters.Add(Parts.ItemNoParameter());
+        Parameters.Add(ContractMgt.Parameter('expectedCount', 'integer', false, CountUnitLbl));
         exit(true);
     end;
 
@@ -130,10 +133,11 @@ codeunit 90101 "Legacy Cancel Reserve Impl" implements "Msg Interface ori", "Msg
     procedure GetEffect(var Effect: JsonObject): Boolean
     var
         Preconditions: JsonArray;
+        CountUnitLbl: Label 'expectedCount counts the one named item (1), even when it has no reservation. With confirmation enabled, send the same request without expectedCount and read expected without changing data. Send that value as expectedCount to confirm.', Comment = 'is-IS=expectedCount telur eina tilgreinda vöru (1), jafnvel þótt hún hafi enga frátekningu. Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta gögnum. Sendu það gildi sem expectedCount til að staðfesta.';
     begin
-        Effect.Add('effect', 'write');
+        Effect.Add('effect', 'irreversible');
         Effect.Add('changes', 'Deletes the item''s Legacy Stock Reservation record and inserts one Legacy Cancellation Log entry, in one transaction. Nothing is written when the item has no reservation. ' +
-            'The answer does not say how much was reserved: read it with Legacy.Stock.Get first if it may need to be reserved again with Legacy.Stock.Reserve. The log entry stays.');
+            'The answer does not say how much was reserved: read it with Legacy.Stock.Get first if it may need to be reserved again with Legacy.Stock.Reserve. The log entry stays. ' + CountUnitLbl);
         Effect.Add('idempotent', true);
         Preconditions.Add('The caller can write Legacy Stock Reservation and Legacy Cancellation Log; without it the type is not offered.');
         Effect.Add('preconditions', Preconditions);
@@ -161,7 +165,7 @@ codeunit 90101 "Legacy Cancel Reserve Impl" implements "Msg Interface ori", "Msg
         Steps: JsonArray;
     begin
         Steps.Add(ContractMgt.WorkflowStep('Legacy.Stock.Get', 'Optional: see what is reserved for the item.'));
-        Steps.Add(ContractMgt.WorkflowStep('Legacy.Stock.CancelReservation', 'Remove the reservation.'));
+        Steps.Add(ContractMgt.WorkflowStep('Legacy.Stock.CancelReservation', 'With confirmation enabled, call without expectedCount to preview (expected = 1), then resend expectedCount 1 to remove the reservation.'));
         Workflow.Add('steps', Steps);
         Workflow.Add('text', 'Standalone. It undoes Legacy.Stock.Reserve for one item; for several items at once use Legacy.Stock.ReleaseAll.');
         exit(true);
@@ -172,10 +176,10 @@ codeunit 90101 "Legacy Cancel Reserve Impl" implements "Msg Interface ori", "Msg
         ContractMgt: Codeunit "Msg Contract Mgt ori";
     begin
         Examples.Add(ContractMgt.Example('Cancel an item''s reservation',
-            '{"type":"Legacy.Stock.CancelReservation","subject":"1896-S"}',
+            '{"type":"Legacy.Stock.CancelReservation","subject":"1896-S","data":{"expectedCount":1}}',
             '{"itemNo":"1896-S","cancelled":true}'));
         Examples.Add(ContractMgt.Example('Nothing to cancel',
-            '{"type":"Legacy.Stock.CancelReservation","subject":"1900-S"}',
+            '{"type":"Legacy.Stock.CancelReservation","subject":"1900-S","data":{"expectedCount":1}}',
             '{"itemNo":"1900-S","cancelled":false}'));
         exit(true);
     end;
