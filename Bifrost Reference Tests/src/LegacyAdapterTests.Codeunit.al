@@ -61,7 +61,7 @@ codeunit 90153 "Legacy Adapter Tests"
         Response: JsonObject;
     begin
         CreateItem('BIFT-L4');
-        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'BIFT-L4', '');
+        Response := Caller.Call(Enum::"Message Type ori"::"Legacy.Stock.CancelReservation", 'BIFT-L4', '{"expectedCount":1}');
         Caller.AssertOk(Response);
         Assert.IsFalse(Caller.GetBoolean(Response, 'cancelled'), 'A no-op must not be answered as a change.');
     end;

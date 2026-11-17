@@ -303,6 +303,18 @@
           <note from="Developer" annotates="general" priority="2">%1 = expected count, %2 = item category, %3 = actual count, is-IS=Valið hefur breyst frá forskoðun: búist var við %1 vörum í flokknum '%2' en þær eru %3. Keyrðu Reference.ItemPrice.PreviewAdjustment aftur og sendu itemCount sem expectedItemCount.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - NamedType SelectionChangedErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 211567532 - Method 3507224617 - NamedType 895773054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nonblocked items in category %1</source>
+          <target state="translated">Ólokaðar vörur í flokknum %1</target>
+          <note from="Developer" annotates="general" priority="2">%1 = item category code, is-IS=Ólokaðar vörur í flokknum %1</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - Method GetConfirmCount - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 211567532 - Method 1479631707 - NamedType 2791681145" size-unit="char" translate="yes" xml:space="preserve">
+          <source>expectedCount counts nonblocked Item records in itemCategoryCode, not the returned items array (which is capped at 1000). With confirmation enabled, send the same request without expectedCount and read expected without changing prices. Reference.ItemPrice.PreviewAdjustment also returns this count as itemCount; send it as both expectedItemCount and expectedCount.</source>
+          <target state="translated">expectedCount telur ólokaðar Item-færslur í itemCategoryCode, ekki fylkið items í svarinu (sem er takmarkað við 1000). Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta verði. Reference.ItemPrice.PreviewAdjustment skilar einnig þessum fjölda sem itemCount; sendu hann bæði sem expectedItemCount og expectedCount.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=expectedCount telur ólokaðar Item-færslur í itemCategoryCode, ekki fylkið items í svarinu (sem er takmarkað við 1000). Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta verði. Reference.ItemPrice.PreviewAdjustment skilar einnig þessum fjölda sem itemCount; sendu hann bæði sem expectedItemCount og expectedCount.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - Method GetEffect - NamedType CountUnitLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 211567532 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
           <source>change item prices, apply the price change, raise prices for a category, lower prices for a category, update unit prices, increase prices by percent</source>
           <target state="translated">breyta vöruverði, beita verðbreytingu, hækka verð í flokki, lækka verð í flokki, uppfæra einingarverð, hækka verð um prósentu</target>
@@ -314,6 +326,12 @@
           <target state="translated">Breyta einingarverði allra vara í einum vöruflokki um prósentu, eftir að notandinn hefur séð forskoðunina. Þarf itemCount úr forskoðuninni. Til að sjá áhrifin fyrst, notaðu Reference.ItemPrice.PreviewAdjustment.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Breyta einingarverði allra vara í einum vöruflokki um prósentu, eftir að notandinn hefur séð forskoðunina. Þarf itemCount úr forskoðuninni. Til að sjá áhrifin fyrst, notaðu Reference.ItemPrice.PreviewAdjustment.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Apply Impl - Method GetSelectionDescription - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3826632266 - Method 2539241493 - NamedType 2791681145" size-unit="char" translate="yes" xml:space="preserve">
+          <source>expectedCount counts nonblocked Item records in itemCategoryCode, not the returned items array (which is capped at 1000). With confirmation enabled, send the same request without expectedCount and read expected without changing prices. Reference.ItemPrice.PreviewAdjustment also returns this count as itemCount; send it as both expectedItemCount and expectedCount.</source>
+          <target state="translated">expectedCount telur ólokaðar Item-færslur í itemCategoryCode, ekki fylkið items í svarinu (sem er takmarkað við 1000). Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta verði. Reference.ItemPrice.PreviewAdjustment skilar einnig þessum fjölda sem itemCount; sendu hann bæði sem expectedItemCount og expectedCount.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=expectedCount telur ólokaðar Item-færslur í itemCategoryCode, ekki fylkið items í svarinu (sem er takmarkað við 1000). Þegar staðfesting er virk skaltu senda sömu beiðni án expectedCount og lesa expected án þess að breyta verði. Reference.ItemPrice.PreviewAdjustment skilar einnig þessum fjölda sem itemCount; sendu hann bæði sem expectedItemCount og expectedCount.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Price Contract - Method AddParameters - NamedType CountUnitLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1216512522 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
           <source>preview price change, what if prices go up, simulate price increase, price adjustment preview, show new prices for a category</source>
@@ -335,7 +353,7 @@
         </trans-unit>
         <trans-unit id="Codeunit 2553378571 - NamedType 217222318" size-unit="char" translate="yes" xml:space="preserve">
           <source> Details: %1</source>
-          <target state="translated"> Nánar: %1</target>
+          <target state="translated">Nánar: %1</target>
           <note from="Developer" annotates="general" priority="2">%1 = platform error, is-IS= Nánar: %1</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Ref Rates Client - NamedType DetailsTxt</note>
         </trans-unit>

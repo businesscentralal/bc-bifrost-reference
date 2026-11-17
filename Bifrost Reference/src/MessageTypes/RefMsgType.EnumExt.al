@@ -57,7 +57,7 @@ enumextension 90000 "Ref Msg Type" extends "Message Type ori"
     value(90007; "Reference.ItemPrice.ApplyAdjustment")
     {
         Caption = 'Reference.ItemPrice.ApplyAdjustment', Locked = true;
-        Implementation = "Msg Interface ori" = "Ref Price Apply Impl", "Msg Discovery ori" = "Ref Price Apply Impl", "Msg Contract ori" = "Ref Price Apply Impl";
+        Implementation = "Msg Interface ori" = "Ref Price Apply Impl", "Msg Discovery ori" = "Ref Price Apply Impl", "Msg Contract ori" = "Ref Price Apply Impl", "Msg Confirm ori" = "Ref Price Apply Impl";
     }
     // External HTTP call with an optional secret, and a type that receives a secret. See src/ExchangeRates.
     value(90008; "Reference.ExchangeRate.Get")

@@ -83,3 +83,5 @@ The core knows nothing about Bifröst, and it is `Access = Internal`: no other a
 Why message types rather than a public codeunit: every caller outside the app (other apps, integrations, the job queue, Orchestrator playbooks, agents) goes through the same validated, audited, permission-checked contract. The questions a person answers in dialogs have become explicit parameters (`allowOverStock`, `expectedCount`). The app's own pages call the core directly.
 
 The old procedures in `Legacy Stock Mgt` stay public and obsolete, so existing callers keep working; new callers use the message types. Permission set **LEGACY STOCK** is the one assignable set; assign it together with Foundation's BIFROST permission sets.
+
+`Legacy.Stock.CancelReservation` declares `irreversible`: it deletes the reservation and keeps a cancellation log. With confirmation enabled, call it without `expectedCount` first; the refusal returns `expected: 1` without changing business data. Confirm the same named item with `expectedCount: 1`. Repeating a confirmed cancellation returns `cancelled: false` and writes no further log.
